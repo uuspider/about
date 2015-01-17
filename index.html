@@ -1,17 +1,57 @@
 ---
 layout: default
-title: about me
+title: uuspider's private page
 ---
-
-<TABLE BORDER="0"  BGCOLOR="#ffffff" >
-  <TR >
+<table BORDER="0"  BGCOLOR="#ffffff" >
+  <tr >
+    <td VALIGN="bottom">
+      <a HREF="http://www.twitter.com/uuspider" target="_blank" title="This is a PRIVATE page"><img SRC="/img/thumbnail.jpeg" WIDTH="52" HEIGHT="52" ALT=""
+ TITLE="A thumbnail photo of uuspider" VALIGN="middle"></img></a>
+    </td>
     <TD VALIGN="bottom">
-      <IMG SRC="/img/thumbnail.jpeg" WIDTH="52" HEIGHT="52" ALT=""
-           TITLE="A thumbnail photo of uuspider" VALIGN="middle">
-    </TD>
-    <TD VALIGN="bottom">
-      <FONT SIZE="2">&lt;<A HREF="http://www.twitter.com/uuspider" target="_blank" title="This is a PRIVATE page">This is uuspider's private page</A>&gt;</FONT><BR>
-      <FONT SIZE="-2">Copyright &copy; 2009-2015 by <A HREF="http://www.twitter.com/uuspider" target="_blank">uuspider</A></FONT><BR>
+      <FONT SIZE="-2"><span id=localtime></span></FONT><BR>
+<!--      <FONT SIZE="2">&lt;<A HREF="http://www.twitter.com/uuspider" target="_blank" title="This is a PRIVATE page">This is uuspider's private page</A>&gt;</FONT><BR> -->
+      <FONT SIZE="-2">Copyright &copy; 2009-2015 by <A HREF="/img/mail.png" target="_blank">uuspider</A></FONT><BR>
+      <script type="text/javascript">
+function showLocale(objD)
+{
+	var str,colorhead,colorfoot;
+	var yy = objD.getYear();
+	if(yy<1900) yy = yy+1900;
+	var MM = objD.getMonth()+1;
+	if(MM<10) MM = '0' + MM;
+	var dd = objD.getDate();
+	if(dd<10) dd = '0' + dd;
+	var hh = objD.getHours();
+	if(hh<10) hh = '0' + hh;
+	var mm = objD.getMinutes();
+	if(mm<10) mm = '0' + mm;
+	var ss = objD.getSeconds();
+	if(ss<10) ss = '0' + ss;
+	var ww = objD.getDay();
+	if  ( ww==0 )  colorhead="<font color=\"#FF0000\">";
+	if  ( ww > 0 && ww < 6 )  colorhead="<font color=\"#373737\">";
+	if  ( ww==6 )  colorhead="<font color=\"#008000\">";
+	if  (ww==0)  ww="Sunday";
+	if  (ww==1)  ww="Monday";
+	if  (ww==2)  ww="Tuesday";
+	if  (ww==3)  ww="Wednesday";
+	if  (ww==4)  ww="Thursday";
+	if  (ww==5)  ww="Friday";
+	if  (ww==6)  ww="Saturday";
+	colorfoot="</font>"
+	str = colorhead + yy + "-" + MM + "-" + dd + " " + hh + ":" + mm + ":" + ss + "  " + ww + colorfoot;
+	return(str);
+}
+function tick()
+{
+	var today;
+	today = new Date();
+	document.getElementById("localtime").innerHTML = showLocale(today);
+	window.setTimeout("tick()", 1000);
+}
+tick();
+</script>
     </TD>
   </TR>
 </TABLE>
@@ -48,7 +88,7 @@ title: about me
       <FONT SIZE="2">
 	1. <br>
 	2. 
-	</FONT><BR>
+      </FONT><BR>
     </TD>
   </TR>
 
@@ -76,50 +116,43 @@ title: about me
 <TABLE BORDER="0" width= "100%">
   <TR BGCOLOR="#f2fddb">
     <TD VALIGN="bottom">
-      <FONT SIZE="2"><b>PHOTOS & INTERESTÀ×´ï</b></FONT><BR>
+      <FONT SIZE="2"><b>PHOTOS & INTEREST</b></FONT><BR>
     </TD>
   </TR>
 
   <TR>
     <TD VALIGN="bottom">
       <FONT SIZE="2">
-       <script>
-       /**
-        *Ëæ»úÍ¼Æ¬
-        */
-        var str=new
-        Array("/img/green.png","/img/fengzhigu.png","/img/fengzhigu2.png","/img/zhongwen.png","/img/yuansu.png",,,,,,,,,,,,,);
-        var a;
-        a=str[parseInt(Math.random()*(str.length))];
-        document.write("<img src="+a+">");
-        </script> 
+        <script language="JavaScript" src="/Js/imgrand.js"></script>
+	</FONT><BR>
     </TD>
   </TR>
+
 </TABLE>
 
 <HR>
 <TABLE BORDER="0">
   <TR>
     <TD VALIGN="bottom">
+      <FONT SIZE="-2">[<A HREF="/img/mail.png" target="_blank">Gmail</A>]</FONT>
+    </TD>
+    <TD VALIGN="bottom">
       <FONT SIZE="-2">[<A HREF="./tweets/index.html" target="_blank">tweets</A>]</FONT>
     </TD>
     <TD VALIGN="bottom">
-      <FONT SIZE="-2">[<A HREF="http://www.twitter.com/uuspider" target="_blank">gmail</A>]</FONT>
+      <FONT SIZE="-2">[<A HREF="/wordpress" target="_blank">wordpress</A>]</FONT>
     </TD>
     <TD VALIGN="bottom">
-      <FONT SIZE="-2">[<A HREF="http://www.twitter.com/uuspider" target="_blank">163</A>]</FONT>
+      <FONT SIZE="-2">[<A HREF="http://book.douban.com/people/uuspider/" target="_blank">read</A>]</FONT>
     </TD>
     <TD VALIGN="bottom">
-      <FONT SIZE="-2">[<A HREF="http://www.twitter.com/uuspider" target="_blank">163</A>]</FONT>
+      <FONT SIZE="-2">[<A HREF="http://movie.douban.com/people/uuspider/" target="_blank">movies</A>]</FONT>
     </TD>
     <TD VALIGN="bottom">
-      <FONT SIZE="-2">[<A HREF="http://www.twitter.com/uuspider" target="_blank">163</A>]</FONT>
+      <FONT SIZE="-2">[<A HREF="http://www.uuspider.com" target="_blank">uuspider</A>]</FONT>
     </TD>
     <TD VALIGN="bottom">
-      <FONT SIZE="-2">[<A HREF="http://www.twitter.com/uuspider" target="_blank">163</A>]</FONT>
-    </TD>
-    <TD VALIGN="bottom">
-      <FONT SIZE="-2">[<A HREF="http://www.twitter.com/uuspider" target="_blank">163</A>]</FONT>
+      <FONT SIZE="-2">[<A HREF="https://github.com/uuspider/key" target="_blank">Github</A>]</FONT>
     </TD>
   </TR>
 </TABLE>
