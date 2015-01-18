@@ -121,52 +121,20 @@ title: uuspider's private page
 </table>
 
 <div id="disqus_container">
-    <a href="#" class="comment" onclick="return false;">查看评论</a>
     <div id="disqus_thread"></div>
-
-    <!--<script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    <input type="button" value="查看评论" onclick="showdqs()" />
+    <script type="text/javascript">
         var disqus_shortname = 'uuspider'; // required: replace example with your forum shortname
 
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
+        function showdqs() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
+        };
     </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>-->
-    <script type="text/javascript">
-        $('#disqus_container .comment').on('click',function(){
-        $(this).html('加载中...');
-        var disqus_shortname = 'uuspider';
-        var that = this;
-        BYB.includeScript('http://' + disqus_shortname + '.disqus.com/embed.js',function(){$(that).remove()});
- //这是一个加载js的函数
-        });
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-
-    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
 
-<!--
-    <script type="text/javascript">
-        $('#disqus_container .comment').on('click',function(){
-            $(this).html('加载中...');
-            var disqus_shortname = 'uuspider';
-            var that = this;
-            BYB.includeScript('http://' + disqus_shortname + '.disqus.com/embed.js',function(){$(that).remove()}); //这是一个加载js的函数
-        });
-    </script>    
--->
-
-
-
-<!--testcode-->
 
 
 <!--test code end-->
