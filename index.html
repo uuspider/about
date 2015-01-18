@@ -8,15 +8,14 @@ title: uuspider's private page
 <table border="0"  bgcolor="#fff" >
   <tr >
     <td valign="bottom">
-      <a href="http://www.twitter.com/uuspider" target="_blank" title="This is a PRIVATE page"><img src="{{site.baseurl}}images/icon.jpeg" width="52" height="52" alt="uuspider"
- title="A thumbnail photo of uuspider" ></img></a>
+        <img src="{{site.baseurl}}images/icon.jpeg" width="48" height="48" alt="uuspider" title="A thumbnail of uuspider" ></img>
     </td>
-    <td valign="bottom">
-      <font size="-2"><span id=localtime></span></font><br>
-      <font size="-2">Copyright &copy; 2009-2015 by <a href="/img/mail.png" target="_blank">uuspider</a></font><br>
+    <td valign="middle">
+      <font size="-1"><span id=localtime></span></font><br>
+      <font size="-1">Copyright &copy; 2009-2015 by uuspider</font><br>
       <script type="text/javascript">
-function showLocale(objD)
-{
+	function showLocale(objD)
+	{
 	var str,colorhead,colorfoot;
 	var yy = objD.getYear();
 	if(yy<1900) yy = yy+1900;
@@ -44,16 +43,16 @@ function showLocale(objD)
 	colorfoot="</font>"
 	str = colorhead + yy + "-" + MM + "-" + dd + " " + hh + ":" + mm + ":" + ss + "  " + ww + colorfoot;
 	return(str);
-}
-function tick()
-{
+	}
+	function tick()
+	{
 	var today;
 	today = new Date();
 	document.getElementById("localtime").innerHTML = showLocale(today);
 	window.setTimeout("tick()", 1000);
-}
-tick();
-</script>
+	}
+	tick();
+	</script>
     </td>
   </tr>
 </table>
