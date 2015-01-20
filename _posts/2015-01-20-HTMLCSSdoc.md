@@ -61,6 +61,7 @@ title: HTML CSS GUIDE
 7. [结语](#end)
 
 <a name="intro"></a>
+
 ## 规范概述
 
 规范的制定是我们长期以来对工作的积累与沉淀的产物，帮助我们更快、更好、更高效的完成繁重、复杂、多样化的任务，我们制作规范的主要目的在于：
@@ -71,6 +72,7 @@ title: HTML CSS GUIDE
 * 提供一整套HTML、CSS解决方案，来帮助开发人员快速做出高质量的符合要求的页面。
 
 <a name="profile"></a>
+
 ## 基本信息
 
 规范名称 | Cook
@@ -135,7 +137,6 @@ title: HTML CSS GUIDE
 
 > `prd` 为生产环境目录，以 `xxx` 项目中的一个子项目 `mobile` 为例，其生产环境中的某个CSS外链大致如下：`//sitename.com/prd/styles/mobile/index.css`
 
-<a name="separate"></a>
 ### 2.分离
 
 结构（HTML）、表现（CSS）、行为分离（JavaScript）
