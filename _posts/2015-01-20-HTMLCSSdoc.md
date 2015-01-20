@@ -60,7 +60,6 @@ title: HTML CSS GUIDE
 	* [Sprite](#sprite)
 7. [结语](#end)
 
-<a name="intro"></a>
 
 ## 规范概述
 
@@ -71,7 +70,6 @@ title: HTML CSS GUIDE
 * 高度统一的代码风格；
 * 提供一整套HTML、CSS解决方案，来帮助开发人员快速做出高质量的符合要求的页面。
 
-<a name="profile"></a>
 
 ## 基本信息
 
@@ -82,10 +80,8 @@ title: HTML CSS GUIDE
 参与人群 | Qunar FED
 最后更新 | 2015.01.18
 
-<a name="general"></a>
 ## 通用约定
 
-<a name="directory"></a>
 ### 1.文档目录结构
 
 ```
