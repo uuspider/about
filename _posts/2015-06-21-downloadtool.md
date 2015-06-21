@@ -28,23 +28,23 @@ title: wget, amulecmd & transmission-remote
 - 后台下载
 
 >wget -b [url]
->Continuing in background, pid 1024.
->Output will be written to `wget-log’.
 
 >查看下载进度
+
 >tail -f wget-log
 
 - 下载多个文件
 
 >保存一份下载链接文件
 
->cat > filelist.txt
->url1
->url2
->url3
+>cat > filelist.txt <br>
+>url1<br>
+>url2<br>
+>url3<br>
 >url4
 
 >下载该文件中的链接
+
 >wget -i filelist.txt
 
 - FTP下载
@@ -66,9 +66,9 @@ title: wget, amulecmd & transmission-remote
 
 - 对下载进程的操作
 
->暂停 | pause [hash \| id]
->重启 | resume [hash \| id]
->取消 | cancel [hash \| id]
+>暂停 | | pause [hash \| id]
+>重启 | | resume [hash \| id]
+>取消 | | cancel [hash \| id]
 
 
 #3. transmission-remote
@@ -83,14 +83,14 @@ title: wget, amulecmd & transmission-remote
 
 - 对下载进程的操作
 
->进程详情 | transmission-remote -t [all \| hash] -i
->停止 | transmission-remote -t [all \| hash] -s
->重启 | transmission-remote -t [all \| hash] -S
->取消 | transmission-remote -t [all \| hash] -r
->下载限速 | transmission-remote -t [all \| hash] -d [rate]
->取消下载限速 | transmission-remote -t [all \| hash] -D
->上传限速 | transmission-remote -t [all \| hash] -u [rate]
->取消上传限速 | transmission-remote -t [all \| hash] -U
+>进程详情 | | transmission-remote -t [all \| hash] -i
+>停止 | | transmission-remote -t [all \| hash] -s
+>重启 | | transmission-remote -t [all \| hash] -S
+>取消 | | transmission-remote -t [all \| hash] -r
+>下载限速 | | transmission-remote -t [all \| hash] -d [rate]
+>取消下载限速 | | transmission-remote -t [all \| hash] -D
+>上传限速 | | transmission-remote -t [all \| hash] -u [rate]
+>取消上传限速 | | transmission-remote -t [all \| hash] -U
 
 
 
