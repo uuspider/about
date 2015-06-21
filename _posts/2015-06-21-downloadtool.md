@@ -3,7 +3,7 @@ layout: default
 title: wget, amulecmd & transmission-remote
 ---
 
-#1. wget 
+##1. wget 
 
 - 下载文件
 
@@ -11,7 +11,7 @@ title: wget, amulecmd & transmission-remote
 
 - 下载时重命名
 
->wget默认会以最后一个符合”/”的后面的字符来命令，对于动态链接的下载通常文件名会不正确。
+>wget默认以最后一个”/”后的字符命名下载文件，对于动态链接的下载，文件名会有误。
 
 >wget http://url/download?id=1024 | | #下载文件以名称download.php?id=1024保存
 >wget -O aoi_sola.avi http://url/download.php?id=1024 | | #下载文件以名称aoi_sola.avi保存
@@ -51,9 +51,10 @@ title: wget, amulecmd & transmission-remote
 >wget [ftp-url]
 
 >如需用户名和密码认证
+
 >wget –ftp-user=USERNAME –ftp-password=PASSWORD [ftp-url]
 
-#2. amulecmd
+##2. amulecmd
 
 - 下载文件
 
@@ -70,7 +71,7 @@ title: wget, amulecmd & transmission-remote
 >取消 | | cancel [hash \| id]
 
 
-#3. transmission-remote
+##3. transmission-remote
 
 - 下载文件
 
