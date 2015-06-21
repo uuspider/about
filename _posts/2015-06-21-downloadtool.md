@@ -12,7 +12,9 @@ title: wget, amulecmd & transmission-remote
 - 下载时重命名
 
 >wget默认会以最后一个符合”/”的后面的字符来命令，对于动态链接的下载通常文件名会不正确。
+
 >wget http://url/download?id=1024  #下载文件以名称download.php?id=1024保存
+
 >wget -O aoi_sola.avi http://url/download.php?id=1024  #下载文件以名称aoi_sola.avi保存
 
 - 限速
@@ -64,9 +66,9 @@ title: wget, amulecmd & transmission-remote
 
 - 对下载进程的操作
 
->暂停 pause [hash | id]
->重启 resume [hash | id]
->取消 cancel [hash | id]
+>暂停 pause [hash \| id]
+>重启 resume [hash \| id]
+>取消 cancel [hash \| id]
 
 
 #3. transmission-remote
@@ -81,14 +83,14 @@ title: wget, amulecmd & transmission-remote
 
 - 对下载进程的操作
 
->进程详情 transmission-remote -t [all | hash] -i
->停止 transmission-remote -t [all | hash] -s
->重启 transmission-remote -t [all | hash] -S
->取消 transmission-remote -t [all | hash] -r
->下载限速 transmission-remote -t [all | hash] -d [rate]
->取消下载限速 transmission-remote -t [all | hash] -D
->上传限速 transmission-remote -t [all | hash] -u [rate]
->取消上传限速 transmission-remote -t [all | hash] -U
+>进程详情 transmission-remote -t [all \| hash] -i
+>停止 transmission-remote -t [all \| hash] -s
+>重启 transmission-remote -t [all \| hash] -S
+>取消 transmission-remote -t [all \| hash] -r
+>下载限速 transmission-remote -t [all \| hash] -d [rate]
+>取消下载限速 transmission-remote -t [all \| hash] -D
+>上传限速 transmission-remote -t [all \| hash] -u [rate]
+>取消上传限速 transmission-remote -t [all \| hash] -U
 
 
 
