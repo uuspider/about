@@ -1,0 +1,152 @@
+---
+layout: default
+title: uuspider's private page
+---
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<div class="">
+<table border="0"  bgcolor="#fff" >
+  <tr >
+    <td valign="bottom">
+        <img src="{{site.baseurl}}images/icon.jpeg" width="48" height="48" alt="uuspider" title="A thumbnail of uuspider" ></img>
+    </td>
+    <td valign="">
+      <font size="-1"><span id=localtime></span></font><br>
+      <font size="-1">Copyright &copy; 2009-2015 by uuspider</font><br>
+      <script type="text/javascript">
+	function showLocale(objD)
+	{
+	var str,colorhead,colorfoot;
+	var yy = objD.getYear();
+	if(yy<1900) yy = yy+1900;
+	var MM = objD.getMonth()+1;
+	if(MM<10) MM = '0' + MM;
+	var dd = objD.getDate();
+	if(dd<10) dd = '0' + dd;
+	var hh = objD.getHours();
+	if(hh<10) hh = '0' + hh;
+	var mm = objD.getMinutes();
+	if(mm<10) mm = '0' + mm;
+	var ss = objD.getSeconds();
+	if(ss<10) ss = '0' + ss;
+	var ww = objD.getDay();
+	if  ( ww==0 )  colorhead="<font color=\"#FF0000\">";
+	if  ( ww > 0 && ww < 6 )  colorhead="<font color=\"#373737\">";
+	if  ( ww==6 )  colorhead="<font color=\"#008000\">";
+	if  (ww==0)  ww="Sunday";
+	if  (ww==1)  ww="Monday";
+	if  (ww==2)  ww="Tuesday";
+	if  (ww==3)  ww="Wednesday";
+	if  (ww==4)  ww="Thursday";
+	if  (ww==5)  ww="Friday";
+	if  (ww==6)  ww="Saturday";
+	colorfoot="</font>"
+	str = colorhead + yy + "-" + MM + "-" + dd + " " + hh + ":" + mm + ":" + ss + "  " + ww + colorfoot;
+	return(str);
+	}
+	function tick()
+	{
+	var today;
+	today = new Date();
+	document.getElementById("localtime").innerHTML = showLocale(today);
+	window.setTimeout("tick()", 1000);
+	}
+	tick();
+	</script>
+    </td>
+  </tr>
+</table>
+</div>
+
+<hr>
+
+<table border="0" width= "100%">
+  <tr bgcolor="#ffe7f4">
+    <td valign="bottom">
+      <font size="2"><b>EPISODE</b></font><br>
+    </td>
+  </tr>
+
+  <tr>
+    <td valign="bottom">
+      <font size="2">
+        <script language="JavaScript" src="{{ site.baseurl }}javascripts/slide.js"></script>
+	</font><br>
+    </td>
+  </tr>
+</table>
+<!-- reserved by uuspider
+<table border="0" width= "100%">
+  <tr bgcolor="#ffd">
+    <td valign="bottom">
+      <font size="2"><b>SHOULD TO KNOW</b></font><br>
+    </td>
+  </tr>
+
+  <tr>
+    <td valign="bottom">
+      <font size="2">
+	1. <br>
+	2. 
+	</font><br>
+    </td>
+  </tr>
+</table>
+
+<div> hello baby </div>
+
+<table border="0" width= "100%">
+  <tr bgcolor="#e8f5fe">
+    <td valign="bottom">
+      <font size="2"><b>WORTH TO STUDY</b></font><br>
+    </td>
+  </tr>
+
+  <tr>
+    <td valign="bottom">
+      <font size="2">
+	1. <br>
+	2. 
+	</font><br>
+    </td>
+  </tr>
+</table>
+-->
+<table border="0" width= "100%">
+  <tr bgcolor="#f2fddb">
+    <td valign="bottom">
+      <font size="2"><b>GUESTBOOK</b></font><br>
+    </td>
+  </tr>
+</table>
+
+<div id="disqus_container">
+    <div id="disqus_thread"></div>
+    <input type="button" value="CHECK"onclick="showdqs()" />
+    <script type="text/javascript">
+        var disqus_shortname = 'uuspider'; // required: replace example with your forum shortname
+
+        function showdqs() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        };
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+
+
+<!--test code end-->
+<hr>
+
+<table border="0">
+  <tr>
+    <td><font size="-2">[<a href="{{ site.baseurl }}images/GmailLogo.jpg" target="_blank">Gmail</a>]</font></td>
+    <td><font size="-2">[<a href="http://book.douban.com/people/uuspider/" target="_blank">books</a>]</font></td>
+    <td><font size="-2">[<a href="http://movie.douban.com/people/uuspider/" target="_blank">movies</a>]</font></td>
+    <td><font size="-2">[<a href="http://www.uuspider.com/" >uuspider</a>]</font></td>
+    <td><font size="-2">[<a href="https://twitter.com/uuspider/" target="_blank">twitter</a>]</font></td>
+    <td><font size="-2">[<a href="https://github.com/uuspider/key/" target="_blank">Github</a>]</font></td>
+  </tr>
+</table>
