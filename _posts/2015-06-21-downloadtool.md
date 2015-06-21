@@ -13,9 +13,8 @@ title: wget, amulecmd & transmission-remote
 
 >wget默认会以最后一个符合”/”的后面的字符来命令，对于动态链接的下载通常文件名会不正确。
 
->wget http://url/download?id=1024 | #下载文件以名称download.php?id=1024保存
-
->wget -O aoi_sola.avi http://url/download.php?id=1024 | #下载文件以名称aoi_sola.avi保存
+>wget http://url/download?id=1024 | | #下载文件以名称download.php?id=1024保存
+>wget -O aoi_sola.avi http://url/download.php?id=1024 | | #下载文件以名称aoi_sola.avi保存
 
 - 限速
 
@@ -75,7 +74,7 @@ title: wget, amulecmd & transmission-remote
 
 - 下载文件
 
->transmission-remote -a [torrent | magnet]
+>transmission-remote -a [torrent \| magnet]
 
 - 查看下载进程信息
 
