@@ -11,7 +11,7 @@ title: wget, amulecmd & transmission-remote
 
 - 下载时重命名
 
->wget默认以最后一个”/”后的字符命名下载文件，对于动态链接，会丢失扩展后缀。
+>wget默认以最后一个”/”后的字符命名下载文件，对于动态链接，还会丢失扩展后缀。
 
 >wget http://url/download?id=1024 | | #下载文件以名称download.php?id=1024保存
 >wget -O aoi_sola.avi http://url/download.php?id=1024 | | #下载文件以名称aoi_sola.avi保存
