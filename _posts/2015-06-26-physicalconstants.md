@@ -5,7 +5,7 @@ title: Fundamental Physical Constants
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
 |项目|符号|数值|不确定度\\(10 ^{-6}\\)|
-|---|:---:|:---|---:|
+|--------|--------|------------|----:|
 |真空中光速|\\(c\\)|\\(2.99792458 \times 10 ^8 {\rm m}/{\rm s}\\)|准确（定义）|
 |万有引力常数|\\(G\\)|\\(6.67384 \times 10 ^{-11} {\rm m} ^3 / ({\rm kg} \cdot {\rm s} ^2)\\)|\\(120\\)|
 |电子电荷,基本电荷|\\(e,e_0\\)|\\(1.602176565 \times 10 ^{-19} {\rm C}\\)|\\(0.022\\)|
