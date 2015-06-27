@@ -1,0 +1,36 @@
+/* @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700); */
+html {
+
+}
+
+body {
+
+  font: 14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+
+header, section, footer {
+  display: block;
+}
+
+a {
+  color: #069;
+  text-decoration: none;
+}
+
+p {
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+strong {
+  color: #222;
+  font-weight: 700;
+}
+
+
+
+img {
+  max-width: 100%;
+}
+
+
