@@ -6,14 +6,9 @@ html {
 body {
 
   font: 14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-
-header, section, footer {
-  display: block;
 }
 
 a {
-  color: #069;
   text-decoration: none;
 }
 
