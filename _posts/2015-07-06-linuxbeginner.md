@@ -16,9 +16,11 @@ title: UNIX / Linux beginner
 <h2 id="top"></h2>
 
 *   [1. 进入终端](#terminal)
-*   [2. ](#setup)
-    *   [1.1 引例](#samples)
-    *   [1.2 标记](#mark)
+*   [2. 文件和目录](#files)
+    *   [2.1 查看当前目录中的内容](#ls)
+    *   [2.2 建立目录](#mkdir)
+    *   [2.3 进入目录](#cd)
+    *   [2.4 查看当前所在目录及其路径](#pwd)
 
 * * *
 <h2 id="terminal">1. 进入终端</h2>
@@ -33,7 +35,19 @@ title: UNIX / Linux beginner
 
 * * *
 
-<h2 id="terminal">1. 进入终端</h2>
+<h2 id="files">2. 文件和目录</h2>
 
-<h3 id="samples">1.1 引例</h3>
+<h3 id="ls">2.1 查看当前目录中的内容</h3>
+
+输入
+
+    ls
+    
+就可以查看当前目录或文件夹中的内容了
+
+<h3 id="mkdir">2.2 建立目录</h3>
+
+<h3 id="cd">2.3 进入目录</h3>
+
+<h3 id="pwd">2.4 查看当前所在目录及其路径</h3>
 
