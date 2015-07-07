@@ -329,5 +329,48 @@ cat将两个文件合并成了一个文件。
 
 <h2 id="right">8. 权限管理</h2>
 
+<h3 id="longls">8.1 查看文件权限</h3>
+
+    $ ls -l
+    
+该命令给出的结果类似于：
+
+|---|---|---|---|---|---|---|
+|-rw-rw-r-- |1 |uuspider |uuspider |41454  |July  7 12:30 |hanmeimei.txt|
+|权限属性|文件个数|拥有者|用户组|文件大小|创建时间|文件名|
+
+
+权限属性又可以分为几段：
+
+|---|---|---|---|
+|-|rw-|rw-|r--|
+|表示文件格式|文件拥有者的权限|同组用户的权限|其它用户的权限|
+
+
+对于文件格式，-表示普通文件，d表示目录，l表示链接。
+
+对于文件权限，r表示可读，w表示可编辑，x表示可执行；对于目录权限，r表示可读取目录内容列表，w表示可更改目录下内容，x表示可进入该目录。
+
+<h3 id="chmod">8.2 更改文件权限</h3>
+
+chmod有以下常用选项：
+
+|:---:|:---|
+|u|user|
+|g|group|
+|o|other|
+|a|all|
+|r|read|
+|w|write (and delete)|
+|x|execute (and access directory)|
+|+|add permission|
+|-|take away permission|
+
+
+    $ chmod go-rwx alllist
+    $ chmod a+rw alllist
+
+<h2 id="process">9. 进程管理</h2>
+
 
 
