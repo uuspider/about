@@ -44,6 +44,8 @@ title: UNIX / Linux guide
     *   [9.3 查看后台进程](#checkjobs)
     *   [9.4 终止进程](#kill)
 *   [10. 其他常用命令](#others)
+    *   [10.1 磁盘操作](#disk)
+    *   [10.2 打包和压缩](#tar)
 *   [11. 下一步该做什么？](#next)
 
 * * *
@@ -550,8 +552,16 @@ ps：图形界面的进程，不能转入后台。
 
     $ gunzip files.gz
     
-解压缩files.gz。注：gzip只能针对文件操作，对目录无效。
+解压缩files.gz。注：gzip只能针对文件操作，对目录无效。如果要打包和压缩目录，可以使用用tar。
 
+    $ tar -zcf dir.tar.gz dir
+    $ tar -zxf dir.tar.gz
+    
+|:---|:---|
+|-c|打包|
+|-x|解包|
+|-f|指定文件名|
+|-z|压缩/解压缩|
 
 
 **[[TOP](#top)]**
