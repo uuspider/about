@@ -186,7 +186,7 @@ lileicp.txt被删除。
 
 创建一个有内容的文件：
 
-    $ ps aux | cat -> hanmeimei.txt
+    $ ps aux | cat > hanmeimei.txt
 
 先不要纠结这条命令干了什么，只要知道：我们创建了一个名为hanmeimei.txt的文件。
 
@@ -234,9 +234,9 @@ tail和head命令类似。
 |-i|忽略大小写|
 
 
-    $ grep -v 'some thing' hanmeimei.txt
+    $ grep -v 'a few words' hanmeimei.txt
     
-显示不含"some thing"字段的行。
+显示不含"a few words"字段的行。
 
     $ wc -w hanmeimei.txt
     
@@ -246,12 +246,88 @@ tail和head命令类似。
 
 显示文件的总行数。
 
+<h2 id="inout">5. 重定向和管道</h2>
 
+<h3 id="redirection">5.1 重定向</h3>
 
+    $ cat
+    
+此时，输入任意字段后敲Enter键，可以看到，终端将显示刚输入的内容，直到按下Ctrl + d (下文简写为^D)退出。
 
+<h3 id="outredirection">5.2 输出重定向</h3>
 
+    $ cat > list1
+    lilei
+    hanmeimei
+    lintao
+    ^D
+    $ cat list1
+    
+刚刚输入的字段就保存在list1中了。
 
+    $ cat > list2
+    Green
+    Lily
+    Mary
+    ^D
+    $ cat >>list1
+    UncleWang
+    ^D
+    
+我们现在有了两个文件list1和list2。
 
+    $ cat list1 list2 > alllist
+    $ cat alllist
+    
+cat将两个文件合并成了一个文件。
+    
+<h3 id="inredirection">5.3 输入重定向</h3>
+
+    $ sort
+    pig
+    cat
+    dog
+    ^D
+    
+屏幕将按照字母顺序输出刚刚输入的字段。
+
+    $ sort < alllist
+    $ sort < alllist > newlist
+    
+文件中的内容经过重新排序，输出到新的文件中。
+    
+<h3 id="pipes">5.4 管道</h3>
+
+    $ ps aux
+    
+输入这条命令，屏幕将显示系统当前的进程信息。注意：该命令的选项aux前没有短横线“-”。
+
+[上文](#mkfile)中我们曾经这样创建过一个文件：
+
+    $ ps aux | cat > hanmeimei.txt
+    
+竖线前后是两个我们已经练习过的命令，中间的竖线称为管道符。管道符左侧命令的输出结果将直接传递给右侧的命令。
+
+<h2 id="wildcards">6. 通配符</h2>
+
+    $ ls *.txt
+    $ ls *list*
+    $ ls *list?
+    
+*表示0～n个字符，?表示1个字符。
+
+<h2 id="manuals">7. 联机手册</h2>
+
+    $ man ls
+    $ whatis ls
+
+这两条命令都显示命令的说明文件，man给出详细的说明，whatis给出的结果则非常简单。
+
+如果记不住命令的确切拼写方法，可以进行模糊查询：
+
+    $ apropos copy
+
+<h2 id="right">8. 权限管理</h2>
 
 
 
