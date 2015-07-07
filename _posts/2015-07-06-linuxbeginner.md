@@ -153,11 +153,8 @@ ps：mkdir创建空目录，touch创建空文件。
 输入
 
     $ mv ../lilei.txt lileimv.txt
-
-输入
-
-    $ ls
     $ ls ..
+    $ ls
     
 可以看到上级目录中的文件lilei.txt已经没有了，当前目录中则出现了名为lileimv.txt的文件。
 
@@ -176,6 +173,49 @@ ps：mkdir创建空目录，touch创建空文件。
     $ ls
     
 lileicp.txt被删除。
+
+<h2 id="checkfiles">4. 查看文件</h2>
+
+<h3 id="mkfile">4.1 准备一个非空文件</h3>
+
+创建一个有内容的文件：
+
+    $ ps aux | cat -> hanmeimei.txt
+    $ ls
+
+先不要纠结这条命令干了什么，只要知道：我们创建了一个名为hanmeimei.txt的文件。
+
+<h3 id="cat">4.2 查看文件内容</h3>
+
+    $ cat hanmeimei.txt
+    
+终端输出了一堆字符，这就是文件hanmeimei.txt中的内容。
+
+ps：在当前目录中，输入“cat h”，然后敲Tab键，可以发现文件名自动补齐了。Tab补齐在输入长文件名时非常有用。
+
+使用cat查看文件内容时，自动滚动到最末尾，较长的文件一闪而过，
+
+    $ less hanmeimei.txt
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
