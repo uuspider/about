@@ -28,6 +28,23 @@ title: UNIX / Linux beginner
     *   [4.1 准备一个非空文件](#mkfile)
     *   [4.2 查看文件内容](#cat)
     *   [4.3 搜索文件内容](#search)
+*   [5. 重定向和管道](#inout)
+    *   [5.1 重定向](#redirection)
+    *   [5.2 输出重定向](#outredirection)
+    *   [5.3 输入重定向](#inredirection)
+    *   [5.4 管道](#pipes)
+*   [6. 通配符](#wildcards)
+*   [7. 联机手册](#manuals)
+*   [8. 权限管理](#right)
+    *   [8.1 查看文件权限](#longls)
+    *   [8.2 更改文件权限](#chmod)
+*   [9. 进程管理](#process)
+    *   [9.1 查看系统进程](#ps)
+    *   [9.2 后台运行](#backrun)
+    *   [9.3 查看后台进程](#checkjobs)
+    *   [9.4 终止进程](#kill)
+    *   [.1 ](#)
+    *   [.1 ](#)
 
 
 * * *
@@ -339,14 +356,14 @@ cat将两个文件合并成了一个文件。
 |-rw-rw-r-- |1 |uuspider |uuspider |41454  |July  7 12:30 |hanmeimei.txt|
 |权限属性|文件个数|拥有者|用户组|文件大小|创建时间|文件名|
 
-
+<br>
 权限属性又可以分为几段：
 
 |---|---|---|---|
 |-|rw-|rw-|r--|
 |表示文件格式|文件拥有者的权限|同组用户的权限|其它用户的权限|
 
-
+<br>
 对于文件格式，-表示普通文件，d表示目录，l表示链接。
 
 对于文件权限，r表示可读，w表示可编辑，x表示可执行；对于目录权限，r表示可读取目录内容列表，w表示可更改目录下内容，x表示可进入该目录。
@@ -366,11 +383,76 @@ chmod有以下常用选项：
 |+|add permission|
 |-|take away permission|
 
-
+<br>
     $ chmod go-rwx alllist
     $ chmod a+rw alllist
 
 <h2 id="process">9. 进程管理</h2>
+
+<h3 id="ps">9.1 查看系统进程</h3>
+
+    $ ps aux
+    
+我们已经知道这个命令可用来查看系统的进程信息。
+
+<h3 id="backrun">9.2 后台运行</h3>
+
+    $ sleep 10
+    $ sleep 10 &
+    
+末尾加&表示后台运行该命令。
+
+    $ sleep 100
+    ^Z
+    $ bg
+    
+^Z可将正在运行的进程挂起，然后输入bg将其转入后台运行。
+
+ps：图形界面的进程，不能转入后台。
+
+<h3 id="checkjobs">9.3 查看后台进程</h3>
+
+    $ jobs
+    
+列出挂起或后台运行的进程。
+
+    $ fg %1
+    
+将jobs列出的第1个进程转到前台。
+
+<h3 id="kill">9.4 终止进程</h3>
+
+前台运行的进程，^C即可终止。
+
+    $ sleep 100
+    ^C
+    
+对于挂起或后台运行的进程，使用kill终止。
+
+    $ sleep 100 &
+    $ jobs
+    $ kill %1
+    
+最常用的还是通过kill PID_number来终止进程。
+
+    $ sleep 100 &
+    $ ps aux | grep sleep
+    
+找到进程的PID为xxx。
+
+    $ kill xxx
+    
+这样就终止了该进程，如果该进程仍未终止，可以使用-9选项强制终止，即
+
+    $ kill -9 xxx
+    
+<h2 id="others">10. 其他常用命令</h2>
+
+
+
+
+
+
 
 
 
