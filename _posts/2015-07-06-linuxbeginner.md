@@ -5,13 +5,11 @@ title: UNIX / Linux beginner
 
 ## UNIX / Linux 指引 
 
-参考：[UNIX Tutorial for Beginners][ref1], [Introduction to Linux][ref2]
-
-[][ref3]
+参考：[UNIX Tutorial for Beginners][ref1], [Introduction to Linux][ref2], [UNIX Commands Guide][ref3]
 
 [ref1]:http://www.ee.surrey.ac.uk/Teaching/Unix/
 [ref2]:http://www.tldp.org/LDP/intro-linux/html/
-[ref3]:
+[ref3]:http://cs.brown.edu/courses/bridge/1998/res/UnixGuide.html
 
 <h2 id="top"></h2>
 
@@ -22,6 +20,14 @@ title: UNIX / Linux beginner
     *   [2.3 进入目录](#cd)
     *   [2.4 查看当前所在目录及其路径](#pwd)
 *   [3. 文件操作](#workonfiles)
+    *   [3.1 创建文件](#touch)
+    *   [3.2 复制文件](#cp)
+    *   [3.3 移动文件](#mv)
+    *   [3.4 删除文件](#rm)
+*   [4. 查看文件内容](#workonfiles)
+    *   [4.1 准备一个非空文件](#mkfile)
+    *   [4.2 查看文件内容](#cat)
+    *   [4.3 搜索文件内容](#search)
 
 
 * * *
@@ -174,14 +180,13 @@ ps：mkdir创建空目录，touch创建空文件。
     
 lileicp.txt被删除。
 
-<h2 id="checkfiles">4. 查看文件</h2>
+<h2 id="checkfiles">4. 查看文件内容</h2>
 
 <h3 id="mkfile">4.1 准备一个非空文件</h3>
 
 创建一个有内容的文件：
 
     $ ps aux | cat -> hanmeimei.txt
-    $ ls
 
 先不要纠结这条命令干了什么，只要知道：我们创建了一个名为hanmeimei.txt的文件。
 
@@ -193,29 +198,53 @@ lileicp.txt被删除。
 
 ps：在当前目录中，输入“cat h”，然后敲Tab键，可以发现文件名自动补齐了。Tab补齐在输入长文件名时非常有用。
 
-使用cat查看文件内容时，自动滚动到最末尾，较长的文件一闪而过，
+使用cat查看文件内容时，屏幕上只能显示最后一屏信息。
 
     $ less hanmeimei.txt
+
+less可以分屏显示较长的信息，PgUP和PgDn上下翻页，q退出。
+
+    $ head hanmeimei.txt
+    $ head -2 hanmeimei.txt
     
+head命令默认返回文件的前10行，该命令可附加选项"-数字"。
 
+    $ tail hanmeimei.txt
+
+tail和head命令类似。
+
+<h3 id="search">4.3 搜索文件内容</h3>
+
+    $ less hanmeimei.txt
+
+在less的显示界面中输入
+
+    /root
     
+可以看到所有的"root"字段都被高亮显示。
+
+    $ grep root hanmeimei.txt
+    
+屏幕上只输出了含有"root"字段的行。grep有以下几个常用选项：
+
+|:---|---|
+|-v|显示不匹配的行|
+|-n|显示行号|
+|-c|显示匹配的总行数|
+|-i|忽略大小写|
 
 
+    $ grep -v 'some thing' hanmeimei.txt
+    
+显示不含"some thing"字段的行。
 
+    $ wc -w hanmeimei.txt
+    
+显示文件的总单词数。
 
+    $ wc -l hanmeimei.txt
 
-
-
-
-
-
-
-
-
-
-
-
-
+显示文件的总行数。
 
 
 
