@@ -31,7 +31,7 @@ title: UNIX / Linux beginner
 
 - 怎么进入终端？
 
-如果开机就进入了字符模式，就可以直接通过键盘输入命令了。
+如果开机进入了字符模式，就可以立即敲键盘输入命令了。
 
 如果进入的是图形界面，通过“程序/终端”，“Applications/Terminal”或“Ctrl+Alt+t”可打开终端窗口，也可以通过“Ctrl+Alt+F1~6”进入字符终端。
 
@@ -115,12 +115,67 @@ ps：cd和.之间有一个空格。
 
 计算机会显示当前目录的完整路径。
 
-<h2 id="workonfiles">3.1 文件操作</h2>
+* * *
+
+<h2 id="workonfiles">3. 文件操作</h2>
+
+<h3 id="touch">3.1 创建文件</h3>
 
 输入
 
-    $ cp
+    $ touch lilei.txt
+    
+用ls命令可以看到我们在当前目录下创建了一个名为lilei.txt的文件。
 
+ps：mkdir创建空目录，touch创建空文件。
+
+<h3 id="cp">3.2 复制文件</h3>
+
+创建一个新目录dr1并进入该目录：
+
+    $ mkdir dr1
+    $ cd dr1
+    
+输入
+
+    $ cp ../lilei.txt lileicp.txt
+    
+这样就将lilei.txt复制到dr1中并命名为lileicp.txt。
+
+输入
+
+    $ ls ..
+    
+可以看到上级目录中的文件lilei.txt仍然存在。
+
+<h3 id="mv">3.3 移动文件</h3>
+
+输入
+
+    $ mv ../lilei.txt lileimv.txt
+
+输入
+
+    $ ls
+    $ ls ..
+    
+可以看到上级目录中的文件lilei.txt已经没有了，当前目录中则出现了名为lileimv.txt的文件。
+
+输入
+
+    $ mv lileimv.txt lilei.txt
+    $ ls
+    
+可以看到，lileimv.txt被重命名为lilei.txt。
+
+<h3 id="rm">3.4 删除文件</h3>
+
+输入
+
+    $ rm lileicp.txt
+    $ ls
+    
+lileicp.txt被删除。
 
 
 
