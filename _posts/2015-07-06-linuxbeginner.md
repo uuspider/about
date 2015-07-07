@@ -1,6 +1,6 @@
 ---
 layout: default
-title: UNIX / Linux beginner
+title: UNIX / Linux guide
 ---
 
 ## UNIX / Linux 指引 
