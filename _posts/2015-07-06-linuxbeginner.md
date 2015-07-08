@@ -434,6 +434,7 @@ chmod有以下常用选项：
 |-|take away permission|
 
 <br>
+
     $ chmod go-rwx alllist
     $ chmod a+rw alllist
 
