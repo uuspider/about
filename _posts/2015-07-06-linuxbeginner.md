@@ -4,7 +4,7 @@ title: UNIX / Linux guide
 ---
 ## UNIX / Linux 指引 
 
-参考：[UNIX Tutorial for Beginners][ref1], [Introduction to Linux][ref2]
+参考：[UNIX Tutorial for Beginners][ref1], [Introduction to Linux][ref2]{:target="_blank"}
 
 [ref1]:http://www.ee.surrey.ac.uk/Teaching/Unix/
 [ref2]:http://www.tldp.org/LDP/intro-linux/html/
