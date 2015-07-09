@@ -9,6 +9,7 @@ title: UNIX / Linux guide
 [ref1]:http://www.ee.surrey.ac.uk/Teaching/Unix/
 [ref2]:http://www.tldp.org/LDP/intro-linux/html/
 
+* * *
 <h2 id="top"></h2>
 
 *   [1. 进入终端](#terminal)
