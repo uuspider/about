@@ -2,14 +2,12 @@
 layout: default
 title: UNIX / Linux guide
 ---
-
 ## UNIX / Linux 指引 
 
-参考：[UNIX Tutorial for Beginners][ref1], [Introduction to Linux][ref2], [UNIX Commands Guide][ref3]
+参考：[UNIX Tutorial for Beginners][ref1] | [Introduction to Linux][ref2]
 
 [ref1]:http://www.ee.surrey.ac.uk/Teaching/Unix/
 [ref2]:http://www.tldp.org/LDP/intro-linux/html/
-[ref3]:http://cs.brown.edu/courses/bridge/1998/res/UnixGuide.html
 
 <h2 id="top"></h2>
 
@@ -434,7 +432,6 @@ chmod有以下常用选项：
 |-|take away permission|
 
 <br>
-
     $ chmod go-rwx alllist
     $ chmod a+rw alllist
 
@@ -603,4 +600,3 @@ ps：图形界面的进程，不能转入后台。
 到目前为止，你已经可以通过linux终端向计算机下达各种常用指令了，linux已经可以作为你的生产工具来产生效益了，因此，请牢记：**从现在开始，Linux只是你的一个工具，你应该“使用”它，而不再是“学习”它**。你一定还会遇见自己没有见过的、不明白的或不理解的命令，请使用搜索引擎吧。如果有一条命令你始终记不住，很有可能是因为它对你根本不重要，你没有必要牢记每一条命令，因为，你还有更重要的事情要在linux中完成。
 
 **[[TOP](#top)]**
-
