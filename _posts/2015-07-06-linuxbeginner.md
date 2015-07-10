@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: UNIX / Linux guide
 ---
 ## UNIX / Linux 指引 
