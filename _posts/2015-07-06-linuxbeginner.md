@@ -580,7 +580,7 @@ ps：图形界面的进程，不能转入后台。
     
 在根目录下查找大于100MB的文件，小于用`-n`，大于用`+n`，等于用`n`。
 
-    $ find /home -user admin
+    $ find / -user admin
     
 在根目录下查找所有者为admin的文件。根据所属组查找用`-group`选项。
 
