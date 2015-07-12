@@ -3,35 +3,35 @@ layout: post
 title: wget, amulecmd & transmission-remote
 ---
 
-## wget 
+# wget
 
-- 下载文件
+#### 下载文件
 
-```wget [url]```
+    wget [url]    
 
-- 下载时重命名
+#### 下载时重命名
 
-```wget -O aoi_sola.avi http://url/download.php?id=1024```
+    wget -O aoi_sola.avi http://url/download.php?id=1024    
 
-- 限速
+#### 限速
 
-```wget –limit-rate=300k [url]```
+    wget –limit-rate=300k [url]    
 
-- 断点续传
+#### 断点续传
 
-```wget -c [url]```
+    wget -c [url]    
 
-- 后台下载
+#### 后台下载
 
-```wget -b [url]```
+    wget -b [url]
 
->查看下载进度
+查看下载进度
 
     tail -f wget-log
 
-- 下载多个文件
+#### 下载多个文件
 
->保存一份下载链接文件
+保存一份下载链接文件
 
     cat > filelist.txt 
     url1
@@ -39,54 +39,56 @@ title: wget, amulecmd & transmission-remote
     url3
     url4
 
->下载该文件中的链接
+下载该文件中的链接
 
     wget -i filelist.txt
 
-- FTP下载
+#### FTP下载
 
     wget [ftp-url]
 
->如需用户名和密码认证
+如需用户名和密码认证
 
     wget –ftp-user=USERNAME –ftp-password=PASSWORD [ftp-url]
 
-## transmission-remote
+# transmission-remote
 
-- 下载文件
+#### 下载文件
 
-    transmission-remote -a [torrent \| magnet]
+    transmission-remote -a [torrent | magnet]
 
-- 查看下载进程信息
+#### 查看下载进程信息
 
     transmission-remote -l
 
-- 对下载进程的操作
+#### 对下载进程的操作
 
->进程详情 | | transmission-remote -t [all \| hash] -i
->停止 | | transmission-remote -t [all \| hash] -s
->重启 | | transmission-remote -t [all \| hash] -S
->取消 | | transmission-remote -t [all \| hash] -r
->下载限速 | | transmission-remote -t [all \| hash] -d [rate]
->取消下载限速 | | transmission-remote -t [all \| hash] -D
->上传限速 | | transmission-remote -t [all \| hash] -u [rate]
->取消上传限速 | | transmission-remote -t [all \| hash] -U
+    transmission-remote -t [all | hash] -[ ]
 
-## amulecmd
+进程详情 | | `-i`
+停止 | | `-s`
+重启 | | `-S`
+取消 | | `-r`
+下载限速 | | `-d [rate]`
+取消下载限速 | | `-D`
+上传限速 | | `-u [rate]`
+取消上传限速 | | `-U`
 
-- 下载文件
+# amulecmd
+
+#### 下载文件
 
     add [ed2k]
 
-- 查看下载进程信息
+#### 查看下载进程信息
 
     show dl
 
-- 对下载进程的操作
+#### 对下载进程的操作
 
-    暂停   pause [hash \| id]  
-    重启  resume [hash \| id]  
-    取消  cancel [hash \| id]
+    暂停   pause [hash | id]  
+    重启  resume [hash | id]  
+    取消  cancel [hash | id]
 
 
 
