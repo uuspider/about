@@ -7,23 +7,23 @@ title: wget, amulecmd & transmission-remote
 
 - 下载文件
 
-    wget [url]
+```wget [url]```
 
 - 下载时重命名
 
-    wget -O aoi_sola.avi http://url/download.php?id=1024
+```wget -O aoi_sola.avi http://url/download.php?id=1024```
 
 - 限速
 
-    wget –limit-rate=300k [url]
+```wget –limit-rate=300k [url]```
 
 - 断点续传
 
-    wget -c [url]
+```wget -c [url]```
 
 - 后台下载
 
-    wget -b [url]
+```wget -b [url]```
 
 >查看下载进度
 
