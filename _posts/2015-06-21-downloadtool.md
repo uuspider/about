@@ -65,14 +65,14 @@ title: wget, amulecmd & transmission-remote
 
     transmission-remote -t [all | hash] -[ ]
 
-进程详情 | | `-i`
-停止 | | `-s`
-重启 | | `-S`
-取消 | | `-r`
-下载限速 | | `-d [rate]`
-取消下载限速 | | `-D`
-上传限速 | | `-u [rate]`
-取消上传限速 | | `-U`
+进程详情 | | **`i`**
+停止 | | **`s`**
+重启 | | **`S`**
+取消 | | **`r`**
+下载限速 | | **`d [rate]`**
+取消下载限速 | | **`D`**
+上传限速 | | **`u [rate]`**
+取消上传限速 | | **`U`**
 
 # amulecmd
 
