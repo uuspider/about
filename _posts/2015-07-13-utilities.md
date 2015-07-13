@@ -18,7 +18,7 @@ title: Software, apps, scripts & recipes
 
 - [XPS peak ![Ext Link][i1]]("Free, fully featured, software for the analysis of XPS spectra"){:target="_blank"}
 
-> XPS图谱处理软件，可进行分峰、拟合、数据输出等。XPS peak运行在Microsoft Windows平台，简单操作可参考"[XPS Peak软件拟合数据的简单步骤   ![Ext Link][i1]](http://www.xieshil.com/post/49683.htm "XPS Peak软件拟合数据的简单步骤"){:target="_blank"} "。[ [Download:  [US][xpspeak1], [UK][xpspeak2], [Honk Kong][xpspeak3] ](3.3MB)
+> XPS图谱处理软件，可进行分峰、拟合、数据输出等。XPS peak运行在Microsoft Windows平台，简单操作可参考"[XPS Peak软件拟合数据的简单步骤   ![Ext Link][i1]](http://www.xieshil.com/post/49683.htm "XPS Peak软件拟合数据的简单步骤"){:target="_blank"} "。[Download:  [US][xpspeak1], [UK][xpspeak2], [Honk Kong][xpspeak3]] (3.3MB)
 
 [xpspeak1]:http://www.uksaf.org/xpspeak41.zip "Download right now"
 [xpspeak2]:http://www.dionea.demon.co.uk/xpspeak41.zip "Download from UK mirror"
