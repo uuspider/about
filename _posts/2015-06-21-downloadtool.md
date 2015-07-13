@@ -51,6 +51,8 @@ title: wget, amulecmd & transmission-remote
 
     wget –ftp-user=USERNAME –ftp-password=PASSWORD [ftp-url]
 
+***
+
 # transmission-remote
 
 #### 下载文件
@@ -74,6 +76,8 @@ title: wget, amulecmd & transmission-remote
 上传限速 | | **`u [rate]`**
 取消上传限速 | | **`U`**
 
+***
+
 # amulecmd
 
 #### 下载文件
@@ -90,7 +94,4 @@ title: wget, amulecmd & transmission-remote
     重启  resume [hash | id]  
     取消  cancel [hash | id]
 
-
-
-
-
+***
