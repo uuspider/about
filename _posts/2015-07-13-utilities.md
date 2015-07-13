@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Softwares, apps, scripts & recipes
+title: Software, apps, scripts & recipes
 ---
-## Softwares, Apps, Scripts & Recipes
+## Software, Apps, Scripts & Recipes
 
 ### —— 实用工具软件
 
