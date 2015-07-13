@@ -16,7 +16,7 @@ title: Softwares, apps, scripts & recipes
 
 > MDI Jade用于X射线衍射数据处理，能够完成大部分物相的定性、定量分析，是大量商业X射线衍射仪的配套软件。注：MDI Jade不是免费软件。
 
-- [XPS peak ![][i1]](http://www.materialsdata.com/ "Industry standard for XRD processing"){:target="_blank"}
+- [XPS peak ![][i1]](http://www.materialsdata.com/ "Free, fully featured, software for the analysis of XPS spectra"){:target="_blank"}
 
 > XPS图谱处理软件，可进行分峰、拟合、数据输出等。XPS peak运行在windows平台，简单操作可参考"[XPS Peak软件拟合数据的简单步骤   ![][i1]](http://www.xieshil.com/post/49683.htm "XPS Peak软件拟合数据的简单步骤"){:target="_blank"}"。[[Download](http://www.uksaf.org/xpspeak41.zip "Download right now")]
 
