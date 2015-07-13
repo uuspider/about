@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Softwares, apps & scripts
+title: Softwares, apps, scripts & recipes
 ---
 
 - [ImageJ  ![imageJ][i1]](http://rsb.info.nih.gov/ij/index.html "Image processing and analysis"){:target="_blank"}
