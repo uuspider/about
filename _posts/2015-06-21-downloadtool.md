@@ -1,9 +1,12 @@
 ---
 layout: post
-title: wget, amulecmd & transmission-remote
+title: wget, transmission-remote & amulecmd
 ---
+[wget](#wget), [transmission-remote](#transmission), [amulecmd](#amule)
 
-# wget
+***
+
+# wget {#wget}
 
 #### 下载文件
 
@@ -53,7 +56,7 @@ title: wget, amulecmd & transmission-remote
 
 ***
 
-# transmission-remote
+# transmission-remote {#transmission}
 
 #### 下载文件
 
@@ -78,7 +81,7 @@ title: wget, amulecmd & transmission-remote
 
 ***
 
-# amulecmd
+# amulecmd {#amule}
 
 #### 下载文件
 
