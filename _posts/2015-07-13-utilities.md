@@ -19,8 +19,6 @@ title: Softwares, apps, scripts & recipes
 > MDI Jade用于X射线衍射数据处理，能够完成大部分物相的定性、定量分析，是大量商业X射线衍射仪的配套软件。
 
 ***
-
-**参考： **
  
 &raquo; [Software tools for surface analysts  ![softwares for surface analysts][i1]](http://www.uksaf.org/software.html "software tools for the modelling, analysis and visualisation of surface science data"){:target="_blank"}
 
