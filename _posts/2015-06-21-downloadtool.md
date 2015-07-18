@@ -2,7 +2,11 @@
 layout: post
 title: wget, transmission-remote & amulecmd
 ---
-[wget](#wget), [transmission-remote](#transmission), [amulecmd](#amule)
+## wget, transmission-remote & amulecmd
+
+*   [wget](#wget) 
+*   [transmission-remote](#transmission)
+*   [amulecmd](#amule)
 
 ***
 
