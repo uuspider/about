@@ -57,8 +57,12 @@ title: wget, transmission-remote & amulecmd
 如需用户名和密码认证
 
     wget –ftp-user=USERNAME –ftp-password=PASSWORD [ftp-url]
+    
+#### 代理服务器
 
-`curl`也有类似功能，查看[这里](http://about.uuspider.com/2015/07/25/curl.html){:target="_blank"}。
+    wget -Y on -e "http_proxy=http://10.0.0.172:80" [url]
+
+注：`curl`有和`wget`类似的功能，查看[这里](http://about.uuspider.com/2015/07/25/curl.html){:target="_blank"}。
 
 ***
 
