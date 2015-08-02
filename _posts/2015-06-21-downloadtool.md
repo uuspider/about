@@ -58,6 +58,8 @@ title: wget, transmission-remote & amulecmd
 
     wget –ftp-user=USERNAME –ftp-password=PASSWORD [ftp-url]
 
+`curl`也有类似功能，查看[这里](http://about.uuspider.com/2015/07/25/curl.html){:target="_blank"}。
+
 ***
 
 # transmission-remote {#transmission}
