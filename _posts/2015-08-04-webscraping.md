@@ -89,9 +89,9 @@ virtualenv用于创建虚拟的Python环境，在虚拟环境中可以：
 
 ## 解析网页
 
-    >>> soup0 = BeautifulSoup(html)
-    >>> print(soup0)
-    >>> print(soup0.title)
+    >>> soup = BeautifulSoup(html)
+    >>> print(soup)
+    >>> print(soup.title)
 
 关于BeautifulSoup详细用法，请看这里。
 
@@ -119,5 +119,23 @@ virtualenv用于创建虚拟的Python环境，在虚拟环境中可以：
     else:
         #program continues.
 
+使用BeautifulSoup解析网页可能发生的异常可以这样处理：
 
+    try:
+        badContent = soup.notTag.otherTag
+    except AttributeError as e:
+        print("Tag was not found")
+    else:
+        if badContent == None:
+            print ("Tas was not found")
+        else:
+            print (badContent)
+    
+    
+    
+    
+    
+    
+    
+    
 
