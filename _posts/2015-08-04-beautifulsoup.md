@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Web scraping with python
+title: Beautiful Soup
 ---
 ## Beautiful Soup
 
