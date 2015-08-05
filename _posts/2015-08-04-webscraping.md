@@ -4,9 +4,9 @@ title: Web scraping with shell / python
 ---
 ## 爬虫基础
 
-参考：[Shell Scripts][ref1]{:target="_blank"},  [BeautifulSoup详解][ref2]{:target="_blank"}, 
+参考：[][ref1]{:target="_blank"},  [BeautifulSoup详解][ref2]{:target="_blank"}, 
 
-[ref1]:
+[ref1]:http://cuiqingcai.com/1319.html
 [ref2]:http://cuiqingcai.com/1319.html
 
 <h2 id="top"></h2>
