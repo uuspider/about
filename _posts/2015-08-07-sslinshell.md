@@ -1,8 +1,8 @@
 ---
 layout: post
-title: base64, md5/SHA1, AES/DES3
+title: base64, md5/SHA1, AES
 ---
-## base64, md5/SHA1, AES/DES3
+## base64, md5/SHA1, AES
 
 参考：[openssl][ref1]{:target="_blank"}
 
@@ -18,7 +18,7 @@ title: base64, md5/SHA1, AES/DES3
 
 ***
 
-## base64 编码与解码 {#base64}
+## base64: encoding {#base64}
 
     $ echo hello world | openssl base64
     aGVsbG8gd29ybGQK
@@ -33,7 +33,7 @@ title: base64, md5/SHA1, AES/DES3
 
 ***
 
-## md5/SHA1 摘要 {#md5}
+## md5/SHA1: digest {#md5}
 
     $ echo hello world | openssl md5
     (stdin)= 6f5902ac237024bdd0c176cb93063dc4
@@ -48,7 +48,7 @@ title: base64, md5/SHA1, AES/DES3
 
 ***
 
-## AES 加密与解密 {#aes}
+## AES: cipher {#aes}
 
     $ echo hello world | openssl aes-128-cbc -k 123 -base64
     U2FsdGVkX18OHihiZ6nWX1QOA43V64h3Shu5QIHkQVM=
