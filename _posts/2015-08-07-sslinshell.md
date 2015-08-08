@@ -51,6 +51,8 @@ title: base64, md5/SHA1, AES
 
 ## AES/RSA: cipher {#aes}
 
+### AES
+
     $ echo hello world | openssl aes-128-cbc -k 123 -base64
     U2FsdGVkX18OHihiZ6nWX1QOA43V64h3Shu5QIHkQVM=
 
@@ -62,6 +64,8 @@ title: base64, md5/SHA1, AES
 这是对上述结果解密。
 
 对于文件的加密或解密，使用`-in`即可，加密或解密后输出文件名可用`-out`指定。
+
+### RSA
 
     $ openssl genrsa -out key.pem 1024
 
