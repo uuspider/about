@@ -4,9 +4,10 @@ title: base64, md5/SHA1, AES
 ---
 ## base64, md5/SHA1, AES
 
-参考：[openssl][ref1]{:target="_blank"}
+参考：[openssl][ref1]{:target="_blank"} , [openssl 命令参数][ref2]{:target="_blank"}
 
 [ref1]:https://www.openssl.org/docs/apps/openssl.html
+[ref2]:http://netkiller.github.io/cryptography/openssl/index.html
 
 <h2 id="top"></h2>
 
@@ -48,7 +49,7 @@ title: base64, md5/SHA1, AES
 
 ***
 
-## AES: cipher {#aes}
+## AES/RSA: cipher {#aes}
 
     $ echo hello world | openssl aes-128-cbc -k 123 -base64
     U2FsdGVkX18OHihiZ6nWX1QOA43V64h3Shu5QIHkQVM=
@@ -60,9 +61,29 @@ title: base64, md5/SHA1, AES
 
 这是对上述结果解密。
 
-对于文件的加密或密文的解密，使用`-in`即可，加密或解密后输出文件名可用`-out`指定。
-    
-更多编码、摘要、加密方法可使用`openssl help`或到[这里](https://www.openssl.org/docs/apps/openssl.html#STANDARD-COMMANDS){:target="_blank"}查看。
+对于文件的加密或解密，使用`-in`即可，加密或解密后输出文件名可用`-out`指定。
+
+    $ openssl genrsa -out key.pem 1024
+
+生成RSA密钥，指定长度为1024。
+
+    $ openssl rsa -in key.pem -pubout -out pubkey.pem
+
+提取PEM格式公钥。
+
+    $ openssl rsa -in key.pem -RSAPublicKey_out -out pubkey.pem
+
+提取PEM RSAPublicKey格式公钥。
+
+    $ openssl rsautl -encrypt -in input.file -inkey pubkey.pem -pubin -out output.file
+
+使用公钥加密文件，`-inkey`指定加密公钥文件。
+
+    $ openssl rsautl -decrypt -in input.file -inkey key.pem -out output.file
+
+使用私钥解密文件，`-inkey`指定解密私钥文件。
+
+更多编码、摘要、加密方法可使用`openssl help`或到[这里](http://netkiller.github.io/cryptography/openssl/index.html){:target="_blank"}查看。
     
 **[[TOP](#top)]**
 
