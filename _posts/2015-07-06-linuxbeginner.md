@@ -454,60 +454,25 @@ ps：在当前目录中，输入`cat h`，然后敲Tab键，可以发现文件�
 
     $ useradd user1
 
-`-e`用于指定用户的有效期。
+linux为每位用户分配唯一的uid，可以使用`id`查看用户的uid：
 
-    $ useradd -e 12/31/2046 user2
+    $ id user1
 
-linux为每位用户分配唯一的uid，如未指定则从500开始顺序增加，创建用户时可以指定uid：
-
-    $ useradd -u 900 user3
-
-使用`passwd`可以为用户设置密码：
-
-    $ passwd user1
-
-用户名也可以修改：
-
-    $ usermod -l user4 user1
-
-这是将user1改名为user4。
-
-    $ usermod -g users user2
-
-将用户user2加入到users组中。
-
-    $ usermod -d /users/usdir user2
-
-将用户目录user2改为/users/usdir。
-
-    $ userdel -r user4
-
-删除用户user4及其工作目录。
-
-    $ id user2
-    $ finger user3
-
-这两个命令用于查看用户信息。
+创建用户组users，指定其gid为900：
 
     $ groupadd -g 900 users
 
-创建用户组users，指定其gid为900。
+将用户user1加入到用户组users中。
 
-    # gpasswd -a user3 users
+    # gpasswd -a user1 users
 
-将用户user3加入到用户组users中。
+将用户user1从用户组users中删除。
 
-    # gpasswd -d user2 users
+    # gpasswd -d user1 users
 
-将用户user2从用户组users中删除。
-
-    # groupmod -n user users
-
-修改用户组的组名。
+删除用户组users：
 
     # groupdel users
-
-删除用户组users。
 
 **[[TOP](#top)]**
 
