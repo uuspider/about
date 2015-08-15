@@ -37,6 +37,7 @@ title: UNIX / Linux guide
 *   [8. 权限管理](#right)
     *   [8.1 查看文件权限](#longls)
     *   [8.2 更改文件权限](#chmod)
+    *   [8.3 用户管理](#useradd)
 *   [9. 进程管理](#process)
     *   [9.1 查看系统进程](#ps)
     *   [9.2 后台运行](#backrun)
@@ -447,7 +448,7 @@ ps：在当前目录中，输入`cat h`，然后敲Tab键，可以发现文件�
 
 * * *
 
-<h3 id="groupadd">8.3 用户管理</h3>
+<h3 id="useradd">8.3 用户管理</h3>
 
 创建一个新用户：
 
