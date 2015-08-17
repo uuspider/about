@@ -16,6 +16,7 @@ title: base64, md5/SHA1, AES
 *   [编码与解码](#base64)
 *   [摘要](#md5)
 *   [加密与解密](#aes)
+*   [ssh-keygen](#ssh)
 
 ***
 
@@ -92,3 +93,36 @@ title: base64, md5/SHA1, AES
 **[[TOP](#top)]**
 
 ***
+
+## ssh-keygen {#ssh}
+
+使用rsa密钥可以使ssh登陆时免于输入密码。
+
+    $ ssh-keygen  #等价于ssh-keygen -t rsa，-t用于指定密钥类型，默认为rsa
+    Generating public/private rsa key pair.
+    Enter file in which to save the key (/home/USER/.ssh/id_rsa): /home/USER/.ssh/USER_rsa  #这里是为密钥命名
+    Enter passphrase (empty for no passphrase):   #输入口令，可设为空
+    Enter same passphrase again: 
+    Your identification has been saved in /home/USER/.ssh/USER_rsa.  #私钥文件
+    Your public key has been saved in /home/USER/.ssh/USER_rsa.pub.  #公钥文件
+    The key fingerprint is:
+    26:09:2e:cd:5a:fd:fc:61:65:83:8a:c7:04:8f:b1:25 USER@LOCALHOST
+    The key's randomart image is:
+    +--[ RSA 2048]----+
+    |                 |
+    |                 |
+    |    . E .        |
+    |   + o X   .     |
+    |  . = * S . +    |
+    |   +   O . o .   |
+    |  .   . * o      |
+    |       . o .     |
+    |          .      |
+    +-----------------+
+    $ ssh-copy-id USER@REMOTEHOST  #将公钥传到远程主机上，保存在~/.ssh/authorized_keys文件中
+
+**[[TOP](#top)]**
+
+***
+
+
