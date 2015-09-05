@@ -2,11 +2,11 @@
 layout: post
 title: Data structures & algorithms basic 
 ---
-## 数据结构与算法
+## 链表
 
-参考：[][ref1]{:target="_blank"},  [][ref2]{:target="_blank"}, 
+参考：[Data structures (C)][ref1]{:target="_blank"},  [][ref2]{:target="_blank"}, 
 
-[ref1]:
+[ref1]:http://c.biancheng.net/cpp/u/shuju/
 [ref2]:
 
 <h2 id="top"></h2>
@@ -34,7 +34,7 @@ title: Data structures & algorithms basic
 
 学一种编程语言，不应该把精力放在语法和各种各样的库上，而是要积极地使用它去做一些有意思的事情。当你的程序越来越长，越来越复杂时，只靠模仿别人的代码已经不能满足你的需求了，你开始觉得力不从心，效率开始下降，这表明，你需要了解一点算法的知识了。
 
-算法和数据结构几乎是密不可分的，学习算法首先要搞清楚一些基本的数据结构。
+算法和数据结构几乎是密不可分的，学习算法首先要搞清楚一些基本的数据结构。链表，是数组之外，最重要的一种数据结构。
 
 **[[TOP](#top)]**
 
