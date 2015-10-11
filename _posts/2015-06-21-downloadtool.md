@@ -81,8 +81,8 @@ title: wget, transmission-remote & amulecmd
     transmission-remote -t [all | hash] -[ ]
 
 进程详情 | | **`i`**
-停止 | | **`s`**
-重启 | | **`S`**
+停止 | | **`S`**
+重启 | | **`s`**
 取消 | | **`r`**
 下载限速 | | **`d [rate]`**
 取消下载限速 | | **`D`**
