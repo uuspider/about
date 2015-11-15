@@ -3,20 +3,18 @@ layout: default
 title: Knowledge, Experience & Opinion
 ---
 
-*  [科学 & 技术](#scitech)
-    *   [数学](#math)
-    *   [物理](#physics)
+*  [技术](#scitech)
 *  [常识](#knowledge)
 
 ***
 
-<h2 id="scitech">科学 & 技术</h2>
-
-<h3 id="math">数学</h3>
+<h2 id="scitech">技术</h2>
 
 - [为什么π 的平方约等于 g？](http://www.zhihu.com/question/21230794)
 
-<h3 id="physics">物理</h3>
+- [矩阵奇异值的物理意义是什么？](http://www.zhihu.com/question/22237507/answer/53804902)
+
+- [为什么万有引力定律、库伦定律都是平方反比？](http://www.zhihu.com/question/37340129/answer/71971870)
 
 - [如何用大妈都能听懂的话介绍量子物理？](http://www.zhihu.com/question/22131485)
 
