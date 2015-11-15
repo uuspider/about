@@ -7,13 +7,15 @@ title: Knowledge, Experience & Opinion
 
 ***
 
-*  [技术](#scitech)
+*  [自然](#scitech)
 *  [常识](#knowledge)
 
 ***
 
-<h2 id="scitech">技术</h2>
+<h2 id="scitech">自然</h2>
 
+- [“飞蛾扑火”是因为昆虫的趋光性吗？](http://www.zhihu.com/question/21260723/answer/29561931)
+- [自然底数为什么是“自然”的？](http://www.zhihu.com/question/20296247/answer/29370489)
 - [傅里叶分析和小波分析之间是什么关系？](http://www.zhihu.com/question/22864189/answer/40772083)    
 - [为什么π 的平方约等于 g？](http://www.zhihu.com/question/21230794)    
 - [矩阵奇异值的物理意义是什么？](http://www.zhihu.com/question/22237507/answer/53804902)    
