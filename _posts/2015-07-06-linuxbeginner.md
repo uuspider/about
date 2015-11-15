@@ -49,7 +49,6 @@ title: UNIX / Linux guide
     *   [10.3 文件搜索](#find)
     *   [10.4 网络](#web)
 *   [11. 下一步该做什么？](#next)
-*   [A1. TIPS & RECIPES](#tips)
 
 * * *
 <h2 id="terminal">1. 进入终端</h2>
@@ -664,24 +663,6 @@ ps：图形界面的进程，不能转入后台。
 <h2 id="next">11. 下一步该做什么？</h2>
 
 到目前为止，你已经可以通过linux终端向计算机下达各种常用指令了，linux已经可以作为你的生产工具来产生效益了，因此，请牢记：**从现在开始，Linux只是你的一个工具，你应该“使用”它，而不再是“学习”它**。你一定还会遇见自己没有见过的、不明白的或不理解的命令，请使用搜索引擎吧。如果有一条命令你始终记不住，很有可能是因为它对你根本不重要，你没有必要牢记每一条命令，因为，你还有更重要的事情要在linux中完成。
-
-<h2 id="tips">A1. Tips and Recipes</h2>
-
-[[Tips and Recipes][add00]{:target="_blank"}] , [[grep, sed, awk & regular expressions][add01]{:target="_blank"}] , [[shell scripts][add02]{:target="_blank"}] , [[curl guide][add03]{:target="_blank"}] , [[wget, amule & transmission][add04]{:target="_blank"}] , [[openssl: encoding, digest & cipher][add05]{:target="_blank"}] , [[ASCII, GB2312, GBK, unicode & UTF-8][add06]{:target="_blank"}] , [[mySQL basic][add07]{:target="_blank"}] , [[json & csv tools][add08]{:target="_blank"}] , [[GNU parallel guide][add09]{:target="_blank"}] , [[Environment variables][add10]{:target="_blank"}] , [[Python guide][add11]{:target="_blank"}] , [[Beautiful Soup][add12]{:target="_blank"}]
-
-[add00]:http://about.uuspider.com/2015/10/15/tips.html
-[add01]:http://about.uuspider.com/2015/07/15/grep.html
-[add02]:http://about.uuspider.com/2015/07/28/shell.html
-[add03]:http://about.uuspider.com/2015/07/25/curl.html
-[add04]:http://about.uuspider.com/2015/06/21/downloadtool.html
-[add05]:http://about.uuspider.com/2015/08/07/sslinshell.html
-[add06]:http://about.uuspider.com/2015/07/20/decode.html
-[add07]:http://about.uuspider.com/2015/08/02/mysql.html
-[add08]:http://about.uuspider.com/2015/08/23/csvkit.html
-[add09]:http://about.uuspider.com/2015/09/22/parallel.html
-[add10]:http://about.uuspider.com/2015/10/31/envvar.html
-[add11]:http://about.uuspider.com/2015/11/11/python.html
-[add12]:http://about.uuspider.com/2015/08/04/beautifulsoup.html
 
 **[[TOP](#top)]**
 
