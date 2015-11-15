@@ -1,6 +1,6 @@
 ---
 layout: post
-title: index
+title: Linux & Python
 ---
 ## Linux & Python
 
