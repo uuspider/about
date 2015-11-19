@@ -2,7 +2,7 @@
 layout: post
 title: wget, transmission, amulecmd & ftp
 ---
-## wget, transmission-remote & amulecmd
+## wget, transmission-remote, amulecmd & ftp
 
 *   [wget](#wget) 
 *   [transmission-remote](#transmission)
@@ -114,15 +114,16 @@ title: wget, transmission, amulecmd & ftp
 
 #### 登陆
 
-    ftp -i -n [hostname | ipadd] [port]
+    ftp -i -n [hostname | IP] [port]
     user anonymous [*****]
-    
+    ls
+    cd [DIR]
     bye
 
 #### 下载
 
     get [remote_file] [local_file]
-    mget [remote_files | ./*.*]
+    mget [remote_files]
 
 #### 上传
 
