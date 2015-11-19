@@ -1,12 +1,13 @@
 ---
 layout: post
-title: wget, transmission-remote & amulecmd
+title: wget, transmission, amulecmd & ftp
 ---
 ## wget, transmission-remote & amulecmd
 
 *   [wget](#wget) 
 *   [transmission-remote](#transmission)
 *   [amulecmd](#amule)
+*   [ftp](#ftp)
 
 ***
 
@@ -106,5 +107,26 @@ title: wget, transmission-remote & amulecmd
     暂停   pause [hash | id]  
     重启  resume [hash | id]  
     取消  cancel [hash | id]
+
+***
+
+# ftp {#ftp}
+
+#### 登陆
+
+    ftp -i -n [hostname | ipadd] [port]
+    user anonymous [*****]
+    
+    bye
+
+#### 下载
+
+    get [remote_file] [local_file]
+    mget [remote_files | ./*.*]
+
+#### 上传
+
+    put local_file [remote_file]
+    mput local_files
 
 ***
