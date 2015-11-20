@@ -7,7 +7,7 @@ title: wget, transmission, amulecmd & ftp
 *   [wget](#wget) 
 *   [transmission-remote](#transmission)
 *   [amulecmd](#amule)
-*   [ftp](#ftp)
+*   [ftp](#mftp)
 
 ***
 
@@ -110,7 +110,7 @@ title: wget, transmission, amulecmd & ftp
 
 ***
 
-# ftp {#ftp}
+# ftp {#mftp}
 
 #### 登陆
 
