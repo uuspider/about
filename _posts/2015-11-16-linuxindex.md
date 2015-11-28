@@ -8,6 +8,7 @@ title: Linux & Python
 
 - [[Tips and Recipes][add00]{:target="_blank"}]    
 - [[Unix/Linux guide][add001]{:target="_blank"}]    
+- [[vi guide][add13]{:target="_blank"}]    
 - [[grep, sed, awk & regular expressions][add01]{:target="_blank"}]    
 - [[shell scripts][add02]{:target="_blank"}]    
 - [[curl guide][add03]{:target="_blank"}]    
@@ -19,8 +20,7 @@ title: Linux & Python
 - [[GNU parallel guide][add09]{:target="_blank"}]    
 - [[Environment variables][add10]{:target="_blank"}]    
 - [[Python guide][add11]{:target="_blank"}]    
-- [[Beautiful Soup][add12]{:target="_blank"}]
-- [[vi guide][add13]{:target="_blank"}]
+- [[Beautiful Soup][add12]{:target="_blank"}]    
 
 [add00]:http://about.uuspider.com/2015/10/15/tips.html
 [add001]:http://about.uuspider.com/2015/07/06/linuxbeginner.html
