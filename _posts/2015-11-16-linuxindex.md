@@ -8,7 +8,7 @@ title: Linux & Python
 
 - [[Tips and Recipes][add00]{:target="_blank"}]    
 - [[Unix/Linux guide][add001]{:target="_blank"}]    
-- [[vi guide][add13]{:target="_blank"}]    
+- [[vi/vim guide][add13]{:target="_blank"}]    
 - [[grep, sed, awk & regular expressions][add01]{:target="_blank"}]    
 - [[shell scripts][add02]{:target="_blank"}]    
 - [[curl guide][add03]{:target="_blank"}]    
