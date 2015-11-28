@@ -20,6 +20,7 @@ title: Linux & Python
 - [[Environment variables][add10]{:target="_blank"}]    
 - [[Python guide][add11]{:target="_blank"}]    
 - [[Beautiful Soup][add12]{:target="_blank"}]
+- [[vi guide][add13]{:target="_blank"}]
 
 [add00]:http://about.uuspider.com/2015/10/15/tips.html
 [add001]:http://about.uuspider.com/2015/07/06/linuxbeginner.html
@@ -35,5 +36,6 @@ title: Linux & Python
 [add10]:http://about.uuspider.com/2015/10/31/envvar.html
 [add11]:http://about.uuspider.com/2015/11/11/python.html
 [add12]:http://about.uuspider.com/2015/08/04/beautifulsoup.html
+[add13]:http://about.uuspider.com/2015/11/28/vi.html
 
 ***
