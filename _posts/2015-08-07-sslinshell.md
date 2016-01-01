@@ -37,15 +37,19 @@ title: base64, md5/SHA1, AES
 
 ## md5/SHA1: digest {#md5}
 
-    $ echo hello world | openssl md5
-    (stdin)= 6f5902ac237024bdd0c176cb93063dc4
+    $ echo -n "hello world" | md5sum
+    5eb63bbbe01eeed093cb22bb8f5acdc3  -
+    $ echo -n "hello world" | openssl md5
+    (stdin)= 5eb63bbbe01eeed093cb22bb8f5acdc3
     $ openssl md5 file.txt
     MD5(file.txt)= xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-    $ echo hello world | openssl sha1
-    (stdin)= 22596363b3de40b06f981fb85d82312e8c0ed511
+    $ echo -n "hello world" | openssl sha1
+    (stdin)= 2aae6c35c94fcfb415dbe95f408b9ce91ee846ed
     $ openssl sha1 file.txt
     SHA1(file.txt)= xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-    
+
+注意：`echo`与`echo -n`是不同的。
+
 **[[TOP](#top)]**
 
 ***
