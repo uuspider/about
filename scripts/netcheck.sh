@@ -9,6 +9,7 @@
 #  语言：shell
 #  功能：1.网络中断后重启网络或重启树莓派;
 #  功能：2.当公网ip变化时，发送邮件通知。
+#  使用：(crontab) */2 * * * * $PATH/netcheck.sh
 #------------------------------------
 
 # http://www.silisoftware.com/tools/ip.php
