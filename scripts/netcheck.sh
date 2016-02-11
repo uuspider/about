@@ -34,7 +34,7 @@ To_Addr="uuspider@gmail.com uuspider@yahoo.com"
 IP_URL=("http://www.silisoftware.com/tools/ip.php" "http://ipecho.net/plain" "http://whatismyip.akamai.com" "http://myip.dnsomatic.com/" "http://members.3322.org/dyndns/getip")
 PING_URL=("www.baidu.com" "www.sina.com.cn" "www.163.com" "www.qq.com")
 
-function pull() {
+pull() {
 #访问IP_URL
   for ((j=0; j < ${#IP_URL[@]}; j++))
   do
@@ -44,7 +44,7 @@ function pull() {
   ip_check
 }
 
-function net_check() {
+net_check() {
   sleep 30
   connected=0
 #检查网络连接是否正常
@@ -67,7 +67,7 @@ function net_check() {
   fi
 }
 
-function ip_check() {
+ip_check() {
   if [ "$IP_New" = "$IP_Log" ]; then
     :
   elif [ "$IP_New" = "" ]; then
