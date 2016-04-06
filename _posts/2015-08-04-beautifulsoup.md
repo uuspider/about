@@ -4,10 +4,11 @@ title: Beautiful Soup
 ---
 ## Beautiful Soup
 
-参考：[Beautiful Soup Doc][ref1]{:target="_blank"},  [Beautiful Soup][ref2]{:target="_blank"}
+参考：[Beautiful Soup Doc][ref1]{:target="_blank"},  [Beautiful Soup][ref2]{:target="_blank"},  [Web Scraping with Python][ref3]{:target="_blank"}
 
 [ref1]:http://beautifulsoup.readthedocs.org/zh_CN/latest/
 [ref2]:http://www.crummy.com/software/BeautifulSoup/
+[ref3]:http://wuchong.me/blog/2014/04/24/easy-web-scraping-with-python/
 
 <h2 id="top"></h2>
 
@@ -79,6 +80,19 @@ python是这样抓取网页的：
     >>> import urllib2
     >>> html = urllib2.urlopen("http://www.douban.com/group/haixiuzu/")
     >>> print(html.read())
+
+也可以使用requests模块：
+
+    >>> import requests
+    >>> response = requests.get("http://www.douban.com/group/haixiuzu/")
+    >>> print(response.text)
+
+如果需要使用代理服务器，[可以这样做](http://wuchong.me/blog/2014/04/24/easy-web-scraping-with-python/){:target="_blank"}：
+
+    >>> import requests
+    >>> proxy={"http":"http://127.0.0.1:8087","https":"https://127.0.0.1:8087"}
+    >>> response=requests.get('https://www.google.com/',proxies=proxy,verify=False)
+    >>> print(response.text)
 
 从网页源码中提取我们的目标信息，可以使用beautifulsoup4套件。
 
