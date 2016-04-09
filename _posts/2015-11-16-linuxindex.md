@@ -19,7 +19,8 @@ title: Linux & Python
 - [[json & csv tools][add08]{:target="_blank"}]    
 - [[GNU parallel guide][add09]{:target="_blank"}]    
 - [[Environment variables][add10]{:target="_blank"}]    
-- [[Python guide][add11]{:target="_blank"}]    
+- [[Python guide][add11]{:target="_blank"}]   
+- [[file, string & re in python][add14]{:target="_blank"}]  
 - [[Beautiful Soup][add12]{:target="_blank"}]    
 
 [add00]:http://about.uuspider.com/2015/10/15/tips.html
@@ -37,5 +38,6 @@ title: Linux & Python
 [add11]:http://about.uuspider.com/2015/11/11/python.html
 [add12]:http://about.uuspider.com/2015/08/04/beautifulsoup.html
 [add13]:http://about.uuspider.com/2015/11/28/vi.html
+[add14]:http://about.uuspider.com/2016/04/08/pyre.html
 
 ***
