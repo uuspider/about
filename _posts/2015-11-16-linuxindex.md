@@ -20,7 +20,7 @@ title: Linux & Python
 - [[GNU parallel guide][add09]{:target="_blank"}]    
 - [[Environment variables][add10]{:target="_blank"}]    
 - [[Python guide][add11]{:target="_blank"}]  
-- [[urllib & urllib2 in python][add15]{:target="_blank"}]   
+- [[urllib & urllib2][add15]{:target="_blank"}]   
 - [[Text processing in python][add14]{:target="_blank"}]  
 - [[Beautiful Soup][add12]{:target="_blank"}]    
 
