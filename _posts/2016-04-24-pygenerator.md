@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Generator expressions
+title: generator expressions
 ---
 ## python 推导式
 
