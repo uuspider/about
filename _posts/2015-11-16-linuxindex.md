@@ -20,6 +20,7 @@ title: Linux & Python
 - [[GNU parallel guide][add09]{:target="_blank"}]    
 - [[Environment variables][add10]{:target="_blank"}]    
 - [[Python guide][add11]{:target="_blank"}]  
+- [[time & datetime][add16]{:target="_blank"}]  
 - [[urllib & urllib2][add15]{:target="_blank"}]   
 - [[Text processing in python][add14]{:target="_blank"}]  
 - [[Beautiful Soup][add12]{:target="_blank"}]    
@@ -41,5 +42,6 @@ title: Linux & Python
 [add13]:http://about.uuspider.com/2015/11/28/vi.html
 [add14]:http://about.uuspider.com/2016/04/08/pyre.html
 [add15]:http://about.uuspider.com/2015/06/27/pyurl.html
+[add16]:http://about.uuspider.com/2016/11/03/pytime.html
 
 ***
