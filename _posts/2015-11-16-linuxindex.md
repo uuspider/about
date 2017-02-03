@@ -23,6 +23,7 @@ title: Linux & Python
 - [[time & datetime][add16]{:target="_blank"}]  
 - [[urllib & urllib2][add15]{:target="_blank"}]   
 - [[Text processing in python][add14]{:target="_blank"}]  
+- [[NumPy Guide][add17]{:target="_blank"}]  
 - [[Beautiful Soup][add12]{:target="_blank"}]    
 
 [add00]:http://about.uuspider.com/2015/10/15/tips.html
@@ -43,5 +44,6 @@ title: Linux & Python
 [add14]:http://about.uuspider.com/2016/04/08/pyre.html
 [add15]:http://about.uuspider.com/2015/06/27/pyurl.html
 [add16]:http://about.uuspider.com/2016/11/03/pytime.html
+[add17]:http://about.uuspider.com/2015/08/29/numpy.html
 
 ***
