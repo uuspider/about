@@ -22,7 +22,7 @@ title: Linux & Python
 - [[Python guide][add11]{:target="_blank"}]  
 - [[time & datetime][add16]{:target="_blank"}]  
 - [[urllib & urllib2][add15]{:target="_blank"}]   
-- [[Text & re in python][add14]{:target="_blank"}]  
+- [[Text processing & re in python][add14]{:target="_blank"}]  
 - [[NumPy Guide][add17]{:target="_blank"}]  
 - [[Beautiful Soup][add12]{:target="_blank"}]    
 
