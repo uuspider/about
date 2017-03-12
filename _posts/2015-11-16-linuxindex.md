@@ -24,7 +24,8 @@ title: Linux & Python
 - [[urllib & urllib2][add15]{:target="_blank"}]   
 - [[Text processing & re in python][add14]{:target="_blank"}]  
 - [[NumPy Guide][add17]{:target="_blank"}]  
-- [[Beautiful Soup][add12]{:target="_blank"}]    
+- [[Beautiful Soup][add12]{:target="_blank"}]
+- [[Flask Guide][add18]{:target="_blank"}]    
 
 [add00]:http://about.uuspider.com/2015/10/15/tips.html
 [add001]:http://about.uuspider.com/2015/07/06/linuxbeginner.html
@@ -45,5 +46,6 @@ title: Linux & Python
 [add15]:http://about.uuspider.com/2015/06/27/pyurl.html
 [add16]:http://about.uuspider.com/2016/11/03/pytime.html
 [add17]:http://about.uuspider.com/2015/08/29/numpy.html
+[add18]:http://about.uuspider.com/2015/11/29/flask.html
 
 ***
