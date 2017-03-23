@@ -47,5 +47,6 @@ title: Linux & Python
 [add16]:http://about.uuspider.com/2016/11/03/pytime.html
 [add17]:http://about.uuspider.com/2015/08/29/numpy.html
 [add18]:http://about.uuspider.com/2015/11/29/flask.html
+[add19]:http://about.uuspider.com/2017/03/21/git.html
 
 ***
