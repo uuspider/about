@@ -2,7 +2,7 @@
 layout: default
 title: Fundamental Physical Constants
 ---
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<script type="text/javascript" src="{{site.baseurl}}MathJax-2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 |项目|符号|数值|不确定度\\(10 ^{-6}\\)|
 |--------|:--------:|------------|----:|
