@@ -123,7 +123,7 @@ title: base64, md5/SHA1, AES
     |       . o .     |
     |          .      |
     +-----------------+
-    $ ssh-copy-id USER@REMOTEHOST  #将公钥传到远程主机上，保存在~/.ssh/authorized_keys文件中
+    $ ssh-copy-id USER@REMOTEHOST  #将公钥传到远程主机上，添加到~/.ssh/authorized_keys文件中
 
 **[[TOP](#top)]**
 
