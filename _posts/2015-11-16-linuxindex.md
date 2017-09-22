@@ -27,6 +27,7 @@ title: Linux & Python
 - [[Beautiful Soup][add12]{:target="_blank"}]
 - [[Flask guide][add18]{:target="_blank"}]    
 - [[git guide][add19]{:target="_blank"}]    
+- [[Data science & scikit-learn][add20]{:target="_blank"}]  
 
 [add00]:http://about.uuspider.com/2015/10/15/tips.html
 [add001]:http://about.uuspider.com/2015/07/06/linuxbeginner.html
@@ -49,5 +50,6 @@ title: Linux & Python
 [add17]:http://about.uuspider.com/2015/08/29/numpy.html
 [add18]:http://about.uuspider.com/2015/11/29/flask.html
 [add19]:http://about.uuspider.com/2017/03/21/git.html
+[add20]:http://about.uuspider.com/2017/08/27/scikit.html
 
 ***
