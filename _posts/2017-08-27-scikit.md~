@@ -789,7 +789,7 @@ k-means算法是最简单的聚类算法，基于期望最大化(EM, Expectation
 
 bagging即booststraping aggregating(自举汇聚)，每次只使用训练集的一部分训练模型，多次训练后通过投票决定最终结果。
 
-bagging是一种组合算法，即集成学习方法(ensemble learning)，每次训练可以是同种算法，也可以只是同一类但不同种算法。
+bagging是一种组合算法，即集成学习方法，每次训练可以是同种算法，也可以只是同一类但不同种算法。
 
 
 
