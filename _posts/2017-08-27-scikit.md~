@@ -47,8 +47,8 @@ title: Data science & scikit-learn
     *   [支持向量机](#svm_c)
 *   [k-means聚类](#cluster)
 *   [Bagging](#bagging)
+    *   [随机森林](#randomforest)
 *   [AdaBoost](#error)
-*   [随机森林](#error)
 *   [超随机树](#error)
 *   [旋转森林](#error)
 
@@ -496,29 +496,29 @@ Gini(X)反映了从数据集中随机抽取两个实例，其类别不一致的�
 
 可以看到，可指定的参数非常丰富。
 
-`class_weight`， 指定样本各类别的权重，防止训练集某些类别的样本过多，导致决策树过于偏向这些类别。默认为'None'；可指定为'balanced'，设定算法自动调整权重；也可以分别指定各个样本的权重，格式为{0:0.9,1:0.1}。
+`class_weight`， 指定各类别实例的权重，防止训练集某些类别的实例过多，导致决策树过于偏向这些类别。默认为'None'；可指定为'balanced'，设定算法自动调整权重；也可以分别指定各个实例的权重，格式为{0:0.9,1:0.1}。
 
 `criterion`， 可设定为`gini`或`entropy`，分别对应CART和ID3算法，默认`gini`。
 
 `max_depth`， 决策树的最大深度，默认为'None'，表示不限制深度，如果实例量或特征数目很多，可设定该值，通常在10-100之间。
 
-`max_features`， 默认为'None'，表示考虑所有特征；如果为'log2'，表示最多考虑\\(log_2N\\)个特征(N为数据集特征总数目)；如果是'sqrt'或'auto'，表示最多考虑\\(\sqrt{N}\\)个特征；如果是整数，表示考虑的特征数目；如果是浮点数，表示考虑N乘以该浮点数并取整后的特征数目。如果样本特征数目不多，默认即可；如果特征数目非常多，可设定该参数以控制决策树建模时间。
+`max_features`， 指定考虑的最大特征数。默认为'None'，表示考虑所有特征；如果为'log2'，表示最多考虑\\(log_2N\\)个特征(N为数据集特征总数目)；如果是'sqrt'或'auto'，表示最多考虑\\(\sqrt{N}\\)个特征；如果是整数，表示考虑的特征数目；如果是浮点数，表示考虑N乘以该浮点数并取整后的特征数目。如果实例特征数目不多，默认即可；如果特征数目非常多，可设定该参数以控制决策树建模时间。
 
 `max_leaf_nodes`， 默认为'None'，表示不限制最大的叶子节点数。如果特征数目很多，可以通过交叉验证定一个数值，防止过拟合。
 
 `min_impurity_decrease`， 浮点数，默认为0，当不纯度的降幅小于该值时终止分类。
 
-`min_impurity_split`， 默认为2，表示节点样本数少于2时，不会继续尝试选择最优特征进行分类，如果样本量非常大，如10万样本，可考虑设定为10。注：v0.21可能会取消该参数，以`min_impurity_decrease`替代。
+`min_impurity_split`， 默认为2，表示节点实例数少于2时，不会继续尝试选择最优特征进行分类，如果实例数非常大，如10万实例，可考虑设定为10。注：v0.21可能会取消该参数，以`min_impurity_decrease`替代。
 
-`min_samples_leaf`， 默认为1，表示叶子节点最少的样本数目，可设定为其它整数；如果是浮点数，表示最少样本数占样本总数的百分比。样本量非常大时，可设定该值以提高效率。
+`min_samples_leaf`， 默认为1，表示叶子节点最少的实例数，可设定为其它整数；如果是浮点数，表示最少实例数占实例总数的百分比。实例量非常大时，可设定该值以提高效率。
 
-`min_samples_split`
+`min_samples_split`， 内部节点再划分所需最小实例数，默认为2。
 
-`min_weight_fraction_leaf`， 表示叶子节点所有样本权重和的最小值，如果小于该值，会和兄弟节点一起被剪枝；默认是0，表示不考虑权重问题。当样本有较多缺失值或样本分布类别偏差很大时，可考虑设定该值。
+`min_weight_fraction_leaf`， 表示叶子节点所有实例权重和的最小值，如果小于该值，会和兄弟节点一起被剪枝；默认是0，表示不考虑权重问题。当实例有较多缺失值或实例分布类别偏差很大时，可考虑设定该值。
 
-`presort`， 布尔值，默认为'False'，表示不对数据排序，样本量大时，设定为'True'会拖慢建模速度。
+`presort`， 布尔值，默认为'False'，表示不对数据排序，实例量大时，设定为'True'会拖慢建模速度。
 
-`splitter`， 默认为'best'，适合样本量不大的情况，如果样本量很大，可设定为'random'。
+`splitter`， 默认为'best'，适合实例量不大的情况，如果实例量很大，可设定为'random'。
 
 更多参数可查看官方手册。决策树对象还有一些属性和方法，可通过help(dtc)查看。
 
@@ -787,9 +787,36 @@ k-means算法是最简单的聚类算法，基于期望最大化(EM, Expectation
 
 ## bagging {#bagging}
 
-bagging即booststraping aggregating(自举汇聚)，每次只使用训练集的一部分训练模型，多次训练后通过投票决定最终结果。
+bagging(booststraping aggregating， 自举汇聚)，是一种组合算法，即集成学习方法(ensemble learning)，bagging每次**可放回地**抽取训练集的一部分构建基分类器，通过对多个基分类器的结果进行投票决定最终结果。这些基分类器可以是同样的算法，也可以不同，但必须是同类的。bagging是多个基分类器的“并联”。
 
-bagging是一种组合算法，即集成学习方法，每次训练可以是同种算法，也可以只是同一类但不同种算法。
+bagging要求基分类器是不稳定的，也就是数据集微小的变动能够引起分类结果的显著变动，如神经网络、决策树等。
+
+### 随机森林 {#randomforest}
+
+随机森林(random forest)是基于决策树的bagging算法，随机森林不仅为每一棵决策树随机抽取部分实例，同时也会随机选取部分特征。随机森林内部会对结果进行评估，因此没有必要对它进行交叉验证或者用一个独立的测试集对结果进行评估，正是由于有这样的优点，随机森林算法曾一度频频出现在各种数据科学竞赛中。
+
+    from sklearn.ensemble import RandomForestClassifier
+    clf = RandomForestClassifier()
+    clf.fit(X, y)
+
+返回模型参数信息：
+
+    RandomForestClassifier(n_estimators=10, criterion=’gini’, max_depth=None,
+        min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, 
+        max_features=’auto’, max_leaf_nodes=None, min_impurity_decrease=0.0, 
+        min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=1, 
+        random_state=None, verbose=0, warm_start=False, class_weight=None)
+
+`n_estimators`， 森林中树的数量，默认为10。
+
+`bootstrap`， 默认为True，即有放回的取样。
+
+`oob_score`， 指定是否采用袋外实例或特征来评估模型。有放回取样中有部分没有被采样的数据，称为袋外数据(‘Out of Bag’)，这些数据不属于训练集。默认为‘False’。
+
+列出特征的重要程度：
+
+    clf.feature_importances_
+
 
 
 
