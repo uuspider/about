@@ -477,7 +477,7 @@ Gini(X)反映了从数据集中随机抽取两个实例，其类别不一致的�
 分类决策树所采用的数据集格式与kNN相同，训练集中最后一列为标签，分离特征矩阵和标签向量：
 
     for indx in range(len(train[0])):
-        x = train[:,:-1]
+        X = train[:,:-1]
         y = train[:,-1]
 
 采用默认的CART算法开始训练：
@@ -485,7 +485,7 @@ Gini(X)反映了从数据集中随机抽取两个实例，其类别不一致的�
     from sklearn import metrics
     from sklearn.tree import DecisionTreeClassifier
     dtc = DecisionTreeClassifier()
-    dtc.fit(x,y)
+    dtc.fit(X,y)
 
 此时将返回dtc的对象信息：
 
@@ -526,7 +526,7 @@ Gini(X)反映了从数据集中随机抽取两个实例，其类别不一致的�
 
 这时候可以查看当给定x矩阵时，模型预测的标签：
 
-    y_predicted = dtc.predict(x)
+    y_predicted = dtc.predict(X_test)
 
 ### 决策树的可视化 {#decision_tree_graph}
 
@@ -571,13 +571,13 @@ dot文件是AutoCAD的图纸文件格式，很多绘图软件都支持，常用�
     from sklearn import metrics
     from sklearn.tree import DecisionTreeRegressor
     dtr = DecisionTreeRegressor()
-    dtr.fit(x,y)
+    dtr.fit(X,y)
 
 其参数与`DecisionTreeClassifier`类似，其中，`criterion`可选`mse`或`mae`，前者为均方差，后者是和均值之差的绝对值之和，默认为`mse`。
 
-完成模型构建后，可以根据给定x矩阵，预测相应的y向量：
+完成模型构建后，可以根据给定X_test矩阵，预测相应的y向量：
 
-    y_predicted = dtr.predict(x)
+    y_predicted = dtr.predict(X_test)
 
 分类处理的数据集中，y只能是离散值、标签或者'True/False'二元值，而回归处理的数据集中y可以是任意实数。
 
@@ -663,7 +663,7 @@ A对B的二阶导数是一个(16*9)的矩阵，称为Hessian矩阵。可见，�
 
     from sklearn.linear_model import LogisticRegression
     lr = LogisticRegression()
-    lr.fit(x,y)
+    lr.fit(X,y)
 
 完成建模后将返回模型的详细参数信息：
 
@@ -704,7 +704,7 @@ Logistic回归的调参比较复杂，首先可以根据数据量的大小选择
 
 核函数的选择在很大程度上决定了SVM的性能，常用的核函数有线性核(`linear`)、多项式核(`poly`)、高斯核(`rbf`)、Sigmoid核(`sigmoid`)，这些核函数都包含有一些可调参数，一般需要通过交叉验证来确定。在处理文本数据时可选用线性核，情况不明时先尝试高斯核。
 
-详细的支持向量机原理，可查看[这里](http://www.jianshu.com/p/864adfd2f795)。
+详细的支持向量机原理，可查看[这里](http://www.jianshu.com/p/864adfd2f795){:target="_blank"}。
 
 ### 支持向量机 {#svm_c}
 
@@ -714,7 +714,7 @@ sklearn中的`svm`包括`SVC`， `NuSVC`， `LinearSVC`分类算法和`SVR`， `
 
     from sklearn import svm
     sc = svm.SVC()
-    sc.fit(x,y)
+    sc.fit(X,y)
 
 将返回模型参数信息：
 
@@ -787,7 +787,7 @@ k-means算法是最简单的聚类算法，基于期望最大化(EM, Expectation
 查看轮廓系数：
 
     from sklearn.metrics import silhouette_score
-    silhouette_score(x,kmc.labels_)
+    silhouette_score(X,kmc.labels_)
 
 **[[TOP](#top)]**
 
@@ -921,9 +921,9 @@ ExtraTree极端随机树回归：
 
     import numpy as np
     import matplotlib.pyplot as plt
-    model.fit(x_train,y_train)
-    score = model.score(x_test, y_test)
-    result = model.predict(x_test)
+    model.fit(X_train,y_train)
+    score = model.score(X_test, y_test)
+    result = model.predict(X_test)
     plt.figure()
     plt.plot(np.arange(len(result)), y_test,'go-',label='true value')
     plt.plot(np.arange(len(result)),result,'ro-',label='predict value')
