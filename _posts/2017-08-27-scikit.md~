@@ -7,10 +7,11 @@ title: Data science & scikit-learn
 
 ## Data science & scikit-learn
 
-参考：[Machine Learning Map][ref1]{:target="_blank"}, [urllib2 - extensible library for opening URLs][ref2]{:target="_blank"}
+参考：[Documentation of scikit-learn][ref1]{:target="_blank"}, [Machine Learning Map][ref2]{:target="_blank"}, [sklearn user guide][ref3]{:target="_blank"}, 
 
-[ref1]:http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html
-[ref2]:https://docs.python.org/2/library/urllib2.html
+[ref1]:http://scikit-learn.org/stable/documentation.html
+[ref2]:http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html
+[ref3]:http://scikit-learn.org/stable/user_guide.html
 
 <h2 id="top"></h2>
 
@@ -236,18 +237,18 @@ kNN是一种分类算法，其处理的数据集格式通常是这样的：
 
 `weights`， 权重，`uniform`表示等比重，`distance`表示按距离反比等等。
 
-模型创建完成后就可以用于预测x_new的类别l ：
+模型创建完成后就可以用于预测X_test的类别l ：
 
-    y_predicted = knn.predict(x_new)
+    y_predicted = knn.predict(X_test)
 
 计算预测结果的概率和概率的对数：
 
-    knn.predict_proba(x_new)
-    knn.predict_log_proba(x_new)
+    knn.predict_proba(X_test)
+    knn.predict_log_proba(X_test)
 
 计算距离测试样本最近的10个点，返回的是这些实例所在的行序号：
 
-    knn.kneighbors(x_new,10,False)
+    knn.kneighbors(X_test,10,False)
 
 第三个参数是`return_distance`，指定是否返回具体的距离值。
 
@@ -703,6 +704,8 @@ Logistic回归的调参比较复杂，首先可以根据数据量的大小选择
 
 核函数的选择在很大程度上决定了SVM的性能，常用的核函数有线性核(`linear`)、多项式核(`poly`)、高斯核(`rbf`)、Sigmoid核(`sigmoid`)，这些核函数都包含有一些可调参数，一般需要通过交叉验证来确定。在处理文本数据时可选用线性核，情况不明时先尝试高斯核。
 
+详细的支持向量机原理，可查看[这里](http://www.jianshu.com/p/864adfd2f795)。
+
 ### 支持向量机 {#svm_c}
 
 sklearn中的`svm`包括`SVC`， `NuSVC`， `LinearSVC`分类算法和`SVR`， `NuSVR`， `LinearSVR`回归算法。其中`LinearSVC`， `LinearSVR`只支持线性核函数，无法从低维向高维映射，对线性不可分的数据不可用。
@@ -928,7 +931,7 @@ ExtraTree极端随机树回归：
     plt.legend()
     plt.show()
 
-文中如有未展开说明的模块，可查看[sklearn官方文档](http://scikit-learn.org/stable/tutorial/index.html){:target="_blank"}。
+文中如有未展开说明的模块，可查看[sklearn官方文档](http://scikit-learn.org/stable/user_guide.html){:target="_blank"}。
 
 关于推荐算法和神经网络，请分别参考这里和这里。
 
