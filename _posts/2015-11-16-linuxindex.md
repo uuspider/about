@@ -28,6 +28,7 @@ title: Linux & Python
 - [[Flask guide][add18]{:target="_blank"}]    
 - [[git guide][add19]{:target="_blank"}]    
 - [[Data science & scikit-learn][add20]{:target="_blank"}]  
+- [[Neural network & keras][add21]{:target="_blank"}] 
 
 [add00]:http://about.uuspider.com/2015/10/15/tips.html
 [add001]:http://about.uuspider.com/2015/07/06/linuxbeginner.html
@@ -51,5 +52,6 @@ title: Linux & Python
 [add18]:http://about.uuspider.com/2015/11/29/flask.html
 [add19]:http://about.uuspider.com/2017/03/21/git.html
 [add20]:http://about.uuspider.com/2017/08/27/scikit.html
+[add21]:http://about.uuspider.com/2017/10/10/keras.html
 
 ***
