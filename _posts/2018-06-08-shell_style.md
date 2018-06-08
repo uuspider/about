@@ -33,7 +33,9 @@ title: shell with style
 
 ## 使用哪种shell {#which_shell}
 
-<table><tr>\<td bgcolor=#87CEFA\> 推荐使用bash。 \</td\></tr></table>
+<table><tr>
+<td bgcolor=#87CEFA> 推荐使用bash。 </td>
+</tr></table>
 
 可执行文件必须以`#!/bin/bash`和最小数量的标志开始。使用`set`设置shell的选项，使得用`bash <script_name>`调用脚本时不会破坏其功能。
 
