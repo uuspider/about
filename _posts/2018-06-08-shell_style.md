@@ -430,156 +430,167 @@ case 和 esac 中匹配项的表达式应该都在同一个缩进级别，匹配
 
 因为在 [[ 和 ]] 之间不会有路径名称扩展或单词分割发生，所以使用 [[ ... ]] 能够减少错误。而且 [[ ... ]] 允许正则表达式匹配，而 [ ... ] 不允许。
 
-# This ensures the string on the left is made up of characters in the
-# alnum character class followed by the string name.
-# Note that the RHS should not be quoted here.
-# For the gory details, see
-# E14 at http://tiswww.case.edu/php/chet/bash/FAQ
-if [[ "filename" =~ ^[[:alnum:]]+name ]]; then
-  echo "Match"
-fi
+    # This ensures the string on the left is made up of characters in the
+    # alnum character class followed by the string name.
+    # Note that the RHS should not be quoted here.
+    # For the gory details, see
+    # E14 at http://tiswww.case.edu/php/chet/bash/FAQ
+    if [[ "filename" =~ ^[[:alnum:]]+name ]]; then
+      echo "Match"
+    fi
 
-# This matches the exact pattern "f*" (Does not match in this case)
-if [[ "filename" == "f*" ]]; then
-  echo "Match"
-fi
+    # This matches the exact pattern "f*" (Does not match in this case)
+    if [[ "filename" == "f*" ]]; then
+      echo "Match"
+    fi
 
-# This gives a "too many arguments" error as f* is expanded to the
-# contents of the current directory
-if [ "filename" == f* ]; then
-  echo "Match"
-fi
-测试字符串(Testing Strings)
+    # This gives a "too many arguments" error as f* is expanded to the
+    # contents of the current directory
+    if [ "filename" == f* ]; then
+      echo "Match"
+    fi
 
-尽可能使用引用，而不是过滤字符串。
+## 测试字符串(Testing Strings)
+
+### 尽可能使用引用，而不是过滤字符串。
+
 Bash 足以在测试中处理空字符串。所以，请使用空（非空）字符串测试，而不是过滤字符，使得代码更易于阅读。
 
-# Do this:
-if [[ "${my_var}" = "some_string" ]]; then
-  do_something
-fi
+    # Do this:
+    if [[ "${my_var}" = "some_string" ]]; then
+      do_something
+    fi
 
-# -z (string length is zero) and -n (string length is not zero) are
-# preferred over testing for an empty string
-if [[ -z "${my_var}" ]]; then
-  do_something
-fi
+    # -z (string length is zero) and -n (string length is not zero) are
+    # preferred over testing for an empty string
+    if [[ -z "${my_var}" ]]; then
+      do_something
+    fi
 
-# This is OK (ensure quotes on the empty side), but not preferred:
-if [[ "${my_var}" = "" ]]; then
-  do_something
-fi
+    # This is OK (ensure quotes on the empty side), but not preferred:
+    if [[ "${my_var}" = "" ]]; then
+      do_something
+    fi
 
-# Not this:
-if [[ "${my_var}X" = "some_stringX" ]]; then
-  do_something
-fi
+    # Not this:
+    if [[ "${my_var}X" = "some_stringX" ]]; then
+      do_something
+    fi
+
 为了避免对你测试的目的产生困惑，请明确使用 -z 或者 -n
 
-# Use this
-if [[ -n "${my_var}" ]]; then
-  do_something
-fi
+    # Use this
+    if [[ -n "${my_var}" ]]; then
+      do_something
+    fi
 
-# Instead of this as errors can occur if ${my_var} expands to a test
-# flag
-if [[ "${my_var}" ]]; then
-  do_something
-fi
-文件名的通配符扩展(Wildcard Expansion of Filenames)
+    # Instead of this as errors can occur if ${my_var} expands to a test
+    # flag
+    if [[ "${my_var}" ]]; then
+      do_something
+    fi
 
-当做文件名通配符扩展的时候，使用显式路径。
+## 文件名的通配符扩展(Wildcard Expansion of Filenames)
+
+### 当做文件名通配符扩展的时候，使用显式路径。
 
 因为文件名可以使用 - 开头，所以使用扩展通配符 ./* 比 * 安全得多。
 
-# Here's the contents of the directory:
-# 当前目录下又-f -r somedir somefile等文件和目录
-# -f  -r  somedir  somefile
+    # Here's the contents of the directory:
+    # 当前目录下又-f -r somedir somefile等文件和目录
+    # -f  -r  somedir  somefile
 
-# 使用rm -v *将会扩展成rm -v -r -f somedir simefile，这将导致删除当前目录所有的文件和目录
-# This deletes almost everything in the directory by force
-psa@bilby$ rm -v *
-removed directory: `somedir'
-removed `somefile'
+    # 使用rm -v *将会扩展成rm -v -r -f somedir simefile，这将导致删除当前目录所有的文件和目录
+    # This deletes almost everything in the directory by force
+    psa@bilby$ rm -v *
+    removed directory: `somedir'
+    removed `somefile'
 
-#相反如果你使用./*则不会，因为-r -f就不会变成rm的参数了
-# As opposed to:
-psa@bilby$ rm -v ./*
-removed `./-f'
-removed `./-r'
-rm: cannot remove `./somedir': Is a directory
-removed `./somefile'
-Eval
+    # 相反如果你使用./*则不会，因为-r -f就不会变成rm的参数了
+    # As opposed to:
+    psa@bilby$ rm -v ./*
+    removed `./-f'
+    removed `./-r'
+    rm: cannot remove `./somedir': Is a directory
+    removed `./somefile'
 
-eval 命令应该被禁止执行。
+## Eval
+
+### eval 命令应该被禁止执行。
 
 eval 用于给变量赋值的时候，可以设置变量，但是不能检查这些变量是什么。
 
-# What does this set?
-# Did it succeed? In part or whole?
-eval $(set_my_variables)
+    # What does this set?
+    # Did it succeed? In part or whole?
+    eval $(set_my_variables)
 
-# What happens if one of the returned values has a space in it?
-variable="$(eval some_function)"
-管道导向 while 循环(Pipes to While)
+    # What happens if one of the returned values has a space in it?
+    variable="$(eval some_function)"
 
-优先使用过程替换或者 for 循环，而不是管道导向 while 循环。在 while 循环中被修改的变量是不能传递给父 Shell 的，因为循环命令是在一个子 Shell 中运行的。
+## 管道导向 while 循环(Pipes to While)
+
+### 优先使用过程替换或者 for 循环，而不是管道导向 while 循环。在 while 循环中被修改的变量是不能传递给父 Shell 的，因为循环命令是在一个子 Shell 中运行的。
 
 管道导向 while 循环中的隐式子 Shell 使得追踪 bug 变得很困难。
 
-last_line='NULL'
-your_command | while read line; do
-  last_line="${line}"
-done
+    last_line='NULL'
+    your_command | while read line; do
+      last_line="${line}"
+    done
 
-# This will output 'NULL'
-echo "${last_line}"
+    # This will output 'NULL'
+    echo "${last_line}"
+
 如果你确定输入中不包含空格或者特殊符号（通常意味着不是用户输入的），那么可以使用一个 for 循环。
 
-total=0
-# Only do this if there are no spaces in return values.
-for value in $(command); do
-  total+="${value}"
-done
+    total=0
+    # Only do this if there are no spaces in return values.
+    for value in $(command); do
+      total+="${value}"
+    done
+
 使用过程替换允许重定向输出，但是请将命令放入一个显式的子 Shell 中，而不是 bash 为 while 循环创建的隐式子 Shell。
 
-total=0
-last_file=
-while read count filename; do
-  total+="${count}"
-  last_file="${filename}"
-done < <(your_command | uniq -c)
+    total=0
+    last_file=
+    while read count filename; do
+      total+="${count}"
+      last_file="${filename}"
+    done < <(your_command | uniq -c)
 
-# This will output the second field of the last line of output from
-# the command.
-echo "Total = ${total}"
-echo "Last one = ${last_file}"
+    # This will output the second field of the last line of output from
+    # the command.
+    echo "Total = ${total}"
+    echo "Last one = ${last_file}"
+
 当不需要传递复杂的结果给父 Shell 时可以使用 while 循环。这通常需要一些更复杂的“解析”。请注意简单的例子使用如 awk 这类工具可能更容易完成。当你特别不希望改变父 Shell 的范围变量时这可能也是有用的。
 
-# Trivial implementation of awk expression:
-#   awk '$3 == "nfs" { print $2 " maps to " $1 }' /proc/mounts
-cat /proc/mounts | while read src dest type opts rest; do
-  if [[ ${type} == "nfs" ]]; then
-    echo "NFS ${dest} maps to ${src}"
-  fi
-done
-命名约定(Naming Conventions)
+    # Trivial implementation of awk expression:
+    #   awk '$3 == "nfs" { print $2 " maps to " $1 }' /proc/mounts
+    cat /proc/mounts | while read src dest type opts rest; do
+      if [[ ${type} == "nfs" ]]; then
+        echo "NFS ${dest} maps to ${src}"
+      fi
+    done
 
-函数名(Function Names)
+# 命名约定(Naming Conventions)
 
-使用小写字母，并用下划线分隔单词。使用双冒号 :: 分隔库。函数名之后必须有圆括号。关键词 function 是可选的，但必须在一个项目中保持一致。
+## 函数名(Function Names)
+
+### 使用小写字母，并用下划线分隔单词。使用双冒号 :: 分隔库。函数名之后必须有圆括号。关键词 function 是可选的，但必须在一个项目中保持一致。
 
 如果你正在写单个函数，请用小写字母来命名，并用下划线分隔单词。如果你正在写一个包，使用双冒号 :: 来分隔包名。大括号必须和函数名位于同一行（就像在 Google 的其他语言一样），并且函数名和圆括号之间没有空格。
 
-# Single function
-my_func() {
-  ...
-}
+    # Single function
+    my_func() {
+      ...
+    }
 
-# Part of a package
-mypackage::my_func() {
-  ...
-}
+    # Part of a package
+    mypackage::my_func() {
+      ...
+    }
+
 当函数名后存在 () 时，关键词 function 是多余的。但是其促进了函数的快速辨识。
 
 # 变量名(Variable Names)
@@ -651,7 +662,7 @@ declare -xr ORACLE_SID='PROD'
 
       # DO NOT do this: $? contains the exit code of 'local', not my_func
       local my_var="$(my_func)"
-  [[ $? -eq 0 ]] || return
+      [[ $? -eq 0 ]] || return
 
       ...
     }
