@@ -260,152 +260,170 @@ shell中的循环遵循像声明函数时用大括号同样的原则，也就是
 
 ## case语句 {#case}
 
-缩进可用 2 个空格替代。
-可用一行替代的，需要在右括号后面和 ;; 号前面添加一个空格。
-对于长的，有多个命令的，应该分割成多行，其中匹配项，对于匹配项的处理以及 ;; 号各自在单独的行。
-case 和 esac 中匹配项的表达式应该都在同一个缩进级别，匹配项的（多行）处理也应该在另一个缩进级别。通常来说，没有必要给匹配项的表达式添加引号。匹配项的表达式不应该在前面加一个左括号，避免使用 ;& 和 ;;s& 等符号.
+### 缩进使用2个空格。
 
-case "${expression}" in
-  a)
-    variable="..."
-    some_command "${variable}" "${other_expr}" ...
-    ;;
-  absolute)
-    actions="relative"
-    another_command "${actions}" "${other_expr}" ...
-    ;;
-  *)
-    error "Unexpected expression '${expression}'"
-    ;;
-esac
+可用一行替代的，需要在右括号后面和 ;; 号前面添加一个空格。
+
+对于长的，有多个命令的，应该分割成多行，其中匹配项，对于匹配项的处理以及 ;; 号各自在单独的行。
+
+case 和 esac 中匹配项的表达式应该都在同一个缩进级别，匹配项的（多行）处理也应该在另一个缩进级别。通常来说，没有必要给匹配项的表达式添加引号。匹配项的表达式不应该在前面加一个左括号，避免使用 ;& 和 ;;s& 等符号。
+
+    case "${expression}" in
+      a)
+        variable="..."
+        some_command "${variable}" "${other_expr}" ...
+        ;;
+      absolute)
+        actions="relative"
+        another_command "${actions}" "${other_expr}" ...
+        ;;
+      *)
+        error "Unexpected expression '${expression}'"
+        ;;
+    esac
+
+
 对于一些简单的匹配项处理操作，可以和匹配项表达式以及 ;; 号在同一行,只要表达式仍然可读。这通常适合单字符的选项处理，当匹配项处理操作不能满足单行的情况下，可以将匹配项表达式单独放在一行，匹配项处理操作和 ;; 放在同一行，当匹配项操作和匹配项表达式以及 ;; 放在同一行的时候在匹配项表达式右括号后面以及 ;; 前面放置一个空格。
 
-verbose='false'
-aflag=''
-bflag=''
-files=''
-while getopts 'abf:v' flag; do
-  case "${flag}" in
-    a) aflag='true' ;;
-    b) bflag='true' ;;
-    f) files="${OPTARG}" ;;
-    v) verbose='true' ;;
-    *) error "Unexpected option ${flag}" ;;
-  esac
-don
-变量扩展(Variable expansion)
+    verbose='false'
+    aflag=''
+    bflag=''
+    files=''
+    while getopts 'abf:v' flag; do
+      case "${flag}" in
+        a) aflag='true' ;;
+        b) bflag='true' ;;
+        f) files="${OPTARG}" ;;
+        v) verbose='true' ;;
+        *) error "Unexpected option ${flag}" ;;
+      esac
+    done
 
-按优先级顺序：保持跟你所发现的一致；把你的变量用括号印起来；推荐用 "${var}" 而不是 "$var"，详细解释如下。
+
+## 变量扩展(Variable expansion)
+
+### 按优先级顺序：保持跟你所发现的一致；把你的变量用括号印起来；推荐用 "${var}" 而不是 "$var"，详细解释如下。
 
 这些仅仅是指南，因为按标题作为强制的规定饱受争议。
+
 以下按照优先顺序列出。
 
 与现存代码中你所发现的保持一致。
+
 把变量用（大）扩号引起来，参阅下面一节：引用。
+
 除非绝对必要或者为了避免深深的困惑，否则不要用大括号将单个字符的 Shell 特殊变量或位置参数括起来。推荐将其他所有变量用大括号括起来。
-# Section of recommended cases.
 
-# Preferred style for 'special' variables:
-echo "Positional: $1" "$5" "$3"
-echo "Specials: !=$!, -=$-, _=$_. ?=$?, #=$# *=$* @=$@ \$=$$ ..."
+    # Section of recommended cases.
 
-# Braces necessary:
-echo "many parameters: ${10}"
+    # Preferred style for 'special' variables:
+    echo "Positional: $1" "$5" "$3"
+    echo "Specials: !=$!, -=$-, _=$_. ?=$?, #=$# *=$* @=$@ \$=$$ ..."
 
-# Braces avoiding confusion:
-# Output is "a0b0c0"
-set -- a b c
-echo "${1}0${2}0${3}0"
+    # Braces necessary:
+    echo "many parameters: ${10}"
 
-# Preferred style for other variables:
-echo "PATH=${PATH}, PWD=${PWD}, mine=${some_var}"
-while read f; do
-  echo "file=${f}"
-done < <(ls -l /tmp)
+    # Braces avoiding confusion:
+    # Output is "a0b0c0"
+    set -- a b c
+    echo "${1}0${2}0${3}0"
 
-# Section of discouraged cases
+    # Preferred style for other variables:
+    echo "PATH=${PATH}, PWD=${PWD}, mine=${some_var}"
+    while read f; do
+      echo "file=${f}"
+    done < <(ls -l /tmp)
 
-# Unquoted vars, unbraced vars, brace-quoted single letter
-# shell specials.
-echo a=$avar "b=$bvar" "PID=${$}" "${1}"
+    # Section of discouraged cases
 
-# Confusing use: this is expanded as "${1}0${2}0${3}0",
-# not "${10}${20}${30}
-set -- a b c
-echo "$10$20$30"
-<span id='Quoting'>引用(Quoting)</span>
+    # Unquoted vars, unbraced vars, brace-quoted single letter
+    # shell specials.
+    echo a=$avar "b=$bvar" "PID=${$}" "${1}"
 
-除非需要小心不带引用的扩展，否则总是将包含变量、命令替换符、空格或 Shell 元字符的字符串引起来。
+    # Confusing use: this is expanded as "${1}0${2}0${3}0",
+    # not "${10}${20}${30}
+    set -- a b c
+    echo "$10$20$30"
+
+# 引用(Quoting)
+
+### 除非需要小心不带引用的扩展，否则总是将包含变量、命令替换符、空格或 Shell 元字符的字符串引起来。
+
 优先引用是单词的字符串（而不是命令选项或者路径名）。
+
 不要对整数进行引用。
+
 千万小心 [[ 中模式匹配的引用规则。
+
 请使用 $@ 除非你有特殊原因需要使用 $*。
-# 'Single' quotes indicate that no substitution is desired.
-# "Double" quotes indicate that substitution is required/tolerated.
 
-# Simple examples
-# "quote command substitutions"
-flag="$(some_command and its args "$@" 'quoted separately')"
+    # 'Single' quotes indicate that no substitution is desired.
+    # "Double" quotes indicate that substitution is required/tolerated.
 
-# "quote variables"
-echo "${flag}"
+    # Simple examples
+    # "quote command substitutions"
+    flag="$(some_command and its args "$@" 'quoted separately')"
 
-# "never quote literal integers"
-value=32
-# "quote command substitutions", even when you expect integers
-number="$(generate_number)"
+    # "quote variables"
+    echo "${flag}"
 
-# "prefer quoting words", not compulsory
-readonly USE_INTEGER='true'
+    # "never quote literal integers"
+    value=32
+    # "quote command substitutions", even when you expect integers
+    number="$(generate_number)"
 
-# "quote shell meta characters"
-echo 'Hello stranger, and well met. Earn lots of $$$'
-echo "Process $$: Done making \$\$\$."
+    # "prefer quoting words", not compulsory
+    readonly USE_INTEGER='true'
 
-# "command options or path names"
-# ($1 is assumed to contain a value here)
-grep -li Hugo /dev/null "$1"
+    # "quote shell meta characters"
+    echo 'Hello stranger, and well met. Earn lots of $$$'
+    echo "Process $$: Done making \$\$\$."
 
-# Less simple examples
-# "quote variables, unless proven false": ccs might be empty
-git send-email --to "${reviewers}" ${ccs:+"--cc" "${ccs}"}
+    # "command options or path names"
+    # ($1 is assumed to contain a value here)
+    grep -li Hugo /dev/null "$1"
 
-# Positional parameter precautions: $1 might be unset
-# Single quotes leave regex as-is.
-grep -cP '([Ss]pecial|\|?characters*)$' ${1:+"$1"}
+    # Less simple examples
+    # "quote variables, unless proven false": ccs might be empty
+    git send-email --to "${reviewers}" ${ccs:+"--cc" "${ccs}"}
 
-# For passing on arguments,
-# "$@" is right almost everytime, and
-# $* is wrong almost everytime:
-#
-# * $* and $@ will split on spaces, clobbering up arguments
-#   that contain spaces and dropping empty strings;
-# * "$@" will retain arguments as-is, so no args
-#   provided will result in no args being passed on;
-#   This is in most cases what you want to use for passing
-#   on arguments.
-# * "$*" expands to one argument, with all args joined
-#   by (usually) spaces,
-#   so no args provided will result in one empty string
-#   being passed on.
-# (Consult 'man bash' for the nit-grits ;-)
+    # Positional parameter precautions: $1 might be unset
+    # Single quotes leave regex as-is.
+    grep -cP '([Ss]pecial|\|?characters*)$' ${1:+"$1"}
 
-set -- 1 "2 two" "3 three tres"; echo $# ; set -- "$*"; echo "$#, $@")
-set -- 1 "2 two" "3 three tres"; echo $# ; set -- "$@"; echo "$#, $@")
-特征和错误(Features and Bugs)
+    # For passing on arguments,
+    # "$@" is right almost everytime, and
+    # $* is wrong almost everytime:
+    #
+    # * $* and $@ will split on spaces, clobbering up arguments
+    #   that contain spaces and dropping empty strings;
+    # * "$@" will retain arguments as-is, so no args
+    #   provided will result in no args being passed on;
+    #   This is in most cases what you want to use for passing
+    #   on arguments.
+    # * "$*" expands to one argument, with all args joined
+    #   by (usually) spaces,
+    #   so no args provided will result in one empty string
+    #   being passed on.
+    # (Consult 'man bash' for the nit-grits ;-)
 
-命令替换(Command Substitution)
+    set -- 1 "2 two" "3 three tres"; echo $# ; set -- "$*"; echo "$#, $@")
+    set -- 1 "2 two" "3 three tres"; echo $# ; set -- "$@"; echo "$#, $@")
 
-使用 $(command) 而不是反引号。
 
-嵌套的反引号要求用反斜杠("\")转义内部的反引号。而 $(command) 形式嵌套时不需要改变，而且更易于阅读。
-例如：
+# 特征和错误(Features and Bugs)
 
-# This is preferred:
-var="$(command "$(command1)")"
+## 命令替换(Command Substitution)
 
-# This is not:
-var="`command \`command1\``"
+### 使用 $(command) 而不是反引号。
+
+嵌套的反引号要求用反斜杠("\")转义内部的反引号。而 $(command) 形式嵌套时不需要改变，而且更易于阅读。如：
+
+    # This is preferred:
+    var="$(command "$(command1)")"
+
+    # This is not:
+    var="`command \`command1\``"
 <span id='Test,[and[['>Test, [ 和 [[(Test, [ and [[)</span>
 
 优先使用 [[ ... ]]，而不是 [, test 和 /usr/bin/[。
