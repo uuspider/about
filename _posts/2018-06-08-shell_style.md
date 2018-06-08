@@ -430,11 +430,12 @@ shell中的循环遵循像声明函数时用大括号同样的原则，也就是
 
     # This is not:
     var="`command \`command1\``"
-<span id='Test,[and[['>Test, [ 和 [[(Test, [ and [[)</span>
 
-优先使用 [[ ... ]]，而不是 [, test 和 /usr/bin/[。
+## test, \[ 和 \[\[
 
-因为在 [[ 和 ]] 之间不会展开路径或切分单词，所以使用 [[ ... ]] 能够减少错误。而且 [[ ... ]] 允许正则表达式匹配，而 [ ... ] 不允许。
+<div class="tip"> 优先使用 [[ ... ]]，而不是 [ 和 test。 </div>
+
+因为在 [[ 和 ]] 之间不会展开路径或切分单词，所以使用 [[ ... ]] 能够减少错误，而且 [[ ... ]] 允许正则表达式匹配， [ ... ] 不允许。
 
     # This ensures the string on the left is made up of characters in the
     # alnum character class followed by the string name.
