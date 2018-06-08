@@ -286,30 +286,9 @@ shell中的循环遵循像声明函数时用大括号同样的原则，也就是
 
 ## case语句 {#case}
 
-<div class="tip"> 缩进使用2个空格。</div>
+<div class="tip"> 每级缩进使用2个空格。case 和 esac 中匹配项的表达式应在同一个缩进级别，执行的命令应比匹配项增加一个缩进级别。</div>
 
-可用一行替代的，需要在右括号后面和 ;; 号前面添加一个空格。
-
-对于长的，有多个命令的，应该分割成多行，其中匹配项，对于匹配项的处理以及 ;; 号各自在单独的行。
-
-case 和 esac 中匹配项的表达式应该都在同一个缩进级别，匹配项的（多行）处理也应该在另一个缩进级别。通常来说，没有必要给匹配项的表达式添加引号。匹配项的表达式不应该在前面加一个左括号，避免使用 ;& 和 ;;s& 等符号。
-
-    case "${expression}" in
-      a)
-        variable="..."
-        some_command "${variable}" "${other_expr}" ...
-        ;;
-      absolute)
-        actions="relative"
-        another_command "${actions}" "${other_expr}" ...
-        ;;
-      *)
-        error "Unexpected expression '${expression}'"
-        ;;
-    esac
-
-
-对于一些简单的匹配项处理操作，可以和匹配项表达式以及 ;; 号在同一行,只要表达式仍然可读。这通常适合单字符的选项处理，当匹配项处理操作不能满足单行的情况下，可以将匹配项表达式单独放在一行，匹配项处理操作和 ;; 放在同一行，当匹配项操作和匹配项表达式以及 ;; 放在同一行的时候在匹配项表达式右括号后面以及 ;; 前面放置一个空格。
+<div class="tip"> 匹配项和执行命令在同一行时，应在右括号后面和 ;; 号前面添加一个空格。</div>
 
     verbose='false'
     aflag=''
@@ -325,49 +304,51 @@ case 和 esac 中匹配项的表达式应该都在同一个缩进级别，匹配
       esac
     done
 
+<div class="tip"> 如果某一匹配项下有多个命令，应分成多行，其中匹配项、单条命令以及 ;; 号各占一行。</div>
 
-## 变量扩展(Variable expansion)
+    case "${expression}" in
+      a)
+        variable="..."
+        some_command "${variable}" "${other_expr}" ...
+        ;;
+      absolute)
+        actions="relative"
+        another_command "${actions}" "${other_expr}" ...
+        ;;
+      *)
+        error "Unexpected expression '${expression}'"
+        ;;
+    esac
 
-<div class="tip"> 按优先级顺序：保持跟你所发现的一致；把你的变量用括号印起来；推荐用 "${var}" 而不是 "$var"。</div>
+<div class="tip"> 通常匹配项的表达式不必添加引号，而且应避免使用 ;& 和 ;;s& 等符号。</div>
 
-这些仅仅是指南，因为按标题作为强制的规定饱受争议。
+## 变量展开 {#var_expansion}
 
-以下按照优先顺序列出。
+<div class="tip"> 首先考虑和当前脚本原来的风格保持一致，其次，除了单个字符的 shell 特殊变量或位置参数，其他所有变量都应使用花括号，即推荐使用 "${var}" 而不是 "$var"。</div>
 
-与现存代码中你所发现的保持一致。
-
-把变量用（大）扩号引起来，参阅下面一节：引用。
-
-除非绝对必要或者为了避免深深的困惑，否则不要用大括号将单个字符的 Shell 特殊变量或位置参数括起来。推荐将其他所有变量用大括号括起来。
-
-    # Section of recommended cases.
-
-    # Preferred style for 'special' variables:
+    # 单个字符的位置参数:
     echo "Positional: $1" "$5" "$3"
+    # 单个字符的特殊变量:
     echo "Specials: !=$!, -=$-, _=$_. ?=$?, #=$# *=$* @=$@ \$=$$ ..."
 
-    # Braces necessary:
+    # 位置参数:
     echo "many parameters: ${10}"
 
-    # Braces avoiding confusion:
+    # 明确变量的边界:
     # Output is "a0b0c0"
     set -- a b c
     echo "${1}0${2}0${3}0"
 
-    # Preferred style for other variables:
+    # 习惯用法:
     echo "PATH=${PATH}, PWD=${PWD}, mine=${some_var}"
     while read f; do
       echo "file=${f}"
     done < <(ls -l /tmp)
 
-    # Section of discouraged cases
-
-    # Unquoted vars, unbraced vars, brace-quoted single letter
-    # shell specials.
+    # 以下为错误用法：
     echo a=$avar "b=$bvar" "PID=${$}" "${1}"
 
-    # Confusing use: this is expanded as "${1}0${2}0${3}0",
-    # not "${10}${20}${30}
+    # 不易读: "${1}0${2}0${3}0" or "${10}${20}${30}"？
     set -- a b c
     echo "$10$20$30"
 
@@ -375,7 +356,7 @@ case 和 esac 中匹配项的表达式应该都在同一个缩进级别，匹配
 
 <div class="tip"> 尽量将包含变量、命令替换符、空格或 shell 元字符的字符串用引号括起来。</div>
 
-<div class="tip"> 优先对是单词的字符串使用引号（而不是命令选项或者路径名）。</div>
+<div class="tip"> 优先对类单词的字符串使用引号（而不是命令选项或者路径名）。</div>
 
 <div class="tip"> 不要对整数使用引号。</div>
 
@@ -386,11 +367,10 @@ case 和 esac 中匹配项的表达式应该都在同一个缩进级别，匹配
     # 单引号不会识别和展开变量。
     # 双引号将展开或替换变量。
 
-    # Simple examples
-    # "quote command substitutions"
+    # 变量展开
     flag="$(some_command and its args "$@" 'quoted separately')"
 
-    # "quote variables"
+    # 变量
     echo "${flag}"
 
     # 不要对整数使用引号。
