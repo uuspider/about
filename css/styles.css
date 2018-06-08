@@ -36,9 +36,10 @@ img {
 }
 
 
-tip {
-  padding: 10px 0 10px 0;
-  background-color: #00FFFF;
+.tip {
+  margin: 0 0 20px;
+  padding: 10px 0 10px 10px;
+  background-color: rgba(142, 255, 186, 0.7);
 }
   
 
