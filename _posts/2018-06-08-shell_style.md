@@ -13,18 +13,46 @@ title: shell with style
 
 ***
 
-*   [PIL安装](#setup)
-*   [图像模式](#mode)
-*   [Image](#image)
-    *   [Image实例属性](#image_attribute)
-    *   [Image函数](#image_fun)
-    *   [Image实例方法](#image_method)
-*   [ImageFilter](#imagefilter)
-    *   [ImageFilter过滤器](#filter)
-    *   [ImageFilter函数](#filter_fun)
-*   [ImageDraw](#imagedraw)
-    *   [ImageDraw函数](#draw_fun)
-    *   [ImageDraw实例方法](#draw_method)
+*   [背景](#setup)
+    *   [选择shell](#image_attribute)
+    *   [shell适用场景](#image_fun)
+*   [脚本与解释器](#mode)
+    *   [扩展名](#image_attribute)
+    *   [SUID/SGID](#image_fun)
+*   [环境](#image)
+    *   [错误信息](#image_attribute)
+*   [注释](#imagefilter)
+    *   [文件头](#filter)
+    *   [功能注释](#filter_fun)
+    *   [代码注释](#filter)
+    *   [TODO注释](#filter_fun)
+*   [格式](#imagefilter)
+    *   [缩进](#filter)
+    *   [换行](#filter_fun)
+    *   [管道](#filter)
+    *   [循环](#filter_fun)
+    *   [case语句](#filter)
+    *   [变量展开](#filter_fun)
+    *   [引号](#filter)
+*   [特性与错误](#imagefilter)
+    *   [命令替换](#filter)
+    *   [test, \[与\[\[](#filter_fun)
+    *   [测试字符串](#filter)
+    *   [通配符](#filter_fun)
+    *   [eval](#filter)
+    *   [管道导向while循环](#filter_fun)
+*   [命名约定](#imagefilter)
+    *   [函数名](#filter)
+    *   [变量名](#filter_fun)
+    *   [常量和环境变量名](#filter)
+    *   [源文件名](#filter_fun)
+    *   [只读变量](#filter)
+    *   [本地变量](#filter_fun)
+    *   [函数位置](#filter)
+    *   [主函数](#filter_fun)
+*   [命令调用](#calling)
+    *   [检查返回值](#returnvalue)
+    *   [内建命令](#invsext)
 *   [结论](#conclusion)
 
 ***
@@ -682,9 +710,9 @@ declare -xr ORACLE_SID='PROD'
 
     main "$@"
 
-# 命令调用
+# 命令调用 {#calling}
 
-## 检查返回值
+## 检查返回值 {#returnvalue}
 
 <div class="tip"> 必须检查返回值，给出返回值相关的信息。</div>
 
@@ -722,7 +750,7 @@ declare -xr ORACLE_SID='PROD'
     fi
 
 
-## 内建命令 vs 外部命令
+## 内建命令 vs 外部命令 {#invsext}
 
 <div class="tip"> 优先选用内建命令。</div>
 
@@ -743,7 +771,7 @@ declare -xr ORACLE_SID='PROD'
 
 # 结论 {#conclusion}
 
-运用常识和判断力，并且**保持一致**。
+<div class="tip"> 运用常识和判断力，并且**保持一致**。</div>
 
 编辑代码时，花点时间看看项目中的其它代码，并熟悉其风格。如果其它代码中`if`语句使用空格，那么你也要使用；如果其中的注释用星号`*` 围成一个盒子状，那么你同样要这么做。
 
