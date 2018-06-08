@@ -347,18 +347,18 @@ case 和 esac 中匹配项的表达式应该都在同一个缩进级别，匹配
 
 # 引号
 
-### 除非需要小心不带引用的扩展，否则总是将包含变量、命令替换符、空格或 Shell 元字符的字符串引起来。
+### 尽量将包含变量、命令替换符、空格或 shell 元字符的字符串用引号括起来。
 
-优先引用是单词的字符串（而不是命令选项或者路径名）。
+### 优先对是单词的字符串使用引号（而不是命令选项或者路径名）。
 
-不要对整数进行引用。
+### 不要对整数使用引号。
 
-千万小心 [[ 中模式匹配的引用规则。
+### 注意 [[ 中模式匹配的引号用法。
 
-请使用 $@ 除非你有特殊原因需要使用 $*。
+### 尽量使用 $@ ，除非有特殊原因需要使用 $*。
 
-    # 'Single' quotes indicate that no substitution is desired.
-    # "Double" quotes indicate that substitution is required/tolerated.
+    # 单引号不会识别和展开变量。
+    # 双引号将展开或替换变量。
 
     # Simple examples
     # "quote command substitutions"
@@ -367,7 +367,7 @@ case 和 esac 中匹配项的表达式应该都在同一个缩进级别，匹配
     # "quote variables"
     echo "${flag}"
 
-    # "never quote literal integers"
+    # 不要对整数使用引号。
     value=32
     # "quote command substitutions", even when you expect integers
     number="$(generate_number)"
@@ -415,9 +415,9 @@ case 和 esac 中匹配项的表达式应该都在同一个缩进级别，匹配
 
 ## 命令替换(Command Substitution)
 
-### 使用 $(command) 而不是反引号。
+### 使用 $(command) ，不推荐使用反引号。
 
-嵌套的反引号要求用反斜杠("\")转义内部的反引号。而 $(command) 形式嵌套时不需要改变，而且更易于阅读。如：
+嵌套的反引号要求用反斜杠("\")转义内部的反引号。而 $(command) 形式嵌套时不需要转义。如：
 
     # This is preferred:
     var="$(command "$(command1)")"
@@ -428,7 +428,7 @@ case 和 esac 中匹配项的表达式应该都在同一个缩进级别，匹配
 
 优先使用 [[ ... ]]，而不是 [, test 和 /usr/bin/[。
 
-因为在 [[ 和 ]] 之间不会有路径名称扩展或单词分割发生，所以使用 [[ ... ]] 能够减少错误。而且 [[ ... ]] 允许正则表达式匹配，而 [ ... ] 不允许。
+因为在 [[ 和 ]] 之间不会展开路径或切分单词，所以使用 [[ ... ]] 能够减少错误。而且 [[ ... ]] 允许正则表达式匹配，而 [ ... ] 不允许。
 
     # This ensures the string on the left is made up of characters in the
     # alnum character class followed by the string name.
@@ -450,9 +450,9 @@ case 和 esac 中匹配项的表达式应该都在同一个缩进级别，匹配
       echo "Match"
     fi
 
-## 测试字符串(Testing Strings)
+## 测试字符串
 
-### 尽可能使用引用，而不是过滤字符串。
+### 尽可能使用引号，而不是过滤字符串。
 
 Bash 足以在测试中处理空字符串。所以，请使用空（非空）字符串测试，而不是过滤字符，使得代码更易于阅读。
 
@@ -477,7 +477,7 @@ Bash 足以在测试中处理空字符串。所以，请使用空（非空）字
       do_something
     fi
 
-为了避免对你测试的目的产生困惑，请明确使用 -z 或者 -n
+为了避免对你测试的目的产生困惑，请明确使用 -z 或者 -n ：
 
     # Use this
     if [[ -n "${my_var}" ]]; then
