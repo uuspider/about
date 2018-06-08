@@ -723,11 +723,11 @@ bash有 PIPESTATUE 变量允许检查管道命令所有部分的返回码，这�
     fi
 
 
-# 内置命令对比外部命令(Builtin Commands vs. External Commands)
+# 内建命令 vs 外部命令
 
-### 可以在调用 Shell 内建命令和调用另外的程序之间选择，请选择内建命令。
+### 优先选用内建命令。
 
-我们更喜欢使用内建命令，如在 bash(1) 中参数扩展函数。因为它更强健和便携（尤其是跟像 sed 这样的命令比较），如：
+如：
 
     # Prefer this:
     addition=$((${X} + ${Y}))
