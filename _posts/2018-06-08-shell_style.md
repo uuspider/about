@@ -196,65 +196,69 @@ TODO注释，以大写TODO开头，在后边的括号中注明用户名，冒号
 
 虽然你需要遵循你正在修改的文件的风格，但是新的代码必须要遵循下面的风格。
 
-缩进(Indentation)
+## 缩进 {#indentation}
 
-按照 2 个空格来缩进，不使用 tab 来缩进。
+### 使用2个空格来缩进，不要使用tab。两个语句块中间应使用空白行来提高可读性。
 
-在两个语句块中间使用空白行来提高可读性。缩进使用两个空格。无论你做什么，不要使用制表符（tab）。对于现有的文件，保留现有使用的缩进，
+缩进使用两个空格。无论你做什么，不要使用制表符（tab）。对于现有的文件，保持其缩进格式一致。
 
-行长度和长字符串(Line Length and Long Strings)
+## 行长度和长字符串 {#line_length}
 
-一行的长度最多是 80 个字符.
+### 一行最长包含80个字符.
 
-如果你必须要写一个长于 80 个字符的字符串，如果可能的话，你应该尽量使用 here document 或者嵌入一个新行，如果有一个文字字符串长度超过了 80 个字符，并且不能合理的分割文字字符串，但是强烈推荐你找到一种办法让它更短一点。
+如果字符串超过80字符，应尽量使用here document或者嵌入一个新行，如果有一个文字字符串长度超过80字符，并且不能合理的分割，强烈推荐你想办法使它更短一点。
 
-# DO use 'here document's
-cat <<END;
-I am an exceptionally long
+    # DO use 'here document's
+    cat <<END;
+    I am an exceptionally long
 string.
-END
+    END
 
-# Embedded newlines are ok too
-long_string="I am an exceptionally
-  long string."
-多个管道(Pipelines)
+    # Embedded newlines are ok too
+    long_string="I am an exceptionally
+      long string."
 
-如果一行不能容纳多个管道操作，那么请将多个管道拆分成一行一个。
 
-如果一行容得下整个管道操作，那么请将整个管道操作写在同一行。
-否则，那么应该分割成每行一个管道，新的一行应该缩进 ２ 个空格。这条规则适用于那些通过使用”|”或者是一个逻辑运算符”||”和”&&”等组合起来的链式命令。
+## 多个管道 {#pipelines}
 
-# All fits on one line
-command1 | command2
+### 如果一行不能完成整套管道操作，应将多个管道拆分成一行一个。
 
-# Long commands
-command1 \
-  | command2 \
-  | command3 \
-  | command4
-循环(Loops)
+如果一行容得下整个管道操作，应将整个管道操作写在同一行。否则，应该分割成每行一个管道，新的一行应该缩进2个空格。这条规则适用于那些通过使用”|”或者是一个逻辑运算符”||”和”&&”等组合起来的链式命令。
 
-请将 ; do、; then 和 while、for 或者 if 放在同一行。
+    # All fits on one line
+    command1 | command2
 
-Shell 中的循环略有不同，但是我们遵循像声明函数时用大括号同样的原则，也就是说：; do、; then 应该和 if/for/while 放在同一行。 else 应该单独一行，结束语句应该单独一行并且跟开始语句垂直对齐。
+    # Long commands
+    command1 \
+      | command2 \
+      | command3 \
+      | command4
 
-例如：
+## 循环 {#loops}
 
-for dir in ${dirs_to_cleanup}; do
-  if [[ -d "${dir}/${ORACLE_SID}" ]]; then
-    log_date "Cleaning up old files in ${dir}/${ORACLE_SID}"
-    rm "${dir}/${ORACLE_SID}/"*
-    if [[ "$?" -ne 0 ]]; then
-      error_message
-    fi
-  else
-    mkdir -p "${dir}/${ORACLE_SID}"
-    if [[ "$?" -ne 0 ]]; then
-      error_message
-    fi
-  fi
-done
-Case 语句(Case statement)
+### 请将’; do’、’; then’和’while’、’for’或者’if’放在同一行。
+
+shell中的循环遵循像声明函数时用大括号同样的原则，也就是说：’; do’、’; then’应该和 ‘if/for/while’放在同一行。’else’应该单独一行，结束语句应该单独一行并且跟开始语句垂直对齐。
+
+如：
+
+    for dir in ${dirs_to_cleanup}; do
+      if [[ -d "${dir}/${ORACLE_SID}" ]]; then
+        log_date "Cleaning up old files in ${dir}/${ORACLE_SID}"
+        rm "${dir}/${ORACLE_SID}/"*
+        if [[ "$?" -ne 0 ]]; then
+          error_message
+        fi
+      else
+        mkdir -p "${dir}/${ORACLE_SID}"
+        if [[ "$?" -ne 0 ]]; then
+          error_message
+        fi
+      fi
+    done
+
+
+## case语句 {#case}
 
 缩进可用 2 个空格替代。
 可用一行替代的，需要在右括号后面和 ;; 号前面添加一个空格。
