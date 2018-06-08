@@ -684,13 +684,13 @@ declare -xr ORACLE_SID='PROD'
 
     main "$@"
 
-# 调用命令(Calling Commands)
+# 命令调用
 
-## 检查返回值(Checking Return Values)
+## 检查返回值
 
 ### 必须检查返回值，给出返回值相关的信息。
 
-对于一个未使用管道的命令，可以使用$?或者直接指向if语句来检查其返回值，如:
+对于一条不包含管道的命令，可以使用$?或者直接指向if语句来检查其返回值，如:
 
     if ! mv "${file_list}" "${dest_dir}/" ; then
       echo "Unable to move ${file_list} to ${dest_dir}" >&2
@@ -704,14 +704,15 @@ declare -xr ORACLE_SID='PROD'
       exit "${E_BAD_MOVE}"
     fi
 
-bash有 PIPESTATUE 变量允许检查管道命令所有部分的返回码，这仅仅用于检查整个管道执行成功与否。如：
+
+对于管道命令，可使用PIPESTATUE变量检查其所有部分的返回码，如：
 
     tar -cf - ./* | ( cd "${dir}" && tar -xf - )
     if [[ "${PIPESTATUS[0]}" -ne 0 || "${PIPESTATUS[1]}" -ne 0 ]]; then
       echo "Unable to tar files to ${dir}" >&2
     fi
 
-然后当你使用任何其它命令的时候 PIPESTATUS 将会被覆盖，如果你需要根据管道发生错误的地方来进行不同的操作，那么你将需要在运行完管道命令后立即将 PIPESTATUS 的值赋给另外一个变量(不要忘了[这个符号也是一个命令，会把PIPESTATUS 的值给覆盖掉．)
+注意，一旦运行其他命令，PIPESTATUS就会被覆盖，如果需要根据管道发生错误的地方来进行不同的操作，应该在运行完管道命令后立即将PIPESTATUS的值赋给另外一个变量(尤其注意[这个符号也是一个命令)，如：
 
     tar -cf - ./* | ( cd "${DIR}" && tar -xf - )
     return_codes=(${PIPESTATUS[*]})
@@ -723,7 +724,7 @@ bash有 PIPESTATUE 变量允许检查管道命令所有部分的返回码，这�
     fi
 
 
-# 内建命令 vs 外部命令
+## 内建命令 vs 外部命令
 
 ### 优先选用内建命令。
 
@@ -742,7 +743,7 @@ bash有 PIPESTATUE 变量允许检查管道命令所有部分的返回码，这�
 
 ***
 
-## 结论 {#conclusion}
+# 结论 {#conclusion}
 
 运用常识和判断力，并且**保持一致**。
 
