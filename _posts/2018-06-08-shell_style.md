@@ -81,11 +81,11 @@ shell脚本不是一种开发语言，但在Google被用于编写多种实用工
 
 # 环境 {#environment}
 
-## 标准输出vs错误输出(STDOUT vs STDERR) {#so_se}
+## STDOUT vs STDERR {#so_se}
 
 ### 所有错误信息应该输入到标准错误输出(STDERR)。
 
-这样做便于识别出脚本运行状态。
+这样做便于查看出脚本运行状态。
 
 推荐使用以下函数，可将错误信息和其他状态信息同时输出。
 
