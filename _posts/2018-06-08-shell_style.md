@@ -564,140 +564,149 @@ mypackage::my_func() {
 }
 当函数名后存在 () 时，关键词 function 是多余的。但是其促进了函数的快速辨识。
 
-变量名(Variable Names)
+# 变量名(Variable Names)
 
-如函数名。
+### 同函数名。
 
 循环的变量名应该和要循环的任何变量同样命名。
 
-for zone in ${zones}; do
-  something_with "${zone}"
-done
-常量和环境变量名(Constants and Environment Variable Names)
+    for zone in ${zones}; do
+      something_with "${zone}"
+    done
 
-要大写、用下划线分割、声明在文件的开头。
+# 常量和环境变量名(Constants and Environment Variable Names)
+
+### 要大写、用下划线分割、声明在文件的开头。
 
 常量和任何导出到环境的变量都应该大写。
 
-# Constant
-readonly PATH_TO_FILES='/some/path'
+    # Constant
+    readonly PATH_TO_FILES='/some/path'
 
-# Both constant and environment
-# declare -r设置只读变量，-x设置为环境变量
+    # Both constant and environment
+    # declare -r设置只读变量，-x设置为环境变量
 declare -xr ORACLE_SID='PROD' 
 有些第一次设置时(例如使用 getopts 情况下)就变成了常量。也就是说，可以在 getopts 中或基于条件来设定常量，但之后应该立即设置其为只读。需要注意的是，declare 不能在函数内部操作全局变量，所以这时推荐使用 readonly 和 export 来代替。
 
-VERBOSE='false'
-while getopts 'v' flag; do
-  case "${flag}" in
-    v) VERBOSE='true' ;;
-  esac
-done
-readonly VERBOSE
-源文件名(Source Filenames)
+    VERBOSE='false'
+    while getopts 'v' flag; do
+      case "${flag}" in
+        v) VERBOSE='true' ;;
+      esac
+    done
+    readonly VERBOSE
 
-小写，如果需要的话使用下划线分隔单词。
+# 源文件名(Source Filenames)
+
+### 使用小写，如果需要的话使用下划线分隔单词。
 
 这是为了和在 Google 中的其他代码风格保持一致：maketemplate 或者 make_template，而不是 make-template。
 
-只读变量(Read-ony Variables)
+## 只读变量(Read-ony Variables)
 
-使用 readonly 或者 declare -r 来确保变量只读。
+### 使用 readonly 或者 declare -r 来确保变量只读。
 
 因为全局变量在 Shell 中广泛使用，所以在使用它们的过程中捕获错误是很重要的。当你声明了一个希望其只读的变量，那么请明确指出。
 
-zip_version="$(dpkg --status zip | grep Version: | cut -d ' ' -f 2)"
-if [[ -z "${zip_version}" ]]; then
-  error_message
-else
-  readonly zip_version
-fi
-使用本地变量(Use Local Variables)
+    zip_version="$(dpkg --status zip | grep Version: | cut -d ' ' -f 2)"
+    if [[ -z "${zip_version}" ]]; then
+      error_message
+    else
+      readonly zip_version
+    fi
 
-使用 local 声明函数内部变量。声明和赋值应该在不同行。
+
+## 使用本地变量(Use Local Variables)
+
+### 使用 local 声明函数内部变量。声明和赋值应该在不同行。
 
 使用 local 来声明局部变量以确保其只在函数内部和子函数中可见。这避免了污染全局命名空间和不经意间设置可能具有函数之外重要意义的变量。
 
 当赋值的值由命令替换提供时，声明和赋值必须分开。因为内建的 local 不会从命令替换中传递退出码。
 
-my_func2() {
-  local name="$1"
+    my_func2() {
+      local name="$1"
 
-  # Separate lines for declaration and assignment:
-  local my_var
-  my_var="$(my_func)" || return
+      # Separate lines for declaration and assignment:
+      local my_var
+      my_var="$(my_func)" || return
 
-  # DO NOT do this: $? contains the exit code of 'local', not my_func
-  local my_var="$(my_func)"
+      # DO NOT do this: $? contains the exit code of 'local', not my_func
+      local my_var="$(my_func)"
   [[ $? -eq 0 ]] || return
 
-  ...
-}
-函数位置(Function Location)
+      ...
+    }
 
-将文件中所有的函数一起放在常量下面。不要在函数之间隐藏可执行代码。
+
+## 函数位置(Function Location)
+
+### 将文件中所有的函数一起放在常量下面。不要在函数之间隐藏可执行代码。
 
 如果你有函数，请将他们一起放在文件头部。只有 includes，set 语句和设置常数可能在函数定义前完成。
-不要在函数之间隐藏可执行代码。如果那样做，会使得代码在调试时难以跟踪并出现意想不到的讨厌结果。
 
-主函数(main)
+不要在函数之间隐藏可执行代码。那样做会使代码在调试时难以跟踪并出现意想不到的结果。
+
+# 主函数(main)
 
 对于足够长的脚本来说，至少需要一个名为 main 的函数来调用其它的函数。
 
 为了便于找到程序的起始位置，把主程序放在一个叫 main 的函数中，放在其它函数的下面，为了提供一致性你应该定义更多的变量为本地变量(如果主程序不是一个程序，那么不能这么做)，文件中最后一句非注释行应该是一个 main 函数的调用。
 
-main "$@"
-调用命令(Calling Commands)
+    main "$@"
 
-检查返回值(Checking Return Values)
+# 调用命令(Calling Commands)
 
-总是应该检查返回值，给出返回值相关的信息。
+## 检查返回值(Checking Return Values)
 
-对于一个未使用管道的命令，可以使用 $? 或者直接指向 if 语句来检查其返回值
-例子:
+### 必须检查返回值，给出返回值相关的信息。
 
-if ! mv "${file_list}" "${dest_dir}/" ; then
-  echo "Unable to move ${file_list} to ${dest_dir}" >&2
-  exit "${E_BAD_MOVE}"
-fi
+对于一个未使用管道的命令，可以使用$?或者直接指向if语句来检查其返回值，如:
 
-# Or
-mv "${file_list}" "${dest_dir}/"
-if [[ "$?" -ne 0 ]]; then
-  echo "Unable to move ${file_list} to ${dest_dir}" >&2
-  exit "${E_BAD_MOVE}"
-fi
-Bash 同样有 PIPESTATUE 变量允许检查管道命令所有部分的返回码，这仅仅用于检查整个管道执行成功与否。下面的例子是被接受的。
+    if ! mv "${file_list}" "${dest_dir}/" ; then
+      echo "Unable to move ${file_list} to ${dest_dir}" >&2
+      exit "${E_BAD_MOVE}"
+    fi
 
-tar -cf - ./* | ( cd "${dir}" && tar -xf - )
-if [[ "${PIPESTATUS[0]}" -ne 0 || "${PIPESTATUS[1]}" -ne 0 ]]; then
-  echo "Unable to tar files to ${dir}" >&2
-fi
-然后当你使用任何其它命令的时候 PIPESTATUS 将会被覆盖，如果你需要根据管道发生错误的地方来进行不同的操作，那么你将需要在运行完管道命令后立即将 PIPESTATUS 的值赋给另外一个变量(不要忘了[这个符号也是一个命令，将会把PIPESTATUS 的值给覆盖掉．)
+    # Or
+    mv "${file_list}" "${dest_dir}/"
+    if [[ "$?" -ne 0 ]]; then
+      echo "Unable to move ${file_list} to ${dest_dir}" >&2
+      exit "${E_BAD_MOVE}"
+    fi
 
-tar -cf - ./* | ( cd "${DIR}" && tar -xf - )
-return_codes=(${PIPESTATUS[*]})
-if [[ "${return_codes[0]}" -ne 0 ]]; then
-  do_something
-fi
-if [[ "${return_codes[1]}" -ne 0 ]]; then
-  do_something_else
-fi
-内置命令对比外部命令(Builtin Commands vs. External Commands)
+bash有 PIPESTATUE 变量允许检查管道命令所有部分的返回码，这仅仅用于检查整个管道执行成功与否。如：
 
-可以在调用 Shell 内建命令和调用另外的程序之间选择，请选择内建命令。
+    tar -cf - ./* | ( cd "${dir}" && tar -xf - )
+    if [[ "${PIPESTATUS[0]}" -ne 0 || "${PIPESTATUS[1]}" -ne 0 ]]; then
+      echo "Unable to tar files to ${dir}" >&2
+    fi
 
-我们更喜欢使用内建命令，如在 bash(1) 中参数扩展函数。因为它更强健和便携（尤其是跟像 sed 这样的命令比较）
+然后当你使用任何其它命令的时候 PIPESTATUS 将会被覆盖，如果你需要根据管道发生错误的地方来进行不同的操作，那么你将需要在运行完管道命令后立即将 PIPESTATUS 的值赋给另外一个变量(不要忘了[这个符号也是一个命令，会把PIPESTATUS 的值给覆盖掉．)
 
-例如：
+    tar -cf - ./* | ( cd "${DIR}" && tar -xf - )
+    return_codes=(${PIPESTATUS[*]})
+    if [[ "${return_codes[0]}" -ne 0 ]]; then
+      do_something
+    fi
+    if [[ "${return_codes[1]}" -ne 0 ]]; then
+      do_something_else
+    fi
 
-# Prefer this:
-addition=$((${X} + ${Y}))
-substitution="${string/#foo/bar}"
 
-# Instead of this:
-addition="$(expr ${X} + ${Y})"
-substitution="$(echo "${string}" | sed -e 's/^foo/bar/')"
+# 内置命令对比外部命令(Builtin Commands vs. External Commands)
+
+### 可以在调用 Shell 内建命令和调用另外的程序之间选择，请选择内建命令。
+
+我们更喜欢使用内建命令，如在 bash(1) 中参数扩展函数。因为它更强健和便携（尤其是跟像 sed 这样的命令比较），如：
+
+    # Prefer this:
+    addition=$((${X} + ${Y}))
+    substitution="${string/#foo/bar}"
+
+    # Instead of this:
+    addition="$(expr ${X} + ${Y})"
+    substitution="$(echo "${string}" | sed -e 's/^foo/bar/')"
 
 
 **[[TOP](#top)]**
