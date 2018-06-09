@@ -1,9 +1,9 @@
 ---
 layout: post
-title: shell with style
+title: Shell with style
 ---
 
-# shell with style
+# Shell with style
 
 参考：[Google shell styleguide][ref1]{:target="_blank"}
 
@@ -13,43 +13,44 @@ title: shell with style
 
 ***
 
-*   [背景](#setup)
-    *   [选择shell](#image_attribute)
-    *   [shell适用场景](#image_fun)
-*   [脚本与解释器](#mode)
-    *   [扩展名](#image_attribute)
-    *   [SUID/SGID](#image_fun)
-*   [环境](#image)
-    *   [错误信息](#image_attribute)
-*   [注释](#imagefilter)
-    *   [文件头](#filter)
-    *   [功能注释](#filter_fun)
-    *   [代码注释](#filter)
-    *   [TODO注释](#filter_fun)
-*   [格式](#imagefilter)
-    *   [缩进](#filter)
-    *   [换行](#filter_fun)
-    *   [管道](#filter)
-    *   [循环](#filter_fun)
-    *   [case语句](#filter)
-    *   [变量展开](#filter_fun)
-    *   [引号](#filter)
-*   [特性与错误](#imagefilter)
-    *   [命令替换](#filter)
-    *   [test, \[与\[\[](#filter_fun)
-    *   [测试字符串](#filter)
-    *   [通配符](#filter_fun)
-    *   [eval](#filter)
-    *   [管道导向while循环](#filter_fun)
-*   [命名约定](#imagefilter)
-    *   [函数名](#filter)
-    *   [变量名](#filter_fun)
-    *   [常量和环境变量名](#filter)
-    *   [源文件名](#filter_fun)
-    *   [只读变量](#filter)
-    *   [本地变量](#filter_fun)
-    *   [函数位置](#filter)
-    *   [主函数](#filter_fun)
+*   [背景](#background)
+    *   [选择shell](#which_shell)
+    *   [shell适用场景](#when_to_use)
+*   [脚本与解释器](#invocation)
+    *   [扩展名](#extensions)
+    *   [SUID/SGID](#suid)
+*   [环境](#environment)
+    *   [重定向输出信息](#so_se)
+*   [注释](#comments)
+    *   [文件头](#header)
+    *   [功能注释](#funcomments)
+    *   [细节注释](#codecomments)
+    *   [TODO注释](#todocomments)
+*   [格式](#formatting)
+    *   [缩进](#indentation)
+    *   [语句块](#part)
+    *   [行的长度](#line_length)
+    *   [管道组合](#pipelines)
+    *   [if/for/while](#loops)
+    *   [case](#case)
+    *   [变量展开](#var_expansion)
+    *   [引号](#quotes)
+*   [shell陷阱](#features)
+    *   [命令替换](#command_substitution)
+    *   [test, \[与\[\[](#test)
+    *   [字符串比对](#filter)
+    *   [通配符](#wildcard)
+    *   [eval](#eval)
+    *   [管道导向while循环](#pipetowhile)
+*   [命名约定](#naming_conventions)
+    *   [函数名](#fun_names)
+    *   [变量名](#var_names)
+    *   [常量和环境变量名](#con_names)
+    *   [源文件名](#script_names)
+    *   [只读变量](#readonly)
+    *   [局部变量](#local_var)
+    *   [函数位置](#fun_location)
+    *   [主函数](#main)
 *   [命令调用](#calling)
     *   [检查返回值](#returnvalue)
     *   [内建命令](#invsext)
@@ -57,71 +58,71 @@ title: shell with style
 
 ***
 
-# 背景 {#background}
+## 背景 {#background}
 
-## 使用哪种shell {#which_shell}
+### 使用哪种 shell {#which_shell}
 
-<div class="tip"> 推荐使用bash。 </div>
+<div class="tip"> 优先选择bash。 </div>
 
-可执行文件必须以`#!/bin/bash`和最小数量的标志开始。使用`set`设置shell的选项，使得用`bash <script_name>`调用脚本时不会破坏其功能。
+可执行文件必须以 `#!/bin/bash` 和最小数量的标志开始。使用 `set` 设置 shell 的选项，以确保使用 `bash <script_name>` 运行脚本时不会出现异常。
 
-限制所有的可执行shell脚本为bash，这样可以保证其具有良好的移植性。如果系统不支持bash，可使用其他shell语言。例如 Solaris SVR4，需要用纯Bourne shell。
+优先选择 bash ，如果系统不支持 bash ，可使用其他 shell 语言。例如 Solaris SVR4，需要用纯 Bourne shell。
 
-* uuspider的shell脚本使用`#!/usr/bin/env bash`开始。
+* uuspider 的 shell 脚本使用 `#!/usr/bin/env bash` 开始。
 
 ## 何时使用shell {#when_to_use}
 
-<div class="tip"> shell仅仅用于编写小工具或者简单的包装脚本。</div>
+<div class="tip"> shell 适用于编写小工具或者简单的包装脚本。</div>
 
-shell脚本不是一种开发语言，但在Google被用于编写各种实用工具。本条风格指南重点在于认同shell的使用，而不具有强制性，也就是说，原则上你可以用shell做任何事。
-
-以下是一些准则：
+shell 不是一种开发语言，而是一种工具语言，因此，有必要明确 shell 在生产环境下的一些使用准则：
 
 - 如果你主要是在调用其他的工具并且做一些相对很小数据量的操作，可以使用shell。
 
-- 如果你关注性能，请选择其他语言，不推荐shell。
+- 如果你关注性能，请选择其他语言， shell 不是一种高效的语言。
 
-- 如果你发现需要使用数组，请使用python。
+- 如果发现你的项目涉及数组，不要使用 shell，可选择 python 。
 
-- 如果你的shell脚本超过100行，请使用python。
+- 如果你的 shell 脚本已经超过100行，请使用 python 。
 
 **[[TOP](#top)]**
 
 ***
 
-# shell文件和解释器调用 {#invocation}
+## 脚本与解释器 {#invocation}
 
-## 文件扩展名 {#extensions}
+### 文件扩展名 {#extensions}
 
-<div class="tip"> 可执行文件应该没有扩展名(强烈建议)或者使用`.sh`扩展名。库文件必须使用`.sh`作为扩展名，而且应该是不可执行的。</div>
+<div class="tip"> 可执行文件不需要扩展名(强烈建议)或者使用 .sh 扩展名。库文件必须使用 .sh 作为扩展名，而且应该是不可执行的。</div>
 
-当执行一个程序时，并不需要知道它是用什么语言编写的。而且shell脚本也不要求有扩展名。所以我们推荐可执行文件不使用扩展名。但对于库文件，知道其用什么语言编写的是很重要的，有时候会需要使用不同语言编写的相似的库文件。使用`.sh`这样特定语言后缀作为扩展名，就使得用不同语言编写的具有相同功能的库文件可以采用一样的名称。
+执行一个程序时，不需要知道它是用什么语言编写的，同时 shell 脚本也不要求有扩展名，所以我们推荐可执行文件不使用扩展名。
 
-## SUID/SGID {#suid}
+对于库文件，明确其编写语言很重要，使用 .sh 这样特定语言后缀作为扩展名，就可以使不同语言编写的具有相同功能的库文件采用同一个文件名。
+
+### SUID/SGID {#suid}
 
 <div class="tip"> 脚本中禁止使用SUID和SGID。 </div>
 
-出于安全性的考虑，禁止在shell中使用SUID/SGID。如果需要更高权限，可使用`sudo`。
+禁止在 shell 中使用 SUID/SGID ，如果需要更高权限，可使用 `sudo` 。
 
 **[[TOP](#top)]**
 
 ***
 
-# 环境 {#environment}
+## 环境 {#environment}
 
-## 错误信息 {#so_se}
+### 重定向输出信息 {#so_se}
 
-<div class="tip"> 所有错误信息应该输入到标准错误输出(STDERR)。</div>
+<div class="tip"> 注意将所有输出信息，尤其是错误信息，重定向到标准错误输出 (STDERR) 。</div>
 
-这样做便于查看脚本运行状态。
+错误信息可能定向到了标准暑促 (STDOUT) ，应将其重定向到 STDERR ，以便于查看脚本运行状态。
 
-推荐使用以下函数，可将错误信息和其他状态信息同时输出。
+推荐使用以下函数，可将错误信息和其他状态信息同时定向到 STDERR 。
 
 
     err() {
       echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
     }
-    
+
     if ! do_something; then
       err "Unable to do_something"
       exit "${E_DID_NOTHING}"
@@ -132,24 +133,18 @@ shell脚本不是一种开发语言，但在Google被用于编写各种实用工
 
 ***
 
-# 注释 {#comments}
+## 注释 {#comments}
 
-## 文件头 {#header}
+### 文件头 {#header}
 
-<div class="tip"> 脚本开头处应包含当前脚本的说明。</div>
+<div class="tip"> 脚本开头处应有说明。</div>
 
 每个脚本必须有一个顶层注释，简述其功能，也可以加入版权声明、作者信息、版本说明等。
 
-例如：
-
-    #!/bin/bash
-    #
-    # Perform hot backups of Oracle databases.
-
-> uuspider的shell脚本文件头格式为：
+> uuspider 的 shell 脚本文件头格式为：
 
     #!/usr/bin/env bash
-    #------------------------------------
+    ########################################
     #  脚本：cnbeta爬虫
     #  版本：0.9
     #  作者：uuspider
@@ -162,15 +157,15 @@ shell脚本不是一种开发语言，但在Google被用于编写各种实用工
     #  更新：2018-03-31 v0.9 cnbeta rss升级 http -> https
     #  语言：shell
     #  功能：获取cnbeta更新并发送到邮箱
-    #------------------------------------
+    ########################################
 
-## 函数注释 {#funcomments}
+### 函数注释 {#funcomments}
 
-<div class="tip"> 除非很短或功能显而易见，函数都必须有注释。任何库函数，无论其长度大小和复杂性都必须要有注释。</div>
+<div class="tip"> 函数，尤其是库函数，无论其长度大小和复杂性都必须有注释。</div>
 
 函数注释应该包含如下内容:
 
-- 函数的描述
+- 函数的功能描述
 
 - 使用的和修改的全局变量
 
@@ -181,19 +176,18 @@ shell脚本不是一种开发语言，但在Google被用于编写各种实用工
 例如:
 
     #!/usr/bin/env bash
-    #
-    # Perform hot backups of Oracle databases.
+    ...
 
     export PATH='/usr/xpg4/bin:/usr/bin:/opt/csw/bin:/opt/goog/bin'
 
     #######################################
     # Cleanup files from the backup dir
-    # Globals:
+    # Globals (全局变量) :
     #   BACKUP_DIR
     #   ORACLE_SID
-    # Arguments:
+    # Arguments (参数) :
     #   None
-    # Returns:
+    # Returns (返回值) :
     #   None
     #######################################
     cleanup() {
@@ -201,17 +195,17 @@ shell脚本不是一种开发语言，但在Google被用于编写各种实用工
     }
 
 
-## 代码正文的注释 {#codecomments}
+### 代码细节的注释 {#codecomments}
 
 <div class="tip"> 对代码中含有技巧的、不容易读懂的、有趣的或重要的部分添加注释。</div>
 
-不要所有代码都加注释。
+注意没有必要为所有代码都添加注释。
 
-## TODO {#todo}
+### TODO {#todocomments}
 
-<div class="tip"> 对临时、短期解决方案，或仍需完善的代码添加TODO注释。</div>
+<div class="tip"> 对临时、短期解决方案，或仍需完善的代码添加 TODO 注释。</div>
 
-TODO注释，以大写TODO开头，在后边的括号中注明用户名，冒号(可省略)之后是注释正文，最后以bug号或ticket号结束。如：
+TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户名，冒号(可省略)之后是注释正文，最后以 bug 号或 ticket 号结束。如：
 
     # TODO(mrmonkey): Handle the unlikely edge cases (bug ####)
 
@@ -220,51 +214,52 @@ TODO注释，以大写TODO开头，在后边的括号中注明用户名，冒号
 
 ***
 
-# 格式 {#formatting}
+## 格式 {#formatting}
 
-优先遵循原脚本文件的风格，但是新的代码必须遵循以下风格。
+优先遵循原脚本文件的风格，如果是新文件，应遵循以下风格。
 
-## 缩进 {#indentation}
+### 缩进 {#indentation}
 
-<div class="tip"> 使用2个空格来缩进，不要使用tab。两个语句块中间应使用空白行来提高可读性。</div>
+<div class="tip"> 每一级缩进为 2 个空格，不要使用 tab 。</div>
 
-## 行长度和长字符串 {#line_length}
+### 语句块 {#part}
 
-<div class="tip"> 一行最长包含80个字符。</div>
+<div class="tip"> 两个语句块之间以一个空白行分隔。</div>
 
-如果字符串超过80字符，应尽量使用here document或者嵌入一个新行，如果有一个文字字符串长度超过80字符，并且不能合理的分割，强烈推荐你想办法使它更短一点。
+### 行长度和长字符串 {#line_length}
 
-    # DO use 'here document's
+<div class="tip"> 每一行最多 80 个字符。</div>
+
+如果字符串超过 80 字符，应尽量使用 here document 或者嵌入一个新行，如果有一个文字字符串长度超过 80 字符，并且不能合理的分割，也应尽量使它短一点。
+
+    # 使用 'here document's
     cat <<END;
     I am an exceptionally long
-string.
+    string.
     END
 
-    # Embedded newlines are ok too
+    # 直接使用换行分割字符串
     long_string="I am an exceptionally
       long string."
 
 
-## 多个管道 {#pipelines}
+### 管道组合 {#pipelines}
 
 <div class="tip"> 如果一行不能完成整套管道操作，应将多个管道拆分成一行一个。</div>
 
-如果一行容得下整个管道操作，应将整个管道操作写在同一行。否则，应该分割成每行一个管道，新的一行应该缩进2个空格。这条规则适用于那些通过使用”|”或者是一个逻辑运算符”||”和”&&”等组合起来的链式命令。
+如果一行可以完成整套管道操作，应将其写在同一行。否则，应该分割为每行一个管道 (缩进 2 个空格)。这条规则适用于那些通过使用 \| 或逻辑运算符 \|\| 、 && 等组合起来的链式命令。
 
-    # All fits on one line
-    command1 | command2
-
-    # Long commands
+    # 管道组合命令
     command1 \
       | command2 \
       | command3 \
       | command4
 
-## 循环 {#loops}
+### if/for/while {#loops}
 
-<div class="tip"> 请将’; do’、’; then’和’while’、’for’或者’if’放在同一行。</div>
+<div class="tip"> '; then' 、 '; do' 应和对应的 'if/for/while' 放在同一行，下一行增加一个缩进级别。</div>
 
-shell中的循环遵循像声明函数时用大括号同样的原则，也就是说：’; do’、’; then’应该和 ‘if/for/while’放在同一行。’else’应该单独一行，结束语句应该单独一行并且跟开始语句垂直对齐。
+'else' 单独一行，与相应的 'if' 对齐，'fi/done'单独一行，与对应的 'if/for/while' 对齐。
 
 如：
 
@@ -284,9 +279,9 @@ shell中的循环遵循像声明函数时用大括号同样的原则，也就是
     done
 
 
-## case语句 {#case}
+### case {#case}
 
-<div class="tip"> 每级缩进使用2个空格。case 和 esac 中匹配项的表达式应在同一个缩进级别，执行的命令应比匹配项增加一个缩进级别。</div>
+<div class="tip"> 匹配项表达式比 case 和 esac 多一个缩进级别。</div>
 
 <div class="tip"> 匹配项和执行命令在同一行时，应在右括号后面和 ;; 号前面添加一个空格。</div>
 
@@ -304,7 +299,7 @@ shell中的循环遵循像声明函数时用大括号同样的原则，也就是
       esac
     done
 
-<div class="tip"> 如果某一匹配项下有多个命令，应分成多行，其中匹配项、单条命令以及 ;; 号各占一行。</div>
+<div class="tip"> 如果某一匹配项下有多个命令，应分成多行，其中匹配项、单条命令和 ;; 号各占一行，命令和 ;; 号比匹配项多一个缩进级别。</div>
 
     case "${expression}" in
       a)
@@ -320,72 +315,76 @@ shell中的循环遵循像声明函数时用大括号同样的原则，也就是
         ;;
     esac
 
-<div class="tip"> 通常匹配项的表达式不必添加引号，而且应避免使用 ;& 和 ;;s& 等符号。</div>
+<div class="tip"> 匹配项的表达式一般不需要添加引号，同时应避免使用 ;& 和 ;;s& 等符号。</div>
 
-## 变量展开 {#var_expansion}
+### 变量展开 {#var_expansion}
 
-<div class="tip"> 首先考虑和当前脚本原来的风格保持一致，其次，除了单个字符的 shell 特殊变量或位置参数，其他所有变量都应使用花括号，即推荐使用 "${var}" 而不是 "$var"。</div>
+<div class="tip"> 除了单个字符的 shell 特殊变量或位置参数，其他所有变量都应使用花括号，即推荐使用 "${var}" 。</div>
 
-    # 单个字符的位置参数:
-    echo "Positional: $1" "$5" "$3"
-    # 单个字符的特殊变量:
+单个字符的特殊变量和位置参数:
+
     echo "Specials: !=$!, -=$-, _=$_. ?=$?, #=$# *=$* @=$@ \$=$$ ..."
-
-    # 位置参数:
+    echo "Positional: $1" "$5" "$3"
     echo "many parameters: ${10}"
 
-    # 明确变量的边界:
+明确变量的边界:
+
     # Output is "a0b0c0"
     set -- a b c
     echo "${1}0${2}0${3}0"
 
-    # 习惯用法:
+单个字符的普通变量也应使用花括号:
+
     echo "PATH=${PATH}, PWD=${PWD}, mine=${some_var}"
     while read f; do
       echo "file=${f}"
     done < <(ls -l /tmp)
 
-    # 以下为错误用法：
+错误用法:
+
+    # <错误用法> 无引号，无花括号，单个字符的特殊变量和位置参数不需要花括号
     echo a=$avar "b=$bvar" "PID=${$}" "${1}"
 
-    # 不易读: "${1}0${2}0${3}0" or "${10}${20}${30}"？
+    # <错误用法> 不易区分: "${1}0${2}0${3}0" or "${10}${20}${30}"？
     set -- a b c
     echo "$10$20$30"
 
-# 引号
+### 引号 {#quotes}
 
 <div class="tip"> 尽量将包含变量、命令替换符、空格或 shell 元字符的字符串用引号括起来。</div>
 
-<div class="tip"> 优先对类单词的字符串使用引号（而不是命令选项或者路径名）。</div>
+<div class="tip"> 优先对类单词的字符串使用引号(而不是命令选项或者路径名)。</div>
 
 <div class="tip"> 不要对整数使用引号。</div>
 
 <div class="tip"> 注意 [[ 中模式匹配的引号用法。</div>
 
-<div class="tip"> 尽量使用 $@ ，除非有特殊原因需要使用 $*。</div>
+<div class="tip"> 尽量使用 $@ ，除非有特殊原因需要使用 $* 。</div>
 
-    # 单引号不会识别和展开变量。
-    # 双引号将展开或替换变量。
+注意单引号不会识别和展开变量，双引号将展开或替换变量。
 
-    # 变量展开
+变量定义或引用时使用双引号:
+
     flag="$(some_command and its args "$@" 'quoted separately')"
-
-    # 变量
     echo "${flag}"
-
-    # 不要对整数使用引号。
-    value=32
-    # "quote command substitutions", even when you expect integers
     number="$(generate_number)"
+    echo "${number}"
 
-    # "prefer quoting words", not compulsory
+不要对整数使用引号:
+
+    value=32
+
+优先对类单词的字符串使用引号:
+
     readonly USE_INTEGER='true'
 
-    # "quote shell meta characters"
+单引号中的特殊字符不需要转义:
+
     echo 'Hello stranger, and well met. Earn lots of $$$'
     echo "Process $$: Done making \$\$\$."
 
-    # "command options or path names"
+命令选项和路径不加引号:
+
     # ($1 is assumed to contain a value here)
     grep -li Hugo /dev/null "$1"
 
@@ -417,25 +416,28 @@ shell中的循环遵循像声明函数时用大括号同样的原则，也就是
     set -- 1 "2 two" "3 three tres"; echo $# ; set -- "$@"; echo "$#, $@")
 
 
-# 特征和错误(Features and Bugs)
+**[[TOP](#top)]**
 
-## 命令替换(Command Substitution)
+***
 
-<div class="tip"> 使用 $(command) ，不推荐使用反引号。</div>
+## shell 陷阱 {#features}
 
-嵌套的反引号要求用反斜杠("\")转义内部的反引号。而 $(command) 形式嵌套时不需要转义。如：
+### 命令替换 {#command_substitution}
 
-    # This is preferred:
+<div class="tip"> 命令替换使用 $(command) ，不要使用反引号。</div>
+
+嵌套的反引号需要使用反斜杠("\\")转义内部的反引号，而 $(command) 形式嵌套时不需要转义。如：
+
     var="$(command "$(command1)")"
 
-    # This is not:
+    # <错误用法>: 使用反引号进行命令替换
     var="`command \`command1\``"
 
-## test, \[ 和 \[\[
+### test, \[\] 和 \[\[\]\] {#test}
 
-<div class="tip"> 优先使用 [[ ... ]]，而不是 [ 和 test。 </div>
+<div class="tip"> 优先使用 [[ ... ]]，而不是 [ ... ] 和 test。 </div>
 
-因为在 [[ 和 ]] 之间不会展开路径或切分单词，所以使用 [[ ... ]] 能够减少错误，而且 [[ ... ]] 允许正则表达式匹配， [ ... ] 不允许。
+在 [[ 和 ]] 之间不会展开路径或切分单词，使用 [[ ... ]] 可以避免错误，同时， [[ ... ]] 允许正则表达式匹配， [ ... ] 不允许。
 
     # This ensures the string on the left is made up of characters in the
     # alnum character class followed by the string name.
@@ -457,88 +459,74 @@ shell中的循环遵循像声明函数时用大括号同样的原则，也就是
       echo "Match"
     fi
 
-## 测试字符串
+### 字符串比对 {#filter}
 
-<div class="tip"> 尽可能使用引号，而不是过滤字符串。</div>
+<div class="tip"> 比对字符串使用 = ，检测字符串是否为空(非空)时使用 -z 或 -n。</div>
 
-Bash 足以在测试中处理空字符串。所以，请使用空（非空）字符串测试，而不是过滤字符，使得代码更易于阅读。
+字符串比对:
 
-    # Do this:
     if [[ "${my_var}" = "some_string" ]]; then
       do_something
     fi
 
-    # -z (string length is zero) and -n (string length is not zero) are
-    # preferred over testing for an empty string
-    if [[ -z "${my_var}" ]]; then
-      do_something
-    fi
-
-    # This is OK (ensure quotes on the empty side), but not preferred:
-    if [[ "${my_var}" = "" ]]; then
-      do_something
-    fi
-
-    # Not this:
+    # <错误用法>:
     if [[ "${my_var}X" = "some_stringX" ]]; then
       do_something
     fi
 
-为了避免对你测试的目的产生困惑，请明确使用 -z 或者 -n ：
+检测字符串是否为空时使用`-z`，检测字符串是否非空时使用`-n`:
 
-    # Use this
-    if [[ -n "${my_var}" ]]; then
+    if [[ -z "${my_var}" ]]; then
       do_something
     fi
 
-    # Instead of this as errors can occur if ${my_var} expands to a test
-    # flag
+    # <不推荐的用法>:
+    if [[ "${my_var}" = "" ]]; then
+      do_something
+    fi
+
+    # <错误用法>: 应使用 -n
     if [[ "${my_var}" ]]; then
       do_something
     fi
 
-## 文件名的通配符扩展(Wildcard Expansion of Filenames)
+### 通配符扩展 {#wildcard}
 
-<div class="tip"> 当做文件名通配符扩展的时候，使用显式路径。</div>
+<div class="tip"> 当文件含有通配符时，应使用完整路径，比如，使用 ./* ，而不是 * 。</div>
 
-因为文件名可以使用 - 开头，所以使用扩展通配符 ./* 比 * 安全得多。
+这是因为文件名可以使用 `-` 开头，使用 \* 可能会被系统误认为是选项，如:
 
-    # Here's the contents of the directory:
-    # 当前目录下又-f -r somedir somefile等文件和目录
-    # -f  -r  somedir  somefile
+当前目录下有 -f ， -r ， somedir ， somefile 等文件和目录，使用
 
-    # 使用rm -v *将会扩展成rm -v -r -f somedir simefile，这将导致删除当前目录所有的文件和目录
-    # This deletes almost everything in the directory by force
-    psa@bilby$ rm -v *
-    removed directory: `somedir'
-    removed `somefile'
+    rm -v *
 
-    # 相反如果你使用./*则不会，因为-r -f就不会变成rm的参数了
-    # As opposed to:
-    psa@bilby$ rm -v ./*
+会扩展成
+
+    rm -v -r -f somedir simefile
+
+这就导致当前目录所有的文件和目录被删除。使用 `./*` 可以避免这种情况：
+
+    rm -v ./*
     removed `./-f'
     removed `./-r'
     rm: cannot remove `./somedir': Is a directory
     removed `./somefile'
 
-## Eval
+### eval {#eval}
 
-<div class="tip"> eval 命令应该被禁止执行。</div>
+<div class="tip"> 禁止使用 eval 。</div>
 
-eval 用于给变量赋值的时候，可以设置变量，但是不能检查这些变量是什么。
+eval 用于变量赋值，可以设置变量，但是不检查这些变量。如:
 
-    # What does this set?
-    # Did it succeed? In part or whole?
-    eval $(set_my_variables)
-
-    # What happens if one of the returned values has a space in it?
     variable="$(eval some_function)"
 
-## 管道导向 while 循环(Pipes to While)
+如果函数某个返回值中含有空格，`variable` 的值就会出错。
 
-<div class="tip"> 优先使用过程替换或者 for 循环，而不是管道导向 while 循环。在 while 循环中被修改的变量是不能传递给父 Shell 的，因为循环命令是在一个子 Shell 中运行的。</div>
+### 管道导向 while 循环 {#pipetowhile}
 
-管道导向 while 循环中的隐式子 Shell 使得追踪 bug 变得很困难。
+<div class="tip"> 不要将管道直接导向 while ，使用过程替换 'done < <()' 或 for 循环。</div>
+
+这是因为 while 循环是在一个子 shell 中运行的，管道直接导向 while 使 bug 难以追踪。
 
     last_line='NULL'
     your_command | while read line; do
@@ -548,7 +536,7 @@ eval 用于给变量赋值的时候，可以设置变量，但是不能检查这
     # This will output 'NULL'
     echo "${last_line}"
 
-如果你确定输入中不包含空格或者特殊符号（通常意味着不是用户输入的），那么可以使用一个 for 循环。
+如果确定输入中不包含空格或者特殊符号(通常不是用户输入的)，可以使用 for 循环。
 
     total=0
     # Only do this if there are no spaces in return values.
@@ -556,7 +544,7 @@ eval 用于给变量赋值的时候，可以设置变量，但是不能检查这
       total+="${value}"
     done
 
-使用过程替换允许重定向输出，但是请将命令放入一个显式的子 Shell 中，而不是 bash 为 while 循环创建的隐式子 Shell。
+也可以使用过程替换 `done < <()` :
 
     total=0
     last_file=
@@ -570,49 +558,62 @@ eval 用于给变量赋值的时候，可以设置变量，但是不能检查这
     echo "Total = ${total}"
     echo "Last one = ${last_file}"
 
-当不需要传递复杂的结果给父 Shell 时可以使用 while 循环。这通常需要一些更复杂的“解析”。请注意简单的例子使用如 awk 这类工具可能更容易完成。当你特别不希望改变父 Shell 的范围变量时这可能也是有用的。
 
-    # Trivial implementation of awk expression:
-    #   awk '$3 == "nfs" { print $2 " maps to " $1 }' /proc/mounts
-    cat /proc/mounts | while read src dest type opts rest; do
+<div class="tip"> while 中修改的变量不能传递到循环外，需要向循环外传递变量时尽量选用 awk 。</div>
+
+如
+
+    awk '$3 == "nfs" { print $2 " maps to " $1 }' /proc/mounts
+
+用 while 的实现方法:
+
+    while read src dest type opts rest; do
       if [[ ${type} == "nfs" ]]; then
         echo "NFS ${dest} maps to ${src}"
       fi
-    done
+    done < /proc/mounts
 
-# 命名约定(Naming Conventions)
 
-## 函数名(Function Names)
+**[[TOP](#top)]**
 
-<div class="tip"> 使用小写字母，并用下划线分隔单词。使用双冒号 :: 分隔库。函数名之后必须有圆括号。关键词 function 是可选的，但必须在一个项目中保持一致。</div>
+***
 
-如果你正在写单个函数，请用小写字母来命名，并用下划线分隔单词。如果你正在写一个包，使用双冒号 :: 来分隔包名。大括号必须和函数名位于同一行（就像在 Google 的其他语言一样），并且函数名和圆括号之间没有空格。
+## 命名约定 {#naming_conventions}
 
-    # Single function
+### 函数名 {#fun_names}
+
+<div class="tip"> 函数名使用小写字母，单词之间用下划线分隔。</div>
+
+<div class="tip"> 函数名之后必须有圆括号，函数名和圆括号之间没有空格。</div>
+
+<div class="tip"> 花括号必须和函数名位于同一行。</div>
+
+<div class="tip"> 关键词 function 可省略，但必须在一个项目中保持一致。</div>
+
     my_func() {
       ...
     }
+
+<div class="tip"> 使用双冒号 :: 分隔函数库。</div>
 
     # Part of a package
     mypackage::my_func() {
       ...
     }
 
-当函数名后存在 () 时，关键词 function 是多余的。但是其促进了函数的快速辨识。
+### 变量名 {#var_names}
 
-# 变量名(Variable Names)
+<div class="tip"> 使用小写字母，下划线分隔单词。</div>
 
-<div class="tip"> 同函数名。</div>
-
-循环的变量名应该和要循环的任何变量同样命名。
+循环的变量名应该和要循环的变量保持一致，如:
 
     for zone in ${zones}; do
       something_with "${zone}"
     done
 
-# 常量和环境变量名(Constants and Environment Variable Names)
+### 常量和环境变量名 {#con_names}
 
-<div class="tip"> 要大写、用下划线分割、声明在文件的开头。</div>
+<div class="tip"> 使用大写字母，下划线分隔单词，声明在文件的开头。</div>
 
 常量和任何导出到环境的变量都应该大写。
 
@@ -621,8 +622,9 @@ eval 用于给变量赋值的时候，可以设置变量，但是不能检查这
 
     # Both constant and environment
     # declare -r设置只读变量，-x设置为环境变量
-declare -xr ORACLE_SID='PROD' 
-有些第一次设置时(例如使用 getopts 情况下)就变成了常量。也就是说，可以在 getopts 中或基于条件来设定常量，但之后应该立即设置其为只读。需要注意的是，declare 不能在函数内部操作全局变量，所以这时推荐使用 readonly 和 export 来代替。
+    declare -xr ORACLE_SID='PROD'
+
+有些变量一旦使用(例如使用 getopts 情况下)就变成了常量，此时应立即设置其为只读。注意 declare 不能在函数内部操作全局变量，这时可使用 readonly 和 export 来代替。
 
     VERBOSE='false'
     while getopts 'v' flag; do
@@ -632,17 +634,15 @@ declare -xr ORACLE_SID='PROD'
     done
     readonly VERBOSE
 
-# 源文件名(Source Filenames)
+### 源文件名 {#script_names}
 
-<div class="tip"> 使用小写，如果需要的话使用下划线分隔单词。</div>
+<div class="tip"> 使用小写字母，下划线分隔单词。</div>
 
-这是为了和在 Google 中的其他代码风格保持一致：maketemplate 或者 make_template，而不是 make-template。
-
-## 只读变量(Read-ony Variables)
+### 只读变量 {#readonly}
 
 <div class="tip"> 使用 readonly 或者 declare -r 来确保变量只读。</div>
 
-因为全局变量在 Shell 中广泛使用，所以在使用它们的过程中捕获错误是很重要的。当你声明了一个希望其只读的变量，那么请明确指出。
+使用只读变量可以帮助查找 bug ，只读变量应明确声明。
 
     zip_version="$(dpkg --status zip | grep Version: | cut -d ' ' -f 2)"
     if [[ -z "${zip_version}" ]]; then
@@ -652,13 +652,13 @@ declare -xr ORACLE_SID='PROD'
     fi
 
 
-## 使用本地变量
+### 局部变量 {#local_var}
 
-<div class="tip"> 使用local声明函数内部变量。声明和赋值应该在不同行。</div>
+<div class="tip"> 使用 local 声明函数内部变量，变量赋值应另起一行。</div>
 
-使用 local 来声明局部变量以确保其只在函数内部和子函数中可用，避免了污染全局命名空间和无意间设置函数外的变量。
+使用 local 来声明局部变量以确保其只在函数内部和子函数中可用，避免了影响全局命名空间和无意间设置的函数外变量。
 
-当赋值的值由命令替换提供时，声明和赋值必须分开。因为内建的 local 不会从命令替换中传递退出码。
+当赋值的值由命令替换提供时，声明和赋值必须分开，因为内建的 local 不会从命令替换中传递退出码。
 
     my_func2() {
       local name="$1"
@@ -675,29 +675,34 @@ declare -xr ORACLE_SID='PROD'
     }
 
 
-## 函数位置(Function Location)
+### 函数位置 {#fun_location}
 
-<div class="tip"> 将文件中所有的函数一起放在常量下面。不要在函数之间隐藏可执行代码。</div>
+<div class="tip"> 将文件中所有的函数一起放在常量定义之后。</div>
 
-函数应集中在文件头部定义。只有 includes，set 语句和设置常数可在函数定义前完成。
+函数应集中在文件头部定义，只有 `includes`，`set` 语句和常量设置可在函数定义前完成。
 
-不要在函数之间隐藏可执行代码，避免调试脚本时难以跟踪问题代码。
+<div class="tip"> 不要在函数之间隐藏可执行代码。</div>
 
-## 主函数(main)
+### 主函数 {#main}
 
 <div class="tip"> 对于较长的脚本，应定义一个名为 main 的函数来调用其它的函数。</div>
 
-为了便于找到程序的起始位置，把主程序放在一个叫 main 的函数中，放在其它函数的下面，应尽量使用本地变量(如果主程序不是一个程序，那么不能这么做)，文件中最后一句非注释行应调用 main 函数。
+为了便于找到程序的起始位置，应把主程序放在 main 函数中，列在其它函数下面，文件中最后一句非注释行应调用 main 函数，注意将变量传递进去。
 
     main "$@"
 
-# 命令调用 {#calling}
 
-## 检查返回值 {#returnvalue}
+**[[TOP](#top)]**
+
+***
+
+## 命令调用 {#calling}
+
+### 检查返回值 {#returnvalue}
 
 <div class="tip"> 必须检查返回值，给出返回值相关的信息。</div>
 
-对于一条不包含管道的命令，可以使用$?或者直接指向if语句来检查其返回值，如:
+对于一条不包含管道的命令，可以使用 `$?` 或者直接指向 if 语句来检查其返回值，如:
 
     if ! mv "${file_list}" "${dest_dir}/" ; then
       echo "Unable to move ${file_list} to ${dest_dir}" >&2
@@ -712,14 +717,14 @@ declare -xr ORACLE_SID='PROD'
     fi
 
 
-对于管道命令，可使用PIPESTATUE变量检查其所有部分的返回码，如：
+对于管道命令，可使用 `PIPESTATUE` 变量检查其所有部分的返回码，如：
 
     tar -cf - ./* | ( cd "${dir}" && tar -xf - )
     if [[ "${PIPESTATUS[0]}" -ne 0 || "${PIPESTATUS[1]}" -ne 0 ]]; then
       echo "Unable to tar files to ${dir}" >&2
     fi
 
-注意，一旦运行其他命令，PIPESTATUS就会被覆盖，如果需要根据管道发生错误的地方来进行不同的操作，应该在运行完管道命令后立即将PIPESTATUS的值赋给另外一个变量(尤其注意[这个符号也是一个命令)，如：
+注意，一旦运行其他命令，`PIPESTATUS` 就会被覆盖，如果需要根据管道发生错误的地方来进行不同的操作，应该在运行完管道命令后立即将 `PIPESTATUS` 的值赋给另外一个变量(尤其注意[这个符号也是一个命令)，如：
 
     tar -cf - ./* | ( cd "${DIR}" && tar -xf - )
     return_codes=(${PIPESTATUS[*]})
@@ -735,13 +740,14 @@ declare -xr ORACLE_SID='PROD'
 
 <div class="tip"> 优先选用内建命令。</div>
 
-如：
+如使用:
 
-    # Prefer this:
     addition=$((${X} + ${Y}))
     substitution="${string/#foo/bar}"
 
-    # Instead of this:
+而不是:
+
+    # <不推荐的用法>:
     addition="$(expr ${X} + ${Y})"
     substitution="$(echo "${string}" | sed -e 's/^foo/bar/')"
 
@@ -750,9 +756,9 @@ declare -xr ORACLE_SID='PROD'
 
 ***
 
-# 结论 {#conclusion}
+## 结论 {#conclusion}
 
-<div class="tip"> 运用常识和判断力，并且**保持一致**。</div>
+<div class="tip"> 运用常识和判断力，并且保持一致。</div>
 
 编辑代码时，花点时间看看项目中的其它代码，并熟悉其风格。如果其它代码中`if`语句使用空格，那么你也要使用；如果其中的注释用星号`*` 围成一个盒子状，那么你同样要这么做。
 
