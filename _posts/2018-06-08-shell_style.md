@@ -114,9 +114,9 @@ shell 不是一种开发语言，而是一种工具语言，因此，有必要�
 
 ### 重定向输出信息 {#so_se}
 
-<div class="tip"> 所有输出信息，尤其是错误信息，应重定向到标准错误输出 (STDERR) 。</div>
+<div class="tip"> 警告、错误等状态信息，应重定向到标准错误输出 (STDERR) 。</div>
 
-错误信息可能定向到了标准输出 (STDOUT) ，应将其重定向到 STDERR ，以便于查看脚本运行状态。
+警告、错误等状态信息可能定向到了标准输出 (STDOUT) ，应将其重定向到 STDERR ，以便于查看脚本运行状态。
 
 推荐使用以下函数，可将错误信息和其他状态信息同时定向到 STDERR 。
 
@@ -359,7 +359,7 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
 
 <div class="tip"> 不要对整数使用引号。</div>
 
-<div class="tip"> 注意 [[ 中模式匹配的引号用法。</div>
+<div class="tip"> 注意 [[ ... ]] 中正则表达式的引号用法。</div>
 
 <div class="tip"> 尽量使用 $@ ，除非有特殊原因需要使用 $* 。</div>
 
@@ -389,6 +389,8 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
 
     # ($1 is assumed to contain a value here)
     grep -li Hugo /dev/null "$1"
+
+一些较复杂的引号用法:
 
     # Less simple examples
     # "quote variables, unless proven false": ccs might be empty
@@ -540,7 +542,7 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
 
 ### 最小化 PATH {#path}
 
-<div class="tip"> 最小化 PATH 的范围，禁止将脚本所在目录加入 PATH 。</div>
+<div class="tip"> 最小化 PATH 的范围，禁止将普通用户的目录加入 PATH 。</div>
 
 对于安全性要求较高的 shell 脚本，应在全局变量定义区域重新定义 `PATH` 并 `export`:
 
@@ -555,11 +557,11 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
     SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
     # <错误用法> 不要直接切换到某个目录
-    cd $(dirname $BASH_SOURCE)
+    cd “$(dirname “${BASH_SOURCE[0]}”)”
 
 ### 管道导向 while {#pipetowhile}
 
-<div class="tip"> 不要将管道直接导向 while ，使用进程替换或 for 循环。</div>
+<div class="tip"> 不要将管道直接导向 while ，应使用进程替换或 for 循环。</div>
 
 这是因为 `while` 循环是在一个子 shell 中运行的，管道直接导向 `while` 使 bug 难以追踪。
 
@@ -579,7 +581,7 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
       total+="${value}"
     done
 
-也可以使用进程替换 `done < <()` :
+也可以使用进程替换 `< <()` :
 
     total=0
     last_file=
@@ -638,7 +640,7 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
 
 ### 变量名 {#var_names}
 
-<div class="tip"> 使用小写字母，下划线分隔单词。</div>
+<div class="tip"> 使用小写字母，单词用下划线分隔。</div>
 
 循环的变量名应该和要循环的变量保持一致，如:
 
@@ -648,7 +650,7 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
 
 ### 常量和环境变量名 {#con_names}
 
-<div class="tip"> 使用大写字母，下划线分隔单词，声明在文件的开头。</div>
+<div class="tip"> 使用大写字母，下划线分隔，在文件的开头处声明。</div>
 
 常量和任何导出到环境的变量都应该大写。
 
