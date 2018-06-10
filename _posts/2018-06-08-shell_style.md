@@ -41,7 +41,9 @@ title: Shell with style
     *   [字符串比对](#filter)
     *   [通配符](#wildcard)
     *   [eval](#eval)
-    *   [管道导向while循环](#pipetowhile)
+    *   [重定义 IFS](#ifs)
+    *   [最小化 PATH] (#path)
+    *   [管道导向while](#pipetowhile)
 *   [命名约定](#naming_conventions)
     *   [函数名](#fun_names)
     *   [变量名](#var_names)
@@ -76,7 +78,7 @@ title: Shell with style
 
 shell 不是一种开发语言，而是一种工具语言，因此，有必要明确 shell 在生产环境下的一些使用准则：
 
-- 如果你主要是在调用其他的工具并且做一些相对很小数据量的操作，可以使用shell。
+- 如果你主要是在调用其他的工具并且做一些相对很小数据量的操作，可以使用 shell。
 
 - 如果你关注性能，请选择其他语言， shell 不是一种高效的语言。
 
@@ -522,9 +524,42 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
 
 如果函数某个返回值中含有空格，`variable` 的值就会出错。
 
-### 管道导向 while 循环 {#pipetowhile}
+### 重定义 IFS {#ifs}
 
-<div class="tip"> 不要将管道直接导向 while ，使用过程替换 'done < <()' 或 for 循环。</div>
+<div class="tip"> 重新定义 IFS 。</div>
+
+对于安全性要求较高的 shell 脚本，应在全局变量定义区域重新定义 `IFS` :
+
+    IFS='   
+    '
+
+`IFS` 重定义为'空格-tab-换行'，也可以使用:
+
+    # 注意 Bourne Shell 不支持这种方式。
+    IFS="\040\t\n"
+
+### 最小化 PATH {#path}
+
+<div class="tip"> 最小化 PATH 的范围，禁止将脚本所在目录加入 PATH 。</div>
+
+对于安全性要求较高的 shell 脚本，应在全局变量定义区域重新定义 `PATH` 并 `export`:
+
+    OLDPATH="$PATH"
+    PATH=/bin:/usr/bin
+    export PATH
+
+注意保存系统原来的 `PATH` 。
+
+当需要使用脚本所在目录时，可为其设置一个全局变量:
+
+    SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+    # <错误用法> 不要直接切换到某个目录
+    cd $(dirname $BASH_SOURCE)
+
+### 管道导向 while {#pipetowhile}
+
+<div class="tip"> 不要将管道直接导向 while ，使用进程替换或 for 循环。</div>
 
 这是因为 `while` 循环是在一个子 shell 中运行的，管道直接导向 `while` 使 bug 难以追踪。
 
@@ -544,7 +579,7 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
       total+="${value}"
     done
 
-也可以使用过程替换 `done < <()` :
+也可以使用进程替换 `done < <()` :
 
     total=0
     last_file=
