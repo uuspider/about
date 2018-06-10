@@ -49,6 +49,7 @@ title: Shell with style
     *   [变量名](#var_names)
     *   [常量和环境变量名](#con_names)
     *   [源文件名](#script_names)
+    *   [临时文件名](#tmp_names)
     *   [只读变量](#readonly)
     *   [局部变量](#local_var)
     *   [函数位置](#fun_location)
@@ -114,9 +115,9 @@ shell 不是一种开发语言，而是一种工具语言，因此，有必要�
 
 ### 重定向输出信息 {#so_se}
 
-<div class="tip"> 警告、错误等状态信息，应重定向到标准错误输出 (STDERR) 。</div>
+<div class="tip"> 正常内容输出到标准输出 (STDOUT) ，警告、错误、诊断等状态信息，应重定向到标准错误输出 (STDERR) 。</div>
 
-警告、错误等状态信息可能定向到了标准输出 (STDOUT) ，应将其重定向到 STDERR ，以便于查看脚本运行状态。
+警告、错误、诊断等状态信息可能默认输出到 STDOUT ，应将其重定向到 STDERR ，以便于查看脚本运行状态。
 
 推荐使用以下函数，可将错误信息和其他状态信息同时定向到 STDERR 。
 
@@ -201,6 +202,8 @@ shell 不是一种开发语言，而是一种工具语言，因此，有必要�
 
 <div class="tip"> 对代码中含有技巧的、不容易读懂的、有趣的或重要的部分添加注释。</div>
 
+注释应与被注释的代码同级缩进，对变量的注释应紧跟在变量后面。
+
 注意不应为所有代码都添加注释。
 
 ### TODO {#todocomments}
@@ -224,6 +227,8 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
 
 <div class="tip"> 每一级缩进为 2 个空格，不要使用 tab 。</div>
 
+特殊情况：当一行很长，使用 `\` 换行时，应使用与命令宽度相同的缩进。
+
 ### 语句块 {#part}
 
 <div class="tip"> 两个语句块之间以一个空白行分隔。</div>
@@ -244,7 +249,6 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
     long_string="I am an exceptionally
       long string."
 
-
 ### 管道组合 {#pipelines}
 
 <div class="tip"> 如果一行不能完成整套管道操作，应将多个管道拆分成一行一个。</div>
@@ -256,6 +260,8 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
       | command2 \
       | command3 \
       | command4
+
+<div class="tip"> 使用 '\' 换行的原则是整齐美观，体现代码的逻辑性。 </div>
 
 ### if/for/while {#loops}
 
@@ -557,7 +563,7 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
     SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
     # <错误用法> 不要直接切换到某个目录
-    cd “$(dirname “${BASH_SOURCE[0]}”)”
+    cd "$(dirname "${BASH_SOURCE[0]}")"
 
 ### 管道导向 while {#pipetowhile}
 
@@ -640,7 +646,9 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
 
 ### 变量名 {#var_names}
 
-<div class="tip"> 使用小写字母，单词用下划线分隔。</div>
+<div class="tip"> 使用小写字母，单词用下划线分隔，所有变量都应初始化。</div>
+
+<div class="tip"> 在函数内部使用有意义的变量名接收参数，禁止直接操作 $1， $2 等。</div>
 
 循环的变量名应该和要循环的变量保持一致，如:
 
@@ -648,11 +656,13 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
       something_with "${zone}"
     done
 
+<div class="tip"> 变量一经定义，不允许删除。</div>
+
 ### 常量和环境变量名 {#con_names}
 
 <div class="tip"> 使用大写字母，下划线分隔，在文件的开头处声明。</div>
 
-常量和任何导出到环境的变量都应该大写。
+常量和任何导出到环境的变量都应该大写，常量的值一旦确定就应立即声明为 `readonly` 。
 
     # Constant
     readonly PATH_TO_FILES='/some/path'
@@ -675,6 +685,14 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
 
 <div class="tip"> 使用小写字母，下划线分隔单词。</div>
 
+### 临时文件名 {#tmp_names}
+
+<div class="tip"> 临时文件的命名应体现其与脚本的关联，并使用 $$ 后缀，临时文件应存放在系统 /tmp 目录中。</div>
+
+可使用如下方式为当前脚本创建临时文件目录:
+
+    mktemp -d /tmp/SCRIPT_NAME$$
+
 ### 只读变量 {#readonly}
 
 <div class="tip"> 使用 readonly 或者 declare -r 来确保变量只读。</div>
@@ -695,12 +713,12 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
 
 使用 `local` 来声明局部变量以确保其只在函数内部和子函数中可用，避免了影响全局命名空间和无意间设置的函数外变量。
 
-当赋值的值由命令替换提供时，声明和赋值必须分开，因为内建的 `local` 不会从命令替换中传递退出码。
+当赋值由命令替换提供时，局部声明和赋值必须分开，因为内建的 `local` 不会从命令替换中传递状态码。
 
     my_func2() {
       local name="$1"
 
-      # 变量声明和赋值应分行:
+      # 局部变量声明和赋值应分行:
       local my_var
       my_var="$(my_func)" || return
 
@@ -725,6 +743,16 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
 <div class="tip"> 对于较长的脚本，应定义一个名为 `main` 的函数来调用其它的函数。</div>
 
 为了便于找到程序的起始位置，应把主程序放在 `main` 函数中，列在其它函数下面，文件中最后一句非注释行应调用 `main` 函数，注意将变量传递进去。
+
+    #!/usr/bin/env bash
+
+    CONFIGURATION_VARIABLES
+
+    MY_FUNCTION_DEFINITIONS
+
+    main() {
+        ...
+    }
 
     main "$@"
 
