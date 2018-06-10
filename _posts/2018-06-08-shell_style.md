@@ -62,7 +62,7 @@ title: Shell with style
 
 ### 使用哪种 shell {#which_shell}
 
-<div class="tip"> 优先选择bash。 </div>
+<div class="tip"> 优先选择 bash。 </div>
 
 可执行文件必须以 `#!/bin/bash` 和最小数量的标志开始。使用 `set` 设置 shell 的选项，以确保使用 `bash <script_name>` 运行脚本时不会出现异常。
 
@@ -247,7 +247,7 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
 
 <div class="tip"> 如果一行不能完成整套管道操作，应将多个管道拆分成一行一个。</div>
 
-如果一行可以完成整套管道操作，应将其写在同一行。否则，应该分割为每行一个管道(缩进 2 个空格)。这条规则适用于那些通过使用 \| 或逻辑运算符 \|\| 、 && 等组合起来的链式命令。
+如果一行可以完成整套管道操作，应将其写在同一行。否则，应该分割为每行一个管道(缩进 2 个空格)。这条规则适用于那些通过使用 `\|` 或逻辑运算符 `\|\|` 、 `&&` 等组合起来的链式命令。
 
     # 管道组合命令
     command1 \
@@ -507,10 +507,10 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
 这就导致当前目录所有的文件和目录被删除。使用 `./*` 可以避免这种情况：
 
     rm -v ./*
-    removed `./-f'
-    removed `./-r'
-    rm: cannot remove `./somedir': Is a directory
-    removed `./somefile'
+    removed './-f'
+    removed './-r'
+    rm: cannot remove './somedir': Is a directory
+    removed './somefile'
 
 ### eval {#eval}
 
