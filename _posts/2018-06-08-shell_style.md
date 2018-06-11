@@ -67,7 +67,7 @@ title: Shell with style
 
 <div class="tip"> 优先选择 bash。 </div>
 
-可执行文件必须以 `#!/bin/bash` 和最小数量的标志开始。使用 `set` 设置 shell 的选项，以确保使用 `bash <script_name>` 运行脚本时不会出现异常。
+可执行文件必须以类似 `#!/bin/bash` 的标志开始。使用 `set` 设置 shell 的选项，以确保使用 `bash <script_name>` 运行脚本时不会出现异常。
 
 优先选择 bash ，如果系统不支持 bash ，可使用其他 shell 语言。例如 Solaris SVR4，需要用纯 Bourne shell。
 
@@ -227,8 +227,6 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
 
 <div class="tip"> 每一级缩进为 2 个空格，不要使用 tab 。</div>
 
-特殊情况：当一行很长，使用 `\` 换行时，应使用与命令宽度相同的缩进。
-
 ### 语句块 {#part}
 
 <div class="tip"> 两个语句块之间以一个空白行分隔。</div>
@@ -236,6 +234,8 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
 ### 行长度和长字符串 {#line_length}
 
 <div class="tip"> 每一行最多 80 个字符。</div>
+
+当一行很长时，使用 `\` 换行，这时应使用与命令宽度相同的缩进。使用 '\' 换行的原则是整齐美观，体现代码的逻辑性。
 
 如果字符串超过 80 字符，应尽量使用 here document 或者嵌入一个新行，如果有一个文字字符串长度超过 80 字符，并且不能合理的分割，也应尽量使它短一点。
 
@@ -261,7 +261,6 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
       | command3 \
       | command4
 
-<div class="tip"> 使用 '\' 换行的原则是整齐美观，体现代码的逻辑性。 </div>
 
 ### if/for/while {#loops}
 
