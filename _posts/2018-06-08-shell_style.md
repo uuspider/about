@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Shell with style
+title: Shell with Style
 ---
 
-# Shell with style
+# Shell with Style
 
 参考：[Google shell styleguide][ref1]{:target="_blank"}
 
