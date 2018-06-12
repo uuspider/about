@@ -71,7 +71,7 @@ title: Shell with Style
 
 优先选择 bash ，如果系统不支持 bash ，可使用其他 shell 语言。例如 Solaris SVR4，需要用纯 Bourne shell。
 
-* uuspider 的 shell 脚本使用 `#!/usr/bin/env bash` 开始。
+> uuspider 的 shell 脚本使用 `#!/usr/bin/env bash` 开始。
 
 ## 何时使用shell {#when_to_use}
 
