@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcur icon" href="/images/i32.ico" type="image/x-icon" />
+  <title>mysql guide</title>
+  <meta name="author" content="uuspider" />
+  <meta name="description" content="about uuspider" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" >
+  <link rel="stylesheet" href="//css/styles.css" />
+
+</head>
+<body>
+
+  <style type="text/css">
+pre {
+  padding:8px 15px;
+  background: #f8f8f8;  
+  border:1px solid #e5e5e5;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+pre,code {
+  background:#e8f5fe;color:#000;
+}
+</style>
+
+<h2 id="mysql-">mySQL 指引</h2>
+
+<p>参考：<a href="http://www.cnblogs.com/mr-wid/archive/2013/05/09/3068229.html" target="_blank">mySQL 入门</a>,  <a href="http://blog.csdn.net/ithomer/article/details/5134201" target="_blank">mysql</a>,  <a href="http://www.runoob.com/mysql/mysql-tutorial.html" target="_blank">mysql tutorial</a>,</p>
+
+<h2 id="top"></h2>
+
+<hr />
+
+<ul>
+  <li><a href="#preface">引言</a></li>
+  <li><a href="#setup">安装</a></li>
+  <li><a href="#user">用户操作</a>
+    <ul>
+      <li><a href="#createuser">创建用户</a></li>
+      <li><a href="#changepasswd">修改密码</a></li>
+      <li><a href="#deleteuser">删除用户</a></li>
+      <li><a href="#remote">远程访问</a></li>
+      <li><a href="#privileges">权限管理</a></li>
+    </ul>
+  </li>
+  <li><a href="#database">库操作</a>
+    <ul>
+      <li><a href="#createdatabase">创建库</a></li>
+      <li><a href="#usedatabase">选择库</a></li>
+      <li><a href="#dropdatabase">删除库</a></li>
+    </ul>
+  </li>
+  <li><a href="#table">表操作</a>
+    <ul>
+      <li><a href="#createtable">创建表</a></li>
+      <li><a href="#showtable">查看表</a></li>
+      <li><a href="#alter">添加列</a></li>
+      <li><a href="#alter2">修改列</a></li>
+      <li><a href="#alter3">删除列</a></li>
+      <li><a href="#alter4">重命名表</a></li>
+      <li><a href="#droptable">删除表</a></li>
+    </ul>
+  </li>
+  <li><a href="#data">数据操作</a>
+    <ul>
+      <li><a href="#insert">插入</a></li>
+      <li><a href="#select">查询</a></li>
+      <li><a href="#update">修改</a></li>
+      <li><a href="#delete">删除</a></li>
+      <li><a href="#out">导出</a></li>
+      <li><a href="#in">导入</a></li>
+    </ul>
+  </li>
+  <li><a href="#form">数据类型</a></li>
+  <li><a href="#inshell">shell 调用 mysql</a></li>
+  <li><a href="#dir">mysql 存储目录及其迁移</a></li>
+</ul>
+
+<hr />
+
+<h2 id="preface">引言</h2>
+
+<p>表格由表头、列、行、键、值构成，呈现为“结构化”的数据，mySQL是用来管理表格的命令集，称为结构化查询语言。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="setup">安装</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo apt-get install mysql-server
+[...]
+$ sudo apt-get install mysql-client
+[...]
+$ sudo apt-get install libmysqlclient-dev
+[...]
+</code></pre>
+</div>
+
+<p>查看mysql的socket是否处于LISTEN状态：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo netstat -tap | grep mysql
+</code></pre>
+</div>
+
+<p>登陆mysql数据库：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ mysql -u root -p
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="user">用户操作</h2>
+
+<h3 id="createuser">创建用户</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ mysql -u root -p
+Enter password:
+[...]
+mysql &gt; grant all privileges on *.* to 'user1'@'localhost' identified by 'password1' with grant option;
+mysql &gt; grant all privileges on *.* to 'user2'@'%' identified by 'password2' with grant option;
+</code></pre>
+</div>
+
+<p>这里给出两个创建用户账户的例子，第二个例子中用<code class="highlighter-rouge">%</code>替代了<code class="highlighter-rouge">localhost</code>，表示允许该用户从任何主机连接到该mysql服务器，这个字段也可以是ip地址、计算机名、域名等。</p>
+
+<h3 id="changepasswd">修改密码</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mysql &gt; set password for 'root'@'localhost' = password('password');
+</code></pre>
+</div>
+
+<h3 id="deleteuser">删除用户</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ mysql -u root -p
+mysql &gt; drop user 'user1'@'localhost';
+</code></pre>
+</div>
+
+<h3 id="remote">远程访问</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ mysql -u root -p
+Enter password:
+[...]
+mysql &gt; grant all privileges on *.* to 'user1'@'%' identified by 'password1' with grant option;
+mysql &gt; grant all privileges on *.* to 'user2'@'192.168.0.9' identified by 'password2' with grant option;
+</code></pre>
+</div>
+
+<p>上边这些对用户账户的操作，也可以通过直接修改<code class="highlighter-rouge">mysql</code>库中的<code class="highlighter-rouge">user</code>表来实现，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mysql &gt; use mysql;
+mysql &gt; update user set password=password('password1') where user='root';
+mysql &gt; flush privileges;
+</code></pre>
+</div>
+
+<h3 id="privileges">权限管理</h3>
+
+<p>上文的<code class="highlighter-rouge">all privileges</code>是授予用户所有权限，也可以授予用户指定权限，包括<code class="highlighter-rouge">select</code>, <code class="highlighter-rouge">insert</code>, <code class="highlighter-rouge">update</code>, <code class="highlighter-rouge">delete</code>, <code class="highlighter-rouge">create</code>, <code class="highlighter-rouge">drop</code>, <code class="highlighter-rouge">index</code>, <code class="highlighter-rouge">alter</code>, <code class="highlighter-rouge">grant</code>, <code class="highlighter-rouge">references</code>, <code class="highlighter-rouge">reload</code>, <code class="highlighter-rouge">shutdown</code>, <code class="highlighter-rouge">process</code>, <code class="highlighter-rouge">file</code>等权限。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mysql &gt; grant select,update on *.* to 'user1'@'localhost' identified by ‘password1’;
+</code></pre>
+</div>
+
+<p>总结一下上述用户管理的格式：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>grant 权限1,权限2... on 指定库.指定表 to '用户名'@'用户地址' identified by '密码';
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="database">库操作</h2>
+
+<h3 id="createdatabase">创建库</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>create database sam_DB character set gbk;
+</code></pre>
+</div>
+
+<p>这是创建了一个名为’sam_DB’的库，并指定其字符编码为gbk。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>show databases;
+</code></pre>
+</div>
+
+<p>可以查看已经存在的数据库。</p>
+
+<h3 id="usedatabase">选择库</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>use sam_DB;
+</code></pre>
+</div>
+
+<p>注意：<code class="highlighter-rouge">use</code>语句结尾可以不使用分号。</p>
+
+<p>也可以在登陆mysql时指定数据库名：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mysql -D 数据库名 -h 主机名 -u 用户名 -p
+</code></pre>
+</div>
+
+<h3 id="dropdatabase">删除库</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>drop database 数据库名;
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="table">表操作</h2>
+
+<h3 id="createtable">创建表</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>create table 表名称(列声明);
+</code></pre>
+</div>
+
+<p>如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>create table students
+(
+  id int unsigned not null auto_increment primary key,
+  name char(8) not null,
+  gender char(4) not null,
+  age tinyint unsigned not null,
+  tel char(13) null default "-"
+);
+</code></pre>
+</div>
+
+<p>创建一个名为’students’的表，包括id、name、gender、age、tel共5列。<code class="highlighter-rouge">int</code>指定该列的类型为整型，<code class="highlighter-rouge">unsigned</code>指定该int为无符号型；<code class="highlighter-rouge">not null</code>表示该列的值不能为空；当插入数据时，若未指定<code class="highlighter-rouge">id</code>，<code class="highlighter-rouge">auto_increment</code>自动产生一个比现有值更大的唯一标识符值；<code class="highlighter-rouge">primary key</code>表示该列为本表的主键；<code class="highlighter-rouge">char(8)</code>表示存储的字符长度为8；<code class="highlighter-rouge">tinyint</code>的取值范围为-127到128；<code class="highlighter-rouge">default</code>用于指定当前列值为空时的默认值。关于数据类型，查看<a href="#form">这里</a>。</p>
+
+<p>可以将mysql命令编写成文件，通过重定向执行：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mysql -D sam_DB -u root -p &lt; newtable.sql
+</code></pre>
+</div>
+
+<h3 id="showtable">查看表</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>show tables;
+</code></pre>
+</div>
+
+<p>查看已创建的表的名称。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>describe students;
+</code></pre>
+</div>
+
+<p>查看表<code class="highlighter-rouge">students</code>的详细信息。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>show columns from students;
+</code></pre>
+</div>
+
+<p>查看列声明。</p>
+
+<h3 id="alter">添加列</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>alter table 表名 add 列名 列数据类型 [after 插入位置];
+</code></pre>
+</div>
+
+<p>如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>alter table students add address char(60);
+alter table students add birthday date after age;
+</code></pre>
+</div>
+
+<h3 id="alter2">修改列</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>alter table 表名 change 列名称 列新名称 新数据类型;
+</code></pre>
+</div>
+
+<p>如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>alter table students change tel telphone char(13) default "-";
+alter table students change name name char(16) not null;
+</code></pre>
+</div>
+
+<h3 id="alter3">删除列</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>alter table 表名 drop 列名称;
+</code></pre>
+</div>
+
+<p>如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>alter table students drop birthday;
+</code></pre>
+</div>
+
+<h3 id="alter4">重命名表</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>alter table 表名 rename 新表名;
+</code></pre>
+</div>
+
+<p>如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>alter table students rename workmates;
+</code></pre>
+</div>
+
+<h3 id="droptable">删除表</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>drop table 表名；
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="data">数据操作</h2>
+
+<h3 id="insert">插入</h3>
+
+<p>格式为：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>insert [into] 表名 [(列名1, 列名2, 列名3, ...)] values (值1, 值2, 值3, ...);
+</code></pre>
+</div>
+
+<p>如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>insert into students values(NULL, "王刚", "男", 20, "13811371377");
+insert into students (name, sex, age) values("孙丽华", "女", 21);
+</code></pre>
+</div>
+
+<h3 id="select">查询</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>select 列名称 from 表名称 [查询条件];
+</code></pre>
+</div>
+
+<p>如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>select name, age from students;
+select * from students where sex="女";
+select * from students where age &gt; 21;
+select * from students where name like "%王%";
+select * from students where id&lt;5 and age&gt;20;
+</code></pre>
+</div>
+
+<h3 id="update">修改(更新)</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>update 表名称 set 列名称=新值 where 更新条件;
+</code></pre>
+</div>
+
+<p>如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>update students set tel=default where id=5;
+update students set age=age+1;
+update students set name="张伟鹏", age=19 where tel="13288097888";
+</code></pre>
+</div>
+
+<h3 id="delete">删除</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>delete from 表名称 where 删除条件;
+</code></pre>
+</div>
+
+<p>如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>delete from students where id=2;
+delete from students where age&lt;20;
+delete from students;
+delete from students where age&lt;=&gt;NULL;
+</code></pre>
+</div>
+
+<h3 id="out">导出</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>select * from students into outfile './students.txt';
+</code></pre>
+</div>
+
+<p>可以指定输出的文件各数据之间可用逗号隔开：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>select * into outfile './students.txt' fields terminated by ',' optionally enclosed by '"' lines terminated by '\n' from students;
+</code></pre>
+</div>
+
+<p>也可以指定输出文件为CSV格式：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>select * from students into outfile './students.txt' fields terminated by ',' enclosed by '"' lines terminated by '\r\n';
+</code></pre>
+</div>
+
+<p>在shell中，mysql还可以直接输出为html或xml形式，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ mysql -H -uUSERNAME -pPASSWD -e"use mysql; show tables"
+[...]
+$ mysql -X -uUSERNAME -pPASSWD -e"use mysql; show tables"
+[...]
+</code></pre>
+</div>
+
+<h3 id="in">导入</h3>
+
+<p>数据的导入比导出更复杂一些，通常需要通过awk脚本逐条导入。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>query=$(echo $LINE | awk -F, '{ printf("%s,\"%s\",%s,\"%s\"", $1, $2, $3, $4)}')
+statement=$(echo "insert into $TABLE values($query);")
+echo $statement
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="form">数据类型</h2>
+
+<h3 id="section">整型</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>tinyint(m)</td>
+      <td>1个字节  范围(-128~127)</td>
+    </tr>
+    <tr>
+      <td>smallint(m)</td>
+      <td>2个字节  范围(-32768~32767)</td>
+    </tr>
+    <tr>
+      <td>mediumint(m)</td>
+      <td>3个字节  范围(-8388608~8388607)</td>
+    </tr>
+    <tr>
+      <td>int(m)</td>
+      <td>4个字节  范围(-2147483648~2147483647)</td>
+    </tr>
+    <tr>
+      <td>bigint(m)</td>
+      <td>8个字节  范围(+-9.22*10的18次方)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<h3 id="section-1">浮点型</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>float(m,d)</td>
+      <td>单精度浮点型    8位精度(4字节)     m总个数，d小数位</td>
+    </tr>
+    <tr>
+      <td>double(m,d)</td>
+      <td>双精度浮点型    16位精度(8字节)    m总个数，d小数位</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<h3 id="section-2">定点型</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>decimal(m,d)</td>
+      <td>m&lt;65，是总位数，d&lt;30且 d&lt;m ，是小数位</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<h3 id="section-3">字符串</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>char(n)</td>
+      <td>固定长度，最多255个字符</td>
+    </tr>
+    <tr>
+      <td>varchar(n)</td>
+      <td>固定长度，最多65535个字符</td>
+    </tr>
+    <tr>
+      <td>tinytext</td>
+      <td>可变长度，最多255个字符</td>
+    </tr>
+    <tr>
+      <td>text</td>
+      <td>可变长度，最多65535个字符</td>
+    </tr>
+    <tr>
+      <td>mediumtext</td>
+      <td>可变长度，最多2的24次方-1个字符</td>
+    </tr>
+    <tr>
+      <td>longtext</td>
+      <td>可变长度，最多2的32次方-1个字符</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<h3 id="section-4">时间</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>date</td>
+      <td>日期 ‘2008-12-2’</td>
+    </tr>
+    <tr>
+      <td>time</td>
+      <td>时间 ‘12:25:36’</td>
+    </tr>
+    <tr>
+      <td>datetime</td>
+      <td>日期时间 ‘2008-12-2 22:06:44’</td>
+    </tr>
+    <tr>
+      <td>timestamp</td>
+      <td>自动存储记录修改时间</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<h3 id="section-5">数据类型的属性</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>NULL</td>
+      <td>数据可为空</td>
+    </tr>
+    <tr>
+      <td>NOT NULL</td>
+      <td>数据不可为空</td>
+    </tr>
+    <tr>
+      <td>DEFAULT</td>
+      <td>指定默认值</td>
+    </tr>
+    <tr>
+      <td>PRIMARY KEY</td>
+      <td>主键</td>
+    </tr>
+    <tr>
+      <td>AUTO_INCREMENT</td>
+      <td>自动递增，仅适用于整数</td>
+    </tr>
+    <tr>
+      <td>UNSIGNED</td>
+      <td>无符号</td>
+    </tr>
+    <tr>
+      <td>CHARACTER SET xxx</td>
+      <td>指定字符集</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="inshell">shell 调用 mysql</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ mysql -uUSERNAME -pPASSWD -e"SQL STATEMENTS"
+</code></pre>
+</div>
+
+<p>如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ mysql -uUSERNAME -pPASSWD -e"show databases"
+$ mysql -uUSERNAME -pPASSWD -e"use sam_DB;show tables"
+</code></pre>
+</div>
+
+<p>也可以将mysql命令写成脚本，通过shell直接调用脚本：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ mysql -uUSERNAME -pPASSWD -e"source ./my.sql"
+$ cat ./my.sql | mysql -uUSERNAME -pPASSWD
+$ mysql -uUSERNAME -pPASSWD &lt; ./my.sql
+</code></pre>
+</div>
+
+<p>这里给出三种调用mysql脚本的方法，注意：第一种和第三种方法中，路径都不需要加引号。</p>
+
+<p>还有一种shell脚本中嵌入mysql脚本的常用方法：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ cat createDB.sh
+#!/bin/bash
+mysql -uUSERNAME -pPASSWD &lt;&lt; EOF
+create database sam_DB;
+use sam_DB;
+create table students
+(
+  id int unsigned not null auto_increment primary key,
+  name char(8) not null,
+  gender char(4) not null,
+  age tinyint unsigned not null,
+  tel char(13) null default "-"
+);
+EOF
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="dir">数据库存储目录及其迁移</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>show variables like '%dir%';
+</code></pre>
+</div>
+
+<p>其中<code class="highlighter-rouge">datadir</code>就是数据库文件所在的目录，默认为<code class="highlighter-rouge">/var/lib/mysql</code>。</p>
+
+<p>如果需要改变数据库的存储路径，需要首先停止mysql服务：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo service mysql stop
+</code></pre>
+</div>
+
+<p>查看<code class="highlighter-rouge">/var/lib/mysql</code>的权限、所有者和所属组：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ls -l 
+</code></pre>
+</div>
+
+<p>可以看到其权限为700，所有者为mysql，所属组为mysql。</p>
+
+<p>建立一个新目录：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo mkidr ~/mysql
+</code></pre>
+</div>
+
+<p>修改所有者和所属组：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo chown -vR mysql:mysql ~/mysql/
+</code></pre>
+</div>
+
+<p>修改权限：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo chmod -vR 700 ~/mysql/
+</code></pre>
+</div>
+
+<p>复制数据库所有文件到该新目录</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo -i
+$ cp -av /var/lib/mysql/* /home/user1/mysql/
+$ exit
+</code></pre>
+</div>
+
+<p>下面还需要修改三个配置文件：</p>
+
+<h3 id="mycnf">my.cnf</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo vi /etc/mysql/my.cnf
+</code></pre>
+</div>
+
+<p>将其中的<code class="highlighter-rouge">datadir=/var/lib/mysql</code>改成<code class="highlighter-rouge">datadir=/home/user1/mysql</code>。</p>
+
+<h3 id="usrbinmysqld">usr.bin.mysqld</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo vi /etc/apparmor.d/usr.sbin.mysqld
+</code></pre>
+</div>
+
+<p>将其中的</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/var/liib/mysql/ r,
+/var/lib/mysql/** rwk,
+</code></pre>
+</div>
+
+<p>改成</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/home/user1/mysql/ r,
+/home/user1/mysql/** rwk,
+</code></pre>
+</div>
+
+<h3 id="abstractionsmysql">abstractions/mysql</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo vi /etc/apparmor.d/abstractions/mysql
+</code></pre>
+</div>
+
+<p>将</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/var/lib/mysql/mysql.sock rw,
+</code></pre>
+</div>
+
+<p>改成</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/home/user1/mysql.sock rw,
+</code></pre>
+</div>
+
+<p>重启apparmor和mysql：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo service apparmor reload
+$ sudo service mysql start
+</code></pre>
+</div>
+
+<p>如果mysql能够正常运行和操作，说明已经迁移成功，原来的数据库文件可以删除：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ rm -rvf /var/lib/mysql/
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+
+
+
+<div  style="display:none"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1264508560'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1264508560%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></div>
+</body>
+</html>

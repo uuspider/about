@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcur icon" href="/images/i32.ico" type="image/x-icon" />
+  <title>time in python</title>
+  <meta name="author" content="uuspider" />
+  <meta name="description" content="about uuspider" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" >
+  <link rel="stylesheet" href="//css/styles.css" />
+
+</head>
+<body>
+
+  <style type="text/css">
+pre {
+  padding:8px 15px;
+  background: #f8f8f8;  
+  border:1px solid #e5e5e5;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+pre,code {
+  background:#e8f5fe;color:#000;
+}
+</style>
+
+<h2 id="time--datetime">time &amp; datetime</h2>
+
+<h2 id="top"></h2>
+
+<hr />
+
+<ul>
+  <li><a href="#time">time</a></li>
+  <li><a href="#datetime">datetime</a></li>
+</ul>
+
+<hr />
+
+<h2 id="time">time</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; import time
+&gt;&gt;&gt; time.time()  #返回unix时间戳
+1478183199.0
+&gt;&gt;&gt; time.localtime()
+time.struct_time(tm_year=2016, tm_mon=11, tm_mday=3, tm_hour=22, tm_min=26, tm_sec=39, tm_wday=3, tm_yday=308, tm_isdst=0)    #时间元组
+&gt;&gt;&gt; time.mktime(datetime.datetime(2016,11,3,22,26,39).timetuple())  #将时间元组转换为unix时间戳
+1478183199.0
+&gt;&gt;&gt; time.sleep(1.6)  #延时，可以是小数
+</code></pre>
+</div>
+
+<h2 id="datetime">datetime</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; import datetime
+&gt;&gt;&gt; datetime.datetime.now()  #当前tz区datetime对象
+datetime.datetime(2016, 11, 03, 21, 10, 16, 302660)
+&gt;&gt;&gt; datetime.datetime.today()  #当前本地datetime对象
+datetime.datetime(2016, 11, 03, 21, 10, 16, 302660)
+&gt;&gt;&gt; datetime.datetime.fromtimestamp(1478183199.0)  #根据时间戳创建datetime对象
+datetime.datetime(2016, 11, 3, 22, 26, 39)
+&gt;&gt;&gt; dt = datetime.datetime.now()  #创建一个datetime实例
+&gt;&gt;&gt; dt.ctime()  #返回一个c时间格式字符串
+'Thu Nov  3 22:26:39 2016'
+&gt;&gt;&gt; dt2 = datetime.datetime(1999, 1, 1, 0, 0)
+&gt;&gt;&gt; td = dt - dt2
+&gt;&gt;&gt; td
+datetime.timedelta(6516, 80799)
+&gt;&gt;&gt; td.days
+&gt;&gt;&gt; td.seconds
+&gt;&gt;&gt; td.microseconds
+&gt;&gt;&gt; dt.strftime("%Y-%m")  #见附表
+'2016-11'
+</code></pre>
+</div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>%A</td>
+      <td>星期的全写，如 Friday</td>
+    </tr>
+    <tr>
+      <td>%a</td>
+      <td>星期的简写，如 Fri</td>
+    </tr>
+    <tr>
+      <td>%B</td>
+      <td>月份的全写，如 December</td>
+    </tr>
+    <tr>
+      <td>%b</td>
+      <td>月份的简写，如 Dec</td>
+    </tr>
+    <tr>
+      <td>%c</td>
+      <td>日期、时间的字符串表示，如 Fri Dec 30 22:32:23 2016</td>
+    </tr>
+    <tr>
+      <td>%d</td>
+      <td>月内第n天，取值范围[1,31]</td>
+    </tr>
+    <tr>
+      <td>%f</td>
+      <td>微秒，取值范围[0,999999]</td>
+    </tr>
+    <tr>
+      <td>%H</td>
+      <td>小时，取值范围[0,23]</td>
+    </tr>
+    <tr>
+      <td>%I</td>
+      <td>小时，取值范围[0,11]</td>
+    </tr>
+    <tr>
+      <td>%j</td>
+      <td>年内第几天，取值范围[001,366]</td>
+    </tr>
+    <tr>
+      <td>%M</td>
+      <td>分钟，取值范围[00,59]</td>
+    </tr>
+    <tr>
+      <td>%m</td>
+      <td>月份，取值范围[01,12]</td>
+    </tr>
+    <tr>
+      <td>%p</td>
+      <td>AM/PM</td>
+    </tr>
+    <tr>
+      <td>%S</td>
+      <td>秒，取值范围[00,61]，61表示闰秒</td>
+    </tr>
+    <tr>
+      <td>%U</td>
+      <td>年内第n周，以周日为第一天，取值范围[00,53]</td>
+    </tr>
+    <tr>
+      <td>%W</td>
+      <td>年内第n周，以周一为第一天，取值范围[00,53]</td>
+    </tr>
+    <tr>
+      <td>%w</td>
+      <td>本周第n天，0表示周一，取值范围[0,6]</td>
+    </tr>
+    <tr>
+      <td>%X</td>
+      <td>时间的字符串表示，如 22:32:23</td>
+    </tr>
+    <tr>
+      <td>%x</td>
+      <td>日期的字符串表示，如 12/30/16</td>
+    </tr>
+    <tr>
+      <td>%Y</td>
+      <td>年份，如 2016</td>
+    </tr>
+    <tr>
+      <td>%y</td>
+      <td>年份，如 16</td>
+    </tr>
+    <tr>
+      <td>%Z</td>
+      <td>时区</td>
+    </tr>
+    <tr>
+      <td>%z</td>
+      <td>与UTC时间的间隔</td>
+    </tr>
+    <tr>
+      <td>%%</td>
+      <td>表示%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+
+
+
+<div  style="display:none"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1264508560'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1264508560%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></div>
+</body>
+</html>

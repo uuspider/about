@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcur icon" href="/images/i32.ico" type="image/x-icon" />
+  <title>Beautiful Soup</title>
+  <meta name="author" content="uuspider" />
+  <meta name="description" content="about uuspider" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" >
+  <link rel="stylesheet" href="//css/styles.css" />
+
+</head>
+<body>
+
+  <style type="text/css">
+pre {
+  padding:8px 15px;
+  background: #f8f8f8;  
+  border:1px solid #e5e5e5;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+pre,code {
+  background:#e8f5fe;color:#000;
+}
+</style>
+
+<h2 id="beautiful-soup">Beautiful Soup</h2>
+
+<p>参考：<a href="http://beautifulsoup.readthedocs.org/zh_CN/latest/" target="_blank">Beautiful Soup Doc</a>,  <a href="http://www.crummy.com/software/BeautifulSoup/" target="_blank">Beautiful Soup</a>,  <a href="http://wuchong.me/blog/2014/04/24/easy-web-scraping-with-python/" target="_blank">Web Scraping with Python</a></p>
+
+<h2 id="top"></h2>
+
+<hr />
+
+<ul>
+  <li><a href="#preface">引言</a></li>
+  <li><a href="#virtualenv">虚拟python环境</a></li>
+  <li><a href="#scraping">抓取网页</a></li>
+  <li><a href="#parser">解析网页</a></li>
+  <li><a href="#html">HTML标签</a></li>
+  <li><a href="#multitag">层级标签</a></li>
+  <li><a href="#find">find方法</a></li>
+  <li><a href="#findmore">更多find方法</a> <a href="#tagname">tagname</a>, <a href="#attrs">attrs</a>, <a href="#text">text</a>, <a href="#recursive">recursive和limit</a></li>
+  <li><a href="#error">异常处理</a></li>
+</ul>
+
+<hr />
+
+<h2 id="preface">引言</h2>
+
+<blockquote>
+  <p>Beautiful Soup 是一个可以从HTML或XML文件中提取数据的Python库.它能够通过你喜欢的转换器实现惯用的文档导航,查找,修改文档的方式.Beautiful Soup会帮你节省数小时甚至数天的工作时间.</p>
+</blockquote>
+
+<p>本文假设读者已经具备了python的基础知识，因此我们从创建虚拟的python开发环境开始，简单回顾python抓取网页，重点介绍Beautiful Soup对网页的解析方法，这些说明不会面面俱到，也不会深入探讨优化方法。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="virtualenv">python 虚拟环境</h2>
+
+<p>virtualenv用于创建虚拟的python环境，在虚拟环境中可以：</p>
+
+<ol>
+  <li>
+    <p>在没有权限的情况下安装新套件</p>
+  </li>
+  <li>
+    <p>根据不同的应用，使用不同的套件版本</p>
+  </li>
+  <li>
+    <p>套件升级不影响其他应用</p>
+  </li>
+</ol>
+
+<p>安装：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo apt-get install python-virtualenv
+</code></pre>
+</div>
+
+<p>创建虚拟环境：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ virtualenv SPI
+</code></pre>
+</div>
+
+<p>创建一个名为SPI的虚拟环境。</p>
+
+<p>启动虚拟环境：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ cd SPI
+$ source ./bin/activate
+</code></pre>
+</div>
+
+<p>退出虚拟环境：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>(SPI)$ deactivate
+</code></pre>
+</div>
+
+<p>安装套件：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>(SPI)$ pip install beautifulsoup4
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="scraping">抓取网页</h2>
+
+<p>python是这样抓取网页的：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; import urllib2
+&gt;&gt;&gt; html = urllib2.urlopen("http://www.douban.com/group/haixiuzu/")
+&gt;&gt;&gt; print(html.read())
+</code></pre>
+</div>
+
+<p>也可以使用requests模块：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; import requests
+&gt;&gt;&gt; response = requests.get("http://www.douban.com/group/haixiuzu/")
+&gt;&gt;&gt; print(response.text)
+</code></pre>
+</div>
+
+<p>如果需要使用代理服务器，<a href="http://wuchong.me/blog/2014/04/24/easy-web-scraping-with-python/" target="_blank">可以这样做</a>：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; import requests
+&gt;&gt;&gt; proxy={"http":"http://127.0.0.1:8087","https":"https://127.0.0.1:8087"}
+&gt;&gt;&gt; response=requests.get('https://www.google.com/',proxies=proxy,verify=False)
+&gt;&gt;&gt; print(response.text)
+</code></pre>
+</div>
+
+<p>从网页源码中提取我们的目标信息，可以使用beautifulsoup4套件。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="parser">解析网页</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; from bs4 import BeautifulSoup
+&gt;&gt;&gt; soup = BeautifulSoup(html)
+&gt;&gt;&gt; print(soup)
+</code></pre>
+</div>
+
+<p>输入的<code class="highlighter-rouge">html</code>会被自动转换为unicode编码。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="html">HTML标签</h2>
+
+<p>HTML元素包括标签、标签内容、标签属性。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#!/usr/bin/env python </span>
+<span class="c"># coding=utf-8</span>
+<span class="c"># Python 2.7.3</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="s">'&lt;td class="title"&gt;&lt;a href="http://www.douban.com/group/topic/77911318/" title="别看世界了 看看我" class=""&gt;别看世界了 看看我&lt;/a&gt;&lt;/td&gt;'</span><span class="p">)</span>
+<span class="n">tag</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">td</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span> <span class="c"># 整个标签</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="c"># 标签名称</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tag</span><span class="o">.</span><span class="n">text</span><span class="p">)</span> <span class="c"># 标签内容</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tag</span><span class="p">[</span><span class="s">'class'</span><span class="p">])</span> <span class="c"># 属性</span>
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="multitag">HTML标签的层级</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#!/usr/bin/env python </span>
+<span class="c"># coding=utf-8</span>
+<span class="c"># Python 2.7.3</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="s">'&lt;tr class=""&gt;&lt;td class="title"&gt;&lt;a href="http://www.douban.com/group/topic/77911318/" title="别看世界了 看看我" class=""&gt;别看世界了 看看我&lt;/a&gt;&lt;/td&gt;&lt;td nowrap="nowrap"&gt;&lt;a href="http://www.douban.com/group/people/72348962/" class=""&gt;芝栀&lt;/a&gt;&lt;/td&gt;&lt;td nowrap="nowrap" class=""&gt;1714&lt;/td&gt;&lt;td nowrap="nowrap" class="time"&gt;08-05 19:47&lt;/td&gt;&lt;/tr&gt;'</span><span class="p">)</span>
+<span class="n">maintag</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">tr</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">maintag</span><span class="o">.</span><span class="n">contents</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">maintag</span><span class="o">.</span><span class="n">contents</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">maintag</span><span class="o">.</span><span class="n">td</span><span class="p">)</span>
+
+<span class="n">tagtd1</span> <span class="o">=</span> <span class="n">maintag</span><span class="o">.</span><span class="n">td</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tagtd1</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tagtd1</span><span class="o">.</span><span class="n">a</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tagtd1</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">parents</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tagtd1</span><span class="o">.</span><span class="n">nextSibling</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tagtd1</span><span class="o">.</span><span class="n">nextSibling</span><span class="o">.</span><span class="n">previousSibling</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>这里给出了三种解析tag的方式，第一种的<code class="highlighter-rouge">contents</code>提供了一个子tag的列表，第二种<code class="highlighter-rouge">maintag.td</code>是最常用的，第三种使用了<code class="highlighter-rouge">parent</code>返回当前tag的上级tag，<code class="highlighter-rouge">previousSibling</code>返回与当前tag同级的前一个tag，<code class="highlighter-rouge">nextSibling</code>返回与当前tag同级的后一个tag。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="find">find 方法</h2>
+
+<p><code class="highlighter-rouge">find</code>和<code class="highlighter-rouge">find_all</code>是常用的两种查找方法，前者返回第一个符合条件的tag，后者返回一个包含所有符合条件tag的列表。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#!/usr/bin/env python </span>
+<span class="c"># coding=utf-8</span>
+<span class="c"># Python 2.7.3</span>
+<span class="kn">import</span> <span class="nn">urllib2</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+<span class="n">html</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s">"http://www.douban.com/group/haixiuzu/"</span><span class="p">)</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">'title'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">'link'</span><span class="p">))</span>
+
+<span class="n">taghtml</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">html</span>
+<span class="n">taghead</span> <span class="o">=</span> <span class="n">taghtml</span><span class="o">.</span><span class="n">head</span>
+<span class="c">#下边是在同一级查找相关tag</span>
+<span class="k">print</span><span class="p">(</span><span class="n">taghead</span><span class="o">.</span><span class="n">find_parents</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">taghead</span><span class="o">.</span><span class="n">find_next_sibling</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">taghead</span><span class="o">.</span><span class="n">find_previous_siblings</span><span class="p">())</span>
+<span class="c">#下边是在整个HTML查找相关tag</span>
+<span class="k">print</span><span class="p">(</span><span class="n">taghead</span><span class="o">.</span><span class="n">find_all_next</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">taghead</span><span class="o">.</span><span class="n">find_next</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">taghead</span><span class="o">.</span><span class="n">find_previous</span><span class="p">())</span>
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="findmore">更多 find 方法</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>find(name=None, attrs={}, recursive=True, text=None, **kwargs)
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">find</code>除了可以直接根据层级关系查找tag，还可以通过name、 attrs、 text等查找tag。</p>
+
+<h3 id="tagname">搜索tagname</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>find(tagname)  
+find(list)  # 如: find(['head', 'body'])
+find(dict)  # 如:find({'head':True, 'body':True})
+find(re.compile('')) # 使用正则, 如:find(re.compile('^a')) 搜索以a开头的tag
+find(lambda)  # 搜索函数返回结果为true的tag, 如:find(lambda name: if len(name) == 1) 搜索长度为1的tag
+find(True)  # 搜索所有tag
+</code></pre>
+</div>
+
+<h3 id="attrs">搜索attrs</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>find(id='xxx')  # 寻找id属性为xxx的tag
+find(attrs={id=re.compile('xxx'), algin='xxx'})  # 寻找id属性符合正则且algin属性为xxx的tag
+find(attrs={id=True, algin=None})  # 寻找有id属性但是没有algin属性的tag
+</code></pre>
+</div>
+
+<h3 id="text">搜索text</h3>
+
+<p>方法与搜索tag一致。注意：搜索text时，其他搜索值如tagname、attrs等都失效。</p>
+
+<h3 id="recursive">recursive 和 limit</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>find(recursive=False)  #只搜索子tag，默认为True，即搜索整个子树
+findAll("a", limit=3)   # 限制返回的符合项数量
+</code></pre>
+</div>
+
+<p>关于BeautifulSoup详细用法，请看<a href="http://beautifulsoup.readthedocs.org/zh_CN/latest/" target="_blank">这里</a>。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="error">抓取和解析的异常处理</h2>
+
+<p>抓取网页可能发生的异常包括：</p>
+
+<ul>
+  <li>
+    <p>找不到目标网页</p>
+  </li>
+  <li>
+    <p>找不到服务器</p>
+  </li>
+</ul>
+
+<p>对于“找不到网页”的情况，可以这样处理：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>try:
+    html = urlopen("http://www.douban.com/group/haixiuzu/")
+except HTTPError as e:
+    print e
+else:
+    #program continues.
+</code></pre>
+</div>
+
+<p>对于“找不到服务器”的情况，<code class="highlighter-rouge">urlopen</code>会返回<code class="highlighter-rouge">None</code>，可以这样处理：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>if html is None:
+    print "URL is not found"
+else:
+    #program continues.
+</code></pre>
+</div>
+
+<p>使用BeautifulSoup解析网页可能发生的异常可以这样处理：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>try:
+    badContent = soup.notTag.otherTag
+except AttributeError as e:
+    print "Tag was not found"
+else:
+    if badContent == None:
+        print "Tas was not found"
+    else:
+        print  badContent
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+
+
+
+<div  style="display:none"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1264508560'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1264508560%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></div>
+</body>
+</html>

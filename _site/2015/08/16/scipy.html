@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcur icon" href="/images/i32.ico" type="image/x-icon" />
+  <title>NumPy, SciPy, Matplotlib & IPython</title>
+  <meta name="author" content="uuspider" />
+  <meta name="description" content="about uuspider" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" >
+  <link rel="stylesheet" href="//css/styles.css" />
+
+</head>
+<body>
+
+  <style type="text/css">
+pre {
+  padding:8px 15px;
+  background: #f8f8f8;  
+  border:1px solid #e5e5e5;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+pre,code {
+  background:#e8f5fe;color:#000;
+}
+</style>
+
+<h2 id="numpy-scipy-matplotlib--ipython">NumPy, SciPy, Matplotlib &amp; IPython</h2>
+
+<p>参考：[B][ref1]{:target=”_blank”},  [Matplotlib tutorial][ref2]{:target=”_blank”},  [pandas tutorial][ref3]{:target=”_blank”}</p>
+
+<p>[ref1]:
+[ref2]:http://reverland.org/python/2012/09/07/matplotlib-tutorial/
+[ref3]:http://dormouse.github.io/pandas.html</p>
+
+<h2 id="top"></h2>
+
+<hr />
+
+<h2 id="virtualenv">python 虚拟环境</h2>
+
+<p>virtualenv用于创建虚拟的python环境，在虚拟环境中可以：</p>
+
+<ol>
+  <li>
+    <p>在没有权限的情况下安装新套件</p>
+  </li>
+  <li>
+    <p>根据不同的应用，使用不同的套件版本</p>
+  </li>
+  <li>
+    <p>套件升级不影响其他应用</p>
+  </li>
+</ol>
+
+<p>安装：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo apt-get install python-virtualenv
+</code></pre>
+</div>
+
+<p>创建虚拟环境：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ virtualenv SPI
+</code></pre>
+</div>
+
+<p>创建一个名为SPI的虚拟环境。</p>
+
+<p>启动虚拟环境：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ cd SPI
+$ source ./bin/activate
+</code></pre>
+</div>
+
+<p>退出虚拟环境：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>(SPI)$ deactivate
+</code></pre>
+</div>
+
+<p>安装套件：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>(SPI)$ pip install ***
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="preface">安装</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Linux</th>
+      <th style="text-align: left">NumPy</th>
+      <th style="text-align: left">SciPy</th>
+      <th style="text-align: left">Matplotlib</th>
+      <th style="text-align: left">IPython</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Debian</td>
+      <td style="text-align: left"><code class="highlighter-rouge">python-numpy</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">python-scipy</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">python-matplotlib</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">ipython</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Fedora</td>
+      <td style="text-align: left"><code class="highlighter-rouge">numpy</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">python-scipy</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">python-matplotlib</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">ipython</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Arch Linux</td>
+      <td style="text-align: left"><code class="highlighter-rouge">python-numpy</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">python-scipy</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">python-matplotlib</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">ipython</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Gentoo</td>
+      <td style="text-align: left"><code class="highlighter-rouge">dev-python/numpy</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">scipy</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">matplotlib</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">ipython</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">OpenSUSE</td>
+      <td style="text-align: left"><code class="highlighter-rouge">python-numpy</code>,<code class="highlighter-rouge">python-numpy-devel</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">python-scipy</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">python-matplotlib</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">ipython</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Slackware</td>
+      <td style="text-align: left"><code class="highlighter-rouge">numpy</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">scipy</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">matplotlib</code></td>
+      <td style="text-align: left"><code class="highlighter-rouge">ipython</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+
+
+
+<div  style="display:none"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1264508560'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1264508560%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></div>
+</body>
+</html>

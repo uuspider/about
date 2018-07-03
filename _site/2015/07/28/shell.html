@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcur icon" href="/images/i32.ico" type="image/x-icon" />
+  <title>shell scripting basic</title>
+  <meta name="author" content="uuspider" />
+  <meta name="description" content="about uuspider" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" >
+  <link rel="stylesheet" href="//css/styles.css" />
+
+</head>
+<body>
+
+  <style type="text/css">
+pre {
+  padding:8px 15px;
+  background: #f8f8f8;  
+  border:1px solid #e5e5e5;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+pre,code {
+  background:#e8f5fe;color:#000;
+}
+</style>
+
+<h2 id="shell-">shell 脚本</h2>
+
+<p>参考：<a href="http://docs.linuxtone.org/ebooks/C&amp;CPP/c/ch31.html" target="_blank">Shell Scripts</a>,  <a href="http://tldp.org/LDP/abs/html/" target="_blank">Advanced Bash-Scripting Guide</a>, <a href="http://www.cyberciti.biz/" target="_blank">nixCraft</a>,   <a href="http://www.commandlinefu.com/" target="_blank">Command Line Fu</a>,</p>
+
+<h2 id="top"></h2>
+
+<hr />
+
+<ul>
+  <li><a href="#preface">引言</a></li>
+  <li><a href="#var">变量</a>
+    <ul>
+      <li><a href="#local">本地变量</a></li>
+      <li><a href="#env">环境变量</a></li>
+    </ul>
+  </li>
+  <li><a href="#test">条件判断</a>
+    <ul>
+      <li><a href="#NumericComparison">数值比较</a></li>
+      <li><a href="#StringComparison">字符串比较</a></li>
+      <li><a href="#FileComparison">文件判断</a></li>
+      <li><a href="#Boolean">布尔运算</a></li>
+    </ul>
+  </li>
+  <li><a href="#statement">流程控制</a>
+    <ul>
+      <li><a href="#if">if</a></li>
+      <li><a href="#case">case</a></li>
+      <li><a href="#for">for</a></li>
+      <li><a href="#until">until</a></li>
+      <li><a href="#while">while</a></li>
+      <li><a href="#break">break和continue</a></li>
+    </ul>
+  </li>
+  <li><a href="#othervar">特殊变量和位置参数</a></li>
+  <li><a href="#array">数组</a></li>
+  <li><a href="#read">交互</a></li>
+  <li><a href="#function">函数</a></li>
+  <li><a href="#go">脚本调试</a></li>
+</ul>
+
+<hr />
+
+<h2 id="preface">引言</h2>
+
+<p>shell既可以交互式地执行用户输入的命令，也可以编写成<strong>脚本</strong>，shell按照一定的规则自动执行脚本中的命令。</p>
+
+<p>shell脚本文件一般是下面的这种形式：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ cat sample.sh
+#!/bin/bash
+echo "hello world!"
+exit 0
+</code></pre>
+</div>
+
+<p>注意：<code class="highlighter-rouge">exit 0</code>表示该脚本的exit status。</p>
+
+<p>使用<code class="highlighter-rouge">sh</code>调用该脚本：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sh sample.sh
+</code></pre>
+</div>
+
+<p>也可以先赋予脚本可执行权限，然后直接执行：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ chmod +x sample.sh
+$ ./sample.sh
+</code></pre>
+</div>
+
+<p>*nix上的shell有很多种，本文仅基于bash和sh，列出基本的语法，重点关注容易出错的细节。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="var">变量</h2>
+
+<h3 id="local">本地变量</h3>
+
+<p>本地变量指用户自定义变量。</p>
+
+<p>变量赋值：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ name="Bill Bu"
+</code></pre>
+</div>
+
+<p>变量赋值时的等号左右不能有空格。变量默认为字符串(不能进行算术计算)，如果变量值包含空格，需要使用单引号或双引号。</p>
+
+<p>命令的结果可以作为一个值赋予变量，这时应使用反引号或<code class="highlighter-rouge">$()</code>包含命令；变量值中可以使用转义符<code class="highlighter-rouge">\</code>。</p>
+
+<p>变量叠加：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ name="$name"ad
+</code></pre>
+</div>
+
+<p>或者</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ name=${name}ad
+</code></pre>
+</div>
+
+<p>命令代换：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ VAR_DATE=`date`
+</code></pre>
+</div>
+
+<p>注意：这里‘是反引号，不是单引号。</p>
+
+<p>更常用的是</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ VAR_DATE=$(date)
+</code></pre>
+</div>
+
+<p>表示将括号中命令的结果输出，赋值给VAR_DATE。</p>
+
+<p>算术代换：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ VAR=101
+$ echo $(($VAR-1))
+</code></pre>
+</div>
+
+<p>上文提到，变量赋值时默认为字符串，如果需要进行算术运算，可以将算术表达式用<code class="highlighter-rouge">$(())</code>扩起来。<code class="highlighter-rouge">$(())</code>中只能进行整数运算，可选的运算符只有<code class="highlighter-rouge">+</code>，<code class="highlighter-rouge">-</code>，<code class="highlighter-rouge">*</code>，<code class="highlighter-rouge">/</code>。注意：括号、变量和运算符之间均没有空格。</p>
+
+<p>变量调用：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ echo $name
+</code></pre>
+</div>
+
+<p>变量查看：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ set
+</code></pre>
+</div>
+
+<p>变量删除：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ unset name
+</code></pre>
+</div>
+
+<p>本地变量可导出为环境变量：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ export VARNAME
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">set</code>和<code class="highlighter-rouge">unset</code>也适用于环境变量。</p>
+
+<h3 id="env">环境变量</h3>
+
+<p>查询：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ env
+</code></pre>
+</div>
+
+<p>临时添加PATH变量：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ PATH="$PATH":/home/name/sh
+</code></pre>
+</div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>PATH</td>
+      <td>可执行文件的搜索路径</td>
+    </tr>
+    <tr>
+      <td>SHELL</td>
+      <td>当前shell</td>
+    </tr>
+    <tr>
+      <td>TERM</td>
+      <td>当前终端类型</td>
+    </tr>
+    <tr>
+      <td>LANG</td>
+      <td>语言和locale，决定编码，时间、货币等显示格式</td>
+    </tr>
+    <tr>
+      <td>HOME</td>
+      <td>当前用户主目录</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="test">条件判断</h2>
+
+<p>常用的条件判断形式为：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[ EXPRESSION ]
+</code></pre>
+</div>
+
+<p>如果表达式成立，返回0，否则返回非0。注意：括号与表达式之间、表达式中各命令、参数之间都必须加空格。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ [ 1 = 2 ]
+$ echo $?
+1
+$ [ 1 = 1 ]
+$ echo $?
+0
+</code></pre>
+</div>
+
+<p>这里，<code class="highlighter-rouge">$?</code>表示上一命令的执行结果，若命令成功则为0，否则非0。</p>
+
+<h3 id="NumericComparison">数值比较</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">n1 -eq n2</code></td>
+      <td>n1等于n2</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">n1 -ge n2</code></td>
+      <td>n1大于等于n2</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">n1 -gt n2</code></td>
+      <td>n1大于n2</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">n1 -le n2</code></td>
+      <td>n1小于等于n2</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">n1 -lt n2</code></td>
+      <td>n1小于n2</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">n1 -ne n2</code></td>
+      <td>n1不等于n2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br />
+这些表达式中，<code class="highlighter-rouge">e-equal</code>，<code class="highlighter-rouge">g-greater</code>，<code class="highlighter-rouge">l-less</code>，<code class="highlighter-rouge">t-than</code>。</p>
+
+<h3 id="StringComparison">字符串比较</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">str1 = str2</code></td>
+      <td>字符串相同</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">str1 != str2</code></td>
+      <td>字符串不同</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-n str</code></td>
+      <td>字符串长度不为0</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-z str</code></td>
+      <td>字符串长度为0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br />
+注意：<code class="highlighter-rouge">=</code>，<code class="highlighter-rouge">!=</code>前后都要有空格。</p>
+
+<h3 id="FileComparison">文件判断</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">-e file</code></td>
+      <td>file存在</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-d file</code></td>
+      <td>file是文件夹</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-f file</code></td>
+      <td>file存在，且是一个文件</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-s file</code></td>
+      <td>file存在，且size大于0</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-r file</code></td>
+      <td>file存在，且有可读权限</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-w file</code></td>
+      <td>file存在，且有可写权限</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-x file</code></td>
+      <td>file存在，且有可执行权限</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-O file</code></td>
+      <td>file存在，且当前用户为其所有者</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-G file</code></td>
+      <td>file存在，且与当前用户的所属组相同</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">file1 -nt file2</code></td>
+      <td>file1的修改时间晚于file2</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">file1 -ot file2</code></td>
+      <td>file1的修改时间早于file2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<h3 id="Boolean">布尔运算</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">EXPRESSION1 -a EXPRESSION2</code></td>
+      <td>逻辑与</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">EXPRESSION1 -o EXPRESSION2</code></td>
+      <td>逻辑或</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">! EXPRESSION</code></td>
+      <td>逻辑非</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br />
+在命令行下逻辑与、逻辑或的常用形式为：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ COMMAND1 &amp;&amp; COMMAND2
+$ COMMAND1 || COMMAND2
+</code></pre>
+</div>
+
+<p>注意：<code class="highlighter-rouge">&amp;&amp;</code>相当于”if…then…“，<code class="highlighter-rouge">||</code>相当于“if not…then…”，都用于连接两个命令。上面的<code class="highlighter-rouge">-a</code>和<code class="highlighter-rouge">-o</code>用于连接两个测试条件，因此，实际使用时语法是有区别的。</p>
+
+<p>可以看到<code class="highlighter-rouge">&amp;&amp;</code>和<code class="highlighter-rouge">||</code>可实现简单的分支流程功能，更复杂的流程控制则需要下面的“流程控制语句”。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="statement">流程控制</h2>
+
+<h3 id="if">if-then-else</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>if COMMAND1
+then
+  commands1
+elif COMMAND2
+then
+  commands2
+else
+  commands3
+fi
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">if</code>和<code class="highlighter-rouge">elif</code>后可以是条件判断，也可以是一个命令，这个命令返回0时，就运行<code class="highlighter-rouge">then</code>之后相应的命令。</p>
+
+<h3 id="case">case</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>case var in
+pattern1)
+  commands1;;
+pattern2)
+  commands2;;
+*)
+  default commands;;
+esac
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">case</code>的<code class="highlighter-rouge">pattern</code>可以匹配整型、字符型常量表达式，也可以匹配字符串，并且支持通配符。</p>
+
+<h3 id="for">for</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>for VAR in LIST
+do
+  commands
+done
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">VAR</code>是一个循环变量，依次取出<code class="highlighter-rouge">LIST</code>中的值，执行<code class="highlighter-rouge">commands</code>；LIST可以是”1 2 3 4 5”，也可以是“{1..5}”，还可以是“{0..10..2}”，表示“0 2 4 6 8 10”，当然也可以是”<code class="highlighter-rouge">$(seq 1 2 20)</code>“。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ for FILENAME in file?; do mv $FILENAME $FILENAME~; done
+</code></pre>
+</div>
+
+<p>这是把file0、file1、file2…重命名为file0、file1、file2…，可以看到<code class="highlighter-rouge">LIST</code>支持通配符。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>for ((EXP1; EXP2; EXP3))
+do
+  commands
+done
+</code></pre>
+</div>
+
+<p>这种格式类似于c语言，如<code class="highlighter-rouge">((i=1; i&lt;=5; i++))</code>，甚至可以用<code class="highlighter-rouge">(( ; ; ))</code>表示无限循环。</p>
+
+<h3 id="until">until</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>until COMMAND
+  commands
+done
+</code></pre>
+</div>
+
+<h3 id="while">while</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>while COMMAND
+do
+  commands
+done
+</code></pre>
+</div>
+
+<p>while可连接到管道：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ls *.mp3 |
+while read line
+do
+    newname="[uuspider]$line"
+    mv $line $newname
+done
+</code></pre>
+</div>
+
+<p>或使用重定向：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>while read line
+do
+    newname="[uuspider]$line"
+    mv $line $newname
+done &lt; &lt;(ls *.mp3)
+</code></pre>
+</div>
+
+<h3 id="break">break和continue</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">break</code></td>
+      <td>跳出循环</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">continue</code></td>
+      <td>跳过本次循环</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="othervar">特殊变量和位置参数</h2>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">$0</code></td>
+      <td>shell或shell脚本的名字</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">$1、$2...${10}...</code></td>
+      <td>位置参数，大于9时使用{}</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">$#</code></td>
+      <td>位置参数的个数</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">$@</code></td>
+      <td>所有位置参数，以列表形式输出<code class="highlighter-rouge">$1</code>,<code class="highlighter-rouge">$2</code>…</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">$*</code></td>
+      <td>所有位置参数，整体作为单个字符串</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">$?</code></td>
+      <td>上条命令的exit status</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">$$</code></td>
+      <td>当前shell的进程编号</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<p>位置参数可以使用shift命令左移，如shift 3表示原来的$4现在变成$1，原来的$5现在变成$2…，原来的$1、$2、$3丢弃，$0不移动。不带参数的shift命令相当于shift 1。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="array">数组</h2>
+
+<h3 id="createarray">数组定义</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ array=(11 22 33 44 55)
+</code></pre>
+</div>
+
+<h3 id="operatearray">数组操作</h3>
+
+<p>查看数组长度：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ echo ${#array[@]}
+</code></pre>
+</div>
+
+<p>读取：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ echo ${array[0]}
+11
+$ echo ${array[@]}
+11 22 33 44 55
+$ echo ${array[*]}
+11 22 33 44 55
+</code></pre>
+</div>
+
+<p>赋值：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ array[0]=00
+$ array[5]=11
+</code></pre>
+</div>
+
+<p>如果某一项不存在，赋值时会自动添加新的数组元素。</p>
+
+<p>删除：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ unset array[1]
+$ unset array
+</code></pre>
+</div>
+
+<p>截取：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ echo ${array[@]:0:3}
+$ newarray=(${array[@]:1:4})
+</code></pre>
+</div>
+
+<p>替换：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ array=(11 22 33 44 55)
+$ echo ${array[@]/33/00}
+11 22 00 44 55
+$ echo ${array[@]}
+11 22 33 44 55
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="read">交互</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ read
+</code></pre>
+</div>
+
+<p>从标准输入读取输入，并赋值给内置变量REPLY。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ read VAR
+</code></pre>
+</div>
+
+<p>从标准输入读取输入并赋值给VAR。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ read VAR1 VAR2 VAR3
+</code></pre>
+</div>
+
+<p>从标准输入读取，第一个字符串赋值给VAR1，第二个字符串赋值给VAR2，其余字符串赋值给VAR3，字符串之间以空格或换行为界。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ read -p "plese type something: " VAR
+</code></pre>
+</div>
+
+<p>输入提示，并将输入赋值给VAR。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ read -r VAR
+</code></pre>
+</div>
+
+<p>输入时可使用反斜杠换行。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ read -t 10
+</code></pre>
+</div>
+
+<p>指定输入等待时间为10秒。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ read -d ":" VAR
+</code></pre>
+</div>
+
+<p>指定定界符为”:”，输入”:”时结束输入。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ read -s VAR
+</code></pre>
+</div>
+
+<p>输入时不显示输入内容。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ read -p "input 3 letters: " -n 3 VAR
+</code></pre>
+</div>
+
+<p>将输入的前3个字符赋值给VAR。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ read -a array
+</code></pre>
+</div>
+
+<p>将输入存储为数组array[@]。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ read -dq -p "Input some words end with q: " VAR
+</code></pre>
+</div>
+
+<p>这行代码表示以“q”为定界符，当输入q时退出输入模式。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="function">函数</h2>
+
+<p>函数定义：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>function FUN() {
+...
+}
+</code></pre>
+</div>
+
+<p>注意：左花括号与函数体之间必须有空格或换行，函数体中最后一条命令与右花括号写在同一行时，末尾必须有<code class="highlighter-rouge">;</code>。</p>
+
+<p>函数调用：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>FUN
+</code></pre>
+</div>
+
+<p>函数只有调用时候才会执行，shell脚本中的函数必须先定义再调用。注意：函数调用时，只写函数名称，不写括号。</p>
+
+<p>函数返回值：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>return 返回值
+</code></pre>
+</div>
+
+<p>函数可以用<code class="highlighter-rouge">return</code>命令返回脚本，后面跟一个数字则表示函数的Exit Status。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="go">脚本调试</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sh -x ./script.sh
+</code></pre>
+</div>
+
+<p>跟踪脚本的执行信息，将执行的每一条命令和结果依次打印出来。</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">-n</code></td>
+      <td>检查脚本中的语法错误</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-v</code></td>
+      <td>执行脚本，同时打印到标准错误输出</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-x</code></td>
+      <td>跟踪执行信息</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<p>脚本中可以使用<code class="highlighter-rouge">set</code>启用或禁用上述调试参数，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#! /bin/sh</span>
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span> <span class="o">]</span>; <span class="k">then
+  </span><span class="nb">set</span> -x
+  <span class="nb">echo</span> <span class="s2">"ERROR: Insufficient Args."</span>
+  <span class="nb">exit </span>1
+  <span class="nb">set</span> +x
+<span class="k">fi</span>
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<p>通过<code class="highlighter-rouge">curl</code>、<code class="highlighter-rouge">grep</code>、<code class="highlighter-rouge">sed</code>、<code class="highlighter-rouge">awk</code>，shell可以实现简单的爬虫功能，使用python，可以实现<a href="http://about.uuspider.com/2015/06/27/pyurl.html" target="_blank">更复杂的爬虫功能</a>。</p>
+
+<hr />
+
+
+
+
+<div  style="display:none"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1264508560'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1264508560%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></div>
+</body>
+</html>

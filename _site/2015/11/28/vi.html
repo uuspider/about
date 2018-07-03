@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcur icon" href="/images/i32.ico" type="image/x-icon" />
+  <title>vi/vim guide</title>
+  <meta name="author" content="uuspider" />
+  <meta name="description" content="about uuspider" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" >
+  <link rel="stylesheet" href="//css/styles.css" />
+
+</head>
+<body>
+
+  <style type="text/css">
+pre {
+  padding:8px 15px;
+  background: #f8f8f8;  
+  border:1px solid #e5e5e5;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+pre,code {
+  background:#e8f5fe;color:#000;
+}
+</style>
+
+<h2 id="vivim-">vi/vim 指引</h2>
+
+<p>参考：<a href="http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/" target="_blank">Learn Vim Progressively</a>, <a href="http://coolshell.cn/articles/5426.html" target="_blank">简明vim练级攻略</a></p>
+
+<hr />
+
+<ul>
+  <li><a href="#open">打开文件</a></li>
+  <li><a href="#mode">模式</a></li>
+  <li><a href="#move">移动光标</a></li>
+  <li><a href="#insert">插入</a></li>
+  <li><a href="#delete">删除</a></li>
+  <li><a href="#copy">复制</a></li>
+  <li><a href="#undo">替换与撤销</a></li>
+  <li><a href="#find">查找</a></li>
+  <li><a href="#select">快速选择</a></li>
+  <li><a href="#block">块操作</a></li>
+  <li><a href="#auto">自动补齐</a></li>
+  <li><a href="#split">分屏</a></li>
+  <li><a href="#set">功能设定</a></li>
+</ul>
+
+<hr />
+
+<h3 id="open">打开文件</h3>
+
+<p>在shell中通过<code class="highlighter-rouge">vi &lt;path/to/file1&gt; &lt;path/to/file2&gt; ...</code>同时打开多个文件，在vi中通过<code class="highlighter-rouge">:e &lt;path/to/file1&gt; &lt;path/to/file2&gt; ...</code>打开文件。</p>
+
+<p><code class="highlighter-rouge">:bn</code>和<code class="highlighter-rouge">:bp</code>在打开的多个文件之间切换，<code class="highlighter-rouge">:ls</code>查看当前打开的文件列表。</p>
+
+<hr />
+
+<h3 id="mode">模式</h3>
+
+<p>打开vi后就是普通模式，按<code class="highlighter-rouge">i</code>进入插入模式，按<code class="highlighter-rouge">Esc</code>返回普通模式，按<code class="highlighter-rouge">:</code>进入命令行模式，输入命令运行后自动返回普通模式。</p>
+
+<p><code class="highlighter-rouge">:w</code>是保存，<code class="highlighter-rouge">:q</code>是退出，<code class="highlighter-rouge">:x</code>和<code class="highlighter-rouge">:wq</code>是保存并退出，<code class="highlighter-rouge">:q!</code>是不保存并强制退出。</p>
+
+<hr />
+
+<h3 id="move">移动光标</h3>
+
+<p><code class="highlighter-rouge">j</code>,<code class="highlighter-rouge">k</code>,<code class="highlighter-rouge">h</code>,<code class="highlighter-rouge">l</code>分别对应上下左右，<code class="highlighter-rouge">w</code>是移动到下一个单词开头，<code class="highlighter-rouge">b</code>是移动到上一个单词开头。这些动作之前都可以加数字N，表示重复动作N次。</p>
+
+<p><code class="highlighter-rouge">:N</code>或<code class="highlighter-rouge">NG</code>移动光标到第N行，<code class="highlighter-rouge">gg</code>移动光标到首行，<code class="highlighter-rouge">G</code>移动光标到末行；使用<code class="highlighter-rouge">&lt;Ctrl+o&gt;</code>和<code class="highlighter-rouge">&lt;Ctrl+i&gt;</code>可在两点之间快速跳转。</p>
+
+<p><code class="highlighter-rouge">0</code>和<code class="highlighter-rouge">^</code>移动光标到行首，<code class="highlighter-rouge">$</code>移动光标到行尾，<code class="highlighter-rouge">fx</code>,<code class="highlighter-rouge">Fx</code>向后或向前搜索“x”并跳转到第一个匹配项。</p>
+
+<p><code class="highlighter-rouge">zz</code>将光标所在行重置在屏幕正中，<code class="highlighter-rouge">M</code>移动光标到当前屏幕中间，<code class="highlighter-rouge">H</code>,<code class="highlighter-rouge">L</code>移动光标到当前屏幕首行或末行。</p>
+
+<p><code class="highlighter-rouge">&lt;Ctrl+d&gt;</code>,<code class="highlighter-rouge">&lt;Ctrl+u&gt;</code>向下或向上滚动半屏，<code class="highlighter-rouge">&lt;Ctrl+f&gt;</code>,<code class="highlighter-rouge">&lt;Ctrl+b&gt;</code>向下或向上滚动一屏，<code class="highlighter-rouge">&lt;Ctrl+y&gt;</code>,<code class="highlighter-rouge">&lt;Ctrl+e&gt;</code>向下或向上滚动一行。</p>
+
+<hr />
+
+<h3 id="insert">插入</h3>
+
+<p><code class="highlighter-rouge">i</code>在光标处插入字符，<code class="highlighter-rouge">a</code>在光标后插入字符，<code class="highlighter-rouge">I</code>,<code class="highlighter-rouge">A</code>则是行首和行末插入，<code class="highlighter-rouge">o</code>是在本行之后插入新行，<code class="highlighter-rouge">O</code>是本行之前插入新行。</p>
+
+<p><code class="highlighter-rouge">s</code>删除当前字符并插入，<code class="highlighter-rouge">S</code>,<code class="highlighter-rouge">cc</code>删除当前行并插入，<code class="highlighter-rouge">cw</code>删除当前所在单词并插入，<code class="highlighter-rouge">C</code>删除光标到行末的字符并插入，<code class="highlighter-rouge">ctx</code>删除光标到x的字符并插入。</p>
+
+<p>在插入模式，按<code class="highlighter-rouge">&lt;Ctrl+o&gt; zz</code>可快速将正在输入的行重置在屏幕正中。</p>
+
+<hr />
+
+<h3 id="delete">删除</h3>
+
+<p><code class="highlighter-rouge">x</code>删除光标处字符，<code class="highlighter-rouge">dd</code>删除整行，<code class="highlighter-rouge">dw</code>删除一个单词，<code class="highlighter-rouge">d$</code>或<code class="highlighter-rouge">D</code>删除至行尾，<code class="highlighter-rouge">d^</code>删除至行首，<code class="highlighter-rouge">dG</code>删除至末行，<code class="highlighter-rouge">d1G</code>删除至首行，<code class="highlighter-rouge">ctx</code>删除光标到x的字符。</p>
+
+<p><code class="highlighter-rouge">x</code>,<code class="highlighter-rouge">dd</code>,<code class="highlighter-rouge">dw</code>前都可以加数字N，表示重复删除动作N次。</p>
+
+<hr />
+
+<h3 id="copy">复制</h3>
+
+<p><code class="highlighter-rouge">yy</code>复制光标所在行，<code class="highlighter-rouge">5yy</code>复制5行，<code class="highlighter-rouge">y^</code>复制行首到光标之前的字符，<code class="highlighter-rouge">y$</code>复制光标到行尾的字符，<code class="highlighter-rouge">y5w</code>复制5个单词，<code class="highlighter-rouge">yG</code>复制至末行，<code class="highlighter-rouge">y1G</code>复制从首行到当前行；<code class="highlighter-rouge">dd</code>剪切当前行。</p>
+
+<p><code class="highlighter-rouge">p</code>粘贴至光标后。</p>
+
+<hr />
+
+<h3 id="undo">替换与撤销</h3>
+
+<p><code class="highlighter-rouge">r</code>替换当前字符，<code class="highlighter-rouge">R</code>连续替换，直至按下<code class="highlighter-rouge">Esc</code>；<code class="highlighter-rouge">~</code>转换光标处字母大小写；<code class="highlighter-rouge">uN</code>撤销N次操作，<code class="highlighter-rouge">U</code>撤销当前行的所有修改，<code class="highlighter-rouge">&lt;Ctrl+r&gt;</code>撤销undo。</p>
+
+<hr />
+
+<h3 id="find">查找</h3>
+
+<p><code class="highlighter-rouge">/</code>表示向后查找，<code class="highlighter-rouge">?</code>表示向前查找。</p>
+
+<p><code class="highlighter-rouge">*</code>和<code class="highlighter-rouge">#</code>分别表示向后和向前查找光标处的单词，<code class="highlighter-rouge">g*</code>和<code class="highlighter-rouge">g#</code>表示部分符合该单词即可。</p>
+
+<p><code class="highlighter-rouge">%</code>查看匹配的括号。</p>
+
+<p>在查找模式下，<code class="highlighter-rouge">n</code>表示继续查找，<code class="highlighter-rouge">N</code>表示反向查找。</p>
+
+<hr />
+
+<h3 id="select">快速选择</h3>
+
+<p><code class="highlighter-rouge">vix</code>和<code class="highlighter-rouge">vax</code>可用于快速选择一个区域，如：对于<code class="highlighter-rouge">(@app.route('/', methods=['GET', 'POST']))</code>，当前光标位于POST的O处，则：</p>
+
+<p><code class="highlighter-rouge">vi'</code>将选定<code class="highlighter-rouge">POST</code>，<code class="highlighter-rouge">va'</code>将选定<code class="highlighter-rouge">'POST'</code>，<code class="highlighter-rouge">i</code>表示in。</p>
+
+<p><code class="highlighter-rouge">vi)</code>选定<code class="highlighter-rouge">'/', methods=['GET', 'POST']</code>，<code class="highlighter-rouge">v2a)</code>选定<code class="highlighter-rouge">(@app.route('/', methods=['GET', 'POST']))</code>。</p>
+
+<p><code class="highlighter-rouge">v</code>可以换成<code class="highlighter-rouge">y</code>(复制),<code class="highlighter-rouge">d</code>(删除),<code class="highlighter-rouge">c</code>(删除并插入)；<code class="highlighter-rouge">x</code>可以是字符、<code class="highlighter-rouge">w</code>(当前单词)、<code class="highlighter-rouge">s</code>(当前句子)、<code class="highlighter-rouge">p</code>(当前段落)等等。</p>
+
+<hr />
+
+<h3 id="block">块操作</h3>
+
+<p><code class="highlighter-rouge">v</code>可视化工具，在该模式下可将光标经过的地方标记反白并选定，<code class="highlighter-rouge">V</code>按行选定，<code class="highlighter-rouge">&lt;Ctrl+v&gt;</code>按块选定(与<code class="highlighter-rouge">jk</code>等配合使用)。</p>
+
+<p>对于选定的区域，可用<code class="highlighter-rouge">d</code>删除或<code class="highlighter-rouge">y</code>复制，<code class="highlighter-rouge">J</code>将所有选定行连接成一行，<code class="highlighter-rouge">&gt;&gt;</code>和<code class="highlighter-rouge">&lt;&lt;</code>快速缩进，<code class="highlighter-rouge">=</code>自动缩进排版。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>0 &lt;Ctrl+v&gt; Nj I# ESC
+</code></pre>
+</div>
+
+<p>适用于注释多行文本。<code class="highlighter-rouge">0</code>将光标移动到行首，<code class="highlighter-rouge">&lt;Ctrl+v&gt;</code>开始块操作，<code class="highlighter-rouge">j</code>标记块，<code class="highlighter-rouge">I# </code>插入<code class="highlighter-rouge">#</code>，<code class="highlighter-rouge">ESC</code>确认生效。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;Ctrl+v&gt; Nj $ A; ESC
+</code></pre>
+</div>
+
+<p>适用于多行文本后补充<code class="highlighter-rouge">;</code>。<code class="highlighter-rouge">&lt;Ctrl+v&gt;</code>开始块操作，<code class="highlighter-rouge">j</code>标记块，<code class="highlighter-rouge">$</code>将光标移动到行末，<code class="highlighter-rouge">A;</code>插入<code class="highlighter-rouge">;</code>，<code class="highlighter-rouge">ESC</code>确认生效。</p>
+
+<hr />
+
+<h3 id="auto">自动补齐</h3>
+
+<p>在插入模式下按<code class="highlighter-rouge">&lt;Ctrl+n&gt;</code>，启用自动补齐功能。</p>
+
+<hr />
+
+<h3 id="split">分屏</h3>
+
+<p><code class="highlighter-rouge">:sp</code>或<code class="highlighter-rouge">:split</code>为水平分屏，<code class="highlighter-rouge">:vsp</code>或<code class="highlighter-rouge">:vsplit</code>为垂直分屏。</p>
+
+<p><code class="highlighter-rouge">&lt;Ctrl+w&gt;</code><code class="highlighter-rouge">[hjkl]</code>切换分屏。</p>
+
+<p><code class="highlighter-rouge">&lt;Ctrl+w&gt;</code><code class="highlighter-rouge">[_|]</code>最大化分屏，<code class="highlighter-rouge">&lt;Ctrl+w&gt;</code><code class="highlighter-rouge">[+-]</code>增加或减小分屏尺寸。</p>
+
+<hr />
+
+<h3 id="set">常用功能设定</h3>
+
+<p><code class="highlighter-rouge">:set all</code>显示所有的设定值。</p>
+
+<p><code class="highlighter-rouge">:set number</code>显示行号，简写nu；<code class="highlighter-rouge">:set nonumber</code>不显示行号，简写nonu。</p>
+
+<p><code class="highlighter-rouge">:set shiftwidth=4</code>设置<code class="highlighter-rouge">&gt;&gt;</code>的缩进字符数，简写sw。</p>
+
+<p><code class="highlighter-rouge">:set expandtab</code>将tab自动转化为空格，取消该设定为<code class="highlighter-rouge">:set noexpandtab</code>。</p>
+
+<p><code class="highlighter-rouge">:set autoindent</code>开启自动缩进，简写ai。</p>
+
+<p><code class="highlighter-rouge">:set pastetoggle</code>关闭自动缩进；修改/etc/vim/vimrc，添加<code class="highlighter-rouge">set pastetoggle=&lt;F9&gt;</code>，在粘贴代码前，按<code class="highlighter-rouge">i</code>后再按F9，就可以关闭自动缩进。</p>
+
+<hr />
+
+
+
+
+<div  style="display:none"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1264508560'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1264508560%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></div>
+</body>
+</html>

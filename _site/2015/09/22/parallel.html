@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcur icon" href="/images/i32.ico" type="image/x-icon" />
+  <title>GNU parallel guide</title>
+  <meta name="author" content="uuspider" />
+  <meta name="description" content="about uuspider" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" >
+  <link rel="stylesheet" href="//css/styles.css" />
+
+</head>
+<body>
+
+  <style type="text/css">
+pre {
+  padding:8px 15px;
+  background: #f8f8f8;  
+  border:1px solid #e5e5e5;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+pre,code {
+  background:#e8f5fe;color:#000;
+}
+</style>
+
+<h2 id="gnu-parallel">GNU parallel</h2>
+
+<p>参考：<a href="http://www.gnu.org/software/parallel/parallel_tutorial.html" target="_blank">Tutorial</a>, <a href="http://my.oschina.net/enyo/blog/271612" target="_blank">parallel 指南</a>, <a href="http://www.gnu.org/software/parallel/man.html" target="_blank">parallel man &amp; examples</a>, <a href="http://www.vaikan.com/use-multiple-cpu-cores-with-your-linux-commands/" target="_blank">parallel 示例</a>,</p>
+
+<h2 id="top"></h2>
+
+<hr />
+
+<ul>
+  <li><a href="#install">安装</a></li>
+  <li><a href="#input">输入</a></li>
+  <li><a href="#replace">占位符</a></li>
+  <li><a href="#csv">CSV数据导入</a></li>
+  <li><a href="#output">输出</a></li>
+  <li><a href="#jobs">并行控制</a></li>
+</ul>
+
+<hr />
+
+<p>在一台或多台计算机上并行运算可以充分利用CPU资源，提高工作效率，GNU parallel就是这样一个在shell下实现并行运算的命令行工具。</p>
+
+<h3 id="install">安装</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ wget http://ftp.gnu.org/gnu/parallel/parallel-latest.tar.bz2
+$ tar -xvjf parallel-latest.tar.bz2 &gt; parallel-files
+$ cd parallel-files
+$ ./configure &amp;&amp; make &amp;&amp; sudo make install
+</code></pre>
+</div>
+
+<p>查看当前安装的GNU parallel版本：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ parallel --version
+</code></pre>
+</div>
+
+<p>注意：不要通过<code class="highlighter-rouge">apt-get</code>安装”GNU parallel”，默认通过<code class="highlighter-rouge">apt-get</code>安装的<code class="highlighter-rouge">parallel</code>并不是我们需要的工具。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h3 id="input">输入</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ parallel echo ::: apple banana dog &gt; FILE
+$ cat FILE
+apple
+banana
+dog
+$ parallel -a FILE echo
+apple
+banana
+dog
+$ cat FILE | parallel echo
+apple
+banana
+dog
+</code></pre>
+</div>
+
+<p>上边列出了<code class="highlighter-rouge">parallel</code>的三种输入方式，第一种是借助<code class="highlighter-rouge">:::</code>直接从命令行输入，第二种通过<code class="highlighter-rouge">-a FILE</code>读入文件，也可以写为<code class="highlighter-rouge">:::: FILE</code>，第三种通过管道将标准输入传递给<code class="highlighter-rouge">parallel</code>。<code class="highlighter-rouge">:::</code>和<code class="highlighter-rouge">::::</code>是<code class="highlighter-rouge">parallel</code>的分隔符，其作用类似于管道符<code class="highlighter-rouge">|</code>。</p>
+
+<p>这些输入方式可以混合使用，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ parallel echo ::: apple banana dog :::: FILE
+apple apple
+apple banana
+apple dog
+banana apple
+banana banana
+banana dog
+dog apple
+dog banana
+dog dog
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">parallel</code>默认按行处理数据，即将一行作为一个参数，定界符为<code class="highlighter-rouge">\n</code>，使用<code class="highlighter-rouge">-d</code>可以改变定界符，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ parallel -d : echo :::: /etc/passwd
+</code></pre>
+</div>
+
+<p>在处理数据时，<code class="highlighter-rouge">parallel</code>可以指定不处理空行，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ (echo apple; echo; echo dog) | parallel --no-run-if-empty echo
+apple
+dog
+</code></pre>
+</div>
+
+<p>如果<code class="highlighter-rouge">parallel</code>没有给定命令，则<code class="highlighter-rouge">:::</code>后的参数会作为命令进行处理，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ parallel ::: 'echo "hello world"' pwd ls
+hello world
+[当前目录路径]
+[当前目录的文件列表]
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h3 id="replace">占位符</h3>
+
+<p>占位符<code class="highlighter-rouge"><span class="p">{}</span></code>在<code class="highlighter-rouge">parallel</code>中应用广泛，其用法多样，这里介绍最常用的几种：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ parallel echo ::: path/name.c
+path/name.c
+$ parallel echo {} ::: path/name.c
+path/name.c
+$ parallel echo {.} ::: path/name.c
+path/name #去掉扩展名
+$ parallel echo {/} ::: path/name.c
+name.c #去掉路径
+$ parallel echo {//} ::: path/name.c
+path #只保留路径
+$ parallel echo {/.} ::: path/name.c
+name #去掉路径和扩展名
+$ parallel echo {#} ::: path/name.c
+1 #输出任务编号
+2
+3
+</code></pre>
+</div>
+
+<p>有多个输入源时，{n}用于指定输入源的参数，n可为负数，表示从后向前倒数。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ parallel echo {1} and {2} ::: A B ::: C D
+A and C
+A and D
+B and C
+B and D
+</code></pre>
+</div>
+
+<p>上述占位符的规则可以组合使用，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ parallel echo ~/{1/} ::: path/name.c
+/home/USER/name.c
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h3 id="csv">类CSV数据导入</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ cat sample.csv
+num business
+6481    互联网
+2363    计算机软件
+1392    高新科技
+1235    地产建筑
+1221    高等教育
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">--colsep</code>可以按照指定分隔符将文件切分为列，<code class="highlighter-rouge">--header</code>将csv的列名作为占位符的索引：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ parallel --header : --colsep '\t' echo {business} :::: sample.csv
+互联网
+计算机软件
+高新科技
+地产建筑
+高等教育
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h3 id="output">输出</h3>
+
+<p>并行任务的输出与输入的顺序不是完全对应的，如果需要保持和输入相同的顺序，可使用<code class="highlighter-rouge">-k</code>(<code class="highlighter-rouge">--keep-order</code>)，也可以使用<code class="highlighter-rouge">--tag</code>为输出打上相应的“tag”：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ parallel --tag --header : --colsep '\t' echo {2} :::: sample.csv
+6481 互联网	   互联网
+2363 计算机软件  计算机软件
+1392 高新科技   高新科技
+1235 地产建筑   地产建筑
+1221 高等教育   高等教育
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h3 id="jobs">并发数</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ls /etc/passwd | parallel -j2 wc -l {} | awk '{s+=$1} END {print s}'
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">-j</code>(<code class="highlighter-rouge">--jobs</code>)用于指定并发数，后边的数字可以是一个数字<code class="highlighter-rouge">n</code>(0表示尽可能多的并发数)，也可以是<code class="highlighter-rouge">+n</code>或<code class="highlighter-rouge">-n</code>，分别表示<code class="highlighter-rouge">CPU内核数+n</code>和<code class="highlighter-rouge">CPU内核数-n</code>，还可以是一个百分数<code class="highlighter-rouge">n%</code>，表示<code class="highlighter-rouge">CPU内核数×n%</code>。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ls /etc/passwd | parallel --tmux -j2 wc -l {} | awk '{s+=$1} END {print s}'
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">--tmux</code>可以在tmux窗口中输出每一个并发任务。注意：需要安装tmux。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ parallel --timeout 4.5 sleep {}\; echo {} ::: 2 4 6 8
+2
+4
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">--timeout</code>用于指定任务的过期延时，精度为2秒。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+
+
+
+<div  style="display:none"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1264508560'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1264508560%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></div>
+</body>
+</html>

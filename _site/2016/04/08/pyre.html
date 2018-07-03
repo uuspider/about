@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcur icon" href="/images/i32.ico" type="image/x-icon" />
+  <title>Text processing in python</title>
+  <meta name="author" content="uuspider" />
+  <meta name="description" content="about uuspider" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" >
+  <link rel="stylesheet" href="//css/styles.css" />
+
+</head>
+<body>
+
+  <style type="text/css">
+pre {
+  padding:8px 15px;
+  background: #f8f8f8;  
+  border:1px solid #e5e5e5;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+pre,code {
+  background:#e8f5fe;color:#000;
+}
+</style>
+
+<h2 id="python-">python: 文本处理</h2>
+
+<p>参考：<a href="https://docs.python.org/2/library/re.html" target="_blank">re - Regular expression operations</a>, <a href="http://blog.csdn.net/whycadi/article/details/2011046" target="_blank">Regular-Expressions in python</a></p>
+
+<h2 id="top"></h2>
+
+<hr />
+
+<ul>
+  <li><a href="#sys">sys &amp; os</a></li>
+  <li><a href="#io">文件操作</a>
+    <ul>
+      <li><a href="#rw">基本操作</a></li>
+      <li><a href="#readline">按行迭代</a></li>
+    </ul>
+  </li>
+  <li><a href="#string">字符串处理</a></li>
+  <li><a href="#re">正则表达式</a>
+    <ul>
+      <li><a href="#basic">基本规则</a>: <a href="#element">元字符</a>|<a href="#count">计数</a>|<a href="#arrow">界定</a>|<a href="#group">组</a></li>
+      <li><a href="#func">函数</a></li>
+      <li><a href="#obj">对象</a>: <a href="#pattern">pattern对象</a>|<a href="#match">match对象</a></li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h1 id="sys">sys &amp; os 模块</h1>
+
+<p>sys和os是python标准库中的两个模块，可以通过</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; help(sys)
+&gt;&gt;&gt; help(os)
+&gt;&gt;&gt; dir(sys)
+</code></pre>
+</div>
+
+<p>查看模块中的函数、变量等详细信息。</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">sys.argv[0]</code></td>
+      <td>当前脚本或程序名称</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">sys.argv[i]</code>(i&gt;0)</td>
+      <td>命令行参数</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">os.name</code></td>
+      <td>当前操作系统</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">os.getcwd()</code></td>
+      <td>当前工作目录</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">os.listdir()</code></td>
+      <td>指定目录下的所有文件和目录名</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">os.remove()</code></td>
+      <td>删除文件</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">os.system()</code></td>
+      <td>运行shell命令</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">os.path.split()</code></td>
+      <td>返回路径的目录名和文件名</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">os.path.isfile()</code></td>
+      <td>检验路径是否为文件</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">os.path.isdir()</code></td>
+      <td>检验路径是否为目录</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">os.path.exists()</code></td>
+      <td>检验路径是否存在</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h1 id="io">文件操作</h1>
+
+<h3 id="rw">文件的读、写和关闭</h3>
+
+<p>首先来新建一个文件lesson1.txt：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; f = open('lesson1.txt', 'w')
+&gt;&gt;&gt; f.write('Good morning, class. \n')
+&gt;&gt;&gt; f.write('Godd morning, teacher.\n')
+&gt;&gt;&gt; f.write('Sit down, please.\n')
+&gt;&gt;&gt; f.write('My name is Han Meimei.')
+&gt;&gt;&gt; f.close()
+</code></pre>
+</div>
+
+<p>这里的<code class="highlighter-rouge">'w'</code>表示写模式，常用的还有<code class="highlighter-rouge">r</code>读模式，<code class="highlighter-rouge">a</code>追加模式，<code class="highlighter-rouge">b</code>二进制模式，<code class="highlighter-rouge">+</code>读/写模式。</p>
+
+<p>注意：如果不使用换行符<code class="highlighter-rouge">\n</code>，上面每次的输入会连接成一行。</p>
+
+<p>读取文件：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; f = open('lesson1.txt', 'r')
+&gt;&gt;&gt; f.read(13)
+'Good morning,'
+&gt;&gt;&gt; f.read()
+' class.Good morning, teacher.Sit down, please.My name is Han Meimei.'
+&gt;&gt;&gt; f.close()
+</code></pre>
+</div>
+
+<p>使用<code class="highlighter-rouge">writelines()</code>写入多行文本：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; f = open('lesson1.txt', 'w')
+&gt;&gt;&gt; f.writelines(['Good morning, class.\n','Good morning, teacher.\n','Sit down, please.\n','My name is Han Meimei.'])
+&gt;&gt;&gt; f.close()
+</code></pre>
+</div>
+
+<p>使用<code class="highlighter-rouge">readlines()</code>读取全文：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; f = open('lesson1.txt', 'r')
+&gt;&gt;&gt; f.readlines()
+['Good morning, class.\n', 'Good morning, teacher.\n', 'Sit down, please.\n', 'My name is Han Meimei.']
+&gt;&gt;&gt; f.close()
+</code></pre>
+</div>
+
+<p>使用<code class="highlighter-rouge">readline()</code>，每调用一次只读取一行：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; f = open('hi.txt', 'r')
+&gt;&gt;&gt; f.readline()
+'Good morning, class.\n'
+&gt;&gt;&gt; f.readline()
+'Good morning, teacher.\n'
+&gt;&gt;&gt; f.close()
+</code></pre>
+</div>
+
+<h3 id="readline">按行迭代</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; for line in open(lesson1.txt):
+...     process(line)
+</code></pre>
+</div>
+
+<p>这种方式不需要再使用<code class="highlighter-rouge">.close()</code>关闭文件。标准输入也可以采用类似的方法：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; import sys
+&gt;&gt;&gt; for line in sys.stdin:
+...     process(line)
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h1 id="string">字符串处理</h1>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; s = raw_input("Enter a string: ")
+Enter a string: Good morning, class.
+&gt;&gt;&gt; s
+'Good morning, class.'
+&gt;&gt;&gt; repr(s) #创建一个字符串，以合法的python表达式的形式来表示值
+"'Good morning, class.'"
+&gt;&gt;&gt; len(s) #返回字符串长度
+20
+&gt;&gt;&gt; s.split(',') #将字符串分隔，返回一个列表
+['Good morning', ' class.']
+&gt;&gt;&gt; 'o' in s #判断s中是否包含'o'，返回布尔值
+True
+&gt;&gt;&gt; s.index('o') #从前向后查找指定字符串，返回第一个匹配项的位置
+1
+&gt;&gt;&gt; s.find('o') #从前向后查找指定字符串，返回第一个匹配项的位置
+1
+&gt;&gt;&gt; s.rfind('o') #从后向前查找指定字符串，返回第一个匹配项的位置
+6
+&gt;&gt;&gt; s.count('o') #检索s中含有几个匹配项，返回匹配项数目
+3
+&gt;&gt;&gt; s.replace(',', '-') #字符串的替换
+'Good morning- class.'
+&gt;&gt;&gt; s.replace(',', '') #可以替换为空字符，即删除指定字符串
+'Good morning class.'
+&gt;&gt;&gt; s.lower() #全部改成小写
+'good morning, class.'
+&gt;&gt;&gt; s.upper() #全部改成大写
+'GOOD MORNING, CLASS.'
+&gt;&gt;&gt; pieces = [x.strip() for x in s.split(',')] #忽略分隔后字符串首尾的空白字符
+&gt;&gt;&gt; pieces
+['Good morning', 'class.']
+&gt;&gt;&gt; ','.join(pieces) #使用指定字符串连接列表中的元素
+'Good morning,class.'
+&gt;&gt;&gt; n = '1024'
+&gt;&gt;&gt; int(n) #字符串转为整型
+1024
+&gt;&gt;&gt; float(n) #字符串转为浮点型
+1024.0
+</code></pre>
+</div>
+
+<p>这些内置的字符串方法可以完成大部分的常用操作，更复杂的字符串处理需要借助于正则表达式模块<code class="highlighter-rouge">re</code>。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h1 id="re">正则表达式</h1>
+
+<p>python的正则表达式模块为<code class="highlighter-rouge">re</code>，与<a href="http://about.uuspider.com/2015/07/15/grep.html#basic" target="_blank">shell的正则</a>相比，<code class="highlighter-rouge">re</code>更灵活，使用更方便，但语法也更复杂。</p>
+
+<p>首先来学习一个简单的函数：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt;  re.search('o', s)
+&lt;_sre.SRE_Match object at 0x7f45631b03d8&gt;
+</code></pre>
+</div>
+
+<p>这个表达式表示从字符串s中查找与’o’匹配的项，如果匹配成功，返回一个<a href="#match">MatchObject</a>，否则返回一个NoneType。</p>
+
+<p>为了更直观地看到匹配是否成功，可以这样处理：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; if re.search('o', s):
+...     print "Found 'o' in s."
+Found 'o' in s.
+&gt;&gt;&gt; re.search('o', s) != None
+True
+</code></pre>
+</div>
+
+<h4 id="section">原生字符串</h4>
+
+<p>有时候，字符串转义会给正则匹配带来不小的麻烦，python提供了<code class="highlighter-rouge">raw</code>前缀标记“原生字符串”用于避免此类问题：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; re.search(r'o', s) != None #注意r
+True
+</code></pre>
+</div>
+
+<p>python2默认未采用unicode，因此最好使用<code class="highlighter-rouge">u</code>标记，即<code class="highlighter-rouge">ur'o'</code>，python3默认采用了unicode，只需使用<code class="highlighter-rouge">r</code>标记。</p>
+
+<p>注意：python可能会提示脚本中出现的utf-8字符无法识别，此时应在.py文件首部加上：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># encoding = utf-8
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="basic">基本规则</h2>
+
+<h3 id="element">元字符</h3>
+
+<h4 id="section-1"><code class="highlighter-rouge">[ ]</code>: 字符集，匹配括号内出现的任意单个字符</h4>
+
+<p><code class="highlighter-rouge">[ABCD]</code>匹配A、B、C、D任一字母；<code class="highlighter-rouge">[A-Z]</code>匹配任意一个大写字母；<code class="highlighter-rouge">[^A-D]</code>匹配一个不是大写字母的字符(<code class="highlighter-rouge">^</code>在<code class="highlighter-rouge">[ ]</code>内时表示取反)。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; re.search(r'^1[358][0-9]{9}', '13901390326') != None
+True
+</code></pre>
+</div>
+
+<p>这条命令可以匹配手机号码。</p>
+
+<h4 id="section-2"><code class="highlighter-rouge">|</code>: 或，用于连接两个表达式</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; re.search(r'Han Meimei|Li Lei', 'My name is Han Meimei.') != None
+True
+&gt;&gt;&gt; re.search(r'Han Meimei|Li lei', 'My name is Li Lei.') != None
+True
+&gt;&gt;&gt; re.findall(r'My name is Han Meimei|Li Lei', 'My name is Han Meimei. My name is Li Lei')
+['My name is Han Meimei', 'Li Lei']
+</code></pre>
+</div>
+
+<p>函数<code class="highlighter-rouge">findall()</code>返回一个列表，包含所有匹配项。</p>
+
+<p>这个例子表明<code class="highlighter-rouge">|</code>的有效范围是其两边的整个表达式，要避免这种情况，需要使用”无捕获组”，即：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; re.findall(r'My name is (?:Han Meimei|Li Lei)', 'My name is Han Meimei. My name is Li Lei')
+['My name is Han Meimei', 'My name is Li Lei']
+</code></pre>
+</div>
+
+<p>注意：<code class="highlighter-rouge">[ ]</code>中的<code class="highlighter-rouge">|</code>不表示或，而表示字符<code class="highlighter-rouge">|</code>。</p>
+
+<h4 id="section-3"><code class="highlighter-rouge">.</code>(一个点): 匹配除换行符之外的任意单个字符</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; re.findall(r'.+', 'hello\nworld')
+['hello', 'world']
+</code></pre>
+</div>
+
+<p>使用<code class="highlighter-rouge">re.S(DOTALL)</code>可以使<code class="highlighter-rouge">.</code>匹配包括换行在内的所有单个字符：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; re.findall(r'.+', 'hello\nworld', re.S)
+['hello\nworld']
+</code></pre>
+</div>
+
+<h4 id="section-4"><code class="highlighter-rouge">^</code>和<code class="highlighter-rouge">$</code>: 匹配行首和行尾字符串</h4>
+
+<p>python中与这两个元字符类似的还有转义字符<code class="highlighter-rouge">\A</code>和<code class="highlighter-rouge">\Z</code>，不同之处在于，<code class="highlighter-rouge">\A</code>和<code class="highlighter-rouge">\Z</code>并不会识别换行<code class="highlighter-rouge">\n</code>，也就是匹配整个字符串的开头和结尾，而<code class="highlighter-rouge">^</code>和<code class="highlighter-rouge">$</code>则可以识别换行，可以匹配每一行的开头和结尾。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; re.findall(r'^wo', 'hello\nworld', re.M)
+['wo']
+&gt;&gt;&gt; re.findall(r'\Awo', 'hello\nworld', re.M)
+[ ]
+</code></pre>
+</div>
+
+<p>类似<code class="highlighter-rouge">\A</code>和<code class="highlighter-rouge">\Z</code>的预定义转义字符还有匹配数字的<code class="highlighter-rouge">\d</code>，补集为<code class="highlighter-rouge">\D</code>；匹配字母和数字的<code class="highlighter-rouge">\w</code>，补集为<code class="highlighter-rouge">\W</code>；匹配间隔符的<code class="highlighter-rouge">\s</code>，补集为<code class="highlighter-rouge">\S</code>，<code class="highlighter-rouge">\s</code>等价于<code class="highlighter-rouge">[ \t\r\n\f\v]</code>(注意最前面有个空格)；匹配单词边界的<code class="highlighter-rouge">\b</code>等。</p>
+
+<h4 id="b-"><code class="highlighter-rouge">\b</code>: 匹配单词边界</h4>
+
+<p>匹配单词的边界，可以看作是单词和间隔符、标点之间的位置，类似地，<code class="highlighter-rouge">\B</code>匹配非单词边界。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; re.findall(r'ei', 'My name is Han Meimei.')
+['ei', 'ei']
+&gt;&gt;&gt; re.findall(r'ei\b', 'My name is Han Meimei.')
+['ei']
+&gt;&gt;&gt; re.findall(r'ei\B', 'My name is Han Meimei.')
+['ei']
+</code></pre>
+</div>
+
+<h4 id="section-5"><code class="highlighter-rouge">(?:)</code>: “无捕获组”</h4>
+
+<p>对比这三个表达式：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; re.findall(r'My name is Han Meimei|Li Lei', 'My name is Han Meimei. My name is Li Lei')
+['My name is Han Meimei', 'Li Lei']
+&gt;&gt;&gt; re.findall(r'My name is (Han Meimei|Li Lei)', 'My name is Han Meimei. My name is Li Lei')
+['Han Meimei', 'Li Lei']
+&gt;&gt;&gt; re.findall(r'My name is (?:Han Meimei|Li Lei)', 'My name is Han Meimei. My name is Li Lei')
+['My name is Han Meimei', 'My name is Li Lei']
+</code></pre>
+</div>
+
+<p>可以发现如果要把一部分表达式作为一个整体操作，需要使用<code class="highlighter-rouge">(?:re)</code>将其括起来，而不能只使用<code class="highlighter-rouge">( )</code>，只使用<code class="highlighter-rouge">( )</code>会构造出一个“组”，为了避免构造成组，需要使用“无捕获组”表达式<code class="highlighter-rouge">(?:re)</code>。关于“组”的用法，请看<a href="#group">这里</a>。</p>
+
+<h4 id="section-6"><code class="highlighter-rouge">(?#)</code>: 注释</h4>
+
+<p><code class="highlighter-rouge">(?#comment)</code>中的’comment’在程序解析表达式时将被忽略。</p>
+
+<h3 id="count">重复匹配次数的限定</h3>
+
+<p><code class="highlighter-rouge">*</code>表示匹配0次、1次或多次，<code class="highlighter-rouge">+</code>表示匹配1次或多次，<code class="highlighter-rouge">?</code>表示匹配0次或1次。</p>
+
+<h4 id="section-7">精确匹配</h4>
+
+<p><code class="highlighter-rouge"><span class="p">{</span><span class="err">n,m</span><span class="p">}</span></code>匹配至少n次，最多m次，<code class="highlighter-rouge"><span class="p">{</span><span class="err">n</span><span class="p">}</span></code>精确匹配n次。</p>
+
+<h4 id="section-8">最小匹配</h4>
+
+<p><code class="highlighter-rouge">*</code><code class="highlighter-rouge">+</code><code class="highlighter-rouge">?</code>默认尽可能多的匹配字符，如提取c程序文件中的注释：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; s = r'/* comments1 */ code /* comments2 */'
+&gt;&gt;&gt; re.findall(r'/\*.*\*/', s)
+['/* comments1 */ code /* comments2 */']
+</code></pre>
+</div>
+
+<p>可以看到，该表达式把“code”也提取出来了，并不符合我们的本意，这时需要在<code class="highlighter-rouge">*</code>后加上<code class="highlighter-rouge">?</code>，表示“最小匹配”：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; re.findall(r'/\*.*?\*/', s)
+['/* comments1 */', '/* comments2 */']
+</code></pre>
+</div>
+
+<h3 id="arrow">前向界定和后向界定</h3>
+
+<p>前向界定<code class="highlighter-rouge">(?&lt;=...)</code>中的<code class="highlighter-rouge">...</code>用于指定匹配项前的字符，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; s = r'Han Meimei'
+&gt;&gt;&gt; re.findall(r'(?&lt;=M)eim', s)
+['eim']
+</code></pre>
+</div>
+
+<p>后向界定<code class="highlighter-rouge">(?=...)</code>中的<code class="highlighter-rouge">...</code>用于指定匹配项后的字符，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; re.findall(r'Mei(?=m)', s)
+['Mei']
+</code></pre>
+</div>
+
+<p>上文提取c程序注释的表达式可以改写为：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; s = r'/* comments1 */ code /* comments2 */'
+&gt;&gt;&gt; re.findall(r'(?&lt;=/\* ).*?(?= \*/)', s)
+['comments1', 'comments2']
+</code></pre>
+</div>
+
+<p>注意：<code class="highlighter-rouge">(?&lt;=...)</code>和<code class="highlighter-rouge">(?=...)</code>中的<code class="highlighter-rouge">...</code>不能包含正则式，必须是明确的字符串。</p>
+
+<p>类似的，有前向非界定<code class="highlighter-rouge">(?&lt;!...)</code>和后向非界定<code class="highlighter-rouge">(?!...)</code>，用于指定匹配项之前或之后不希望出现的字符。复杂的界定表达式可读性会变差，这时更适合使用“组”来处理。</p>
+
+<h3 id="group">组</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; re.findall(r'My name is (Han Meimei|Li Lei)', 'My name is Han Meimei. My name is Li Lei')
+['Han Meimei', 'Li Lei']
+</code></pre>
+</div>
+
+<p>这个例子的<code class="highlighter-rouge">findall()</code>只返回了<code class="highlighter-rouge">( )</code>中匹配的内容，这就是“组”的基本功能。</p>
+
+<p>组还可以命名<code class="highlighter-rouge">(?P&lt;name&gt;…)</code>和引用<code class="highlighter-rouge">(?P=name)</code>，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; s = r'Han Meimei'
+&gt;&gt;&gt; re.findall(r'(?P&lt;p1&gt;ei)m(?P=p1)', s) #提取中间为m的ei
+['ei']
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">(?P&lt;name&gt;…)</code>中的<code class="highlighter-rouge">...</code>可以是明确的字符，也可以是复杂的正则表达式。</p>
+
+<p>还可以通过序号引用组表达式：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; re.findall(r'(ei)m\1', s)
+['ei']
+&gt;&gt;&gt; re.findall(r'(ei)m(\1)', s)
+[('ei', 'ei')]
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="func">函数</h2>
+
+<h4 id="rematchresearch"><code class="highlighter-rouge">re.match()</code>和<code class="highlighter-rouge">re.search()</code></h4>
+
+<p>这两个函数的用法是类似的，不同之处在于<code class="highlighter-rouge">re.match()</code>从字符串开头开始匹配，开头匹配失败则返回NoneType，而<code class="highlighter-rouge">re.search()</code>则会检索整个字符串。</p>
+
+<p><code class="highlighter-rouge">re.match()</code>和<code class="highlighter-rouge">re.search()</code>包含三个参数，第一个是正则式，第二个是目标字符串，第三个是选项(修饰符)，常用的修饰符有：</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">re.I(IGNORECASE)</code></td>
+      <td><code class="highlighter-rouge">i</code></td>
+      <td>忽略大小写</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">re.X(VERBOSE)</code></td>
+      <td><code class="highlighter-rouge">x</code></td>
+      <td>详细模式：忽略空白字符和注释 (注释以#开始，直到行尾)</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">re.M(MULTILINE)</code></td>
+      <td><code class="highlighter-rouge">m</code></td>
+      <td>多行匹配，影响<code class="highlighter-rouge">^</code>和<code class="highlighter-rouge">$</code></td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">re.S(DOTALL)</code></td>
+      <td><code class="highlighter-rouge">s</code></td>
+      <td>使<code class="highlighter-rouge">.</code>匹配包括换行在内的所有字符</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">re.U(UNICODE)</code></td>
+      <td><code class="highlighter-rouge">u</code></td>
+      <td>unicode模式</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<p>修饰符的使用方法：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; s = r'Han Meimei'
+&gt;&gt;&gt; re.search('m', s) != None
+&gt;&gt;&gt; re.search('(?i)m', s) != None
+&gt;&gt;&gt; re.search('m', s, re.IGNORECASE) != None
+</code></pre>
+</div>
+
+<h4 id="refindallrefinditer"><code class="highlighter-rouge">re.findall()</code>和<code class="highlighter-rouge">re.finditer()</code></h4>
+
+<p>这两个函数也包含正则式、目标字符串和修饰符三个参数。</p>
+
+<p><code class="highlighter-rouge">re.findall()</code>返回所有匹配成功的字符串，打印为一个列表，<code class="highlighter-rouge">re.finditer()</code>则以迭代的方式返回匹配成功的字符串：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; s = r'Han Meimei'
+&gt;&gt;&gt; re.findall(r'\w', s)
+['H', 'a', 'n', 'M', 'e', 'i', 'm', 'e', 'i']
+&gt;&gt;&gt; for i in re.finditer(r'\w', s):
+...     print i.group(), i.span()
+H (0, 1)
+... ...
+i (9, 10)
+</code></pre>
+</div>
+
+<h4 id="resubresubn-"><code class="highlighter-rouge">re.sub()</code>和<code class="highlighter-rouge">re.subn()</code>: 替换</h4>
+
+<p>这两个函数用于将匹配的字符串替换为新的指定字符串，均包括正则式、新字符串、目标字符串、最多替换次数等参数。</p>
+
+<p><code class="highlighter-rouge">re.sub()</code>返回处理后的字符串，<code class="highlighter-rouge">re.subn()</code>返回一个元组，其中第一个元素是处理后的字符串，第二个元素是替换次数。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; re.subn(r'ei', r'a', s, 3)
+('Han Mama', 2)
+</code></pre>
+</div>
+
+<h4 id="resplit-"><code class="highlighter-rouge">re.split()</code>: “切片”</h4>
+
+<p>使用指定的正则式分隔目标字符串，包括正则式、目标字符串、切片次数三个参数，返回一个列表，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; s=r'Hello    ,    World.'
+&gt;&gt;&gt; re.split('\s*,\s*', s)
+['Hello', 'World.']
+</code></pre>
+</div>
+
+<h4 id="reescape-"><code class="highlighter-rouge">re.escape()</code>: 转义预处理</h4>
+
+<p>可用于字符串的预处理，为目标字符串中的特殊字符加上转义符：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; s=r'Hello , \tWorld.'
+&gt;&gt;&gt; re.escape(s)
+'Hello\\ \\,\\ \\\\tWorld\\.'
+</code></pre>
+</div>
+
+<h4 id="recompile-pattern"><code class="highlighter-rouge">re.compile()</code>: 编译为pattern对象</h4>
+
+<p>该函数包含正则式和修饰符两个参数，返回pattern对象，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; s1 = r'Good morning, class.'
+&gt;&gt;&gt; s2 = r'Good morning, teacher.'
+&gt;&gt;&gt; rc = re.compile(r'morning', re.I)
+&gt;&gt;&gt; rc.findall(s1)
+['morning']
+&gt;&gt;&gt; rc.findall(s2)
+['morning']
+</code></pre>
+</div>
+
+<p>注意：这里的<code class="highlighter-rouge">findall()</code>不只是函数了，而是pattern对象的<strong>方法</strong>。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="obj">对象</h2>
+
+<h3 id="pattern">pattern对象</h3>
+
+<p>pattern对象有很多方法，其中<code class="highlighter-rouge">findall()</code>,<code class="highlighter-rouge">finditer()</code>,<code class="highlighter-rouge">match()</code>,<code class="highlighter-rouge">search()</code>与同名函数的功能完全一样，不过其包含的参数有所不同，依次是目标字符串、指定起始位置、指定结束位置。如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; s = r'Han Meimei'
+&gt;&gt;&gt; rc = re.compile(r'ei', re.I)
+&gt;&gt;&gt; rc.findall(s, 5, 10)
+['ei', 'ei']
+&gt;&gt;&gt; rc.findall(s, 6, 10)
+['ei']
+</code></pre>
+</div>
+
+<p>pattern对象还有一些属性，如<code class="highlighter-rouge">flags</code>返回一个整数，代指编译时的修饰符，<code class="highlighter-rouge">pattern</code>返回编译时的正则式，<code class="highlighter-rouge">groupindex</code>返回一个字典，包含正则式中的组及其序号(不包含无命名组)。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; rc.flags
+2
+</code></pre>
+</div>
+
+<h3 id="match">match对象</h3>
+
+<p>match对象用于提取正则匹配结果MatchObject中的信息。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; s = r'Han Meimei'
+&gt;&gt;&gt; rc = re.compile(r'(?P&lt;p1&gt;mei)', re.I)
+&gt;&gt;&gt; m = rc.search(s, 3, 10)
+&gt;&gt;&gt; m.string #目标字符串
+'Han Meimei'
+&gt;&gt;&gt; m.re.pattern #re生成pattern对象
+'(?P&lt;p1&gt;mei)'
+&gt;&gt;&gt; m.group()
+'Mei'
+&gt;&gt;&gt; m.group(1)
+'Mei'
+&gt;&gt;&gt; m.group('p1')
+'Mei'
+</code></pre>
+</div>
+
+<p>此外，<code class="highlighter-rouge">groups()</code>返回全部组，<code class="highlighter-rouge">groupdict()</code>返回一个以组名为key、匹配结果为values的字典，<code class="highlighter-rouge">start()</code>,<code class="highlighter-rouge">end()</code>,<code class="highlighter-rouge">span()</code>返回匹配成功的组的位置信息，<code class="highlighter-rouge">pos</code>,<code class="highlighter-rouge">endpos</code>返回正则方法输入的位置信息，<code class="highlighter-rouge">lastindex</code>,<code class="highlighter-rouge">lastgroup</code>返回最后匹配的组序号和组名。</p>
+
+<p>最后，再介绍一个非常有用的<code class="highlighter-rouge">expand()</code>，用于生成并返回一个新的字符串，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; s1 = r'HanMeimei 15 girl'
+&gt;&gt;&gt; s2 = r'LiLei 16 boy'
+&gt;&gt;&gt; rc = re.compile(r'(?P&lt;name&gt;[a-z]+)\s+(?P&lt;age&gt;[0-9]+)\s+(?P&lt;gender&gt;[a-z]+)', re.I)
+&gt;&gt;&gt; m1 = rc.search(s1)
+&gt;&gt;&gt; m2 = rc.search(s2)
+&gt;&gt;&gt; m1.expand(r'My name is \g&lt;1&gt;. I am a \g&lt;gender&gt; and I am \g&lt;age&gt;.')
+'My name is HanMeimei. I am a girl and I am 15.'
+&gt;&gt;&gt; m2.expand(r'My name is \g&lt;1&gt;. I am a \g&lt;gender&gt; and I am \g&lt;age&gt;.')
+'My name is LiLei. I am a boy and I am 16.'
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+
+
+
+<div  style="display:none"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1264508560'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1264508560%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></div>
+</body>
+</html>

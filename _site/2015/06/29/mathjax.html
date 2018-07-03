@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcur icon" href="/images/i32.ico" type="image/x-icon" />
+  <title>Mathjax guide</title>
+  <meta name="author" content="uuspider" />
+  <meta name="description" content="about uuspider" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" >
+  <link rel="stylesheet" href="//css/styles.css" />
+
+</head>
+<body>
+
+  <script type="text/javascript" src="//MathJax-2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<h2 id="mathjax-">MathJax 指引</h2>
+
+<p>参考：<a href="http://www.martinkeefe.com/math/mathjax" target="_blank">MathJax Guide</a>，<a href="http://www.onemathematicalcat.org/MathJaxDocumentation/TeXSyntax.htm" target="_blank">TEX Commands</a>，<a href="http://www.mathjax.org/" target="_blank">MathJax.org</a></p>
+
+<h2 id="top"></h2>
+
+<ul>
+  <li><a href="#basic">1. 基本格式</a>
+    <ul>
+      <li><a href="#samples">1.1 引例</a></li>
+      <li><a href="#mark">1.2 标记</a></li>
+    </ul>
+  </li>
+  <li><a href="#letters">2. 字母</a>
+    <ul>
+      <li><a href="#latinletters">2.1 拉丁字母</a></li>
+      <li><a href="#greekletters">2.2 希腊字母</a></li>
+      <li><a href="#otherletters">2.3 其他字母</a></li>
+      <li><a href="#fonts">2.4 字体</a></li>
+      <li><a href="#size">2.5 字号</a></li>
+    </ul>
+  </li>
+  <li><a href="#symbols">3. 符号</a>
+    <ul>
+      <li><a href="#operator">3.1 运算符号</a></li>
+      <li><a href="#relation">3.2 逻辑符号</a></li>
+      <li><a href="#namedoperators">3.3 图形标记</a></li>
+      <li><a href="#arrow">3.4 箭头</a></li>
+      <li><a href="#punctuation">3.5 字母标记</a></li>
+      <li><a href="#pairing">3.6 扩号</a></li>
+      <li><a href="#accent">3.7 戴帽类符号</a></li>
+      <li><a href="#delimiter">3.8 连线符号</a></li>
+    </ul>
+  </li>
+  <li><a href="#notations">4. 标注</a>
+    <ul>
+      <li><a href="#topandbottom">4.1 上下标</a></li>
+      <li><a href="#arrowsnu">4.2 箭头标注</a></li>
+    </ul>
+  </li>
+  <li><a href="#format">5. 格式</a>
+    <ul>
+      <li><a href="#box">5.1 外框</a></li>
+      <li><a href="#matrices">5.2 矩阵</a></li>
+      <li><a href="#multi">5.3 多行公式</a></li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="basic">1. 基本格式</h2>
+
+<h3 id="samples">1.1 引例</h3>
+
+<p>MathJax是一个JavaScript引擎，用于在网页上显示和渲染各种学术符号，MathJax可以解析html源代码中的Latex、MathML、ASCIIMathML等标记语言。如：</p>
+
+<p>\(- \frac{\hbar^2}{2m}\nabla^2 \Psi(\mathbf{r},t)+V(\mathbf{r})\Psi(\mathbf{r},t)=i\hbar\frac{\partial}{\partial t}\Psi(\mathbf{r},t)\)</p>
+
+<p>\[e = \sum_{n=0}^\infty \frac{1}{n!}\]</p>
+
+<p>\[\boxed{
+\lim _{T \rightarrow 0} f _i =
+    \begin{cases}
+        1, &amp; \varepsilon _i\lt\mu, \cr
+        0, &amp; \varepsilon _i \gt \mu.
+    \end{cases} }
+                \]
+<br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="mark">1.2 标记</h3>
+
+<p>公式可以与文字混排在一行，也可以独立成行。</p>
+
+<p>混排的公式记作：\( \backslash ( 公式 \backslash) \)；</p>
+
+<p>独立成行的公式记作：\( \backslash [ 公式 \backslash ] \)。</p>
+
+<p>使用\label{id}给公式编号，通过\ ref{id}实现对公式的引用，应用公式引用需要对MathJax进行配置：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;script type="text/x-mathjax-config"&gt;
+  MathJax.Hub.Config({
+    TeX: {
+    equationNumbers: {
+      autoNumber: ["AMS"], 
+      useLabelIds: true}},
+  "HTML-CSS": {
+      linebreaks: {
+      automatic: true}},
+  SVG: {
+   linebreaks: {
+     automatic: true}}});
+&lt;/script&gt;
+</code></pre>
+</div>
+
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="letters">2. 字母</h2>
+
+<h3 id="latinletters">2.1 拉丁字母</h3>
+
+<div style="float:left;">
+    <table>
+    <tr>
+        <th>\(A\)</th>
+        <th>\(B\)</th>
+        <th>\(C\)</th>
+        <th>\(D\)</th>
+        <th>\(E\)</th>
+        <th>\(F\)</th>
+        <th>\(G\)</th>
+        <th>\(H\)</th>
+        <th>\(I\)</th>
+        <th>\(J\)</th>
+        <th>\(K\)</th>
+        <th>\(L\)</th>
+        <th>\(M\)</th>
+    </tr>
+    </table>
+</div>
+<div>
+    <table>
+    <tr>
+        <th>\(N\)</th>
+        <th>\(O\)</th>
+        <th>\(P\)</th>
+        <th>\(Q\)</th>
+        <th>\(R\)</th>
+        <th>\(S\)</th>
+        <th>\(T\)</th>
+        <th>\(U\)</th>
+        <th>\(V\)</th>
+        <th>\(W\)</th>
+        <th>\(X\)</th>
+        <th>\(Y\)</th>
+        <th>\(Z\)</th>
+    </tr>
+    </table>
+</div>
+<div style="float:left;">
+    <table>
+    <tr>
+        <th>\(a\)</th>
+        <th>\(b\)</th>
+        <th>\(c\)</th>
+        <th>\(d\)</th>
+        <th>\(e\)</th>
+        <th>\(f\)</th>
+        <th>\(g\)</th>
+        <th>\(h\)</th>
+        <th>\(i\)</th>
+        <th>\(j\)</th>
+        <th>\(k\)</th>
+        <th>\(l\)</th>
+        <th>\(m\)</th>
+        <th>\(n\)</th>
+        <th>\(o\)</th>
+        <th>\(p\)</th>
+        <th>\(q\)</th>
+    </tr>
+    </table>
+</div>
+<div>
+    <table>
+    <tr>
+        <th>\(r\)</th>
+        <th>\(s\)</th>
+        <th>\(t\)</th>
+        <th>\(u\)</th>
+        <th>\(v\)</th>
+        <th>\(w\)</th>
+        <th>\(x\)</th>
+        <th>\(y\)</th>
+        <th>\(z\)</th>
+        <th>\(1\)</th>
+        <th>\(2\)</th>
+        <th>\(3\)</th>
+        <th>\(4\)</th>
+        <th>\(5\)</th>
+        <th>\(6\)</th>
+        <th>\(7\)</th>
+        <th>\(8\)</th>
+        <th>\(9\)</th>
+        <th>\(0\)</th>
+    </tr>
+    </table>
+</div>
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="greekletters">2.2 希腊字母</h3>
+
+<div style="float:left;">
+    <table>
+    <tr>
+        <th>\Gamma</th>
+        <th>\Delta</th>
+        <th>\Lambda</th>
+        <th>\Phi</th>
+        <th>\Pi</th>
+        <th>\Psi</th>
+    </tr>
+    <tr>
+        <th>\(\Gamma\)</th>
+        <th>\(\Delta\)</th>
+        <th>\(\Lambda\)</th>
+        <th>\(\Phi\)</th>
+        <th>\(\Pi\)</th>
+        <th>\(\Psi\)</th>
+    </tr>
+    </table>
+</div>
+
+<div>
+    <table>
+    <tr>
+        <th>\Sigma</th>
+        <th>\Theta</th>
+        <th>\Upsilon</th>
+        <th>\Xi</th>
+        <th>\Omega</th>
+    </tr>
+    <tr>
+        <th>\(\Sigma\)</th>
+        <th>\(\Theta\)</th>
+        <th>\(\Upsilon\)</th>
+        <th>\(\Xi\)</th>
+        <th>\(\Omega\)</th>
+    </tr>
+    </table>
+</div>
+
+<div style="float:left;">
+    <table>
+    <tr>
+    <th>\alpha</th>
+    <th>\beta</th>
+    <th>\gamma</th>
+    <th>\delta</th>
+    <th>\epsilon</th>
+
+    </tr>
+    <tr>
+    <th>\(\alpha\)</th>
+    <th>\(\beta\)</th>
+    <th>\(\gamma\)</th>
+    <th>\(\delta\)</th>
+    <th>\(\epsilon\)</th>
+    
+    </tr>
+    </table>
+</div>
+
+<div>
+    <table>
+    <tr>
+    <th>\zeta</th>
+    <th>\eta</th>
+    <th>\theta</th>
+    <th>\iota</th>
+    <th>\kappa</th>
+    <th>\lambda</th>
+    
+    </tr>
+    <tr>
+    <th>\(\zeta\)</th>
+    <th>\(\eta\)</th>
+    <th>\(\theta\)</th>
+    <th>\(\iota\)</th>
+    <th>\(\kappa\)</th>
+    <th>\(\lambda\)</th>
+    
+    </tr>
+    </table>
+</div>
+
+<div style="float:left;">
+    <table>
+    <tr>
+    <th>\mu</th>
+    <th>\nu</th>
+    <th>\xi</th>
+    <th>\pi</th>
+    <th>\rho</th>
+    <th>\sigma</th>
+    <th>\tau</th>
+    <th>\phi</th>
+    </tr>
+    <tr>
+    <th>\(\mu\)</th>
+    <th>\(\nu\)</th>
+    <th>\(\xi\)</th>
+    <th>\(\pi\)</th>
+    <th>\(\rho\)</th>
+    <th>\(\sigma\)</th>
+    <th>\(\tau\)</th>
+    <th>\(\phi\)</th>
+    </tr>
+    </table>
+</div>
+
+<div>
+    <table>
+    <tr>
+    <th>\upsilon</th>
+    <th>\chi</th>
+    <th>\psi</th>
+    <th>\omega</th>
+    <th>\varepsilon</th>
+    </tr>
+    <tr>
+    <th>\(\upsilon\)</th>
+    <th>\(\chi\)</th>
+    <th>\(\psi\)</th>
+    <th>\(\omega\)</th>
+    <th>\(\varepsilon\)</th>
+    </tr>
+    </table>
+</div>
+
+<div style="float:left;">
+    <table>
+    <tr>
+    <th>\digamma</th>
+    <th>\varkappa</th>
+    <th>\varsigma</th>
+    </tr>
+    <tr>
+    <th>\(\digamma\)</th>
+    <th>\(\varkappa\)</th>
+    <th>\(\varsigma\)</th>
+    </tr>
+    </table>
+</div>
+
+<div>
+    <table>
+    <tr>
+    <th>\varphi</th>
+    <th>\varpi</th>
+    <th>\varrho</th>
+    <th>\vartheta</th>
+    </tr>
+    <tr>
+    <th>\(\varphi\)</th>
+    <th>\(\varpi\)</th>
+    <th>\(\varrho\)</th>
+    <th>\(\vartheta\)</th>
+    </tr>
+    </table>
+</div>
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="otherletters">2.3 其他字母</h3>
+
+<div>
+    <table>
+    <tr>
+        <th>\(\aleph\)</th>
+        <th align="left">\aleph</th>
+        <th>\(\ell\)</th>
+        <th align="left">\ell</th>
+        <th>\(\complement\)</th>
+        <th align="left">\complement</th>
+    </tr>
+    <tr>
+        <th>\(\eth\)</th>
+        <th align="left">\eth</th>
+        <th>\(\hbar\)</th>
+        <th align="left">\hbar</th>
+        <th>\(\hslash\)</th>
+        <th align="left">\hslash</th>
+    </tr>
+    <tr>
+        <th>\(\mho\)</th>
+        <th align="left">\mho</th>
+        <th>\(\partial\)</th>
+        <th align="left">\partial</th>
+        <th>\(\Bbbk\)</th>
+        <th align="left">\Bbbk</th>
+    </tr>
+    <tr>
+        <th>\(\Im\)</th>
+        <th align="left">\Im</th>
+        <th>\(\Re\)</th>
+        <th align="left">\Re</th>
+        <th>\(\circledS\)</th>
+        <th align="left">\circledS</th>
+    </tr>
+    <tr>
+        <th>\(\imath\)</th>
+        <th align="left">\imath</th>
+        <th>\(\jmath\)</th>
+        <th align="left">\jmath</th>
+        <th>\(\)</th>
+        <th align="left"></th>
+    </tr>
+    </table>
+</div>
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="fonts">2.4 字体</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>\({\rm ABCabc123}\)</td>
+      <td>:</td>
+      <td>{\rm ABCabc123}</td>
+      <td>罗马体</td>
+    </tr>
+    <tr>
+      <td>\({\it ABCabc123}\)</td>
+      <td>:</td>
+      <td>{\it ABCabc123}</td>
+      <td>意大利体</td>
+    </tr>
+    <tr>
+      <td>\({\bf ABCabc123}\)</td>
+      <td>:</td>
+      <td>{\bf ABCabc123}</td>
+      <td>黑体</td>
+    </tr>
+    <tr>
+      <td>\({\cal ABCabc123}\)</td>
+      <td>:</td>
+      <td>{\cal ABCabc123}</td>
+      <td>花体</td>
+    </tr>
+    <tr>
+      <td>\({\sf ABCabc123}\)</td>
+      <td>:</td>
+      <td>{\sf ABCabc123}</td>
+      <td>等线体</td>
+    </tr>
+    <tr>
+      <td>\({\mit ABCabc123}\)</td>
+      <td>:</td>
+      <td>{\mit ABCabc123}</td>
+      <td>数学斜体</td>
+    </tr>
+    <tr>
+      <td>\({\tt ABCabc123}\)</td>
+      <td>:</td>
+      <td>{\tt ABCabc123}</td>
+      <td>打字机字体</td>
+    </tr>
+    <tr>
+      <td>\({\frak ABCabc123}\)</td>
+      <td>:</td>
+      <td>{\frak ABCabc123}</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>\({\mathscr {ABCabc123} }\)</td>
+      <td>:</td>
+      <td>{\mathscr {ABCabc123} }</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>\({\mathbb {ABCabc123} }\)</td>
+      <td>:</td>
+      <td>{\mathbb {ABCabc123} }</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="size">2.5 字号</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>\({\large xxx}\)</td>
+      <td>:</td>
+      <td>{\large xxx}</td>
+    </tr>
+    <tr>
+      <td>\({\Large xxx}\)</td>
+      <td>:</td>
+      <td>{\Large xxx}</td>
+    </tr>
+    <tr>
+      <td>\({\LARGE xxx}\)</td>
+      <td>:</td>
+      <td>{\LARGE xxx}</td>
+    </tr>
+    <tr>
+      <td>\({\huge xxx}\)</td>
+      <td>:</td>
+      <td>{\huge xxx}</td>
+    </tr>
+    <tr>
+      <td>\({\Huge xxx}\)</td>
+      <td>:</td>
+      <td>{\Huge xxx}</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="symbols">3. 符号</h2>
+
+<h3 id="operator">3.1 运算符号</h3>
+
+<div>
+    <table>
+    <tr>
+        <th>\(\times\)</th>
+        <th align="left">\times</th>
+        <th>\(\pm\)</th>
+        <th align="left">\pm</th>
+        <th>\(\bigcup\)</th>
+        <th align="left">\bigcup</th>
+    </tr>
+    <tr>
+        <th>\(\div\)</th>
+        <th align="left">\div</th>
+        <th>\(\mp\)</th>
+        <th align="left">\mp</th>
+        <th>\(\bigcap\)</th>
+        <th align="left">\bigcap</th>
+    </tr>
+    <tr>
+        <th>\(\int\)</th>
+        <th align="left">\int</th>
+        <th>\(\oint\)</th>
+        <th align="left">\oint</th>
+        <th>\(\iiint\)</th>
+        <th align="left">\iiint</th>
+    </tr>
+    <tr>
+        <th>\(\bigoplus\)</th>
+        <th align="left">\bigoplus</th>
+        <th>\(\bigotimes\)</th>
+        <th align="left">\bigotimes</th>
+        <th>\(\bigodot\)</th>
+        <th align="left">\bigodot</th>
+    </tr>
+    <tr>
+        <th>\(\sum\)</th>
+        <th align="left">\sum</th>
+        <th>\(\prod\)</th>
+        <th align="left">\prod</th>
+        <th>\(\cdot\)</th>
+        <th align="left">\cdot</th>
+    </tr>
+    <tr>
+        <th>\(\prime\)</th>
+        <th align="left">\prime</th>
+        <th>\(\partial\)</th>
+        <th align="left">\partial</th>
+        <th>\(\nabla\)</th>
+        <th align="left">\nabla</th>
+    </tr>
+    <tr>
+        <th>\(\sqrt[n]{m}\)</th>
+        <th align="left">\sqrt[n]{m}</th>
+        <th>\(\frac{n}{m}\)</th>
+        <th align="left">\frac{n}{m}</th>
+        <th>\(\)</th>
+        <th align="left"></th>
+    </tr>
+    </table>
+</div>
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="relation">3.2 逻辑符号</h3>
+
+<div>
+    <table>
+    <tr>
+        <th>\(\approx\)</th>
+        <th align="left">\approx</th>
+        <th>\(\sim\)</th>
+        <th align="left">\sim</th>
+        <th>\(\doteq\)</th>
+        <th align="left">\doteq</th>
+    </tr>
+    <tr>
+        <th>\(\geqslant\)</th>
+        <th align="left">\geqslant</th>
+        <th>\(\gg\)</th>
+        <th align="left">\gg</th>
+        <th>\(\ngtr\)</th>
+        <th align="left">\ngtr</th>
+    </tr>
+    <tr>
+        <th>\(\leqslant\)</th>
+        <th align="left">\leqslant</th>
+        <th>\(\ll\)</th>
+        <th align="left">\ll</th>
+        <th>\(\nless\)</th>
+        <th align="left">\nless</th>
+    </tr>
+    <tr>
+        <th>\(\equiv\)</th>
+        <th align="left">\equiv</th>
+        <th>\(\because\)</th>
+        <th align="left">\because</th>
+        <th>\(\in\)</th>
+        <th align="left">\in</th>
+    </tr>
+    <tr>
+        <th>\(\neq\)</th>
+        <th align="left">\neq</th>
+        <th>\(\therefore\)</th>
+        <th align="left">\therefore</th>
+        <th>\(\ni\)</th>
+        <th align="left">\ni</th>
+    </tr>
+    <tr>
+        <th>\(\notin\)</th>
+        <th align="left">\notin</th>
+        <th>\(\perp\)</th>
+        <th align="left">\perp</th>
+        <th>\(\mid\)</th>
+        <th align="left">\mid</th>
+    </tr>
+    <tr>
+        <th>\(\propto\)</th>
+        <th align="left">\propto</th>
+        <th>\(\parallel\)</th>
+        <th align="left">\parallel</th>
+        <th>\(\nmid\)</th>
+        <th align="left">\nmid</th>
+    </tr>
+    <tr>
+        <th>\(\forall\)</th>
+        <th align="left">\forall</th>
+        <th>\(\exists\)</th>
+        <th align="left">\exists</th>
+        <th></th>
+        <th align="left"></th>
+    </tr>
+    </table>
+</div>
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="namedoperators">3.3 图形标记</h3>
+
+<div>
+    <table>
+    <tr>
+        <th>\(\angle\)</th>
+        <th align="left">\angle</th>
+        <th>\(\infty\)</th>
+        <th align="left">\infty</th>
+        <th>\(\surd\)</th>
+        <th align="left">\surd</th>
+    </tr>
+    <tr>
+        <th>\(\bot\)</th>
+        <th align="left">\bot</th>
+        <th>\(\bigstar\)</th>
+        <th align="left">\bigstar</th>
+        <th>\(\varnothing\)</th>
+        <th align="left">\varnothing</th>
+    </tr>
+    <tr>
+        <th>\(\triangle\)</th>
+        <th align="left">\triangle</th>
+        <th>\(\square\)</th>
+        <th align="left">\square</th>
+        <th>\(\spadesuit\)</th>
+        <th align="left">\spadesuit</th>
+    </tr>
+    <tr>
+        <th>\(\clubsuit\)</th>
+        <th align="left">\clubsuit</th>
+        <th>\(\blacksquare\)</th>
+        <th align="left">\blacksquare</th>
+        <th>\(\vec{x}\)</th>
+        <th align="left">\vec{x}</th>
+    </tr>
+    <tr>
+        <th>\(\ldots\)</th>
+        <th align="left">\ldots</th>
+        <th>\(\cdots\)</th>
+        <th align="left">\cdots</th>
+        <th>\(\circ\)</th>
+        <th align="left">\circ</th>
+    </tr>
+    </table>
+</div>
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="arrow">3.4 箭头</h3>
+
+<div>
+    <table>
+    <tr>
+        <th>\(\gets\)</th>
+        <th align="left">\gets</th>
+        <th>\(\to\)</th>
+        <th align="left">\to</th>
+    </tr>
+    <tr>
+        <th>\(\upuparrows\)</th>
+        <th align="left">\upuparrows</th>
+        <th>\(\downdownarrows\)</th>
+        <th align="left">\downdownarrows</th>
+    </tr>
+    <tr>
+        <th>\(\nearrow\)</th>
+        <th align="left">\nearrow</th>
+        <th>\(\nwarrow\)</th>
+        <th align="left">\nwarrow</th>
+    </tr>
+    <tr>
+        <th>\(\swarrow\)</th>
+        <th align="left">\swarrow</th>
+        <th>\(\searrow\)</th>
+        <th align="left">\searrow</th>
+    </tr>
+    <tr>
+        <th>\(\downarrow\)</th>
+        <th align="left">\downarrow</th>
+        <th>\(\Uparrow\)</th>
+        <th align="left">\Uparrow</th>
+    </tr>
+    <tr>
+        <th>\(\updownarrow\)</th>
+        <th align="left">\updownarrow</th>
+        <th>\(\Updownarrow\)</th>
+        <th align="left">\Updownarrow</th>
+    </tr>
+    <tr>
+        <th>\(\circlearrowleft\)</th>
+        <th align="left">\circlearrowleft</th>
+        <th>\(\circlearrowright\)</th>
+        <th align="left">\circlearrowright</th>
+    </tr>
+    <tr>
+        <th>\(\curvearrowleft\)</th>
+        <th align="left">\curvearrowleft</th>
+        <th>\(\curvearrowright\)</th>
+        <th align="left">\curvearrowright</th>
+    </tr>
+    </table>
+</div>
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="punctuation">3.5 字母标记</h3>
+
+<div>
+    <table>
+    <tr>
+        <th align="left">\(\sin\)</th>
+        <th align="left">\sin</th>
+        <th align="left">\(\cos\)</th>
+        <th align="left">\cos</th>
+        <th align="left">\(\exp\)</th>
+        <th align="left">\exp</th>
+    </tr>
+    <tr>
+        <th align="left">\(\max\)</th>
+        <th align="left">\max</th>
+        <th align="left">\(\min\)</th>
+        <th align="left">\min</th>
+        <th align="left">\(\det\)</th>
+        <th align="left">\det</th>
+    </tr>
+    <tr>
+        <th align="left">\(\ln\)</th>
+        <th align="left">\ln</th>
+        <th align="left">\(\log\)</th>
+        <th align="left">\log</th>
+        <th align="left">\(\lg\)</th>
+        <th align="left">\lg</th>
+    </tr>
+    <tr>
+        <th align="left">\(\inf\)</th>
+        <th align="left">\inf</th>
+        <th align="left">\(\deg\)</th>
+        <th align="left">\deg</th>
+        <th align="left">\(\tan\)</th>
+        <th align="left">\tan</th>
+    </tr>
+    <tr>
+        <th align="left">\(\lim\)</th>
+        <th align="left">\lim</th>
+        <th align="left">\(\arg\)</th>
+        <th align="left">\arg</th>
+        <th align="left">\(\csc\)</th>
+        <th align="left">\csc</th>
+    </tr>
+    <tr>
+        <th align="left">\(\arcsin\)</th>
+        <th align="left">\arcsin</th>
+        <th align="left">\(\arccos\)</th>
+        <th align="left">\arccos</th>
+        <th align="left">\(\arctan\)</th>
+        <th align="left">\arctan</th>
+    </tr>
+    </table>
+</div>
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="pairing">3.6 括号</h3>
+
+<div>
+    <table>
+    <tr>
+        <th>\(\lbrace\)</th>
+        <th align="left">&nbsp;&nbsp;\lbrace</th>
+        <th>\(\backslash\)</th>
+        <th align="left">&nbsp;&nbsp;\backslash</th>
+        <th>\(\vert\)</th>
+        <th align="left">&nbsp;&nbsp;\vert</th>
+    </tr>
+    <tr>
+        <th>\(\rbrace\)</th>
+        <th align="left">&nbsp;&nbsp;\rbrace</th>
+        <th>\</th>
+        <th align="left">&nbsp;&nbsp;\</th>
+        <th>\(\Vert\)</th>
+        <th align="left">&nbsp;&nbsp;\Vert</th>
+    </tr>
+    </table>
+</div>
+<p><br />
+如果只需要显示一半，需要使用<strong>/left.</strong>或<strong>/right.</strong>进行标记：</p>
+
+<table class="centre display">
+    <tr>
+        <th> \( \left. \frac{ {\rm d}y}{ {\rm d}x} \right| _{x=0} \)  </th> 
+        <th>:</th>   
+        <th>\left. \frac{ {\rm d}y}{ {\rm d}x} \right| _{x=0}</th>
+    </tr>
+</table>
+<p><br />
+括号的大小可调整：</p>
+<div>
+<table class="centre display">
+    <tr>
+        <th>(<br />)</th>  
+        <th>\left<br />\right</th>  
+        <th>\bigl<br />\bigr</th>
+        <th>\Bigl<br />\Bigr</th>  
+        <th>\biggl<br />\biggr</th>  
+        <th>\Biggl<br />\Biggr</th>
+    </tr>
+    <tr>
+        <th>\((\dfrac{c}{d})\)</th>   
+        <th>\(\left(\dfrac{c}{d}\right)\)</th> 
+        <th>\(\bigl(\dfrac{c}{d}\bigr)\)</th>   
+        <th>\(\Bigl(\dfrac{c}{d}\Bigr)\)</th>   
+        <th>\(\biggl(\dfrac{c}{d}\biggr)\)</th> 
+        <th>\(\Biggl(\dfrac{c}{d}\Biggr)\)</th> 
+    </tr>
+</table>
+</div>
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="accent">3.7 戴帽类符号</h3>
+
+<div>
+    <table>
+    <tr>
+        <th>\(\acute{x}\)</th>
+        <th align="left">\acute{x}</th>
+        <th>\(\grave{x}\)</th>
+        <th align="left">\grave{x}</th>
+        <th>\(\ddot{x}\)</th>
+        <th align="left">\ddot{x}</th>
+    </tr>
+    <tr>
+        <th>\(\tilde{x}\)</th>
+        <th align="left">\tilde{x}</th>
+        <th>\(\bar{x}\)</th>
+        <th align="left">\bar{x}</th>
+        <th>\(\breve{x}\)</th>
+        <th align="left">\breve{x}</th>
+    </tr>
+    <tr>
+        <th>\(\check{x}\)</th>
+        <th align="left">\check{x}</th>
+        <th>\(\hat{x}\)</th>
+        <th align="left">\hat{x}</th>
+        <th>\(\vec{x}\)</th>
+        <th align="left">\vec{x}</th>
+    </tr>
+    <tr>
+        <th>\(\dot{x}\)</th>
+        <th align="left">\dot{x}</th>
+        <th>\(\ddot{x}\)</th>
+        <th align="left">\ddot{x}</th>
+        <th>\(\dddot{x}\)</th>
+        <th align="left">\dddot{x}</th>
+    </tr>
+    </table>
+</div>
+
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="delimiter">3.8 连线符号</h3>
+
+<div>
+    <table>
+    <tr>
+        <th>\(\widetilde{xxx}\)</th>
+        <th align="left">\widetilde{xxx}</th>
+    </tr>
+    <tr>
+        <th>\(\widehat{xxx}\)</th>
+        <th align="left">\widehat{xxx}</th>
+    </tr>
+    <tr>
+        <th>\(\overbrace{xxx}\)</th>
+        <th align="left">\overbrace{xxx}</th>
+    </tr>
+    <tr>
+        <th>\(\underbrace{xxx}\)</th>
+        <th align="left">\underbrace{xxx}</th>
+    </tr>
+    <tr>
+        <th>\(\overline{xxx}\)</th>
+        <th align="left">\overline{xxx}</th>
+    </tr>
+    <tr>
+        <th>\(\underline{xxx}\)</th>
+        <th align="left">\underline{xxx}</th>
+    </tr>
+    <tr>
+        <th>\(\overrightarrow{xxx}\)</th>
+        <th align="left">\overrightarrow{xxx}</th>
+    </tr>
+    <tr>
+        <th>\(\underleftarrow{xxx}\)</th>
+        <th align="left">\underleftarrow{xxx}</th>
+    </tr>
+    <tr>
+        <th>\(\overleftrightarrow{xxx}\)</th>
+        <th align="left">\overleftrightarrow{xxx}</th>
+    </tr>
+    <tr>
+        <th>\(\underleftrightarrow{xxx}\)</th>
+        <th align="left">\underleftrightarrow{xxx}</th>
+    </tr>
+    </table>
+</div>
+
+<p>\(\overbrace{a+\underbrace{b+c}_{1.0}+d}^{2.0}\):</p>
+
+<p><strong>\overbrace{a+\underbrace{b+c}_{1.0}+d}^{2.0}</strong></p>
+
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="notations">4. 标注</h2>
+
+<h3 id="topandbottom">4.1 上下标</h3>
+
+<p>^标记上标，_标记下标，两侧都有上下标时，使用<strong>\sideset</strong>。</p>
+
+<div>
+    <table>
+    <tr>
+        <th>\(\sideset{^1_2}{^3_4}\bigotimes \)</th>
+        <th>:</th>
+        <th>\sideset{^1_2}{^3_4}\bigotimes</th>
+    </tr>
+    </table>
+</div>
+<p><br /></p>
+
+<p>顶部和底部符号用<strong>\overset</strong>和<strong>\underset</strong>标记。</p>
+
+<div>
+    <table>
+    <tr>
+        <th>\(\overset{*}{X} \)</th>
+        <th>:</th>
+        <th>\overset{*}{X}</th>
+    </tr>
+    </table>
+</div>
+<p><br /></p>
+
+<p>底部的符号还可以使用<strong>\limits</strong>标记。</p>
+
+<div>
+    <table>
+    <tr>
+        <th>\(\iint\limits_S f(x,y)\;dx\;dy \)</th>
+        <th>:</th>
+        <th>\iint\limits_S f(x,y)\;dx\;dy </th>
+    </tr>
+    </table>
+</div>
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="arrowsnu">4.2 箭头标注</h3>
+
+<div><table><tr><th>\(A\:\xleftarrow{n+\mu-1}\:B\:\xrightarrow[T]{n\pm i-1}\:C\):</th></tr></table></div>
+
+<p><strong>A:\xleftarrow{n+\mu-1}:B:\xrightarrow[T]{n\pm i-1}:C</strong></p>
+
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="format">5. 格式</h2>
+
+<h3 id="box">5.1 外框</h3>
+
+<p>\(\boxed{E = mc ^2}\)</p>
+
+<p><strong>\boxed{E = mc ^2}</strong></p>
+
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="matrices">5.2 矩阵</h3>
+
+<div>
+<table><tr><th>
+\[\begin{pmatrix}
+\alpha&amp; \beta^{*}\\
+\gamma^{*}&amp; \delta
+\end{pmatrix}\]</th></tr>
+
+<tr><th align="left"><pre><code>\begin{pmatrix}
+  \alpha&amp; \beta^{*}\\
+  \gamma^{*}&amp; \delta
+\end{pmatrix}</code></pre></th></tr>
+</table>
+</div>
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="multi">5.3 多行公式</h3>
+
+<p>\标记换行，&amp;类似于制表符，用于元素的对齐。</p>
+
+<table>
+    <tr>
+        <th>\[\boxed{
+        \begin{equation}
+            \begin{split}
+            a =&amp; b+c-d\\
+               &amp;{}+e-f\\
+              =&amp; g+h\\
+              =&amp; i
+            \end{split}
+            \end{equation} }
+            \]
+        </th>
+    </tr>
+</table>
+<table>
+    <tr>
+        <th>
+            <pre align="left"><code>
+\begin{equation}
+  \begin{split}
+    a =&amp; b+c-d\\
+         &amp;{}+e-f\\
+       =&amp; g+h\\
+       =&amp; i
+  \end{split}
+\end{equation}
+            </code></pre>
+        </th>
+    </tr>
+</table>
+<table>
+    <tr>
+        <th>\[\boxed{
+        \begin{align}
+        a_1&amp; =b_1+c_1\\
+        a_2&amp; =b_2+c_2-d_2+e_2
+        \end{align} }
+                \]</th>
+    </tr>
+</table>
+<table>
+    <tr>
+        <th align="left"><pre><code>
+\begin{align}
+  a_1&amp; =b_1+c_1\\
+  a_2&amp; =b_2+c_2-d_2+e_2
+\end{align}
+        </code></pre></th></tr>
+</table>
+<table>
+    <tr>
+        <th>\[\boxed{
+        \begin{align}
+        a_{11}&amp; =b_{11}&amp;
+        a_{12}&amp; =b_{12}\\
+        a_{21}&amp; =b_{21}&amp;
+        a_{22}&amp; =b_{22}+c_{22}
+        \end{align} }
+                \]</th>
+    </tr>
+</table>
+<table>
+    <tr>
+        <th align="left"><pre><code>\begin{align}
+  a_{11}&amp; =b_{11}&amp;
+  a_{12}&amp; =b_{12}\\
+  a_{21}&amp; =b_{21}&amp;
+  a_{22}&amp; =b_{22}+c_{22}
+\end{align}</code></pre></th>
+    </tr>
+</table>
+<table>
+    <tr>
+        <th>\[\boxed{
+\lim _{T \rightarrow 0} f _i =
+    \begin{cases}
+        1, &amp; \varepsilon _i\lt\mu, \\
+        0, &amp; \varepsilon _i \gt \mu.
+    \end{cases} }
+                \]</th>
+    </tr>
+</table>
+<table>
+    <tr>
+        <th align="left"><pre><code>\lim _{T \rightarrow 0} f _i =
+  \begin{cases}
+    1, &amp; \varepsilon _i \lt \mu, \\
+    0, &amp; \varepsilon _i \gt \mu.
+  \end{cases}</code></pre></th>
+    </tr>
+</table>
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+
+<div  style="display:none"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1264508560'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1264508560%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></div>
+</body>
+</html>

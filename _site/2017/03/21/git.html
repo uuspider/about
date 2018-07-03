@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcur icon" href="/images/i32.ico" type="image/x-icon" />
+  <title>git guide</title>
+  <meta name="author" content="uuspider" />
+  <meta name="description" content="about uuspider" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" >
+  <link rel="stylesheet" href="//css/styles.css" />
+
+</head>
+<body>
+
+  <style type="text/css">
+pre {
+  padding:8px 15px;
+  background: #f8f8f8;  
+  border:1px solid #e5e5e5;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+pre,code {
+  background:#e8f5fe;color:#000;
+}
+</style>
+
+<h2 id="git-">git 指引</h2>
+
+<p>参考：<a href="https://git-scm.com/book/zh" target="_blank">Pro Git</a>, <a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank">常用git命令清单</a>, <a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank">git简明指南</a>, <a href="http://backlogtool.com/git-guide/cn/" target="_blank">猴子都能懂的git教程</a></p>
+
+<h2 id="top"></h2>
+
+<hr />
+
+<ul>
+  <li><a href="#setup">安装配置</a> : <a href="#config">配置文件</a> | <a href="#user">用户信息</a> | <a href="#vi">编辑器</a> | <a href="#info">查看配置</a> | <a href="#help">帮助</a></li>
+  <li><a href="#init">建立仓库</a> : <a href="#stage">管理文件</a> | <a href="#head">HEAD</a> | <a href="#status">查看状态</a> | <a href="#clone">clone</a></li>
+  <li><a href="#update">更新仓库</a> : <a href="#push">push</a> | <a href="#remote">remote</a> | <a href="#pull">pull</a></li>
+  <li><a href="#branch">分支管理</a> : <a href="#local_branch">本地操作</a> | <a href="#remote_branch">远端分支</a></li>
+  <li><a href="#label">标签管理</a></li>
+  <li><a href="#server">git服务器</a></li>
+</ul>
+
+<hr />
+
+<p>git是分布式版本控制系统，每个客户端都保存了整个<strong>代码仓库</strong>，在本地对文件进行修改后，保存在暂存区域，之后提交更新，最后推送到远端git仓库，在此过程中，只有推送需要连接网络，因此，git对版本控制的操作并不依赖网络，便于保持数据的完整性和版本历史的洁净。</p>
+
+<h2 id="setup">安装配置</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo apt-get install git
+</code></pre>
+</div>
+
+<p>初次运行git之前需要配置一些参数和变量，包括<code class="highlighter-rouge">/etc/gitconfig</code>、<code class="highlighter-rouge">~/.gitconfig</code>或<code class="highlighter-rouge">~/.config/git/config</code>以及当前使用仓库git目录中的<code class="highlighter-rouge">.git/config</code>，这三个文件中，后一个配置会覆盖上一级别的配置。</p>
+
+<h3 id="config">编辑配置文件</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git config -e --global # 编辑 ~/.gitconfig
+$ git config -e # 编辑 .git/config
+</code></pre>
+</div>
+
+<p>也可以在shell中直接编辑配置文件。</p>
+
+<h3 id="user">用户信息</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git config --global user.name "Tom King"
+$ git config --global user.email uuspider@gmail.com
+</code></pre>
+</div>
+
+<p>git会把用户名和email写入每一次版本提交，并且不可更改。这里<code class="highlighter-rouge">--global</code>选项是针对全系统设置的，如果针对特定项目使用不同用户名和email时，就不要使用该选项。</p>
+
+<h3 id="vi">编辑器</h3>
+
+<p>git默认使用vim，如果想使用emacs，可以这样配置：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git config --global core.editor emacs
+</code></pre>
+</div>
+
+<p>git可以彩色显示：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git config --global color.ui auto
+</code></pre>
+</div>
+
+<p>还可以为git命令设定别名，如将<code class="highlighter-rouge">checkout</code>缩略为<code class="highlighter-rouge">co</code>等：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git config --global alias.co checkout
+$ git config --global alias.br branch
+$ git config --global alias.ci commit
+$ git config --global alias.st status
+</code></pre>
+</div>
+
+<h3 id="info">查看配置信息</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git config --list # 查看所有配置
+$ git config user.name # 查看指定项配置，这里是查看用户名
+</code></pre>
+</div>
+
+<h3 id="help">帮助</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git help config
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="init">建立仓库</h2>
+
+<p>将当前目录(workspace)所有文件导入git：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git init
+</code></pre>
+</div>
+
+<p>该命令创建一个<code class="highlighter-rouge">.git</code>子目录，初始化git仓库(repository)所有的必须文件，如果指定project-name，即<code class="highlighter-rouge">git init &lt;project-name&gt;</code>，就新建一个目录并初始化为git仓库。</p>
+
+<h3 id="stage">管理文件</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git add *.py
+$ git add templates static
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">git add &lt;file-name/dir-name&gt;</code>将文件快照添加到暂存区(stage或index)，<code class="highlighter-rouge">git add .</code>表示将当前目录(workspace)所有文件快照加入暂存区，<code class="highlighter-rouge">-p</code>会提示文件快照变化并要求确认。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git rm readme.txt
+</code></pre>
+</div>
+
+<p>从workspace删除文件。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git rm --cached license.txt
+</code></pre>
+</div>
+
+<p>不再将文件添加到stage，但保留在workspace。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git mv readme README
+</code></pre>
+</div>
+
+<p>重命名workspace中的文件名并记录在stage。</p>
+
+<h3 id="head">提交到HEAD</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git commit -m 'commit message'
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">git commit</code>是将暂存区快照提交到本地git仓库(HEAD)，<code class="highlighter-rouge">-m</code>后可输入代码提交的说明信息，<code class="highlighter-rouge">--amend -m 'commit mesage'</code>是修改最后一次<code class="highlighter-rouge">commit</code>说明信息，<code class="highlighter-rouge">--amend &lt;file-name&gt;</code>重复最后一次<code class="highlighter-rouge">commit</code>，<code class="highlighter-rouge">-a</code>表示将workspace快照直接提交到HEAD，<code class="highlighter-rouge">-v</code>显示所有diff信息。</p>
+
+<h3 id="status">查看状态</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git status
+</code></pre>
+</div>
+
+<p>查看当前git仓库的状态。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git log
+</code></pre>
+</div>
+
+<p>查看git日志。</p>
+
+<h3 id="clone">将远端git仓库复制到本地</h3>
+
+<p>使用<code class="highlighter-rouge">clone</code>可将远端服务器上git仓库所有文件和版本信息都复制到本地：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git clone https://github.com/USERNAME/repo.git LocalGitName
+</code></pre>
+</div>
+
+<p>git支持ssh、git等协议，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git clone ssh://git@github.com:22/USERNAME/repo.git
+</code></pre>
+</div>
+
+<p>建立git仓库后，就可以在本地管理和编辑工作文件，然后推送到远端。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="update">更新仓库</h2>
+
+<p>完成工作文件的编辑后，可使用<code class="highlighter-rouge">add</code>和<code class="highlighter-rouge">commit</code>提交本次更新到本地git仓库：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git add *.py
+$ git commit -m 'commit message'
+</code></pre>
+</div>
+
+<p>如果是将当前目录所有文件快照都加入仓库，即<code class="highlighter-rouge">git add .</code>，则上述这两条命令可以合并处理：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git commit -a -m 'commit message'
+</code></pre>
+</div>
+
+<h3 id="push">推送到远端仓库</h3>
+
+<p>如果远端服务器已经存在当前git仓库，可以直接使用<code class="highlighter-rouge">push</code>将本地git仓库的更新推送过去：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git push origin master
+</code></pre>
+</div>
+
+<p>其格式为<code class="highlighter-rouge">git push -u &lt;remote-name&gt; &lt;branch-name&gt;</code>，注意如果指定了<code class="highlighter-rouge">-u</code>选项，此后的推送便可以省略’remote-name’和’branch-name’，首次运行时不可省略。’origin’和’master’是习惯用法，分别为远端git仓库和主分支的默认名称。</p>
+
+<h3 id="remote">查看远端仓库</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git remote
+</code></pre>
+</div>
+
+<p>列出远端git仓库名称。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git remote -v
+</code></pre>
+</div>
+
+<p>列出远端git仓库名称与其对应的url。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git remote show origin
+</code></pre>
+</div>
+
+<p>通过<code class="highlighter-rouge">git remote show [remote-name]</code>，可以查看远端仓库url和分支信息，如果不指定remote-name，可以列出更多信息。</p>
+
+<h3 id="pull">将远端git仓库更新同步到本地</h3>
+
+<p>如果远端git仓库有更新，可以使用<code class="highlighter-rouge">pull</code>将其同步到本地git仓库：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git pull origin master
+</code></pre>
+</div>
+
+<p>执行<code class="highlighter-rouge">push</code>或<code class="highlighter-rouge">pull</code>时，如果省略远端git仓库名称，则默认其为origin。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="branch">分支管理</h2>
+
+<p>多人协作或多模块协作任务(主分支，merge分支)过程中，每个成员或每个模块的修改记录可以分别保存，形成一个个分支任务(topic分支)，各个分支的编辑、修改不受其他分支影响，当完成该分支任务后，按照<strong>一定的逻辑</strong>合并到主分支，这就是git的核心功能。</p>
+
+<h3 id="local_branch">本地操作</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git branch
+</code></pre>
+</div>
+
+<p>列出所有本地分支，<code class="highlighter-rouge">-r</code>列出所有<code class="highlighter-rouge">fetch</code>到本地的远程分支，<code class="highlighter-rouge">-a</code>列出所有本地分支和<code class="highlighter-rouge">fetch</code>到本地的远程分支。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git branch bugfix
+</code></pre>
+</div>
+
+<p>创建bugfix分支，但HEAD仍指向原分支。要切换到bugfix分支，需使用<code class="highlighter-rouge">checkout</code>：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git checkout bugfix
+</code></pre>
+</div>
+
+<p>切换分支后，HEAD指向bugfix，工作目录中的文件会随之改变。</p>
+
+<p>如果需要新建分支并马上切换到新的分支，可以使用<code class="highlighter-rouge">checkout</code>的<code class="highlighter-rouge">-b</code>选项：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git checkout -b hurryfix
+</code></pre>
+</div>
+
+<p>如果要将本地分支与指定远端分支建立追踪关系，可以使用<code class="highlighter-rouge">--set-upstream</code>：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git branch --set-upstream hurryfix origin/serverfix
+</code></pre>
+</div>
+
+<p>也可以在远端分支的基础上，在本地新建分支：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git checkout hurryfix origin/serverfix
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">origin/serverfix</code>是<code class="highlighter-rouge">fetch</code>到本地的远程分支表示形式，指远端origin仓库中的serverfix分支。</p>
+
+<p>完成hurryfix任务后，可切换回上一个分支：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git checkout -
+</code></pre>
+</div>
+
+<p>如果上一个分支为master，就可以把hurryfix合并到master：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git merge hurryfix
+</code></pre>
+</div>
+
+<p>如果hurryfix和bugfix同步进行，对同一个文件的同一部分做了不同的修改，git合并分支时就会引起冲突(conflicts)，此时，可以使用<code class="highlighter-rouge">git status</code>查看冲突解决标记或<code class="highlighter-rouge">git diff &lt;branch_a&gt; &lt;branch_b&gt;</code>查看差异，然后在workspace修改含有冲突内容的文件，使用<code class="highlighter-rouge">git add</code>将该冲突文件标记为已解决，最后完成<code class="highlighter-rouge">git commit</code>并再次合并分支。</p>
+
+<p>被合并到master后，hurryfix分支就可以删除了：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git branch -d hurryfix
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">git branch</code>还有一些其它选项，如<code class="highlighter-rouge">-v</code>可以列出最后一次提交，<code class="highlighter-rouge">--merged</code>和<code class="highlighter-rouge">--no-merged</code>可分别列出已经合并和未合并到当前分支的分支，<code class="highlighter-rouge">-vv</code>则可以列出所有本地分支的更多信息，同时列出与远端分支进行版本信息的比较结果。</p>
+
+<p>注意：上述所有操作均在本地操作。</p>
+
+<h3 id="remote_branch">远端分支</h3>
+
+<p>在本地处理git协作任务时，需要查看远端git仓库及其分支信息：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git remote -v
+$ git ls-remote
+</code></pre>
+</div>
+
+<p>列出远端origin仓库信息：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git remote show origin
+</code></pre>
+</div>
+
+<p>如果远端服务器还没有建立相应的git仓库(remote)，可使用<code class="highlighter-rouge">remote add</code>将本地git仓库推送过去：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git remote add remote-name git@github.com:USERNAME/repo.git # 这是ssh协议的一种写法
+</code></pre>
+</div>
+
+<p>远端’remote-name’可以这样修改：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git remote rename remote-name origin
+</code></pre>
+</div>
+
+<p>通过<code class="highlighter-rouge">push</code>可以将本地完成的分支任务推送到远端：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git push origin master
+</code></pre>
+</div>
+
+<p>这条命令表示将本地master分支推送到远端origin仓库，并命名为master分支，如果远端分支的名称需要修改为bugfix，可以这样做：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git push origin master:bugfix
+</code></pre>
+</div>
+
+<p>表示推送本地master分支来更新远端origin仓库上的bugfix分支。</p>
+
+<p>如果其他协作者在远端origin仓库中建立了一个serverfix分支，可以<code class="highlighter-rouge">fetch</code>到本地：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git fetch origin serverfix
+</code></pre>
+</div>
+
+<p>或者将origin的所有更新都<code class="highlighter-rouge">fetch</code>到本地：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git fetch origin
+</code></pre>
+</div>
+
+<p>但此时本地的serverfix分支并不能编辑，如果需要在这个新的serverfix分支上进行工作，需要<code class="highlighter-rouge">checkout</code>：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git checkout -b origin/serverfix
+</code></pre>
+</div>
+
+<p>这个操作有一个快捷方式：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git checkout --track origin/serverfix
+</code></pre>
+</div>
+
+<p>表示在本地新建一个serverfix分支，并与远端origin/serverfix建立追踪关系。</p>
+
+<p>如果需要为本地分支与远端分支设置不同名称，可以：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git checkout -b sf origin/serverfix
+$ git checkout --track sf origin/serverfix
+</code></pre>
+</div>
+
+<p>再回到<code class="highlighter-rouge">pull</code>，<code class="highlighter-rouge">pull</code>实际上是<code class="highlighter-rouge">fetch</code>+<code class="highlighter-rouge">merge</code>，即将远端分支<code class="highlighter-rouge">fetch</code>到本地仓库，然后再<code class="highlighter-rouge">merge</code>到相应的本地分支，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git fetch origin
+$ git merge origin/serverfix:master
+</code></pre>
+</div>
+
+<p>可以写成：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git pull origin serverfix:master
+</code></pre>
+</div>
+
+<p>表示<code class="highlighter-rouge">fetch</code>远程origin仓库的serverfix分支，同时与本地当前仓库master分支合并。如果是与当前分支合并，则这里的master可以省略；如果当前分支与远程分支存在追踪关系，则远程分支名可以省略；如果当前仓库只有一个追踪分支，则远程git仓库名也可以省略，即：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git pull
+</code></pre>
+</div>
+
+<p>当远程git仓库删除某个分支后，<code class="highlighter-rouge">pull</code>不会删除对应的本地分支，如果需要同步删除对应的本地分支，可以使用<code class="highlighter-rouge">-p</code>选项。</p>
+
+<p>当完成一个分支任务的所有工作后，就可以将该分支合并到远端master分支，然后删除该分支，删除远端分支：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git push origin --delete serverfix
+</code></pre>
+</div>
+
+<p>或</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git remote rm serverfix
+</code></pre>
+</div>
+
+<p>分支的合并，除了<code class="highlighter-rouge">merge</code>，还有<code class="highlighter-rouge">rebase</code>，<code class="highlighter-rouge">rebase</code>和<code class="highlighter-rouge">merge</code>的最终结果是一样的，其优点在于提交记录更加清晰，如在topic分支中更新master分支的更新，就可以使用<code class="highlighter-rouge">rebase</code>简化记录，而向master分支导入topic分支，可先<code class="highlighter-rouge">rebase</code>，再<code class="highlighter-rouge">merge</code>，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git checkout hurryfix
+$ git reabse master
+$ git checkout master
+$ git merge hurryfix
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="label">标签</h2>
+
+<p>通常，正式发布的软件都拥有版本号，与此类似，git支持为提交的记录添加标签：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git tag 0.1.0 1234567890
+</code></pre>
+</div>
+
+<p>末尾的十位十六进制数字是所要标记的commit的前十位，如果不提供则表示标记当前的commit。commit ID可以通过<code class="highlighter-rouge">log</code>查看：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git log
+</code></pre>
+</div>
+
+<p>列出所有tag：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git tag
+</code></pre>
+</div>
+
+<p>删除本地tag：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git tag -d [tag]
+</code></pre>
+</div>
+
+<p>删除远端tag：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git push origin :refs/tags/[tagName]
+</code></pre>
+</div>
+
+<p>查看tag信息：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git show [tag]
+</code></pre>
+</div>
+
+<p>提交指定tag：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git push [remote_branch] [tag]
+</code></pre>
+</div>
+
+<p>提交所有tag：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git push [remote_branch] --tags
+</code></pre>
+</div>
+
+<p>新建一个分支，指向某个tag：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git checkout -b [branch] [tag]
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="server">git服务器</h2>
+
+<p>安装git后，创建一个git用户：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo adduser git_pi
+</code></pre>
+</div>
+
+<p>选定一个目录作为git仓库，如<code class="highlighter-rouge">/srv/pi.git</code>，在<code class="highlighter-rouge">/srv</code>目录下输入：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo git init --bare pi.git
+</code></pre>
+</div>
+
+<p>修改用户权限，禁止用户直接登录服务器修改工作区：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo chown -R git_pi:git_pi pi.git
+</code></pre>
+</div>
+
+<p>编辑<code class="highlighter-rouge">/etc/passwd</code>，禁止git用户登录shell，找到：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git_pi:x:1001:1001:,,,:/home/git:/bin/bash
+</code></pre>
+</div>
+
+<p>改为：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git_pi:x:1001:1001:,,,:/home/git:/usr/bin/git-shell
+</code></pre>
+</div>
+
+<p>git服务器搭建完成，现在可在客户端使用git命令了，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git clone git_pi@192.168.1.99:/srv/pi.git
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+
+
+
+<div  style="display:none"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1264508560'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1264508560%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></div>
+</body>
+</html>

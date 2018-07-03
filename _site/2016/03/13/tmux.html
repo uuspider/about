@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcur icon" href="/images/i32.ico" type="image/x-icon" />
+  <title>tmux</title>
+  <meta name="author" content="uuspider" />
+  <meta name="description" content="about uuspider" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" >
+  <link rel="stylesheet" href="//css/styles.css" />
+
+</head>
+<body>
+
+  <style type="text/css">
+pre {
+  padding:8px 15px;
+  background: #f8f8f8;  
+  border:1px solid #e5e5e5;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+pre,code {
+  background:#e8f5fe;color:#000;
+}
+</style>
+
+<h2 id="tmux-shortcuts">tmux shortcuts</h2>
+
+<p>参考：<a href="http://www.regular-expressions.info/grep.html" target="_blank">man grep</a>, <a href="http://www.gnu.org/software/grep/manual/grep.html" target="_blank">man sed</a></p>
+
+<h2 id="top"></h2>
+
+<hr />
+
+<ul>
+  <li><a href="#windows">窗口操作</a></li>
+  <li><a href="#panels">面板操作</a></li>
+</ul>
+
+<hr />
+
+<h3 id="windows">窗口操作</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">选项:</th>
+      <th style="text-align: left"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">c</code></td>
+      <td style="text-align: left">创建新窗口</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">&amp;</code></td>
+      <td style="text-align: left">关闭当前窗口</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">&lt;num&gt;</code></td>
+      <td style="text-align: left">切换到指定窗口</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">p</code></td>
+      <td style="text-align: left">切换到上一窗口</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">n</code></td>
+      <td style="text-align: left">切换到下一窗口</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">l</code></td>
+      <td style="text-align: left">在前后两个窗口间切换</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">w</code></td>
+      <td style="text-align: left">通过窗口列表切换窗口</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">'</code></td>
+      <td style="text-align: left">重命名当前窗口</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">.</code></td>
+      <td style="text-align: left">修改当前窗口编号</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">f</code></td>
+      <td style="text-align: left">在所有窗口中查找文本</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h3 id="panels">面板操作</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">选项:</th>
+      <th style="text-align: left"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">"</code></td>
+      <td style="text-align: left">上下平分当前面板</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">%</code></td>
+      <td style="text-align: left">左右平分当前面板</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">x</code></td>
+      <td style="text-align: left">关闭当前面板</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">!</code></td>
+      <td style="text-align: left">将当前面板重置于新建窗口</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">Ctrl+arrow</code></td>
+      <td style="text-align: left">以1格为单位移动面板边缘</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">Alt+arrow</code></td>
+      <td style="text-align: left">以5格为单位移动面板边缘</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">space</code></td>
+      <td style="text-align: left">在预置面板布局中循环切换</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">q</code></td>
+      <td style="text-align: left">显示面板编号</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">o</code></td>
+      <td style="text-align: left">在当前窗口中选择下一面板</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">arrow</code></td>
+      <td style="text-align: left">移动光标以选择面板</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge"><span class="p">{</span></code></td>
+      <td style="text-align: left">向前置换当前面板</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">}</code></td>
+      <td style="text-align: left">向后置换当前面板</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">Alt+o</code></td>
+      <td style="text-align: left">逆时针旋转当前窗口中的面板</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="highlighter-rouge">Ctrl+o</code></td>
+      <td style="text-align: left">顺时针旋转当前窗口中的面板</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+
+
+
+<div  style="display:none"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1264508560'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1264508560%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></div>
+</body>
+</html>

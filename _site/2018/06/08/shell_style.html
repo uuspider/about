@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcur icon" href="/images/i32.ico" type="image/x-icon" />
+  <title>Shell with Style</title>
+  <meta name="author" content="uuspider" />
+  <meta name="description" content="about uuspider" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" >
+  <link rel="stylesheet" href="//css/styles.css" />
+
+</head>
+<body>
+
+  <style type="text/css">
+pre {
+  padding:8px 15px;
+  background: #f8f8f8;  
+  border:1px solid #e5e5e5;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+pre,code {
+  background:#e8f5fe;color:#000;
+}
+</style>
+
+<h1 id="shell-with-style">Shell with Style</h1>
+
+<p>参考：<a href="http://zh-google-styleguide.readthedocs.io/en/latest/google-shell-styleguide/contents/" target="_blank">Google shell styleguide</a></p>
+
+<h2 id="top"></h2>
+
+<hr />
+
+<ul>
+  <li><a href="#background">背景</a>
+    <ul>
+      <li><a href="#which_shell">选择shell</a></li>
+      <li><a href="#when_to_use">shell适用场景</a></li>
+    </ul>
+  </li>
+  <li><a href="#invocation">脚本与解释器</a>
+    <ul>
+      <li><a href="#extensions">扩展名</a></li>
+      <li><a href="#suid">SUID/SGID</a></li>
+    </ul>
+  </li>
+  <li><a href="#environment">环境</a>
+    <ul>
+      <li><a href="#so_se">重定向输出信息</a></li>
+    </ul>
+  </li>
+  <li><a href="#comments">注释</a>
+    <ul>
+      <li><a href="#header">文件头</a></li>
+      <li><a href="#funcomments">功能注释</a></li>
+      <li><a href="#codecomments">细节注释</a></li>
+      <li><a href="#todocomments">TODO注释</a></li>
+    </ul>
+  </li>
+  <li><a href="#formatting">格式</a>
+    <ul>
+      <li><a href="#indentation">缩进</a></li>
+      <li><a href="#part">语句块</a></li>
+      <li><a href="#line_length">行的长度</a></li>
+      <li><a href="#pipelines">管道组合</a></li>
+      <li><a href="#loops">if/for/while</a></li>
+      <li><a href="#case">case</a></li>
+      <li><a href="#var_expansion">变量展开</a></li>
+      <li><a href="#quotes">引号</a></li>
+    </ul>
+  </li>
+  <li><a href="#features">shell陷阱</a>
+    <ul>
+      <li><a href="#command_substitution">命令替换</a></li>
+      <li><a href="#test">test, [与[[</a></li>
+      <li><a href="#filter">字符串比对</a></li>
+      <li><a href="#wildcard">通配符</a></li>
+      <li><a href="#eval">eval</a></li>
+      <li><a href="#ifs">重定义 IFS</a></li>
+      <li><a href="#path">最小化 PATH</a></li>
+      <li><a href="#pipetowhile">管道导向while</a></li>
+    </ul>
+  </li>
+  <li><a href="#naming_conventions">命名约定</a>
+    <ul>
+      <li><a href="#fun_names">函数名</a></li>
+      <li><a href="#var_names">变量名</a></li>
+      <li><a href="#con_names">常量和环境变量名</a></li>
+      <li><a href="#script_names">源文件名</a></li>
+      <li><a href="#tmp_names">临时文件名</a></li>
+      <li><a href="#readonly">只读变量</a></li>
+      <li><a href="#local_var">局部变量</a></li>
+      <li><a href="#fun_location">函数位置</a></li>
+      <li><a href="#main">主函数</a></li>
+    </ul>
+  </li>
+  <li><a href="#calling">命令调用</a>
+    <ul>
+      <li><a href="#returnvalue">检查返回值</a></li>
+      <li><a href="#invsext">内建命令</a></li>
+    </ul>
+  </li>
+  <li><a href="#conclusion">结论</a></li>
+</ul>
+
+<hr />
+
+<h2 id="background">背景</h2>
+
+<h3 id="which_shell">使用哪种 shell</h3>
+
+<div class="tip"> 优先选择 bash。 </div>
+
+<p>可执行文件必须以类似 <code class="highlighter-rouge"><span class="c">#!/bin/bash</span></code> 的标志开始。使用 <code class="highlighter-rouge">set</code> 设置 shell 的选项，以确保使用 <code class="highlighter-rouge">bash &lt;script_name&gt;</code> 运行脚本时不会出现异常。</p>
+
+<p>优先选择 bash ，如果系统不支持 bash ，可使用其他 shell 语言。例如 Solaris SVR4，需要用纯 Bourne shell。</p>
+
+<blockquote>
+  <p>uuspider 的 shell 脚本使用 <code class="highlighter-rouge"><span class="c">#!/usr/bin/env bash</span></code> 开始。</p>
+</blockquote>
+
+<h2 id="when_to_use">何时使用shell</h2>
+
+<div class="tip"> shell 适用于编写小工具或者简单的包装脚本。</div>
+
+<p>shell 不是一种开发语言，而是一种工具语言，因此，有必要明确 shell 在生产环境下的一些使用准则：</p>
+
+<ul>
+  <li>
+    <p>如果你主要是在调用其他的工具并且做一些相对很小数据量的操作，可以使用 shell。</p>
+  </li>
+  <li>
+    <p>如果你关注性能，请选择其他语言， shell 不是一种高效的语言。</p>
+  </li>
+  <li>
+    <p>如果发现你的项目涉及数组，不要使用 shell，可选择 python 。</p>
+  </li>
+  <li>
+    <p>如果你的 shell 脚本已经超过100行，请使用 python 。</p>
+  </li>
+</ul>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="invocation">脚本与解释器</h2>
+
+<h3 id="extensions">文件扩展名</h3>
+
+<div class="tip"> 可执行文件不需要扩展名(强烈建议)或者使用 .sh 扩展名。库文件必须使用 .sh 作为扩展名，而且应该是不可执行的。</div>
+
+<p>执行一个程序时，不需要知道它是用什么语言编写的，同时 shell 脚本也不要求有扩展名，所以我们推荐可执行文件不使用扩展名。</p>
+
+<p>对于库文件，明确其编写语言很重要，使用 .sh 这样特定语言后缀作为扩展名，就可以使不同语言编写的具有相同功能的库文件采用同一个文件名。</p>
+
+<h3 id="suid">SUID/SGID</h3>
+
+<div class="tip"> 禁止使用SUID和SGID。 </div>
+
+<p>禁止在 shell 中使用 SUID/SGID ，如果需要更高权限，可使用 <code class="highlighter-rouge">sudo</code> 。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="environment">环境</h2>
+
+<h3 id="so_se">重定向输出信息</h3>
+
+<div class="tip"> 正常内容输出到标准输出 (STDOUT) ，警告、错误、诊断等状态信息，应重定向到标准错误输出 (STDERR) 。</div>
+
+<p>警告、错误、诊断等状态信息可能默认输出到 STDOUT ，应将其重定向到 STDERR ，以便于查看脚本运行状态。</p>
+
+<p>推荐使用以下函数，可将错误信息和其他状态信息同时定向到 STDERR 。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>err() {
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" &gt;&amp;2
+}
+
+if ! do_something; then
+  err "Unable to do_something"
+  exit "${E_DID_NOTHING}"
+fi
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="comments">注释</h2>
+
+<h3 id="header">文件头</h3>
+
+<div class="tip"> 文件开头处应有脚本说明。</div>
+
+<p>每个脚本必须有一个顶层注释，简述其功能，也可以加入版权声明、作者信息、版本说明等。</p>
+
+<blockquote>
+  <p>uuspider 的 shell 脚本文件头格式为：</p>
+</blockquote>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#!/usr/bin/env bash</span>
+<span class="c">########################################</span>
+<span class="c">#  脚本：cnbeta爬虫</span>
+<span class="c">#  版本：0.9</span>
+<span class="c">#  作者：uuspider</span>
+<span class="c">#  日期：2015-07-24</span>
+<span class="c">#  修订：2015-09-09 v0.4</span>
+<span class="c">#  修订：2015-12-09 v0.5 20条新内容时发送</span>
+<span class="c">#  修订：2016-09-09 v0.6 邮件题目重复问题</span>
+<span class="c">#  更新：2016-12-20 v0.7 cnbeta rss升级</span>
+<span class="c">#  更新：2017-03-04 v0.8 cnbeta rss升级</span>
+<span class="c">#  更新：2018-03-31 v0.9 cnbeta rss升级 http -&gt; https</span>
+<span class="c">#  语言：shell</span>
+<span class="c">#  功能：获取cnbeta更新并发送到邮箱</span>
+<span class="c">########################################</span>
+</code></pre>
+</div>
+
+<h3 id="funcomments">函数注释</h3>
+
+<div class="tip"> 函数，尤其是库函数，无论其长度大小和复杂性都必须有注释。</div>
+
+<p>函数注释应该包含如下内容:</p>
+
+<ul>
+  <li>
+    <p>函数的功能描述</p>
+  </li>
+  <li>
+    <p>使用的和修改的全局变量</p>
+  </li>
+  <li>
+    <p>参数信息</p>
+  </li>
+  <li>
+    <p>返回值，应该明确定义函数返回值，避免使用默认值</p>
+  </li>
+</ul>
+
+<p>例如:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#!/usr/bin/env bash</span>
+...
+
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s1">'/usr/xpg4/bin:/usr/bin:/opt/csw/bin:/opt/goog/bin'</span>
+
+<span class="c">#######################################</span>
+<span class="c"># Cleanup files from the backup dir</span>
+<span class="c"># Globals (全局变量) :</span>
+<span class="c">#   BACKUP_DIR</span>
+<span class="c">#   ORACLE_SID</span>
+<span class="c"># Arguments (参数) :</span>
+<span class="c">#   None</span>
+<span class="c"># Returns (返回值) :</span>
+<span class="c">#   None</span>
+<span class="c">#######################################</span>
+cleanup<span class="o">()</span> <span class="o">{</span>
+  ...
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h3 id="codecomments">代码细节的注释</h3>
+
+<div class="tip"> 对代码中含有技巧的、不容易读懂的、有趣的或重要的部分添加注释。</div>
+
+<p>注释应与被注释的代码同级缩进，对变量的注释应紧跟在变量后面。</p>
+
+<p>注意不应为所有代码都添加注释。</p>
+
+<h3 id="todocomments">TODO</h3>
+
+<div class="tip"> 对临时、短期解决方案，或仍需完善的代码添加 TODO 注释。</div>
+
+<p>TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户名，冒号(可省略)之后是注释正文，最后以 bug 号或 ticket 号结束。如:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># TODO(mrmonkey): Handle the unlikely edge cases (bug ####)
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="formatting">格式</h2>
+
+<p>优先沿用文件原本的风格，如果是新文件，应遵循以下风格。</p>
+
+<h3 id="indentation">缩进</h3>
+
+<div class="tip"> 每一级缩进为 2 个空格，不要使用 tab 。</div>
+
+<h3 id="part">语句块</h3>
+
+<div class="tip"> 两个语句块之间以一个空白行分隔。</div>
+
+<h3 id="line_length">行长度和长字符串</h3>
+
+<div class="tip"> 每一行最多 80 个字符。</div>
+
+<p>当一行很长时，使用 <code class="highlighter-rouge">\</code> 换行，这时应使用与命令宽度相同的缩进。使用 <code class="highlighter-rouge">\</code> 换行的原则是整齐美观，体现代码的逻辑性。</p>
+
+<p>如果字符串超过 80 字符，应尽量使用 here document 或者嵌入一个新行，如果有一个文字字符串长度超过 80 字符，并且不能合理的分割，也应尽量使它短一点。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># 使用 'here document's
+cat &lt;&lt;END;
+I am an exceptionally long
+string.
+END
+
+# 直接使用换行分割字符串
+long_string="I am an exceptionally
+  long string."
+</code></pre>
+</div>
+
+<h3 id="pipelines">管道组合</h3>
+
+<div class="tip"> 如果一行不能完成整套管道操作，应将多个管道拆分成一行一个。</div>
+
+<p>如果一行可以完成整套管道操作，应将其写在同一行。否则，应该分割为每行一个管道(缩进 2 个空格)。这条规则适用于那些通过使用 <code class="highlighter-rouge">|</code> 或逻辑运算符 <code class="highlighter-rouge">||</code> 、 <code class="highlighter-rouge">&amp;&amp;</code> 等组合起来的链式命令。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># 管道组合命令
+command1 \
+  | command2 \
+  | command3 \
+  | command4
+</code></pre>
+</div>
+
+<h3 id="loops">if/for/while</h3>
+
+<div class="tip"> '; then' 、 '; do' 应和对应的 'if/for/while' 放在同一行，下一行增加一个缩进级别。</div>
+
+<p><code class="highlighter-rouge">else</code> 单独一行，与相应的 <code class="highlighter-rouge">if</code> 对齐； <code class="highlighter-rouge">fi/done</code> 单独一行，与相应的 <code class="highlighter-rouge">if/for/while</code> 对齐。</p>
+
+<p>如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>for dir in ${dirs_to_cleanup}; do
+  if [[ -d "${dir}/${ORACLE_SID}" ]]; then
+    log_date "Cleaning up old files in ${dir}/${ORACLE_SID}"
+    rm "${dir}/${ORACLE_SID}/"*
+    if [[ "$?" -ne 0 ]]; then
+      error_message
+    fi
+  else
+    mkdir -p "${dir}/${ORACLE_SID}"
+    if [[ "$?" -ne 0 ]]; then
+      error_message
+    fi
+  fi
+done
+</code></pre>
+</div>
+
+<h3 id="case">case</h3>
+
+<div class="tip"> 匹配项表达式比 case 和 esac 多一个缩进级别。</div>
+
+<div class="tip"> 匹配项和执行命令在同一行时，应在右括号后面和 ;; 号前面添加一个空格。</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>verbose='false'
+aflag=''
+bflag=''
+files=''
+while getopts 'abf:v' flag; do
+  case "${flag}" in
+    a) aflag='true' ;;
+    b) bflag='true' ;;
+    f) files="${OPTARG}" ;;
+    v) verbose='true' ;;
+    *) error "Unexpected option ${flag}" ;;
+  esac
+done
+</code></pre>
+</div>
+
+<div class="tip"> 如果某一匹配项下有多个命令，应分成多行，其中匹配项、单条命令和 ;; 号各占一行，命令和 ;; 号比匹配项多一个缩进级别。</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>case "${expression}" in
+  a)
+    variable="..."
+    some_command "${variable}" "${other_expr}" ...
+    ;;
+  absolute)
+    actions="relative"
+    another_command "${actions}" "${other_expr}" ...
+    ;;
+  *)
+    error "Unexpected expression '${expression}'"
+    ;;
+esac
+</code></pre>
+</div>
+
+<div class="tip"> 匹配项的表达式一般不需要添加引号，同时应避免使用 ;&amp; 和 ;;s&amp; 等符号。</div>
+
+<h3 id="var_expansion">变量展开</h3>
+
+<div class="tip"> 除了单个字符的 shell 特殊变量或位置参数，其他所有变量都应使用花括号，如 "${var}" 。</div>
+
+<p>单个字符的特殊变量和位置参数:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>echo "Specials: !=$!, -=$-, _=$_. ?=$?, #=$# *=$* @=$@ \$=$$ ..."
+echo "Positional: $1" "$5" "$3"
+echo "many parameters: ${10}"
+</code></pre>
+</div>
+
+<p>明确变量的边界:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># Output is "a0b0c0"
+set -- a b c
+echo "${1}0${2}0${3}0"
+</code></pre>
+</div>
+
+<p>单个字符的普通变量也应使用花括号:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>echo "PATH=${PATH}, PWD=${PWD}, mine=${some_var}"
+while read f; do
+  echo "file=${f}"
+done &lt; &lt;(ls -l /tmp)
+</code></pre>
+</div>
+
+<p>错误用法:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># &lt;错误用法&gt; 无引号，无花括号，单个字符的特殊变量和位置参数不需要花括号
+echo a=$avar "b=$bvar" "PID=${$}" "${1}"
+
+# &lt;错误用法&gt; 不易区分: "${1}0${2}0${3}0" or "${10}${20}${30}"？
+set -- a b c
+echo "$10$20$30"
+</code></pre>
+</div>
+
+<h3 id="quotes">引号</h3>
+
+<div class="tip"> 尽量将包含变量、命令替换符、空格或 shell 元字符的字符串用引号括起来。</div>
+
+<div class="tip"> 优先对类单词的字符串使用引号(而不是命令选项或者路径名)。</div>
+
+<div class="tip"> 不要对整数使用引号。</div>
+
+<div class="tip"> 注意 [[ ... ]] 中正则表达式的引号用法。</div>
+
+<div class="tip"> 尽量使用 $@ ，除非有特殊原因需要使用 $* 。</div>
+
+<p>注意单引号不会识别和展开变量，双引号将展开或替换变量。</p>
+
+<p>变量定义或引用时使用双引号:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>flag="$(some_command and its args "$@" 'quoted separately')"
+echo "${flag}"
+number="$(generate_number)"
+echo "${number}"
+</code></pre>
+</div>
+
+<p>不要对整数使用引号:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>value=32
+</code></pre>
+</div>
+
+<p>优先对类单词的字符串使用引号:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>readonly USE_INTEGER='true'
+</code></pre>
+</div>
+
+<p>单引号中的特殊字符不需要转义:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>echo 'Hello stranger, and well met. Earn lots of $$$'
+echo "Process $$: Done making \$\$\$."
+</code></pre>
+</div>
+
+<p>命令选项和路径不加引号:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># ($1 is assumed to contain a value here)
+grep -li Hugo /dev/null "$1"
+</code></pre>
+</div>
+
+<p>一些较复杂的引号用法:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># Less simple examples
+# "quote variables, unless proven false": ccs might be empty
+git send-email --to "${reviewers}" ${ccs:+"--cc" "${ccs}"}
+
+# Positional parameter precautions: $1 might be unset
+# Single quotes leave regex as-is.
+grep -cP '([Ss]pecial|\|?characters*)$' ${1:+"$1"}
+
+# For passing on arguments,
+# "$@" is right almost everytime, and
+# $* is wrong almost everytime:
+#
+# * $* and $@ will split on spaces, clobbering up arguments
+#   that contain spaces and dropping empty strings;
+# * "$@" will retain arguments as-is, so no args
+#   provided will result in no args being passed on;
+#   This is in most cases what you want to use for passing
+#   on arguments.
+# * "$*" expands to one argument, with all args joined
+#   by (usually) spaces,
+#   so no args provided will result in one empty string
+#   being passed on.
+# (Consult 'man bash' for the nit-grits ;-)
+
+set -- 1 "2 two" "3 three tres"; echo $# ; set -- "$*"; echo "$#, $@")
+set -- 1 "2 two" "3 three tres"; echo $# ; set -- "$@"; echo "$#, $@")
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="features">shell 陷阱</h2>
+
+<h3 id="command_substitution">命令替换</h3>
+
+<div class="tip"> 命令替换使用 $(command) ，不要使用反引号。</div>
+
+<p>反引号嵌套的反引号需要使用反斜杠(“\“)转义内部的反引号，而 <code class="highlighter-rouge">$(command)</code> 嵌套的反引号不需要转义。如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var="$(command "$(command1)")"
+
+# &lt;错误用法&gt; 不要使用反引号进行命令替换
+var="`command \`command1\``"
+</code></pre>
+</div>
+
+<h3 id="test">test, [] 和 [[]]</h3>
+
+<div class="tip"> 优先使用 [[ ... ]]，而不是 [ ... ] 和 test。 </div>
+
+<p>在 <code class="highlighter-rouge">[[</code> 和 <code class="highlighter-rouge">]]</code> 之间不会展开路径或切分单词，使用 <code class="highlighter-rouge">[[ ... ]]</code> 可以避免错误，同时， <code class="highlighter-rouge">[[ ... ]]</code> 支持正则表达式， <code class="highlighter-rouge">[ ... ]</code> 不支持。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># This ensures the string on the left is made up of characters in the
+# alnum character class followed by the string name.
+# Note that the RHS should not be quoted here.
+# For the gory details, see
+# E14 at http://tiswww.case.edu/php/chet/bash/FAQ
+if [[ "filename" =~ ^[[:alnum:]]+name ]]; then
+  echo "Match"
+fi
+
+# This matches the exact pattern "f*" (Does not match in this case)
+if [[ "filename" == "f*" ]]; then
+  echo "Match"
+fi
+
+# This gives a "too many arguments" error as f* is expanded to the
+# contents of the current directory
+if [ "filename" == f* ]; then
+  echo "Match"
+fi
+</code></pre>
+</div>
+
+<h3 id="filter">字符串比对</h3>
+
+<div class="tip"> 比对字符串使用 = ，检测字符串是否为空(非空)时使用 -z 或 -n。</div>
+
+<p>字符串比对:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>if [[ "${my_var}" = "some_string" ]]; then
+  do_something
+fi
+
+# &lt;错误用法&gt;:
+if [[ "${my_var}X" = "some_stringX" ]]; then
+  do_something
+fi
+</code></pre>
+</div>
+
+<p>检测字符串是否为空时使用<code class="highlighter-rouge">-z</code>，检测字符串是否非空时使用<code class="highlighter-rouge">-n</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>if [[ -z "${my_var}" ]]; then
+  do_something
+fi
+
+# &lt;不推荐的用法&gt;:
+if [[ "${my_var}" = "" ]]; then
+  do_something
+fi
+
+# &lt;错误用法&gt;: 应使用 -n
+if [[ "${my_var}" ]]; then
+  do_something
+fi
+</code></pre>
+</div>
+
+<h3 id="wildcard">通配符扩展</h3>
+
+<div class="tip"> 当文件含有通配符时，应使用完整路径，比如，使用 ./* ，而不是 * 。</div>
+
+<p>这是因为文件名可以使用 <code class="highlighter-rouge">-</code> 开头，使用 <code class="highlighter-rouge">*</code> 可能会被系统误认为是选项，如:</p>
+
+<p>当前目录下有 -f ， -r ， somedir ， somefile 等文件和目录，使用</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>rm -v *
+</code></pre>
+</div>
+
+<p>会扩展成</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>rm -v -r -f somedir simefile
+</code></pre>
+</div>
+
+<p>这就导致当前目录所有的文件和目录被删除。使用 <code class="highlighter-rouge">./*</code> 可以避免这种情况：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>rm -v ./*
+removed './-f'
+removed './-r'
+rm: cannot remove './somedir': Is a directory
+removed './somefile'
+</code></pre>
+</div>
+
+<h3 id="eval">eval</h3>
+
+<div class="tip"> 禁止使用 eval 。</div>
+
+<p><code class="highlighter-rouge">eval</code> 用于变量赋值，可以设置变量，但是不检查这些变量。如:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>variable="$(eval some_function)"
+</code></pre>
+</div>
+
+<p>如果函数某个返回值中含有空格，<code class="highlighter-rouge">variable</code> 的值就会出错。</p>
+
+<h3 id="ifs">重定义 IFS</h3>
+
+<div class="tip"> 重新定义 IFS 为'空格-tab-换行'。</div>
+
+<p>对于安全性要求较高的 shell 脚本，应在全局变量定义区域重新定义 <code class="highlighter-rouge">IFS</code> :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>IFS='   
+'
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">IFS</code> 重定义为’空格-tab-换行’，也可以使用:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># 注意 Bourne Shell 不支持这种方式。
+IFS="\040\t\n"
+</code></pre>
+</div>
+
+<h3 id="path">最小化 PATH</h3>
+
+<div class="tip"> 最小化 PATH 的范围，禁止将普通用户的目录加入 PATH 。</div>
+
+<p>对于安全性要求较高的 shell 脚本，应在全局变量定义区域重新定义 <code class="highlighter-rouge">PATH</code> 并 <code class="highlighter-rouge">export</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>OLDPATH="$PATH"
+PATH=/bin:/usr/bin
+export PATH
+</code></pre>
+</div>
+
+<p>注意保存系统原来的 <code class="highlighter-rouge">PATH</code> 。</p>
+
+<p>当需要使用某个目录时，可为其设置一个全局变量，如当前脚本所在目录:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &amp;&amp; pwd )"
+
+# &lt;错误用法&gt; 不要直接切换到某个目录
+cd "$(dirname "${BASH_SOURCE[0]}")"
+</code></pre>
+</div>
+
+<h3 id="pipetowhile">管道导向 while</h3>
+
+<div class="tip"> 不要将管道直接导向 while ，应使用进程替换或 for 循环。</div>
+
+<p>这是因为 <code class="highlighter-rouge">while</code> 循环是在一个子 shell 中运行的，管道直接导向 <code class="highlighter-rouge">while</code> 使 bug 难以追踪。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>last_line='NULL'
+your_command | while read line; do
+  last_line="${line}"
+done
+
+# This will output 'NULL'
+echo "${last_line}"
+</code></pre>
+</div>
+
+<p>如果确定输入中不包含空格或者特殊符号(通常不是用户输入的)，可以使用 <code class="highlighter-rouge">for</code> 循环。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>total=0
+# Only do this if there are no spaces in return values.
+for value in $(command); do
+  total+="${value}"
+done
+</code></pre>
+</div>
+
+<p>也可以使用进程替换 <code class="highlighter-rouge">&lt; &lt;()</code> :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>total=0
+last_file=
+while read count filename; do
+  total+="${count}"
+  last_file="${filename}"
+done &lt; &lt;(your_command | uniq -c)
+
+# This will output the second field of the last line of output from
+# the command.
+echo "Total = ${total}"
+echo "Last one = ${last_file}"
+</code></pre>
+</div>
+
+<div class="tip"> while 中修改的变量不能传递到循环外，需要向循环外传递变量时尽量选用 awk 。</div>
+
+<p>如</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>awk '$3 == "nfs" { print $2 " maps to " $1 }' /proc/mounts
+</code></pre>
+</div>
+
+<p>用 <code class="highlighter-rouge">while</code> 的实现方法:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>while read src dest type opts rest; do
+  if [[ ${type} == "nfs" ]]; then
+    echo "NFS ${dest} maps to ${src}"
+  fi
+done &lt; /proc/mounts
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="naming_conventions">命名约定</h2>
+
+<h3 id="fun_names">函数名</h3>
+
+<div class="tip"> 函数名使用小写字母，单词之间用下划线分隔。</div>
+
+<div class="tip"> 函数名之后必须有圆括号，函数名和圆括号之间没有空格。</div>
+
+<div class="tip"> 花括号必须和函数名位于同一行，花括号与圆括号之间加一个空格。</div>
+
+<div class="tip"> 关键词 function 可省略，但必须在一个项目中保持一致。</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>my_func() {
+  ...
+}
+</code></pre>
+</div>
+
+<div class="tip"> 使用双冒号 :: 分隔函数库。</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># Part of a package
+mypackage::my_func() {
+  ...
+}
+</code></pre>
+</div>
+
+<h3 id="var_names">变量名</h3>
+
+<div class="tip"> 使用小写字母，单词用下划线分隔，所有变量都应初始化。</div>
+
+<div class="tip"> 在函数内部使用有意义的变量名接收参数，禁止直接操作 $1， $2 等。</div>
+
+<p>循环的变量名应该和要循环的变量保持一致，如:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>for zone in ${zones}; do
+  something_with "${zone}"
+done
+</code></pre>
+</div>
+
+<div class="tip"> 变量一经定义，不允许删除。</div>
+
+<h3 id="con_names">常量和环境变量名</h3>
+
+<div class="tip"> 使用大写字母，下划线分隔，在文件的开头处声明。</div>
+
+<p>常量和任何导出到环境的变量都应该大写，常量的值一旦确定就应立即声明为 <code class="highlighter-rouge">readonly</code> 。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># Constant
+readonly PATH_TO_FILES='/some/path'
+
+# Both constant and environment
+# declare -r设置只读变量，-x设置为环境变量
+declare -xr ORACLE_SID='PROD'
+</code></pre>
+</div>
+
+<p>有些变量被脚本使用后(例如使用 <code class="highlighter-rouge">getopts</code> 情况下)就变成了常量，此时应立即设置其为只读。注意 <code class="highlighter-rouge">declare</code> 不能在函数内部操作全局变量，这时可使用 <code class="highlighter-rouge">readonly</code> 和 <code class="highlighter-rouge">export</code> 来代替。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>VERBOSE='false'
+while getopts 'v' flag; do
+  case "${flag}" in
+    v) VERBOSE='true' ;;
+  esac
+done
+readonly VERBOSE
+</code></pre>
+</div>
+
+<h3 id="script_names">源文件名</h3>
+
+<div class="tip"> 使用小写字母，下划线分隔单词。</div>
+
+<h3 id="tmp_names">临时文件名</h3>
+
+<div class="tip"> 临时文件应使用 $$ 后缀，并存放在系统 /tmp 目录中。</div>
+
+<p>可使用如下方式为当前脚本创建临时文件目录:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mktemp -d /tmp/SCRIPT_NAME$$
+</code></pre>
+</div>
+
+<h3 id="readonly">只读变量</h3>
+
+<div class="tip"> 使用 readonly 或者 declare -r 来确保变量只读。</div>
+
+<p>使用只读变量可以帮助查找 bug ，只读变量应明确声明。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>zip_version="$(dpkg --status zip | grep Version: | cut -d ' ' -f 2)"
+if [[ -z "${zip_version}" ]]; then
+  error_message
+else
+  readonly zip_version
+fi
+</code></pre>
+</div>
+
+<h3 id="local_var">局部变量</h3>
+
+<div class="tip"> 使用 local 声明函数内部变量，变量赋值应另起一行。</div>
+
+<p>使用 <code class="highlighter-rouge">local</code> 来声明局部变量以确保其只在函数内部和子函数中可用，避免了影响全局命名空间和无意间设置的函数外变量。</p>
+
+<p>当赋值由命令替换提供时，局部声明和赋值必须分开，因为内建的 <code class="highlighter-rouge">local</code> 不会从命令替换中传递状态码。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>my_func2() {
+  local name="$1"
+
+  # 局部变量声明和赋值应分行:
+  local my_var
+  my_var="$(my_func)" || return
+
+  # DO NOT do this: $? contains the exit code of 'local', not my_func
+  local my_var="$(my_func)"
+  [[ $? -eq 0 ]] || return
+
+  ...
+}
+</code></pre>
+</div>
+
+<h3 id="fun_location">函数位置</h3>
+
+<div class="tip"> 将文件中所有的函数一起放在常量定义之后。</div>
+
+<p>函数应集中在文件头部定义，只有 <code class="highlighter-rouge">includes</code>，<code class="highlighter-rouge">set</code> 语句和常量设置可在函数定义前完成。</p>
+
+<div class="tip"> 不要在函数之间隐藏可执行代码。</div>
+
+<h3 id="main">主函数</h3>
+
+<div class="tip"> 对于较长的脚本，应定义一个名为 main 的函数来调用其它的函数。</div>
+
+<p>为了便于找到程序的起始位置，应把主程序放在 <code class="highlighter-rouge">main</code> 函数中，列在其它函数下面，文件中最后一句非注释行应调用 <code class="highlighter-rouge">main</code> 函数，注意将变量传递进去。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c">#!/usr/bin/env bash</span>
+
+CONFIGURATION_VARIABLES
+
+MY_FUNCTION_DEFINITIONS
+
+main<span class="o">()</span> <span class="o">{</span>
+    ...
+<span class="o">}</span>
+
+main <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="calling">命令调用</h2>
+
+<h3 id="returnvalue">检查返回值</h3>
+
+<div class="tip"> 必须检查返回值， return 和 exit 都要设置状态码。</div>
+
+<p>对于一条不包含管道的命令，可以使用 <code class="highlighter-rouge">$?</code> 或者直接指向 <code class="highlighter-rouge">if</code> 语句来检查其返回值，如:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>if ! mv "${file_list}" "${dest_dir}/" ; then
+  echo "Unable to move ${file_list} to ${dest_dir}" &gt;&amp;2
+  exit "${E_BAD_MOVE}"
+fi
+
+# Or
+mv "${file_list}" "${dest_dir}/"
+if [[ "$?" -ne 0 ]]; then
+  echo "Unable to move ${file_list} to ${dest_dir}" &gt;&amp;2
+  exit "${E_BAD_MOVE}"
+fi
+</code></pre>
+</div>
+
+<p>对于管道命令，可使用 <code class="highlighter-rouge">PIPESTATUE</code> 变量检查其所有部分的返回码，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tar -cf - ./* | ( cd "${dir}" &amp;&amp; tar -xf - )
+if [[ "${PIPESTATUS[0]}" -ne 0 || "${PIPESTATUS[1]}" -ne 0 ]]; then
+  echo "Unable to tar files to ${dir}" &gt;&amp;2
+fi
+</code></pre>
+</div>
+
+<p>注意，一旦运行其他命令，<code class="highlighter-rouge">PIPESTATUS</code> 就会被覆盖，如果需要根据管道发生错误的地方来进行不同的操作，应该在运行完管道命令后立即将 <code class="highlighter-rouge">PIPESTATUS</code> 的值赋给另外一个变量(尤其注意 <code class="highlighter-rouge">[</code> 这个符号也是一个命令)，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tar -cf - ./* | ( cd "${DIR}" &amp;&amp; tar -xf - )
+return_codes=(${PIPESTATUS[*]})
+if [[ "${return_codes[0]}" -ne 0 ]]; then
+  do_something
+fi
+if [[ "${return_codes[1]}" -ne 0 ]]; then
+  do_something_else
+fi
+</code></pre>
+</div>
+
+<h2 id="invsext">内建命令 vs 外部命令</h2>
+
+<div class="tip"> 优先选用内建命令。</div>
+
+<p>如使用:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>addition=$((${X} + ${Y}))
+substitution="${string/#foo/bar}"
+</code></pre>
+</div>
+
+<p>而不是:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># &lt;不推荐的用法&gt;:
+addition="$(expr ${X} + ${Y})"
+substitution="$(echo "${string}" | sed -e 's/^foo/bar/')"
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="conclusion">结论</h2>
+
+<div class="tip"> 运用常识和判断力，并且保持一致。</div>
+
+<p>编辑代码时，花点时间看看项目中的其它代码，并熟悉其风格。如果其它代码中<code class="highlighter-rouge">if</code>语句使用空格，那么你也要使用；如果其中的注释用星号<code class="highlighter-rouge">*</code> 围成一个盒子状，那么你同样要这么做。</p>
+
+<p>风格指南的重点在于提供一个通用的编程规范，这样大家可以把精力集中在实现内容而不是表现形式上。我们展示的是一个总体的的风格规范，但局部风格也很重要，如果你在一个文件中新加的代码和原有代码风格相去甚远，这就破坏了文件本身的整体美观，也会打乱读者在阅读代码时的节奏，所以要尽量避免。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+
+
+
+<div  style="display:none"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1264508560'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1264508560%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></div>
+</body>
+</html>

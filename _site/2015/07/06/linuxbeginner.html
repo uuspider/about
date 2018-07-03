@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcur icon" href="/images/i32.ico" type="image/x-icon" />
+  <title>UNIX / Linux guide</title>
+  <meta name="author" content="uuspider" />
+  <meta name="description" content="about uuspider" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" >
+  <link rel="stylesheet" href="//css/styles.css" />
+
+</head>
+<body>
+
+  <style type="text/css">
+pre {
+  padding:8px 15px;
+  background: #f8f8f8;  
+  border:1px solid #e5e5e5;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+pre,code {
+  background:#e8f5fe;color:#000;
+}
+</style>
+
+<h2 id="unix--linux-">UNIX / Linux 指引</h2>
+
+<p>参考：<a href="http://www.ee.surrey.ac.uk/Teaching/Unix/" target="_blank">UNIX Tutorial for Beginners</a>, <a href="http://www.tldp.org/LDP/intro-linux/html/" target="_blank">Introduction to Linux</a></p>
+
+<hr />
+<h2 id="top"></h2>
+
+<ul>
+  <li><a href="#terminal">1. 进入终端</a></li>
+  <li><a href="#files">2. 文件和目录</a>
+    <ul>
+      <li><a href="#ls">2.1 查看当前目录中的内容</a></li>
+      <li><a href="#mkdir">2.2 建立目录</a></li>
+      <li><a href="#cd">2.3 进入目录</a></li>
+      <li><a href="#pwd">2.4 查看当前所在目录及其路径</a></li>
+    </ul>
+  </li>
+  <li><a href="#workonfiles">3. 文件操作</a>
+    <ul>
+      <li><a href="#touch">3.1 创建文件</a></li>
+      <li><a href="#cp">3.2 复制文件</a></li>
+      <li><a href="#mv">3.3 移动文件</a></li>
+      <li><a href="#rm">3.4 删除文件</a></li>
+    </ul>
+  </li>
+  <li><a href="#workonfiles">4. 查看文件内容</a>
+    <ul>
+      <li><a href="#mkfile">4.1 准备一个非空文件</a></li>
+      <li><a href="#cat">4.2 查看文件内容</a></li>
+      <li><a href="#search">4.3 搜索文件内容</a></li>
+    </ul>
+  </li>
+  <li><a href="#inout">5. 重定向和管道</a>
+    <ul>
+      <li><a href="#redirection">5.1 重定向</a></li>
+      <li><a href="#outredirection">5.2 输出重定向</a></li>
+      <li><a href="#inredirection">5.3 输入重定向</a></li>
+      <li><a href="#pipes">5.4 管道</a></li>
+    </ul>
+  </li>
+  <li><a href="#wildcards">6. 通配符</a></li>
+  <li><a href="#manuals">7. 联机手册</a></li>
+  <li><a href="#right">8. 权限管理</a>
+    <ul>
+      <li><a href="#longls">8.1 查看文件权限</a></li>
+      <li><a href="#chmod">8.2 更改文件权限</a></li>
+      <li><a href="#useradd">8.3 用户管理</a></li>
+    </ul>
+  </li>
+  <li><a href="#process">9. 进程管理</a>
+    <ul>
+      <li><a href="#ps">9.1 查看系统进程</a></li>
+      <li><a href="#backrun">9.2 后台运行</a></li>
+      <li><a href="#checkjobs">9.3 查看后台进程</a></li>
+      <li><a href="#kill">9.4 终止进程</a></li>
+    </ul>
+  </li>
+  <li><a href="#others">10. 其他常用命令</a>
+    <ul>
+      <li><a href="#disk">10.1 磁盘操作</a></li>
+      <li><a href="#tar">10.2 打包和压缩</a></li>
+      <li><a href="#find">10.3 文件搜索</a></li>
+      <li><a href="#web">10.4 网络</a></li>
+    </ul>
+  </li>
+  <li><a href="#next">11. 下一步该做什么？</a></li>
+</ul>
+
+<hr />
+<h2 id="terminal">1. 进入终端</h2>
+
+<p>学习UNIX或Linux，是为了使用字符命令操控计算机，我们通过在终端输入字符下达指令，同时计算机也通过终端显示程序运行结果。终端是人机交互的窗口。</p>
+
+<ul>
+  <li>怎么进入终端？</li>
+</ul>
+
+<p>如果开机进入了字符模式，就可以立即敲键盘输入命令了。</p>
+
+<p>如果进入的是图形界面，通过“程序/终端”，“Applications/Terminal”或“Ctrl+Alt+t”可打开终端窗口，也可以通过“Ctrl+Alt+F1~6”进入字符终端。</p>
+
+<p>当看到</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>uuspider@localhost:~$
+</code></pre>
+</div>
+
+<p>或</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>root@localhost:~#
+</code></pre>
+</div>
+
+<p>时，表示计算机已经在等待我们下达指令了。</p>
+
+<p>ps：提示符可能是上面的$，#，也可能是%，&amp;等等。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="files">2. 文件和目录</h2>
+
+<h3 id="ls">2.1 查看当前目录中的内容</h3>
+
+<p>输入</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ls
+</code></pre>
+</div>
+
+<p>可以查看当前目录或文件夹中的内容，但是目录中的隐藏文件不会显示，要查看所有内容，需要给命令附加一个参数(“选项”)。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ls -a
+</code></pre>
+</div>
+
+<p>注意观察输出结果，可以发现隐藏文件或目录都以.开头。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="mkdir">2.2 建立目录</h3>
+
+<p>学习UNIX / linux这些字符命令，靠死记硬背“Linux 手册”是行不通的，我们要把它们当成工具，真正用起来。</p>
+
+<p>因此，我们首先建立一个专门的目录start来练习这些命令：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ mkdir start
+</code></pre>
+</div>
+
+<p>输入<code class="highlighter-rouge">ls</code>命令，看看是不是已经多出了一个start。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="cd">2.3 进入目录</h3>
+
+<p>输入</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ cd start
+</code></pre>
+</div>
+
+<p>就进入了start目录。</p>
+
+<p>输入</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ cd ..
+</code></pre>
+</div>
+
+<p>回到了上级目录。</p>
+
+<p>输入</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ cd .
+</code></pre>
+</div>
+
+<p>表示进入当前目录，这个操作看上去没啥用，其实是为了告诉大家：<code class="highlighter-rouge">.</code>表示当前目录。</p>
+
+<p>ps：<code class="highlighter-rouge">cd</code>和<code class="highlighter-rouge">.</code>之间有一个空格。</p>
+
+<p>输入</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ cd ~
+</code></pre>
+</div>
+
+<p>或</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ cd
+</code></pre>
+</div>
+
+<p>都会返回用户的home目录。</p>
+
+<p>小结：linux中，<code class="highlighter-rouge">~</code>表示用户的home目录，<code class="highlighter-rouge">..</code>表示上级目录，<code class="highlighter-rouge">.</code>表示当前目录。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="pwd">2.4 查看当前所在目录及其路径</h3>
+
+<p>输入</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ pwd
+</code></pre>
+</div>
+
+<p>计算机会显示当前目录的完整路径。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="workonfiles">3. 文件操作</h2>
+
+<h3 id="touch">3.1 创建文件</h3>
+
+<p>输入</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ touch lilei.txt
+</code></pre>
+</div>
+
+<p>用ls命令可以看到我们在当前目录下创建了一个名为lilei.txt的文件。</p>
+
+<p>ps：<code class="highlighter-rouge">mkdir</code>创建空目录，<code class="highlighter-rouge">touch</code>创建空文件。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="cp">3.2 复制文件</h3>
+
+<p>创建一个新目录dr1并进入该目录：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ mkdir dr1
+$ cd dr1
+</code></pre>
+</div>
+
+<p>输入</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ cp ../lilei.txt lileicp.txt
+</code></pre>
+</div>
+
+<p>这样就将lilei.txt复制到dr1中并命名为lileicp.txt。</p>
+
+<p>输入</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ls ..
+</code></pre>
+</div>
+
+<p>可以看到上级目录中的文件lilei.txt仍然存在。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="mv">3.3 移动文件</h3>
+
+<p>输入</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ mv ../lilei.txt lileimv.txt
+$ ls ..
+$ ls
+</code></pre>
+</div>
+
+<p>可以看到上级目录中的文件lilei.txt已经没有了，当前目录中则出现了名为lileimv.txt的文件。</p>
+
+<p>输入</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ mv lileimv.txt lilei.txt
+$ ls
+</code></pre>
+</div>
+
+<p>可以看到，lileimv.txt被重命名为lilei.txt。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="rm">3.4 删除文件</h3>
+
+<p>输入</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ rm lileicp.txt
+$ ls
+</code></pre>
+</div>
+
+<p>lileicp.txt被删除。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="checkfiles">4. 查看文件内容</h2>
+
+<h3 id="mkfile">4.1 准备一个非空文件</h3>
+
+<p>创建一个有内容的文件：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ps aux | cat &gt; hanmeimei.txt
+</code></pre>
+</div>
+
+<p>先不要纠结这条命令干了什么，只要知道：我们创建了一个名为hanmeimei.txt的文件。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="cat">4.2 查看文件内容</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ cat hanmeimei.txt
+</code></pre>
+</div>
+
+<p>终端输出了一堆字符，这就是文件hanmeimei.txt中的内容。</p>
+
+<p>ps：在当前目录中，输入<code class="highlighter-rouge">cat h</code>，然后敲Tab键，可以发现文件名自动补齐了。Tab补齐在输入长文件名时非常有用。</p>
+
+<p>使用cat查看文件内容时，屏幕上只能显示最后一屏信息。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ less hanmeimei.txt
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">less</code>可以分屏显示较长的信息，PgUP和PgDn上下翻页，q退出。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ head hanmeimei.txt
+$ head -2 hanmeimei.txt
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">head</code>命令默认返回文件的前10行，该命令可附加选项”-数字”。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ tail hanmeimei.txt
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">tail</code>和<code class="highlighter-rouge">head</code>命令类似。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="search">4.3 搜索文件内容</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ less hanmeimei.txt
+</code></pre>
+</div>
+
+<p>在<code class="highlighter-rouge">less</code>的显示界面中输入</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/root
+</code></pre>
+</div>
+
+<p>可以看到所有的”root”字段都被高亮显示。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ grep root hanmeimei.txt
+</code></pre>
+</div>
+
+<p>屏幕上只输出了含有”root”字段的行。<code class="highlighter-rouge">grep</code>有以下几个常用选项：</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>-v</td>
+      <td>显示不匹配的行</td>
+    </tr>
+    <tr>
+      <td>-n</td>
+      <td>显示行号</td>
+    </tr>
+    <tr>
+      <td>-c</td>
+      <td>显示匹配的总行数</td>
+    </tr>
+    <tr>
+      <td>-i</td>
+      <td>忽略大小写</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ grep -v 'a few words' hanmeimei.txt
+</code></pre>
+</div>
+
+<p>显示不含”a few words”字段的行。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ wc -w hanmeimei.txt
+</code></pre>
+</div>
+
+<p>显示文件的总单词数。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ wc -l hanmeimei.txt
+</code></pre>
+</div>
+
+<p>显示文件的总行数。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="inout">5. 重定向和管道</h2>
+
+<h3 id="redirection">5.1 重定向</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ cat
+</code></pre>
+</div>
+
+<p>此时，输入任意字段后敲Enter键，可以看到，终端将显示刚输入的内容，直到按下<code class="highlighter-rouge">Ctrl + d</code> (下文简写为^D)退出。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="outredirection">5.2 输出重定向</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ cat &gt; list1
+lilei
+hanmeimei
+lintao
+^D
+$ cat list1
+</code></pre>
+</div>
+
+<p>刚刚输入的字段就保存在list1中了。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ cat &gt; list2
+Green
+Lily
+Mary
+^D
+$ cat &gt;&gt;list1
+UncleWang
+^D
+</code></pre>
+</div>
+
+<p>我们现在有了两个文件list1和list2。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ cat list1 list2 &gt; alllist
+$ cat alllist
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">cat</code>将两个文件合并成了一个文件。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="inredirection">5.3 输入重定向</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sort
+pig
+cat
+dog
+^D
+</code></pre>
+</div>
+
+<p>屏幕将按照字母顺序输出刚刚输入的字段。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sort &lt; alllist
+$ sort &lt; alllist &gt; newlist
+</code></pre>
+</div>
+
+<p>文件中的内容经过重新排序，输出到新的文件中。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="pipes">5.4 管道</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ps aux
+</code></pre>
+</div>
+
+<p>输入这条命令，屏幕将显示系统当前的进程信息。注意：该命令的选项aux前没有短横线“-”。</p>
+
+<p><a href="#mkfile">上文</a>中我们曾经这样创建过一个文件：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ps aux | cat &gt; hanmeimei.txt
+</code></pre>
+</div>
+
+<p>竖线前后是两个我们已经练习过的命令，中间的竖线称为管道符。管道符左侧命令的输出结果将直接传递给右侧的命令。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="wildcards">6. 通配符</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ls *.txt
+$ ls *list*
+$ ls *list?
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">*</code>表示0～n个字符，<code class="highlighter-rouge">?</code>表示1个字符。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="manuals">7. 联机手册</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ man ls
+$ whatis ls
+</code></pre>
+</div>
+
+<p>这两条命令都显示命令的说明文件，<code class="highlighter-rouge">man</code>给出详细的说明，<code class="highlighter-rouge">whatis</code>给出的结果则非常简单。</p>
+
+<p>如果记不住命令的确切拼写方法，可以进行模糊查询：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ apropos copy
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="right">8. 权限管理</h2>
+
+<h3 id="longls">8.1 查看文件权限</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ls -l
+</code></pre>
+</div>
+
+<p>该命令给出的结果类似于：</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>-rw-rw-r–</td>
+      <td>1</td>
+      <td>admin</td>
+      <td>usergp</td>
+      <td>41454</td>
+      <td>July  7 12:30</td>
+      <td>lilei.txt</td>
+    </tr>
+    <tr>
+      <td>权限属性</td>
+      <td>文件个数</td>
+      <td>所有者</td>
+      <td>所属组</td>
+      <td>文件大小</td>
+      <td>创建时间</td>
+      <td>文件名</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br />
+权限属性分为几段：</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>-</td>
+      <td>rw-</td>
+      <td>rw-</td>
+      <td>r–</td>
+    </tr>
+    <tr>
+      <td>文件格式</td>
+      <td>所有者的权限</td>
+      <td>同组用户的权限</td>
+      <td>其它用户的权限</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br />
+对于文件格式，<code class="highlighter-rouge">-</code>表示普通文件，<code class="highlighter-rouge">d</code>表示目录，<code class="highlighter-rouge">l</code>表示链接。</p>
+
+<p>对于文件权限，<code class="highlighter-rouge">r</code>表示可读，<code class="highlighter-rouge">w</code>表示可编辑，<code class="highlighter-rouge">x</code>表示可执行；对于目录权限，<code class="highlighter-rouge">r</code>表示可读取目录内容列表，<code class="highlighter-rouge">w</code>表示可更改目录下内容，<code class="highlighter-rouge">x</code>表示可进入该目录。</p>
+
+<p>计算机使用9位二进制数存储文件权限信息，如：111 101 101 表示 rwx r-x r-x，换算成八/十进制就是755，110 100 100 表示 rw- r– r–，换算成八/十进制就是644。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="chmod">8.2 更改文件权限</h3>
+
+<p><code class="highlighter-rouge">chmod</code>用于更改文件的权限，有以下常用选项：</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>u</td>
+      <td>user</td>
+    </tr>
+    <tr>
+      <td>g</td>
+      <td>group</td>
+    </tr>
+    <tr>
+      <td>o</td>
+      <td>other</td>
+    </tr>
+    <tr>
+      <td>a</td>
+      <td>all</td>
+    </tr>
+    <tr>
+      <td>r</td>
+      <td>read</td>
+    </tr>
+    <tr>
+      <td>w</td>
+      <td>write (and delete)</td>
+    </tr>
+    <tr>
+      <td>x</td>
+      <td>execute (and access directory)</td>
+    </tr>
+    <tr>
+      <td>+</td>
+      <td>add permission</td>
+    </tr>
+    <tr>
+      <td>-</td>
+      <td>take away permission</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ chmod go-rwx alllist
+$ chmod a+rw alllist
+$ chmod 755 allist
+</code></pre>
+</div>
+
+<p>大多数情况下，<code class="highlighter-rouge">chmod</code>命令要求有root用户权限。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h3 id="useradd">8.3 用户管理</h3>
+
+<p>创建一个新用户：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ useradd user1
+</code></pre>
+</div>
+
+<p>linux为每位用户分配唯一的uid，可以使用<code class="highlighter-rouge">id</code>查看用户的uid：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ id user1
+</code></pre>
+</div>
+
+<p>创建用户组users，指定其gid为900：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ groupadd -g 900 users
+</code></pre>
+</div>
+
+<p>将用户user1加入到用户组users中。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># gpasswd -a user1 users
+</code></pre>
+</div>
+
+<p>将用户user1从用户组users中删除。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># gpasswd -d user1 users
+</code></pre>
+</div>
+
+<p>删除用户组users：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># groupdel users
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="process">9. 进程管理</h2>
+
+<h3 id="ps">9.1 查看系统进程</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ps aux
+</code></pre>
+</div>
+
+<p>我们已经知道这个命令可用来查看系统的进程信息。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="backrun">9.2 后台运行</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sleep 10
+$ sleep 10 &amp;
+</code></pre>
+</div>
+
+<p>末尾加&amp;表示后台运行该命令。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sleep 100
+^Z
+$ bg
+</code></pre>
+</div>
+
+<p>^Z可将正在运行的进程挂起，然后输入<code class="highlighter-rouge">bg</code>将其转入后台运行。</p>
+
+<p>ps：图形界面的进程，不能转入后台。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="checkjobs">9.3 查看后台进程</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ jobs
+</code></pre>
+</div>
+
+<p>列出挂起或后台运行的进程。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ fg %1
+</code></pre>
+</div>
+
+<p>将<code class="highlighter-rouge">jobs</code>列出的第1个进程转到前台。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="kill">9.4 终止进程</h3>
+
+<p>前台运行的进程，^C即可终止。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sleep 100
+^C
+</code></pre>
+</div>
+
+<p>对于挂起或后台运行的进程，使用<code class="highlighter-rouge">kill</code>终止。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sleep 100 &amp;
+$ jobs
+$ kill %1
+</code></pre>
+</div>
+
+<p>最常用的还是通过<code class="highlighter-rouge">kill PID_number</code>来终止进程。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sleep 100 &amp;
+$ ps aux | grep sleep
+</code></pre>
+</div>
+
+<p>找到进程的PID为xxx。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ kill xxx
+</code></pre>
+</div>
+
+<p>这样就终止了该进程，如果该进程仍未终止，可以使用<code class="highlighter-rouge">-9</code>选项强制终止，即</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ kill -9 xxx
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="others">10. 其他常用命令</h2>
+
+<h3 id="disk">10.1 磁盘操作</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ df -h .
+</code></pre>
+</div>
+
+<p>查看文件系统的容量使用情况，包括正在运行的进程所占用的容量。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ du -sh
+</code></pre>
+</div>
+
+<p>查看目录占用容量情况，是静态<strong>文件</strong>占用的容量。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ mount
+</code></pre>
+</div>
+
+<p>查看系统中挂载的设备。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ mount -a
+</code></pre>
+</div>
+
+<p>依据配置文件<code class="highlighter-rouge">/etc/fstab</code>自动挂载设备。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ mkdir /mnt/cdrom
+$ mount -t iso9660 /dev/cdrom /mnt/cdrom/
+</code></pre>
+</div>
+
+<p>建立挂载点并挂载光驱。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ umount /mnt/cdrom
+</code></pre>
+</div>
+
+<p>卸载光驱。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ fdisk -l
+</code></pre>
+</div>
+
+<p>查看设备文件名，可用于挂载移动硬盘或u盘。对于<code class="highlighter-rouge">-t</code>选项，fat、fat16均为fat，fat32为vfat。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="tar">10.2 打包和压缩</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ gzip files
+</code></pre>
+</div>
+
+<p>得到压缩文件files.gz。注：<code class="highlighter-rouge">gzip</code>压缩后不保留原文件。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ gunzip files.gz
+</code></pre>
+</div>
+
+<p>解压缩files.gz。注：<code class="highlighter-rouge">gzip</code>只能针对文件操作，对目录无效。如果要打包和压缩目录，可以使用用<code class="highlighter-rouge">tar</code>。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ tar -zcf dir.tar.gz dir
+$ tar -zxf dir.tar.gz
+</code></pre>
+</div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>-c</td>
+      <td>打包</td>
+    </tr>
+    <tr>
+      <td>-x</td>
+      <td>解包</td>
+    </tr>
+    <tr>
+      <td>-f</td>
+      <td>指定文件名</td>
+    </tr>
+    <tr>
+      <td>-z</td>
+      <td>压缩/解压缩</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="find">10.3 文件搜索</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ find /etc -name init
+</code></pre>
+</div>
+
+<p>在目录<code class="highlighter-rouge">/etc</code>中查找文件init，默认区分大小写；如不需要区分大小写，用<code class="highlighter-rouge">-iname</code>选项。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ find / -size +2048000
+</code></pre>
+</div>
+
+<p>在根目录下查找大于100MB的文件，小于用<code class="highlighter-rouge">-n</code>，大于用<code class="highlighter-rouge">+n</code>，等于用<code class="highlighter-rouge">n</code>。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ find / -user admin
+</code></pre>
+</div>
+
+<p>在根目录下查找所有者为admin的文件。根据所属组查找用<code class="highlighter-rouge">-group</code>选项。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ find /etc -cmin -5
+</code></pre>
+</div>
+
+<p>在<code class="highlighter-rouge">/etc</code>下查找5分钟内被修改过属性的文件和目录。<code class="highlighter-rouge">-amin</code>代指访问时间，<code class="highlighter-rouge">-mmin</code>代指文件内容。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ find /etc -size +163840 -a -size -204800
+</code></pre>
+</div>
+
+<p>在<code class="highlighter-rouge">/etc</code>下查找大于80MB小于100MB的文件。<code class="highlighter-rouge">-a</code>表示两个条件同时满足，<code class="highlighter-rouge">-o</code>表示满足其中任意一个条件即可。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ find /etc -name inittab -exec ls -l {} \;
+</code></pre>
+</div>
+
+<p>在<code class="highlighter-rouge">/etc</code>下查找inittab文件并显示其详细信息，<code class="highlighter-rouge">-exec</code>表示对<code class="highlighter-rouge">find</code>命令的结果进行操作，类似的也可以用<code class="highlighter-rouge">-ok</code>；<code class="highlighter-rouge"><span class="p">{}</span><span class="w"> </span><span class="err">\;</span></code>代指<code class="highlighter-rouge">find</code>命令的结果。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<h3 id="web">10.4 网络</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ping 127.0.0.1
+</code></pre>
+</div>
+
+<p>和windows的用法一样，用于测试本机和目标IP的网络连通情况。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ifconfig
+</code></pre>
+</div>
+
+<p>查看网卡状态信息，也可以临时配置网卡。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ traceroute www.google.com
+</code></pre>
+</div>
+
+<p>显示数据包到目标地址间的路径。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ netstat
+</code></pre>
+</div>
+
+<p>显示网络相关信息，常用有如下选项。</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>-tlun</td>
+      <td>查看本机监听的端口</td>
+    </tr>
+    <tr>
+      <td>-an</td>
+      <td>查看本机所有的网络连接</td>
+    </tr>
+    <tr>
+      <td>-rn</td>
+      <td>查看本机路由表</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br />
+<strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="next">11. 下一步该做什么？</h2>
+
+<p>到目前为止，你已经可以通过linux终端向计算机下达各种常用指令了，linux已经可以作为你的生产工具来产生效益了，因此，请牢记：<strong>从现在开始，Linux只是你的一个工具，你应该“使用”它，而不再是“学习”它</strong>。你一定还会遇见自己没有见过的、不明白的或不理解的命令，请使用搜索引擎吧。如果有一条命令你始终记不住，很有可能是因为它对你根本不重要，你没有必要牢记每一条命令，因为，你还有更重要的事情要在linux中完成。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+
+
+
+<div  style="display:none"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1264508560'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1264508560%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></div>
+</body>
+</html>

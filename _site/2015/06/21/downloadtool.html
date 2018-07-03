@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcur icon" href="/images/i32.ico" type="image/x-icon" />
+  <title>wget, transmission, amulecmd & ftp</title>
+  <meta name="author" content="uuspider" />
+  <meta name="description" content="about uuspider" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" >
+  <link rel="stylesheet" href="//css/styles.css" />
+
+</head>
+<body>
+
+  <style type="text/css">
+pre {
+  padding:8px 15px;
+  background: #f8f8f8;  
+  border:1px solid #e5e5e5;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+pre,code {
+  background:#e8f5fe;color:#000;
+}
+</style>
+
+<h2 id="wget-transmission-remote-amulecmd--ftp">wget, transmission-remote, amulecmd &amp; ftp</h2>
+
+<ul>
+  <li><a href="#wget">wget</a></li>
+  <li><a href="#transmission">transmission-remote</a></li>
+  <li><a href="#amule">amulecmd</a></li>
+  <li><a href="#mftp">ftp</a></li>
+</ul>
+
+<hr />
+
+<h1 id="wget">wget</h1>
+
+<h4 id="section">下载文件</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wget [url]    
+</code></pre>
+</div>
+
+<h4 id="section-1">下载时重命名</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wget -O aoi_sola.avi http://url/download.php?id=1024    
+</code></pre>
+</div>
+
+<h4 id="section-2">限速</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wget –limit-rate=300k [url]    
+</code></pre>
+</div>
+
+<h4 id="section-3">断点续传</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wget -c [url]    
+</code></pre>
+</div>
+
+<h4 id="section-4">后台下载</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wget -b [url]
+</code></pre>
+</div>
+
+<p>查看下载进度</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tail -f wget-log
+</code></pre>
+</div>
+
+<h4 id="section-5">下载多个文件</h4>
+
+<p>保存一份下载链接文件</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>cat &gt; filelist.txt 
+url1
+url2
+url3
+url4
+</code></pre>
+</div>
+
+<p>下载该文件中的链接</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wget -i filelist.txt
+</code></pre>
+</div>
+
+<h4 id="ftp">FTP下载</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wget [ftp-url]
+</code></pre>
+</div>
+
+<p>如需用户名和密码认证</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wget –ftp-user=USERNAME –ftp-password=PASSWORD [ftp-url]
+</code></pre>
+</div>
+
+<h4 id="section-6">代理服务器</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wget -Y on -e "http_proxy=http://10.0.0.172:80" [url]
+</code></pre>
+</div>
+
+<p>注：<code class="highlighter-rouge">curl</code>有和<code class="highlighter-rouge">wget</code>类似的功能，查看<a href="http://about.uuspider.com/2015/07/25/curl.html" target="_blank">这里</a>。</p>
+
+<hr />
+
+<h1 id="transmission">transmission-remote</h1>
+
+<h4 id="section-7">下载文件</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>transmission-remote -a [torrent | magnet]
+</code></pre>
+</div>
+
+<h4 id="section-8">查看下载进程信息</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>transmission-remote -l
+</code></pre>
+</div>
+
+<h4 id="section-9">对下载进程的操作</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>transmission-remote -t [all | hash] -[ ]
+</code></pre>
+</div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>进程详情</td>
+      <td> </td>
+      <td><strong><code class="highlighter-rouge">i</code></strong></td>
+    </tr>
+    <tr>
+      <td>停止</td>
+      <td> </td>
+      <td><strong><code class="highlighter-rouge">S</code></strong></td>
+    </tr>
+    <tr>
+      <td>重启</td>
+      <td> </td>
+      <td><strong><code class="highlighter-rouge">s</code></strong></td>
+    </tr>
+    <tr>
+      <td>取消</td>
+      <td> </td>
+      <td><strong><code class="highlighter-rouge">r</code></strong></td>
+    </tr>
+    <tr>
+      <td>下载限速</td>
+      <td> </td>
+      <td><strong><code class="highlighter-rouge">d [rate]</code></strong></td>
+    </tr>
+    <tr>
+      <td>取消下载限速</td>
+      <td> </td>
+      <td><strong><code class="highlighter-rouge">D</code></strong></td>
+    </tr>
+    <tr>
+      <td>上传限速</td>
+      <td> </td>
+      <td><strong><code class="highlighter-rouge">u [rate]</code></strong></td>
+    </tr>
+    <tr>
+      <td>取消上传限速</td>
+      <td> </td>
+      <td><strong><code class="highlighter-rouge">U</code></strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h1 id="amule">amulecmd</h1>
+
+<h4 id="section-10">下载文件</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>add [ed2k]
+</code></pre>
+</div>
+
+<h4 id="section-11">查看下载进程信息</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>show dl
+</code></pre>
+</div>
+
+<h4 id="section-12">对下载进程的操作</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>暂停   pause [hash | id]  
+重启  resume [hash | id]  
+取消  cancel [hash | id]
+</code></pre>
+</div>
+
+<hr />
+
+<h1 id="mftp">ftp</h1>
+
+<h4 id="section-13">登陆</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ftp -i -n [hostname | IP] [port]
+user anonymous [*****]
+ls
+cd [DIR]
+bye
+</code></pre>
+</div>
+
+<h4 id="section-14">下载</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>get [remote_file] [local_file]
+mget [remote_files]
+</code></pre>
+</div>
+
+<h4 id="section-15">上传</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>put local_file [remote_file]
+mput local_files
+</code></pre>
+</div>
+
+<hr />
+
+
+
+
+<div  style="display:none"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1264508560'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1264508560%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></div>
+</body>
+</html>

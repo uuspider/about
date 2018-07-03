@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcur icon" href="/images/i32.ico" type="image/x-icon" />
+  <title>MySQLdb guide</title>
+  <meta name="author" content="uuspider" />
+  <meta name="description" content="about uuspider" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" >
+  <link rel="stylesheet" href="//css/styles.css" />
+
+</head>
+<body>
+
+  <style type="text/css">
+pre {
+  padding:8px 15px;
+  background: #f8f8f8;  
+  border:1px solid #e5e5e5;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+pre,code {
+  background:#e8f5fe;color:#000;
+}
+</style>
+
+<h2 id="python-">python 指引</h2>
+
+<p>参考：<a href="http://www.runoob.com/python/python-tutorial.html" target="_blank">Python basics</a>, <a href="http://www.swaroopch.com/notes/python/" target="_blank">A byte of python</a>, <a href="http://www.diveintopython.net/" target="_blank">Dive into python</a></p>
+
+<h2 id="top"></h2>
+
+<hr />
+
+<ul>
+  <li><a href="#var">变量</a></li>
+  <li><a href="#structure">数据结构</a> : <a href="#list">列表,元组</a> | <a href="#set">字典,集合</a></li>
+  <li><a href="#stream">流程控制</a> : <a href="#if">分支</a> | <a href="#while">循环</a> | <a href="#try">异常</a></li>
+  <li><a href="#func">函数</a></li>
+  <li><a href="#io">输入输出</a></li>
+  <li><a href="#class">类</a></li>
+  <li><a href="#import">模块</a></li>
+</ul>
+
+<hr />
+
+<h2 id="var">安装</h2>
+
+<p>首先安装MySQL服务器和客户端：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo apt-get install mysql-server-5.6 mysql-client-5.6
+$ sudo apt-get install libmysqlclient-dev libmysqld-dev
+</code></pre>
+</div>
+
+<p>通过pip安装MySQLdb：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo apt-get install python-pip
+$ sudo apt-get install python-dev
+$ sudo pip install mysql-python
+</code></pre>
+</div>
+
+<p>在python中可以成功载入MySQLdb时即表示安装成功：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; import MySQLdb
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="structure">数据结构</h2>
+
+<h3 id="list">列表和元组</h3>
+
+<p>将数据一个接一个地存起来，如列表lists和元组tuples，就构成了最简单的线性结构。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; list_1 = [5,4,3,2,1]
+&gt;&gt;&gt; tuple_1 = (5,4,3,2,1)
+</code></pre>
+</div>
+
+<p>列表和元组非常相似，区别在于列表使用方括号，元组使用圆括号。访问列表和元组的方式也是一样的，如<code class="highlighter-rouge">list_1[0]</code>和<code class="highlighter-rouge">tuple_1[0]</code>分别用于访问其第一个元素。</p>
+
+<p>列表和元组更新元素的方式不同，列表中的元素可以单独更新，元组则不可以，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; list_1[1]=0
+&gt;&gt;&gt; list_1
+[0,4,3,2,1]
+&gt;&gt;&gt; tuple_[1]=0
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: 'tuple' object does not support item assignment
+&gt;&gt;&gt; tuple_1 = (0,4,3,2,1)
+&gt;&gt;&gt; tuple_1
+(0,4,3,2,1)
+</code></pre>
+</div>
+
+<p>列表和元组的元素可以是数字、字符串，也可以是列表、元组，最常见的是“列表的列表”，构成一个二维表。</p>
+
+<p>列表的操作有很多，如对于<code class="highlighter-rouge">list=[3,2,1]</code>：</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">list.append(i)</code></td>
+      <td>添加元素到列表尾部</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="highlighter-rouge">list.append(0)</code>&gt;<code class="highlighter-rouge">[3,2,1,0]</code></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">list.extend(list0)</code></td>
+      <td>合并list0到列表尾部</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="highlighter-rouge">list.extend([0,9])</code>&gt;<code class="highlighter-rouge">[3,2,1,0,9]</code></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">list.pop(x)</code></td>
+      <td>返回并删除第x个元素</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="highlighter-rouge">list.pop(1)</code>&gt;<code class="highlighter-rouge">2</code>，<code class="highlighter-rouge">[3,1]</code></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">list.insert(x,i)</code></td>
+      <td>插入元素到第x个位置</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="highlighter-rouge">list.insert(2,0)</code>&gt;<code class="highlighter-rouge">[3,2,0,1]</code></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">list.sort()</code></td>
+      <td>排序列表元素</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="highlighter-rouge">list.sort()</code>&gt;<code class="highlighter-rouge">[1,2,3]</code></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">list.index(i)</code></td>
+      <td>返回列表中第一次出现该元素的位置</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="highlighter-rouge">list.index(2)</code>&gt;<code class="highlighter-rouge">1</code></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">list.count(i)</code></td>
+      <td>计算列表中该元素出现的次数</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="highlighter-rouge">list.count(2)</code>&gt;<code class="highlighter-rouge">1</code></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">list.remove(i)</code></td>
+      <td>删除列表中第一次出现的该元素</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="highlighter-rouge">list.remove(2)</code>&gt;<code class="highlighter-rouge">[3,1]</code></p>
+
+<p>只要不会改变元素值，这些列表操作，大多数都同样适用于元组。</p>
+
+<h3 id="set">字典和集合</h3>
+
+<p>列表和元组是元素的集合，这些元素依次对应一个数字下标。“数字下标”并不是必要的，字典就是一种“非数字下标”的数据结构，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; dict = {'a':'aaa','b':'bbb','c':'ccc'}
+</code></pre>
+</div>
+
+<p>实际上，“下标”也不是必要的，python可以将数据放在一起，不指定次序，也没有下标，这就是集合，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; set = {'aaa','bbb','ccc'}
+</code></pre>
+</div>
+
+<p>常见的集合操作有：</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">set_1 &amp; set_2</code></td>
+      <td>返回两个集合共有的元素</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">set_1| set_2</code></td>
+      <td>合并两个集合的元素</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">set_1 - set_2</code></td>
+      <td>set_1中存在，set_2中不存在的元素</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">set_1 ^ set_2</code></td>
+      <td>set_1或set_2中存在的元素，且剔除共有的元素</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="stream">流程控制</h2>
+
+<h3 id="if">分支控制</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>if 判断条件(非零) :
+    执行语句
+elif 判断条件 :
+    执行语句
+else :
+    执行语句
+</code></pre>
+</div>
+
+<h3 id="while">循环控制</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>while 判断条件 :
+    执行语句
+
+for 元素 in 列表或元组:
+    执行语句
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">break</code>和<code class="highlighter-rouge">continue</code>用于跳出或跳过循环，<code class="highlighter-rouge">pass</code>是一个特殊的占位语句，用于保持程序结构的完整性，而不会做任何动作。</p>
+
+<h3 id="try">捕获异常</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>try:
+    执行语句
+except 错误返回名:
+    执行语句
+except 错误返回名,错误返回值 :
+    执行语句
+else :
+    执行语句
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="func">函数</h2>
+
+<p>函数定义：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>def functionname(parameters):
+    函数体
+    return [expression]
+</code></pre>
+</div>
+
+<p>函数调用：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>functionname(n)
+</code></pre>
+</div>
+
+<p>关于匿名函数：<code class="highlighter-rouge">lambda</code>被称为python的匿名函数，其主体是一个表达式，而非代码块，并且只能写一行，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; sum = lambda arg1, arg2: arg1 + arg2
+&gt;&gt;&gt; sum(20,80)
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="io">输入输出</h2>
+
+<p>标准输出和标准输入：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt;&gt;&gt; print "Hello World";
+Hello World
+&gt;&gt;&gt; str = raw_input("Enter your input : ");
+&gt;&gt;&gt; print "Received input is : ", str
+</code></pre>
+</div>
+
+<p>打开和关闭文件：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>poem = '''\
+What language is thine, O sea?
+The language of eternal question.
+What language is thy anser, O sky?
+The language of eternal silence.
+'''
+
+f = file('poem.txt', 'w') 
+f.write(poem) 
+f.close() 
+
+f = file('poem.txt')
+while True:
+    line = f.readline()
+        if len(line) == 0:
+                break
+        print line,
+f.close() 
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">'w'</code>是”写“文件模式，常见的还有只读<code class="highlighter-rouge">'r'</code>、追加<code class="highlighter-rouge">'a'</code>、读写<code class="highlighter-rouge">'r+'</code>等模式。</p>
+
+<p>文件处理完以后都需要关闭，下边这种方法可以自动关闭文件：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>with open('letter.txt', mode="w") as file_a:
+    for letter in "hello":
+        file_a.write(letter + "\n")
+
+with open('letter.txt') as a:
+    for line in a:
+        print line.strip()
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="class">类</h2>
+
+<p>创建一个类：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>class Person:
+    def __init__(self, age, name):
+        self.age = age
+        self.name = name
+    def birthday(self):
+        self.age = self.age + 1
+</code></pre>
+</div>
+
+<p>这里创建了一个名为<code class="highlighter-rouge">Person</code>的类，<code class="highlighter-rouge">__init__</code>设置了类的属性，<code class="highlighter-rouge">birthday()</code>是<code class="highlighter-rouge">Person</code>对象的一个方法。</p>
+
+<p>下面来看看怎么使用这个类(创建实例)：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>hanmeimei = Person(15, "HanMeimei")
+lilei = Person(16,"LiLei")
+print lilei.name, lilei.age
+print hanmeimei.name, hanmeimei.age
+</code></pre>
+</div>
+
+<p>类可以继承，构成“超类”、“子类”等，类中的方法还可以重写，这些概念的作用需要在写代码过程中理解和领悟。</p>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+<h2 id="import">模块</h2>
+
+<p><code class="highlighter-rouge">import</code>用于导入模块，也就是将python代码从另一个文件中转移到当前程序中，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>import re
+</code></pre>
+</div>
+
+<p>也可以只导入模块中的一部分代码(函数、类等)，如：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>from re import match
+</code></pre>
+</div>
+
+<p><strong>[<a href="#top">TOP</a>]</strong></p>
+
+<hr />
+
+
+
+
+<div  style="display:none"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1264508560'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1264508560%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></div>
+</body>
+</html>
