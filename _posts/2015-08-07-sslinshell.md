@@ -107,8 +107,8 @@ title: base64, md5/SHA1, AES
     Enter file in which to save the key (/home/USER/.ssh/id_rsa): /home/USER/.ssh/id_rsa  #这里是为密钥命名
     Enter passphrase (empty for no passphrase):   #输入口令，可设为空
     Enter same passphrase again:
-    Your identification has been saved in /home/USER/.ssh/id_rsa.  #私钥文件
-    Your public key has been saved in /home/USER/.ssh/id_rsa.pub.  #公钥文件
+    Your identification has been saved in /home/USER/.ssh/id_rsa.  #私钥文件，相当于钥匙
+    Your public key has been saved in /home/USER/.ssh/id_rsa.pub.  #公钥文件，相当于锁
     The key fingerprint is:
     26:09:2e:cd:5a:fd:fc:61:65:83:8a:c7:04:8f:b1:25 USER@LOCALHOST
     The key's randomart image is:
