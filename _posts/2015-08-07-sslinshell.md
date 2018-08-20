@@ -93,7 +93,7 @@ title: base64, md5/SHA1, AES
 使用私钥解密文件，`-inkey`指定解密私钥文件。
 
 更多编码、摘要、加密方法可使用`openssl help`或到[这里](http://netkiller.github.io/cryptography/openssl/index.html){:target="_blank"}查看。
-    
+
 **[[TOP](#top)]**
 
 ***
@@ -104,11 +104,11 @@ title: base64, md5/SHA1, AES
 
     $ ssh-keygen  #等价于ssh-keygen -t rsa，-t用于指定密钥类型，默认为rsa
     Generating public/private rsa key pair.
-    Enter file in which to save the key (/home/USER/.ssh/id_rsa): /home/USER/.ssh/USER_rsa  #这里是为密钥命名
+    Enter file in which to save the key (/home/USER/.ssh/id_rsa): /home/USER/.ssh/id_rsa  #这里是为密钥命名
     Enter passphrase (empty for no passphrase):   #输入口令，可设为空
-    Enter same passphrase again: 
-    Your identification has been saved in /home/USER/.ssh/USER_rsa.  #私钥文件
-    Your public key has been saved in /home/USER/.ssh/USER_rsa.pub.  #公钥文件
+    Enter same passphrase again:
+    Your identification has been saved in /home/USER/.ssh/id_rsa.  #私钥文件
+    Your public key has been saved in /home/USER/.ssh/id_rsa.pub.  #公钥文件
     The key fingerprint is:
     26:09:2e:cd:5a:fd:fc:61:65:83:8a:c7:04:8f:b1:25 USER@LOCALHOST
     The key's randomart image is:
@@ -123,10 +123,10 @@ title: base64, md5/SHA1, AES
     |       . o .     |
     |          .      |
     +-----------------+
-    $ ssh-copy-id USER@REMOTEHOST  #将公钥传到远程主机上，添加到~/.ssh/authorized_keys文件中
+    $ ssh-copy-id [-i id_rsa] USER@REMOTEHOST  #将公钥(-i指定公钥)传到远程主机上，添加到~/.ssh/authorized_keys文件中
+
+`id_rsa`和`id_rsa.pub`相当于钥匙和锁，和我们生活中的一把锁配多枚钥匙不同，这里是一枚钥匙配多把锁，`id_rsa`由本机生成，而且只保存在本机，`id_rsa.pub`由本机生成，但可以通过`ssh-copy-id`或其他方式分发给多个远程主机，这样通过本机ssh登陆这些远程主机时就不需要输入密码了。
 
 **[[TOP](#top)]**
 
 ***
-
-
