@@ -658,7 +658,27 @@ ps：图形界面的进程，不能转入后台。
 <br>
 **[[TOP](#top)]**
 
-* * *
+***
+
+<h3 id="web">10.5 安装软件包</h3>
+
+常见的有rpm、deb、tar等软件包，如：
+
+    $ sudo rpm -i FILENAME.rpm
+    $ sudo rpm -e FILENAME # 卸载
+    $ sudo dpkg -i FILENAME.deb
+    $ sudo dpkg -e FILENAME # 卸载
+
+tar格式的软件包通常为源码形式，需要解压后按照下面的过程编译安装：
+
+    $ ./configure
+    $ make
+    $ make install
+
+
+**[[TOP](#top)]**
+
+***
 
 <h2 id="next">11. 下一步该做什么？</h2>
 
