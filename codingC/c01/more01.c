@@ -50,7 +50,7 @@ int see_more() {
     int c;
     printf("\033[7m more? \33[m");     // reverse on a vt100
     while((c = getchar()) != EOF) {    // get response
-            // int getc(FILE *steam)
+            // int getc(FILE *stream)
         if (c == 'q')                  // q -> N
             return 0;
         if (c == ' ')                  // ' ' => next page
