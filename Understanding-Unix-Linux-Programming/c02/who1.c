@@ -19,6 +19,8 @@ int main() {
 
     if (( utmpfd = open(UTMP_FILE, O_RDONLY)) == -1) {
         perror(UTMP_FILE);         // UTMP_FILE is in utmp.h
+        // void perror(const char *s)
+        // similar as: fprintf(stderr, "%s: %s\n", s, "error message")
         exit(1);
     }
 
@@ -36,7 +38,7 @@ int show_info(struct utmp *utbufp) {
     printf(" ");                         // a space
     printf("%-8.8s", utbufp->ut_line);   // the tty
     printf(" ");                         // a space
-    printf("%10d", utbufp->ut_time);     // login time: x86 10ld; x64 10d 
+    printf("%10d", utbufp->ut_time);     // login time: x86 10ld; x64 10d
     printf(" ");                         // a space
     #ifdef SHOWHOST
     printf("(%s)", utbufp->ut_host);     // the host
