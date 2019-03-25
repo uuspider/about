@@ -2,8 +2,8 @@
  * more01.c - v0.1 of more
  * read and print 24 lines then pause for a few special commands
  */
-#include <stdio.h>
-#include <stdlib.h>
+#include <stdio.h>  // man stdio
+#include <stdlib.h> 
 #define PAGELEN 24
 #define LINELEN 512
 void do_more(FILE *);
