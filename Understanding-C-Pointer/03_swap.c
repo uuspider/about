@@ -2,24 +2,24 @@
  * RESULTS:
 #########################
 Before swap:
- x is 1 at 0x7ffc199ca5d0
- y is 2 at 0x7ffc199ca5d4
+ x is 1 at 0x7ffc8d746a80
+ y is 2 at 0x7ffc8d746a84
 swap:
 step 1: t = *a;
-*a is 1 at 0x7ffc199ca5d0
-*b is 2 at 0x7ffc199ca5d4
- t is 1 at 0x7ffc199ca5b4
+*a is 1 at 0x7ffc8d746a80
+*b is 2 at 0x7ffc8d746a84
+ t is 1 at 0x7ffc8d746a64
 step 2: *a = *b;
-*a is 2 at 0x7ffc199ca5d0
-*b is 2 at 0x7ffc199ca5d4
- t is 1 at 0x7ffc199ca5b4
+*a is 2 at 0x7ffc8d746a80
+*b is 2 at 0x7ffc8d746a84
+ t is 1 at 0x7ffc8d746a64
 step 3: *b = t;
-*a is 2 at 0x7ffc199ca5d0
-*b is 1 at 0x7ffc199ca5d4
- t is 1 at 0x7ffc199ca5b4
+*a is 2 at 0x7ffc8d746a80
+*b is 1 at 0x7ffc8d746a84
+ t is 1 at 0x7ffc8d746a64
 After swap:
- x is 2 at 0x7ffc199ca5d0
- y is 1 at 0x7ffc199ca5d4
+ x is 2 at 0x7ffc8d746a80
+ y is 1 at 0x7ffc8d746a84
 #########################
 */
 #include <stdio.h>
