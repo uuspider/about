@@ -1,5 +1,6 @@
 /* array as parameter deliver to function
  * REAULT:
+####################################################################
 Size of a in main is 20 bytes. 这是系统分配给数组的内存容量。
 Size of a in func is  8 bytes. 这是数组首地址，也就是指针的长度，编译器会发出警告:
 	warning: ‘sizeof’ on array function parameter ‘a’ will return size of ‘int *’ [-Wsizeof-array-argument]
@@ -10,7 +11,32 @@ Size of a in func is  8 bytes. 这是数组首地址，也就是指针的长度�
 *(a + 4) is 5
 [注意] 数组作为子函数参数时，实际传递的都是地址，应该使用指针接收。
 如:"int func(int a[5])"等同于"int func(int *a)."
+####################################################################
+ * ex: 练习数组指针
+#include <stdio.h>
 
+int func(int (*a)[3], int (*b)[2])
+{
+    int i = 0;
+    int j = 0;
+    for (i = 0; i < 2; i++)
+        for (j = 0; j < 3; j++)
+            b[j][i] = a[i][j];
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 2; j++)
+            printf("%d\t", b[i][j]);
+        printf("\n");
+    }
+}
+
+int main() 
+{
+    int a[2][3] = { 1, 3, 5, 4, 6, 8 };
+    int b[3][2] = {0};
+
+    func(a, b);
+}
+####################################################################
  */
 #include <stdio.h>
 
