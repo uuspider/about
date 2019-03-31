@@ -65,10 +65,10 @@ void main()
     printf("\t+  |%16p+ pa \n",pa);
     printf("\t+--+----------------+ &pa:\t%p\n", &pa);
     printf("\t+  |%16d+ i, *p, **p2\n",i);
-    printf("\t+--+----------------+ p, *p2:\t%p\n",p);
-    printf("\t+  |%16p+\n",p);
-    printf("\t+--+----------------+ p2:\t%p\n",p2);
-    printf("\t+  |%16p+\n",p2);
+    printf("\t+--+----------------+ &i:\t%p\n",p);
+    printf("\t+  |%16p+ p\n",p);
+    printf("\t+--+----------------+ &p:\t%p\n",p2);
+    printf("\t+  |%16p+ p2\n",p2);
     printf("\t+--+----------------+\n");
 
     printf("[注意] a是地址常量，不可赋值\n");
