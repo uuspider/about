@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: episode
 title: 人工智能的三个思想实验
 ---
 ## 人工智能的三个思想实验
