@@ -37,9 +37,18 @@ img {
 
 
 blockquote {
-  margin: 0 0 20px;
-  padding: 10px;
   background-color: rgba(142, 255, 186, 0.7);
+  display: block;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 40px;
+  -webkit-margin-end: 40px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+  overflow-x: auto;
 }
 
 pre {
