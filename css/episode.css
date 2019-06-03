@@ -74,10 +74,9 @@ pre,code {
 }
 
 .cc {
-  font: 12px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 15px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #fff;
-  padding:0px 0px -10px 0px;
-  background-color: #00b5da;
+  background-color: #c6e8ff;
   display: block;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
