@@ -1,6 +1,7 @@
 ---
 layout: episode
 title: 人工智能的三个思想实验
+author: uuspider
 ---
 《读库1806》中有一篇《人工智能会觉醒吗》，总结了关于人工智能的三个思想实验，记录如下。
 
@@ -50,10 +51,5 @@ Daniel C. Dennett在他的《[直觉泵和其他思考工具][add01]{:target="_b
 
 人类如果不想被灭绝，必须进化成机器。
 
-***
-
-[[Episode][episode]]
-
 [add01]:https://book.douban.com/subject/30340107/
-[episode]:http://about.uuspider.com/2019/06/02/episodeindex.html
 
