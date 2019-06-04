@@ -38,7 +38,7 @@ img {
 
 blockquote {
   padding:20px 20px 0px 20px;
-  background-color: rgba(142, 255, 186, 0.7);
+  background-color: #f4f4f4;
   display: block;
   -webkit-margin-start: 20px;
   -webkit-margin-end: 20px;
@@ -62,7 +62,8 @@ pre {
   overflow-x: auto;
 }
 pre,code {
-  background:#e8f5fe;color:#000;
+  background:#e8f5fe;
+  color:#000;
 }
 
 .wrapper {
