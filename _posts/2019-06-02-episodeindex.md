@@ -16,6 +16,6 @@ title: Keep Calm & Carry On
 [add02]:http://about.uuspider.com/2019/06/03/ai_experiments.html
 [add03]:http://about.uuspider.com/2019/06/04/no_word.html
 [add04]:http://about.uuspider.com/2019/06/05/leader.html
-[add05]:http://about.uuspider.com/2019/06/06/54.html
+[add05]:http://about.uuspider.com/2019/06/06/ws.html
 
 ***
