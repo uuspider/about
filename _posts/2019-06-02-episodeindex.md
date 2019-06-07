@@ -18,6 +18,6 @@ title: Keep Calm & Carry On
 [add03]:http://about.uuspider.com/2019/06/04/no_word.html
 [add04]:http://about.uuspider.com/2019/06/05/leader.html
 [add05]:http://about.uuspider.com/2019/06/06/ws.html
-[add05]:http://about.uuspider.com/2019/06/07/jump_etc.html
+[add06]:http://about.uuspider.com/2019/06/07/jump_etc.html
 
 ***
