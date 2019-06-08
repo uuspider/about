@@ -6,6 +6,7 @@ title: Keep Calm & Carry On
 
 ***
 
+- [[形而上和证伪][add07]]
 - [[误闯ETC][add06]]
 - [[五四时代的青年][add05]]
 - [[关于领导力][add04]]
@@ -19,5 +20,6 @@ title: Keep Calm & Carry On
 [add04]:http://about.uuspider.com/2019/06/05/leader.html
 [add05]:http://about.uuspider.com/2019/06/06/ws.html
 [add06]:http://about.uuspider.com/2019/06/07/jump_etc.html
+[add07]:http://about.uuspider.com/2019/06/08/metaphysical.html
 
 ***
