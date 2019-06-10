@@ -1,6 +1,6 @@
 ---
 layout: episode
-title: 形而上与证伪
+title: 形而上学可以被证伪吗
 author: uuspider
 ---
 中学课本上大肆批判形而上学，一力推崇辩证法，却始终没有明确什么是形而上学。
