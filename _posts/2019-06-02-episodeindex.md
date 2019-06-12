@@ -5,7 +5,7 @@ title: Keep Calm & Carry On
 ## Episode & Thinking
 
 ***
-
+- [[唐三彩的用途][add08]]
 - [[形而上学可以被证伪吗][add07]]
 - [[误闯ETC][add06]]
 - [[五四时代的青年][add05]]
@@ -21,5 +21,6 @@ title: Keep Calm & Carry On
 [add05]:http://about.uuspider.com/2019/06/06/ws.html
 [add06]:http://about.uuspider.com/2019/06/07/jump_etc.html
 [add07]:http://about.uuspider.com/2019/06/08/metaphysical.html
+[add08]:http://about.uuspider.com/2019/06/12/burial.html
 
 ***
