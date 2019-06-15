@@ -5,6 +5,7 @@ title: Keep Calm & Carry On
 ## Episode & Thinking
 
 ***
+- [[马斯克的Neuralink][add11]]
 - [[专注的乐趣][add10]]
 - [[破碎的知识][add09]]
 - [[唐三彩的用途][add08]]
@@ -26,5 +27,6 @@ title: Keep Calm & Carry On
 [add08]:http://about.uuspider.com/2019/06/12/burial.html
 [add09]:http://about.uuspider.com/2019/06/13/broken_knowledge.html
 [add10]:http://about.uuspider.com/2019/06/14/be_absorbed_in.html
+[add11]:http://about.uuspider.com/2019/06/15/neuralink.html
 
 ***
