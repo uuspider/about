@@ -5,6 +5,7 @@ title: Keep Calm & Carry On
 ## Episode & Thinking
 
 ***
+- [[战时离乡记][add13]]
 - [[想不到的才是未来][add12]]
 - [[马斯克的Neuralink][add11]]
 - [[专注的乐趣][add10]]
@@ -30,5 +31,6 @@ title: Keep Calm & Carry On
 [add10]:http://about.uuspider.com/2019/06/14/be_absorbed_in.html
 [add11]:http://about.uuspider.com/2019/06/15/neuralink.html
 [add12]:http://about.uuspider.com/2019/06/16/future.html
+[add13]:http://about.uuspider.com/2019/06/22/in_war.html
 
 ***
