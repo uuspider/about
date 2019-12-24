@@ -4,7 +4,6 @@ html {
 }
 
 body {
-
   font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   font-size: 18px;
 }
@@ -31,7 +30,10 @@ strong {
   font-weight: 700;
 }
 
-
+h1 {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
+  color: #666666;
+}
 
 img {
   max-width: 100%;
