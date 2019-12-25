@@ -73,14 +73,14 @@ pre,code {
 }
 
 .wrapper {
-  max-width: calc(800px - (10px * 2));
+  max-width: calc(800px - (5px * 2));
   margin-right: auto;
   margin-left: auto;
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
 }
 
 .post-meta {
-  font-size: medium;
+  font-size: 12px;
   color: #666;
 }
