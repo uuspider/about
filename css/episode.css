@@ -35,6 +35,10 @@ h1, h2, h3 {
   color: #666666;
 }
 
+h2 {
+  border-bottom: 1px;
+}
+
 img {
   max-width: 100%;
   height:auto;
