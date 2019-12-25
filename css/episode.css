@@ -33,7 +33,6 @@ strong {
 h1, h2, h3 {
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
   color: #666;
-  border-bottom: 2px LightGrey solid;
 }
 
 h2, h3 {
@@ -88,4 +87,5 @@ pre,code {
 .post-meta {
   font-size: 12px;
   color: #666;
+  border-bottom: 2px LightGrey solid;
 }
