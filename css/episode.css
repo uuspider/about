@@ -30,7 +30,7 @@ strong {
   font-weight: 700;
 }
 
-h1 {
+h1, h2, h3 {
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
   color: #666666;
 }
