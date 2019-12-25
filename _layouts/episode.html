@@ -24,8 +24,8 @@
                 <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%Y年%-m月%-d日" }}</time>
                 {% if page.author %}
                     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-                        <span itemprop="name"> {{ page.author }} • </span>
-                        <span>自由转载<!—-非商用-保持署名—-> (<a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh">CC BY-NC 4.0</a>)</span>
+                        <span itemprop="name"> {{ page.author }} <!—-• </span>
+                        <span>自由转载-非商用-保持署名—-> (<a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh">CC BY-NC 4.0</a>)</span>
                     </span>
                 {% endif %}
                 <hr>
