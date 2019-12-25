@@ -32,11 +32,12 @@ strong {
 
 h1, h2, h3 {
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
-  color: #666666;
+  color: #666;
+  border-bottom: 2px LightGrey solid;
 }
 
 h3 {
-  border-bottom: 1px;
+  border-bottom: 1px LightGrey solid;
 }
 
 img {
