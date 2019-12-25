@@ -31,6 +31,7 @@ title: Linux & Python
 - [[Neural network & keras][add21]{:target="_blank"}]
 - [[Image processing & PIL][add22]{:target="_blank"}]
 - [[SDCC guide][add23]{:target="_blank"}]
+- [[rsync guide][add24]{:target="_blank"}]
 
 [add00]:http://about.uuspider.com/2015/10/15/tips.html
 [add001]:http://about.uuspider.com/2015/07/06/linuxbeginner.html
@@ -57,5 +58,6 @@ title: Linux & Python
 [add21]:http://about.uuspider.com/2017/10/10/keras.html
 [add22]:http://about.uuspider.com/2017/10/19/pil.html
 [add23]:http://about.uuspider.com/2019/03/05/sdcc.html
+[add24]:http://about.uuspider.com/2019/12/26/rsync.html
 
 ***
