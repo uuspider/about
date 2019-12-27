@@ -5,6 +5,8 @@ title: Keep Calm & Carry On
 ## Episode & Thinking
 
 ***
+
+- [[组织是怎么运转的][add15]]
 - [[“方法学”][add14]]
 - [[战时离乡记][add13]]
 - [[想不到的才是未来][add12]]
@@ -16,7 +18,7 @@ title: Keep Calm & Carry On
 - [[误闯ETC][add06]]
 - [[五四时代的青年][add05]]
 - [[关于领导力][add04]]
-- [[我们为什么沉默][add03]] 
+- [[我们为什么沉默][add03]]
 - [[人工智能的三个思想实验][add02]]
 - [[怎么变得有思想][add01]]
 
@@ -34,5 +36,6 @@ title: Keep Calm & Carry On
 [add12]:http://about.uuspider.com/2019/06/16/future.html
 [add13]:http://about.uuspider.com/2019/06/22/in_war.html
 [add14]:http://about.uuspider.com/2019/07/08/gtd.html
+[add15]:http://about.uuspider.com/2019/12/28/organization.html
 
 ***
