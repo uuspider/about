@@ -6,6 +6,7 @@ title: Keep Calm & Carry On
 
 ***
 
+- [[技术的难点][add16]]
 - [[组织是怎么运转的][add15]]
 - [[“方法学”][add14]]
 - [[战时离乡记][add13]]
@@ -37,5 +38,6 @@ title: Keep Calm & Carry On
 [add13]:http://about.uuspider.com/2019/06/22/in_war.html
 [add14]:http://about.uuspider.com/2019/07/08/gtd.html
 [add15]:http://about.uuspider.com/2019/12/28/organization.html
+[add16]: http://about.uuspider.com/2019/12/29/tech.html
 
 ***
