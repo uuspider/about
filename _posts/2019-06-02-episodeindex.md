@@ -40,6 +40,6 @@ title: Keep Calm & Carry On
 [add14]:http://about.uuspider.com/2019/07/08/gtd.html
 [add15]:http://about.uuspider.com/2019/12/28/organization.html
 [add16]: http://about.uuspider.com/2019/12/29/tech.html
-[add17]: http://about.uuspider.com/2020/01/31/private_opinion.html
+[add17]: http://about.uuspider.com/2020/01/31/private_opinions.html
 
 ***
