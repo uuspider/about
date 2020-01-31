@@ -6,6 +6,7 @@ title: Keep Calm & Carry On
 
 ***
 
+- [[如何处理不同观点][add17]]
 - [[技术的难点][add16]]
 - [[组织是怎么运转的][add15]]
 - [[“方法学”][add14]]
@@ -39,5 +40,6 @@ title: Keep Calm & Carry On
 [add14]:http://about.uuspider.com/2019/07/08/gtd.html
 [add15]:http://about.uuspider.com/2019/12/28/organization.html
 [add16]: http://about.uuspider.com/2019/12/29/tech.html
+[add17]: http://about.uuspider.com/2020/01/31/private_opinion.html
 
 ***
