@@ -6,6 +6,7 @@ title: Keep Calm & Carry On
 
 ***
 
+- [[创新是怎么回事][add18]]
 - [[如何处理不同观点][add17]]
 - [[技术的难点][add16]]
 - [[组织是怎么运转的][add15]]
@@ -41,5 +42,6 @@ title: Keep Calm & Carry On
 [add15]:http://about.uuspider.com/2019/12/28/organization.html
 [add16]: http://about.uuspider.com/2019/12/29/tech.html
 [add17]: http://about.uuspider.com/2020/01/31/private_opinions.html
+[add18]: http://about.uuspider.com/2020/02/05/innovation.html
 
 ***
