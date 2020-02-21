@@ -6,6 +6,7 @@ title: Keep Calm & Carry On
 
 ***
 
+- [[战斗英雄][add20]]
 - [[物理定律中的动词][add19]]
 - [[创新是怎么回事][add18]]
 - [[如何处理不同观点][add17]]
@@ -41,9 +42,10 @@ title: Keep Calm & Carry On
 [add13]:http://about.uuspider.com/2019/06/22/in_war.html
 [add14]:http://about.uuspider.com/2019/07/08/gtd.html
 [add15]:http://about.uuspider.com/2019/12/28/organization.html
-[add16]: http://about.uuspider.com/2019/12/29/tech.html
-[add17]: http://about.uuspider.com/2020/01/31/private_opinions.html
-[add18]: http://about.uuspider.com/2020/02/05/innovation.html
-[add19]: http://about.uuspider.com/2020/02/07/understanding_your_work.html
+[add16]:http://about.uuspider.com/2019/12/29/tech.html
+[add17]:http://about.uuspider.com/2020/01/31/private_opinions.html
+[add18]:http://about.uuspider.com/2020/02/05/innovation.html
+[add19]:http://about.uuspider.com/2020/02/07/understanding_your_work.html
+[add20]:http://about.uuspider.com/2020/02/10/battlefront_hero.html
 
 ***
