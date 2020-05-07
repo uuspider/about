@@ -6,6 +6,7 @@ title: Keep Calm & Carry On
 
 ***
 
+- [[乱糟糟的大革命][add21]]
 - [[战斗英雄][add20]]
 - [[物理定律中的动词][add19]]
 - [[创新是怎么回事][add18]]
@@ -47,5 +48,6 @@ title: Keep Calm & Carry On
 [add18]:http://about.uuspider.com/2020/02/05/innovation.html
 [add19]:http://about.uuspider.com/2020/02/07/understanding_your_work.html
 [add20]:http://about.uuspider.com/2020/02/10/battlefront_hero.html
+[add21]:http://about.uuspider.com/2020/05/07/French_Revolution
 
 ***
