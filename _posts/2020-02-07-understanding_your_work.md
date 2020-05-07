@@ -60,7 +60,7 @@ author: uuspider
 
 ***
 
-[[Episode][episode]]
+[[HOME][episode]]
 
 [episode]:http://about.uuspider.com/2019/06/02/episodeindex.html
 [ref01]:https://book.douban.com/subject/1037602/

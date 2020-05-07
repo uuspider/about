@@ -86,7 +86,7 @@ Georgetown大学的法语和比较文学教授Susanna Lee一篇[文章][ref01]{:
 
 ***
 
-[[Episode][episode]]
+[[HOME][episode]]
 
 [episode]:http://about.uuspider.com/2019/06/02/episodeindex.html
 [ref01]:https://theconversation.com/were-living-in-the-bizarre-world-that-flaubert-envisioned-129211 "We're living in the bizarre world that Flaubert envisioned"
