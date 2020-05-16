@@ -6,6 +6,7 @@ title: Keep Calm & Carry On
 
 ***
 
+- [[何必一本正经][add24]]
 - [[一蓑烟雨任平生][add23]]
 - [[以身试毒][add22]]
 - [[乱糟糟的大革命][add21]]
@@ -53,5 +54,6 @@ title: Keep Calm & Carry On
 [add21]:http://about.uuspider.com/2020/05/07/French_Revolution.html
 [add22]:http://about.uuspider.com/2020/05/08/sci.html
 [add23]:http://about.uuspider.com/2020/05/09/wander.html
+[add24]:http://about.uuspider.com/2020/05/11/textbook.html
 
 ***
