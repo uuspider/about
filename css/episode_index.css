@@ -12,11 +12,17 @@ li {
   width: 100%;
   height:  36px;
   background: #fff;
+  list-style: none;
 }
 
 li:hover {
   background: #eee;
 }
+
+li:before {
+  content: "\2022\20";
+  color: #337ab7;
+  font-size: 18px;
 
 a {
   display: block;
