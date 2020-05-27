@@ -7,6 +7,7 @@ title: Keep Calm & Carry On
 
 ***
 
+- [贸易战背景下的华为][add25]
 - [何必一本正经][add24]
 - [一蓑烟雨任平生][add23]
 - [以身试毒][add22]
@@ -56,5 +57,6 @@ title: Keep Calm & Carry On
 [add22]:http://about.uuspider.com/2020/05/08/sci.html
 [add23]:http://about.uuspider.com/2020/05/09/wander.html
 [add24]:http://about.uuspider.com/2020/05/11/textbook.html
+[add25]:http://about.uuspider.com/2020/05/27/huawei.html
 
 ***
