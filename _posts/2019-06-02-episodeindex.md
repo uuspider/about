@@ -7,6 +7,7 @@ title: Keep Calm & Carry On
 
 ***
 
+- [雅尔塔][add29]
 - [谁解其中味][add28]
 - [不败的马斯克][add27]
 - [推石头上山][add26]
@@ -64,5 +65,6 @@ title: Keep Calm & Carry On
 [add26]:http://about.uuspider.com/2020/06/20/to_live.html
 [add27]:http://about.uuspider.com/2020/06/21/musk.html
 [add28]:http://about.uuspider.com/2020/07/12/language.html
+[add29]:http://about.uuspider.com/2021/05/03/Yalta.html
 
 ***
