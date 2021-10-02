@@ -7,6 +7,7 @@ title: Keep Calm & Carry On
 
 ***
 
+- [解放大脑][add32]
 - [浮出水面][add31]
 - [没有什么天长地久][add30]
 - [雅尔塔][add29]
@@ -70,5 +71,6 @@ title: Keep Calm & Carry On
 [add29]:http://about.uuspider.com/2021/05/03/Yalta.html
 [add30]:http://about.uuspider.com/2021/05/09/gtd.html
 [add31]:http://about.uuspider.com/2021/09/25/upthewater.html
+[add32]:http://about.uuspider.com/2021/10/02/brain.html
 
 ***
