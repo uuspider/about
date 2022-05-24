@@ -37,10 +37,6 @@ li {
     width: auto;
 }
 
-.odd {
-    background-color: #eee;
-}
-
-.even {
-    background-color: #fff;
+li:hover,li:focus {
+    background: #eee;
 }
