@@ -1,29 +1,8 @@
-/* @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700); */
 html {
-
 }
 
 body {
-
-  font: 18px Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-li {
-  padding-top: 3px;
-  width: 100%;
-  height:  28px;
-  background: #fff;
-/*  list-style: none;*/
-}
-
-li:hover {
-  background:/* @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700); */
-html {
-
-}
-
-body {
-    font: 19px Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: 18px Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin-left: 0;
     margin-right: 0;
 }
