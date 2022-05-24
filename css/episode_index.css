@@ -17,16 +17,51 @@ li {
 }
 
 li:hover {
-  background: #eee;
+  background:/* @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700); */
+html {
+
 }
-/*
-li:before {
-  content: "\2022\20";
-  color: #337ab7;
-  font-size: 18px;
-*/
+
+body {
+    font: 19px Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-left: 0;
+    margin-right: 0;
+}
+
 a {
-  display: block;
-  width: 100%;
-  height: auto;
+    color: #555;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+a:hover, a:focus {
+    color: #222;
+    text-decoration: underline;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    list-style-type: none;
+}
+
+li {
+    padding: 9px 16px 9px 16px;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #bbb;
+    list-style: none;
+    list-style-type: none;
+    width: auto;
+}
+
+.odd {
+    background-color: #eee;
+}
+
+.even {
+    background-color: #fff;
 }

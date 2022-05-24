@@ -7,10 +7,10 @@ title: Keep Calm & Carry On
 
 ***
 
-- [解放大脑][add32]
-- [浮出水面][add31]
-- [没有什么天长地久][add30]
-- [雅尔塔][add29]
+- [解放大脑][add32]{class="odd"}
+- [浮出水面][add31]{class="even"}
+- [没有什么天长地久][add30]{class="odd"}
+- [雅尔塔][add29]{class="even"}
 - [谁解其中味][add28]
 - [不败的马斯克][add27]
 - [推石头上山][add26]
