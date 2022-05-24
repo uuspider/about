@@ -36,7 +36,7 @@ title: Keep Calm & Carry On
 - [我们为什么沉默][add03]
 - [人工智能的三个思想实验][add02]
 - [怎么变得有思想][add01]
-
+<li></li>
 [add01]:http://about.uuspider.com/2019/06/02/thinking.html
 [add02]:http://about.uuspider.com/2019/06/03/ai_experiments.html
 [add03]:http://about.uuspider.com/2019/06/04/no_word.html
@@ -69,5 +69,3 @@ title: Keep Calm & Carry On
 [add30]:http://about.uuspider.com/2021/05/09/gtd.html
 [add31]:http://about.uuspider.com/2021/09/25/upthewater.html
 [add32]:http://about.uuspider.com/2021/10/02/brain.html
-
-***
