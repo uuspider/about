@@ -4,14 +4,14 @@ title: Keep Calm & Carry On
 ---
 <link rel="stylesheet" href="/css/episode_index.css" />
 
-- [解放大脑][add32]{::class="odd"}
-- [浮出水面][add31]{::class="even"}
-- [没有什么天长地久][add30]{:class="odd"}
-- [雅尔塔][add29]{:class="even"}
-- [谁解其中味][add28]{:class="odd"}
-- [不败的马斯克][add27]{:class="even"}
-- [推石头上山][add26]{:class="odd"}
-- [贸易战背景下的华为][add25]{:class="even"}
+- [解放大脑][add32]
+- [浮出水面][add31]
+- [没有什么天长地久][add30]
+- [雅尔塔][add29]
+- [谁解其中味][add28]
+- [不败的马斯克][add27]
+- [推石头上山][add26]
+- [贸易战背景下的华为][add25]
 - [何必一本正经][add24]
 - [一蓑烟雨任平生][add23]
 - [以身试毒][add22]
