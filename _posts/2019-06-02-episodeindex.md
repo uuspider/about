@@ -3,11 +3,8 @@ layout: post
 title: Keep Calm & Carry On
 ---
 <link rel="stylesheet" href="/css/episode_index.css" />
-## 不吐不快
 
-***
-
-- [解放大脑][add32]{class="odd"}
+- [解放大脑][add32]{:class="odd"}
 - [浮出水面][add31]{class="even"}
 - [没有什么天长地久][add30]{class="odd"}
 - [雅尔塔][add29]{class="even"}
