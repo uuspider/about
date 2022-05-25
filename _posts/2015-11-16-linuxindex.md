@@ -12,6 +12,7 @@ title: Linux & Python
 - [[grep, sed, awk & regular expressions][add01]{:target="_blank"}]    
 - [[shell scripts][add02]{:target="_blank"}]    
 - [[curl guide][add03]{:target="_blank"}]    
+- [[cookies][add25]{:target="_blank"}]    
 - [[wget, amule & transmission][add04]{:target="_blank"}]    
 - [[openssl: encoding, digest & cipher][add05]{:target="_blank"}]    
 - [[ASCII, GB2312, GBK, unicode & UTF-8][add06]{:target="_blank"}]    
@@ -59,5 +60,6 @@ title: Linux & Python
 [add22]:http://about.uuspider.com/2017/10/19/pil.html
 [add23]:http://about.uuspider.com/2019/03/05/sdcc.html
 [add24]:http://about.uuspider.com/2019/12/26/rsync.html
+[add25]:http://about.uuspider.com/2015/08/15/cookie.html
 
 ***
