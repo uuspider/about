@@ -5,9 +5,10 @@ title: Shell with Style
 
 # Shell with Style
 
-参考：[Google shell styleguide][ref1]{:target="_blank"}
+参考：[Google shell styleguide][ref1]{:target="_blank"}, [samizdat-shell-help.bash][ref2]{:target="_blank"}
 
 [ref1]:http://zh-google-styleguide.readthedocs.io/en/latest/google-shell-styleguide/contents/
+[ref2]:https://gist.github.com/kovetskiy/a4bb510595b3a6b17bfd1bd9ac8bb4a5
 
 <h2 id="top"></h2>
 
@@ -827,6 +828,34 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
 编辑代码时，花点时间看看项目中的其它代码，并熟悉其风格。如果其它代码中`if`语句使用空格，那么你也要使用；如果其中的注释用星号`*` 围成一个盒子状，那么你同样要这么做。
 
 风格指南的重点在于提供一个通用的编程规范，这样大家可以把精力集中在实现内容而不是表现形式上。我们展示的是一个总体的的风格规范，但局部风格也很重要，如果你在一个文件中新加的代码和原有代码风格相去甚远，这就破坏了文件本身的整体美观，也会打乱读者在阅读代码时的节奏，所以要尽量避免。
+
+## Tip 1 注释即help
+
+使用`sed`或`awk`可以将注释以help的形式输出，如：
+
+    #!/bin/bash
+    ###
+    ### my-script — does one thing well
+    ###
+    ### Usage:
+    ###   my-script <input> <output>
+    ###
+    ### Options:
+    ###   <input>   Input file to read.
+    ###   <output>  Output file to write. Use '-' for stdout.
+    ###   -h        Show this message.
+
+    help() {
+        sed -rn 's/^### ?//;T;p' "$0"
+        #awk -F'### ' '/^###/ { print $2 }' "$0"
+    }
+
+    if [[ $# == 0 ]] || [[ "$1" == "-h" ]]; then
+    help
+    exit 1
+    fi
+
+    echo Hello World
 
 
 **[[TOP](#top)]**
