@@ -5,7 +5,7 @@ title: Shell with Style
 
 # Shell with Style
 
-参考：[Google shell styleguide][ref1]{:target="_blank"}, [samizdat-shell-help.bash][ref2]{:target="_blank"}
+参考：[Google shell styleguide][ref1]{:target="_blank"}, [Help message for shell script][ref2]{:target="_blank"}
 
 [ref1]:http://zh-google-styleguide.readthedocs.io/en/latest/google-shell-styleguide/contents/
 [ref2]:https://gist.github.com/kovetskiy/a4bb510595b3a6b17bfd1bd9ac8bb4a5
@@ -831,7 +831,14 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
 
 ## Tip 1 注释即help
 
-使用`sed`或`awk`可以将注释以help的形式输出，如：
+July 7, 2020
+
+Have you ever thought how good it would be to have a help message for your shell script that you wrote a month ago and already forgot what it is supposed to do?
+
+Yeah, there is always a way to show a message using cat (meow) or a bunch of echo calls.
+But there is a neat trick.
+
+Add your message with all the required information on top of your file, just right after the shebang.
 
     #!/bin/bash
     ###
@@ -856,6 +863,20 @@ TODO 注释以大写 TODO 开头，在后边紧跟的一个括号中注明用户
     fi
 
     echo Hello World
+
+
+$0 means a filename of a file that is being executed.
+A bit about the magic that is going here:
+s — stands for substitute the following pattern;
+/ — keyword to define start/end of the pattern;
+^### ? — match a string starting with ### and an optional space after;
+// — there could be something between the slashes, but since nothing is here, replace the pattern with an empty string;
+T — Jumps to the end of sed-script if no s/// has done a successful substitution;
+p — Prints the result of the substitution.
+
+Now just call the help function if an arg -h or no args passed.
+
+Hope it helps, cheers!
 
 
 **[[TOP](#top)]**
