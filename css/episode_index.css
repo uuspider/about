@@ -2,9 +2,10 @@ html {
 }
 
 body {
-    font: 18px Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    margin-left: 0;
-    margin-right: 0;
+    font: 16px Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #eee;
+    margin: auto;
+    max-width: 600px;
 }
 
 a {
@@ -22,16 +23,17 @@ a:hover, a:focus {
 
 ul {
     margin: 0;
-    padding: 0;
+    padding: 30px;
     list-style: none;
     list-style-type: none;
+    background-color: #fff;
 }
 
 li {
     padding: 9px 16px 9px 16px;
     border-top-width: 1px;
     border-top-style: solid;
-    border-top-color: #bbb;
+    border-top-color: #fff;
     list-style: none;
     list-style-type: none;
     width: auto;
@@ -39,4 +41,8 @@ li {
 
 li:hover,li:focus {
     background: #eee;
+}
+
+h2 {
+    padding-left: 30px;
 }
