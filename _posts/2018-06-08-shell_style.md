@@ -873,12 +873,19 @@ Add your message with all the required information on top of your file, just rig
 
 
 $0 means a filename of a file that is being executed.
+
 A bit about the magic that is going here:
+
 s — stands for substitute the following pattern;
+
 / — keyword to define start/end of the pattern;
+
 ^### ? — match a string starting with ### and an optional space after;
+
 // — there could be something between the slashes, but since nothing is here, replace the pattern with an empty string;
+
 T — Jumps to the end of sed-script if no s/// has done a successful substitution;
+
 p — Prints the result of the substitution.
 
 Now just call the help function if an arg -h or no args passed.
