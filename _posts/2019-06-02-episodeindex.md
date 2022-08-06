@@ -5,6 +5,7 @@ title: Keep Calm & Carry On
 <link rel="stylesheet" href="/css/episode_index.css" />
 ## uuspider's blog
 
+- [交朋友和做生意][add33]
 - [解放大脑][add32]
 - [浮出水面][add31]
 - [没有什么天长地久][add30]
@@ -70,3 +71,4 @@ title: Keep Calm & Carry On
 [add30]:http://about.uuspider.com/2021/05/09/gtd.html
 [add31]:http://about.uuspider.com/2021/09/25/upthewater.html
 [add32]:http://about.uuspider.com/2021/10/02/brain.html
+[add33]:http://about.uuspider.com/2022/08/06/mkfriends.html
