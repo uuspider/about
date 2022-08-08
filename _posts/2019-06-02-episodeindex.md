@@ -5,6 +5,7 @@ title: Keep Calm & Carry On
 <link rel="stylesheet" href="/css/episode_index.css" />
 ## uuspider's blog
 
+- [信心从哪里来][add35]
 - [知行总合一][add34]
 - [交朋友和做生意][add33]
 - [解放大脑][add32]
@@ -74,3 +75,4 @@ title: Keep Calm & Carry On
 [add32]:http://about.uuspider.com/2021/10/02/brain.html
 [add33]:http://about.uuspider.com/2022/08/06/mkfriends.html
 [add34]:http://about.uuspider.com/2022/08/07/justdoit.html
+[add35]:http://about.uuspider.com/2022/08/08/confidence.html
