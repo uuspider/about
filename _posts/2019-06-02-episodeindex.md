@@ -5,6 +5,7 @@ title: Keep Calm & Carry On
 <link rel="stylesheet" href="/css/episode_index.css" />
 ## uuspider's blog
 
+- [没有“灵魂”的会议][add37]
 - [集体怎么负责][add36]
 - [信心从哪里来][add35]
 - [知行总合一][add34]
@@ -78,3 +79,4 @@ title: Keep Calm & Carry On
 [add34]:http://about.uuspider.com/2022/08/07/justdoit.html
 [add35]:http://about.uuspider.com/2022/08/08/confidence.html
 [add36]:http://about.uuspider.com/2022/08/16/dobyothers.html
+[add37]:http://about.uuspider.com/2022/08/17/meeting.html
