@@ -81,4 +81,4 @@ title: Keep Calm & Carry On
 [add35]:http://about.uuspider.com/2022/08/08/confidence.html
 [add36]:http://about.uuspider.com/2022/08/16/dobyothers.html
 [add37]:http://about.uuspider.com/2022/08/17/meeting.html
-[add37]:http://about.uuspider.com/2022/08/20/rule.html
+[add38]:http://about.uuspider.com/2022/08/20/rule.html
