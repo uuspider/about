@@ -5,6 +5,7 @@ title: Keep Calm & Carry On
 <link rel="stylesheet" href="/css/episode_index.css" />
 ## uuspider's blog
 
+- [吊炉烧饼][add40]
 - [居高临下的包容][add39]
 - [假装你可以][add38]
 - [没有“灵魂”的会议][add37]
@@ -84,3 +85,4 @@ title: Keep Calm & Carry On
 [add37]:http://about.uuspider.com/2022/08/17/meeting.html
 [add38]:http://about.uuspider.com/2022/08/20/rule.html
 [add39]:http://about.uuspider.com/2022/08/21/debating.html
+[add40]:http://about.uuspider.com/2022/09/04/yearsago.html
