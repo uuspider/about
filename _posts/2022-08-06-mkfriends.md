@@ -13,6 +13,8 @@ author: uuspider
 
 这种情况下，应该大胆地把困难撇在一边，忘掉它，去运动，去读书，去玩游戏，去做自己感兴趣的事，尤其重要的是，去陌生的环境，认识更多的人。
 
+> 有一个公式：幸运 = 你做的事情 x 知道的人数。你做的事情越多，知道的人越多，就越可能幸运。 ([《发表作品会增加你的幸运》][ref7])
+
 交朋友，把自己放在一个更大的圈子里，能够获取更多的信息和资源，遇到难题时就有了更多的选项，提高了自己把事情做完、做成的几率，也就是给自己带来更多“好运气”。
 
 不会交朋友？那就从下面几点开始：
@@ -72,3 +74,4 @@ author: uuspider
 [ref4]:https://www.youtube.com/watch?v=ErgLIoWzd4s&t=205s
 [ref5]:https://twitter.com/evilinside44/status/1505016136878129161
 [ref6]:https://weibo.com/1767964927/KcKvme0Pj
+[ref7]:https://www.ruanyifeng.com/blog/2022/09/weekly-issue-223.html
