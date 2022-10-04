@@ -27,6 +27,8 @@ author: uuspider
 
 > I'm at the stage in my life where I keep myself out of arguments. Even if you tell me 1+1=5. You're absolutely correct, enjoy. (Keanu Reeves)
 
+> 遇到认知差距云泥之别的，千万不要争论，对他所说的话就扔一句：你说的对。然后转身离开就行了，多说一句你就输了。 ([@bqB9Ml6aFloKS2F][ref05])
+
 《辛亥年》、《民国的忧伤》记录了清末及民国时期的宪政历程，百年前在争论的议题，现在仍在继续争论，百年前在筹划的大业，如今仍未达成，百年来，革命家、改革家们前仆后继，何以如此“无所作为”呢？
 
 > 海鹏为自己写的这些文章定位为“我仅存的志向就是重申常识”，他很谦逊地说：“重申常识这种事，做起来一百年也不够，可它没什么难度，未必专需要谁做。”但我是一个编辑，我知道找到一个睿智、幽默的专栏作家可能并不会太难，但是找到一个能如此尊重并且理解汉语，还能优雅运用的人基本上是件不可能完成的任务。
@@ -60,3 +62,4 @@ author: uuspider
 [ref02]:https://twitter.com/JunZhan12743255/status/1568268254258561027
 [ref03]:https://twitter.com/Eurasch/status/1542618530440712192
 [ref04]:https://twitter.com/straysmallcat/status/1568786151745679361
+[ref05]:https://twitter.com/bqB9Ml6aFloKS2F/status/1576850931307532289
