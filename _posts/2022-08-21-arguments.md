@@ -23,6 +23,8 @@ author: uuspider
 
 不幸的是，专业经验和直觉经验并不总是一致的，当专业行为超出“小粉红”们的直觉和理解能力时，网络暴力将如洪水猛兽般失控。
 
+> 思想家卢梭说过，世上最没用的三种教育方法就是：讲道理、发脾气、刻意感动。最有用的三种教育方法是：阅读、自由、身教。知识就是力量，掌握知识并把知识运用到生活中去的人是有力量的人。不要妄图去唤醒任何人，每个人读过的书、犯过的错、走过的路、爱过的人，都不一样。你想说明白讲清楚的，需要跨越的不是语言，而是语言背后的认知水平、智商、教育、阶层、信仰等鸿沟。 ([@bqB9Ml6aFloKS2F][ref06])
+
 如果法律和正义无力保护这些真正想解决问题的技术人员，**避免争论**，就无奈地成为他们最后一道防线，——再往后退只能是无所作为了。
 
 > I'm at the stage in my life where I keep myself out of arguments. Even if you tell me 1+1=5. You're absolutely correct, enjoy. (Keanu Reeves)
@@ -63,3 +65,4 @@ author: uuspider
 [ref03]:https://twitter.com/Eurasch/status/1542618530440712192
 [ref04]:https://twitter.com/straysmallcat/status/1568786151745679361
 [ref05]:https://twitter.com/bqB9Ml6aFloKS2F/status/1576850931307532289
+[ref06]:https://twitter.com/bqB9Ml6aFloKS2F/status/1576849615030169600
