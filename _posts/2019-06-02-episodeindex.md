@@ -5,7 +5,7 @@ title: Keep Calm & Carry On
 <link rel="stylesheet" href="/css/episode_index.css" />
 ## uuspider's blog
 
-- [怀念手动挡][add41]
+- [驾驶乐趣][add41]
 - [吊炉烧饼][add40]
 - [居高临下的包容][add39]
 - [假装你可以][add38]
