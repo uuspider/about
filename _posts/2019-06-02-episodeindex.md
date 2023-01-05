@@ -5,6 +5,7 @@ title: Keep Calm & Carry On
 <link rel="stylesheet" href="/css/episode_index.css" />
 ## uuspider's blog
 
+- [孔子][add44]
 - [停不下来的金枪鱼][add43]
 - [旅行的意义][add42]
 - [驾驶乐趣][add41]
@@ -92,3 +93,4 @@ title: Keep Calm & Carry On
 [add41]:http://about.uuspider.com/2022/09/18/driving.html
 [add42]:http://about.uuspider.com/2022/12/18/travlling.html
 [add43]:http://about.uuspider.com/2022/09/06/questionandanswer.html
+[add44]:http://about.uuspider.com/2022/12/26/Confucius_.html
