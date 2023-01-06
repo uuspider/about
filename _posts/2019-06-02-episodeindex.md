@@ -92,5 +92,5 @@ title: Keep Calm & Carry On
 [add40]:http://about.uuspider.com/2022/09/04/yearsago.html
 [add41]:http://about.uuspider.com/2022/09/18/driving.html
 [add42]:http://about.uuspider.com/2022/12/18/travlling.html
-[add43]:http://about.uuspider.com/2022/09/06/questionandanswer.html
-[add44]:http://about.uuspider.com/2022/12/26/Confucius_.html
+[add43]:http://about.uuspider.com/2023/01/04/questionandanswer.html
+[add44]:http://about.uuspider.com/2023/01/05/Confucius.html
