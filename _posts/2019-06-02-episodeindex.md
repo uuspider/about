@@ -5,6 +5,7 @@ title: Keep Calm & Carry On
 <link rel="stylesheet" href="/css/episode_index.css" />
 ## uuspider's blog
 
+- [世界的中心在哪里][add46]
 - [深夜小吃][add45]
 - [孔子][add44]
 - [停不下来的金枪鱼][add43]
@@ -96,3 +97,4 @@ title: Keep Calm & Carry On
 [add43]:http://about.uuspider.com/2023/01/04/questionandanswer.html
 [add44]:http://about.uuspider.com/2023/01/05/Confucius.html
 [add45]:http://about.uuspider.com/2023/01/07/stall.html
+[add46]:http://about.uuspider.com/2023/01/12/center.html
