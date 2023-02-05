@@ -5,7 +5,7 @@ title: Keep Calm & Carry On
 <link rel="stylesheet" href="/css/episode_index.css" />
 ## uuspider's blog
 
-- [三分钟热度][add47]
+- [三分钟收获][add47]
 - [世界的中心在哪里][add46]
 - [深夜小吃][add45]
 - [孔子][add44]
