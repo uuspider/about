@@ -6,7 +6,7 @@ title: Keep Calm & Carry On
 ## uuspider's blog
 
 - [三分钟收获][add47]
-- [世界的中心在哪里][add46]
+- [世界的中心][add46]
 - [深夜小吃][add45]
 - [孔子][add44]
 - [停不下来的金枪鱼][add43]
