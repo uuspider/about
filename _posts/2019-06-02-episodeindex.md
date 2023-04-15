@@ -5,6 +5,7 @@ title: Keep Calm & Carry On
 <link rel="stylesheet" href="/css/episode_index.css" />
 ## uuspider's blog
 
+- [不要凑合][add50]
 - [人工智能的奇点][add49]
 - [饥荒][add48]
 - [三分钟收获][add47]
@@ -104,3 +105,4 @@ title: Keep Calm & Carry On
 [add47]:http://about.uuspider.com/2023/02/02/3min.html
 [add48]:http://about.uuspider.com/2023/03/06/thewayout.html
 [add49]:http://about.uuspider.com/2023/03/28/thinking.html
+[add50]:http://about.uuspider.com/2023/03/12/balance.html
