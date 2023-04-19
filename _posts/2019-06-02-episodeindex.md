@@ -5,7 +5,7 @@ title: Keep Calm & Carry On
 <link rel="stylesheet" href="/css/episode_index.css" />
 ## uuspider's blog
 
-- [不要凑合][add50]
+- [不凑合][add50]
 - [人工智能的奇点][add49]
 - [饥荒][add48]
 - [三分钟收获][add47]
