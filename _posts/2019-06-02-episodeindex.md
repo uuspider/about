@@ -5,6 +5,7 @@ title: Keep Calm & Carry On
 <link rel="stylesheet" href="/css/episode_index.css" />
 ## uuspider's blog
 
+- [程序员的星辰大海][add51]
 - [不凑合][add50]
 - [人工智能的奇点][add49]
 - [饥荒][add48]
@@ -106,3 +107,4 @@ title: Keep Calm & Carry On
 [add48]:http://about.uuspider.com/2023/03/06/thewayout.html
 [add49]:http://about.uuspider.com/2023/03/28/thinking.html
 [add50]:http://about.uuspider.com/2023/03/12/balance.html
+[add51]:http://about.uuspider.com/2023/04/22/feedback.html
