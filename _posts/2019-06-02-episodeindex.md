@@ -5,6 +5,7 @@ title: Keep Calm & Carry On
 <link rel="stylesheet" href="/css/episode_index.css" />
 ## uuspider's blog
 
+- [散步去][add53]
 - [铁饭碗][add52]
 - [程序员的星辰大海][add51]
 - [不凑合][add50]
@@ -110,3 +111,4 @@ title: Keep Calm & Carry On
 [add50]:http://about.uuspider.com/2023/03/12/balance.html
 [add51]:http://about.uuspider.com/2023/04/22/feedback.html
 [add52]:http://about.uuspider.com/2023/05/07/ironbowl.html
+[add53]:http://about.uuspider.com/2023/06/18/walking.html
