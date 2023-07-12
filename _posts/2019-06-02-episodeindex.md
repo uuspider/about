@@ -5,7 +5,7 @@ title: Keep Calm & Carry On
 <link rel="stylesheet" href="/css/episode_index.css" />
 ## uuspider's blog
 
-- [视而不见的常识][ref54]
+- [视而不见的常识][add54]
 - [散步去][add53]
 - [铁饭碗][add52]
 - [程序员的星辰大海][add51]
