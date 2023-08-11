@@ -26,7 +26,3 @@ author: uuspider
 如果是想休息和娱乐，和媒体一起狂欢倒也不坏，但不要指望能从他们那里获得什么真正有用的东西。
 
 ***
-
-[[HOME][episode]]
-
-[episode]:http://about.uuspider.com/2019/06/02/episodeindex.html

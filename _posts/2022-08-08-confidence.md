@@ -34,7 +34,3 @@ author: uuspider
 但这并不总是有效，蒙哥马利发起了市场花园行动，一如既往地事无巨细，一如既往地成竹在胸，却遭到惨败：德国的溃兵一样有事无巨细的应对方案和满满的信心。
 
 ***
-
-[[HOME][episode]]
-
-[episode]:http://about.uuspider.com/2019/06/02/episodeindex.html

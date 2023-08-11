@@ -23,7 +23,4 @@ author: uuspider
 
 ***
 
-[[HOME][episode]]
-
-[episode]:http://about.uuspider.com/2019/06/02/episodeindex.html
 [ref01]:https://twitter.com/linyujing/status/1541389362826715136 'Promised Land'

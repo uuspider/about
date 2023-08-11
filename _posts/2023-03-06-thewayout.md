@@ -55,7 +55,4 @@ author: uuspider
 
 ***
 
-[[HOME][episode]]
-
-[episode]:http://about.uuspider.com/2019/06/02/episodeindex.html
 [ref01]:https://www.bilibili.com/video/BV1wq4y1q7Wv/?share_source=copy_web&vd_source=0443b50f4c9a6f3ac9a2d08422f230db

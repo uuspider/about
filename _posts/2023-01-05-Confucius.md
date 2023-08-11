@@ -62,7 +62,3 @@ author: uuspider
 (读中岛敦《山月记·弟子》)
 
 ***
-
-[[HOME][episode]]
-
-[episode]:http://about.uuspider.com/2019/06/02/episodeindex.html

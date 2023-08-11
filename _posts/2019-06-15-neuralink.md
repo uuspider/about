@@ -44,7 +44,3 @@ author: uuspider
 (本文素材主要来自《读库1705》，原文《未来的人会是怎样》有148页，内容非常丰富。)
 
 ***
-
-[[HOME][episode]]
-
-[episode]:http://about.uuspider.com/2019/06/02/episodeindex.html

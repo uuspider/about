@@ -29,9 +29,6 @@ author: uuspider
 
 ***
 
-[[HOME][episode]]
-
-[episode]:http://about.uuspider.com/2019/06/02/episodeindex.html
 [ref01]:https://book.douban.com/subject/5931067/
 [ref02]:https://book.douban.com/subject/2075391/
 [ref03]:http://blog.sina.com.cn/shikang

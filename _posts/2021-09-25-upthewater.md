@@ -43,7 +43,4 @@ author: uuspider
 
 ***
 
-[[HOME][episode]]
-
-[episode]:http://about.uuspider.com/2019/06/02/episodeindex.html
 [ref01]:http://about.uuspider.com/2021/05/03/Yalta.html

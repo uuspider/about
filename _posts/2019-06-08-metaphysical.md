@@ -28,7 +28,3 @@ author: uuspider
 科学的理论总是具体和精确的，形而上学试图凌驾于科学之上，为了包罗万象，只能含糊其辞甚至故弄玄虚。也许，形而上的讨论永远也不会有结果，不如用有限的人生做一点可证伪的学问。
 
 ***
-
-[[HOME][episode]]
-
-[episode]:http://about.uuspider.com/2019/06/02/episodeindex.html

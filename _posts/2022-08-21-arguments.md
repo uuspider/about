@@ -57,9 +57,6 @@ author: uuspider
 
 ***
 
-[[HOME][episode]]
-
-[episode]:http://about.uuspider.com/2019/06/02/episodeindex.html
 [ref01]:https://twitter.com/keaising/status/1545247732574564352
 [ref02]:https://twitter.com/JunZhan12743255/status/1568268254258561027
 [ref03]:https://twitter.com/Eurasch/status/1542618530440712192

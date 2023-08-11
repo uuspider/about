@@ -29,7 +29,3 @@ author: uuspider
 (PS:基尔波诺斯上将的故事来自网络上袁腾飞讲课的视频，可能是他编出来的段子，与维基百科上的资料有出入。)
 
 ***
-
-[[HOME][episode]]
-
-[episode]:http://about.uuspider.com/2019/06/02/episodeindex.html

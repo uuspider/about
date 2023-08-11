@@ -28,7 +28,3 @@ author: uuspider
 再说回金枪鱼，有些矫情的无聊文人，无病呻吟，感慨它们“永不停歇、逐梦而行”，其实对金枪鱼而言，并无甚深意，这只是它们的本能，既无法逃避，也不为“梦想”，算是一种生存的常态吧。
 
 ***
-
-[[HOME][episode]]
-
-[episode]:http://about.uuspider.com/2019/06/02/episodeindex.html

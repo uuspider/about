@@ -30,8 +30,5 @@ author: uuspider
 
 ***
 
-[[HOME][episode]]
-
-[episode]:http://about.uuspider.com/2019/06/02/episodeindex.html
 [ref01]:https://book.douban.com/subject/25846075/
 [ref02]:https://book.douban.com/subject/26340695/

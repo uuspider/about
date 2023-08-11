@@ -53,8 +53,5 @@ Daniel C. Dennett在《[直觉泵和其他思考工具][add01]{:target="_blank"}
 
 ***
 
-[[HOME][episode]]
-
-[episode]:http://about.uuspider.com/2019/06/02/episodeindex.html
 
 [add01]:https://book.douban.com/subject/30340107/
