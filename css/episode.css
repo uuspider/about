@@ -93,4 +93,5 @@ pre,code {
 .post-footer {
   font-size: 12px;
   color: #666;
+  border-top: 2px LightGrey solid;
 }
