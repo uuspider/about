@@ -89,3 +89,8 @@ pre,code {
   color: #666;
   border-bottom: 2px LightGrey solid;
 }
+
+.post-footer {
+  font-size: 12px;
+  color: #666;
+}
