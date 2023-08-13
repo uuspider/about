@@ -63,8 +63,6 @@ author: uuspider
 
 坦诚相待，和而不同，这是生意，也是生活。
 
-***
-
 [ref1]:https://twitter.com/fwjizyp/status/1131952068384575489
 [ref2]:http://about.uuspider.com/2019/12/29/tech.html
 [ref3]:https://twitter.com/minzhuziyou666/status/1547718226917724161

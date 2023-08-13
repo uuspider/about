@@ -55,8 +55,6 @@ author: uuspider
 
 > 你连想改变别人的念头都不要有。要学习像太阳一样，只是发出光和热，每个人接收阳光的反应有不同，有人觉得刺眼，有人觉得温暖，有人甚至躲开阳光。 (卡尔·荣格)
 
-***
-
 [ref01]:https://twitter.com/keaising/status/1545247732574564352
 [ref02]:https://twitter.com/JunZhan12743255/status/1568268254258561027
 [ref03]:https://twitter.com/Eurasch/status/1542618530440712192

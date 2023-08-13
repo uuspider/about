@@ -84,8 +84,6 @@ Georgetown大学的法语和比较文学教授Susanna Lee一篇[文章][ref01]{:
 
 >(补充：抢发论文和“双黄连治病毒”刷新了我的认知，只能说，国内这些研究人员做起事来，既没有科学的方法，也没有科学的态度，甚至自私、无知到不关心、不理解数据背后的事实真相。如果他们是故意的，还有亡羊补牢的机会，但我感觉他们极有可能是无意的，这表明，即使是在高级知识分子的圈子里，都罕见真正的科学精神。)
 
-***
-
 [ref01]:https://theconversation.com/were-living-in-the-bizarre-world-that-flaubert-envisioned-129211 "We're living in the bizarre world that Flaubert envisioned"
 [ref02]:https://weibointl.api.weibo.cn/share/118509860.html
 [ref03]:http://www.ruanyifeng.com/blog/2019/01/weekly-issue-39.html

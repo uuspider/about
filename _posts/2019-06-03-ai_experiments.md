@@ -51,7 +51,4 @@ Daniel C. Dennett在《[直觉泵和其他思考工具][add01]{:target="_blank"}
 
 如果不想被灭绝，人类必须进化成机器。
 
-***
-
-
 [add01]:https://book.douban.com/subject/30340107/

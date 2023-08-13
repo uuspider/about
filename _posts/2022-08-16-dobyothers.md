@@ -21,6 +21,4 @@ author: uuspider
 
 真诚地信任一个人，他就会尽力把事情做好。
 
-***
-
 [ref01]:https://twitter.com/linyujing/status/1541389362826715136 'Promised Land'

@@ -53,6 +53,4 @@ author: uuspider
 
 也许，我们唯一能做的，只有忍耐，等到风调雨顺，等到不再有人折腾，我们还有望吃上馒头和蛋糕。
 
-***
-
 [ref01]:https://www.bilibili.com/video/BV1wq4y1q7Wv/?share_source=copy_web&vd_source=0443b50f4c9a6f3ac9a2d08422f230db

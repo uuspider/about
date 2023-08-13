@@ -28,7 +28,5 @@ author: uuspider
 
 让老爷们去谈理论，对于工程师而言，解决现实、具体的工程问题，就是创新。
 
-***
-
 [ref01]:https://book.douban.com/subject/25846075/
 [ref02]:https://book.douban.com/subject/26340695/

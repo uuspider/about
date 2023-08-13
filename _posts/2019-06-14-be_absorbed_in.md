@@ -27,8 +27,6 @@ author: uuspider
 
 >你可能以为费了一番力气，是跃过了一个讨厌的小山坡，返身才发现，那是一座巨大的山脉，可能你一生都无法再越过它。 ( P112, 《[那些不值钱的经验][ref02]{:target="_blank"}》, [石康][ref03]{:target="_blank"} )
 
-***
-
 [ref01]:https://book.douban.com/subject/5931067/
 [ref02]:https://book.douban.com/subject/2075391/
 [ref03]:http://blog.sina.com.cn/shikang

@@ -35,6 +35,4 @@ author: uuspider
 
 这些“有办法”的人确立了组织的形式和运转的规则，使之能够稳定、持久，而不会被轻易破坏和摧毁。
 
-***
-
 [ref01]:https://chinafactcheck.com/9296/

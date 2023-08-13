@@ -58,6 +58,4 @@ author: uuspider
 
 (费曼的故事来自，“美国佬在巴西”，《[别闹了，费曼先生][ref01]{:target="_blank"}》)
 
-***
-
 [ref01]:https://book.douban.com/subject/1037602/
