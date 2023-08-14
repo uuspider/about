@@ -1,0 +1,75 @@
+/* @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700); */
+html {
+
+}
+
+body {
+  font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-size: 18px;
+}
+
+a {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  color: #23527c;
+  text-decoration: underline;
+}
+
+p {
+  /*text-indent: 2em;*/
+  line-height: 1.8;
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+strong {
+  font-weight: 700;
+}
+
+h1, h2, h3 {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, Helvetica, STKaiti, SimSun, serif;
+  color: #666;
+}
+
+h2, h3 {
+  border-bottom: 1px LightGrey solid;
+}
+
+img {
+  max-width: 100%;
+  height:auto;
+}
+
+
+blockquote {
+  padding:20px 20px 0px 20px;
+  background-color: #eee;
+  border:1px solid #ccc;
+  display: block;
+  overflow-x: auto;
+  font-size: 12px;
+}
+
+.wrapper {
+  max-width: calc(800px - (5px * 2));
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.post-meta {
+  font-size: 12px;
+  color: #666;
+  border-bottom: 2px LightGrey solid;
+}
+
+.post-footer {
+  font-size: 12px;
+  color: #666;
+  border-top: 2px LightGrey solid;
+  text-align: right;
+}
