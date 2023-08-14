@@ -9,8 +9,8 @@ body {
 }
 
 a {
-  color: #337ab7;
-  text-decoration: none;
+  color: #000;
+  text-decoration: underline;
 }
 
 a:hover, a:focus {
