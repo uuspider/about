@@ -45,12 +45,11 @@ img {
 
 
 blockquote {
-  padding:20px 20px 0px 20px;
-  background-color: #eee;
-  border:1px solid #ccc;
+  padding:10px 20px 0px 20px;
+  background-color: #eef;
   display: block;
   overflow-x: auto;
-  font-size: 12px;
+  font-size: 15px;
 }
 
 .wrapper {
