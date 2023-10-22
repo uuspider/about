@@ -5,6 +5,7 @@ title: Keep Calm & Carry On
 <link rel="stylesheet" href="/css/episode_index.css" />
 ## uuspider's blog
 
+<!-- [苏州][add57]-->
 - [八角楼上][add56]
 - [秦始皇的故事][add55]
 - [视而不见的常识][add54]
@@ -118,3 +119,4 @@ title: Keep Calm & Carry On
 [add54]:http://about.uuspider.com/2023/07/06/reading.html
 [add55]:http://about.uuspider.com/2023/07/30/qinshihuang.html
 [add56]:http://about.uuspider.com/2023/09/29/bajiaolou.html
+[add57]:http://about.uuspider.com/2023/10/22/city.html
