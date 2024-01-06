@@ -6,6 +6,7 @@ title: Keep Calm & Carry On
 ## uuspider's blog
 
 
+- [权力从哪里来][add59]
 - [干就完了][add58]
 <!-- [苏州][add57]-->
 - [八角楼上][add56]
@@ -123,3 +124,4 @@ title: Keep Calm & Carry On
 [add56]:http://about.uuspider.com/2023/09/29/bajiaolou.html
 [add57]:http://about.uuspider.com/2023/10/22/city.html
 [add58]:http://about.uuspider.com/2023/11/26/justdoit.html
+[add59]:http://about.uuspider.com/2024/01/03/power.html
