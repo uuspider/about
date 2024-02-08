@@ -125,3 +125,4 @@ title: Keep Calm & Carry On
 [add57]:http://about.uuspider.com/2023/10/22/city.html
 [add58]:http://about.uuspider.com/2023/11/26/justdoit.html
 [add59]:http://about.uuspider.com/2024/01/03/power.html
+[add60]:http://about.uuspider.com/2024/02/07/deeplearning.html
