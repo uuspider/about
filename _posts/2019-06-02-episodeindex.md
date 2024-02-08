@@ -6,6 +6,7 @@ title: Keep Calm & Carry On
 ## uuspider's blog
 
 
+- [集体智慧][add60]
 - [权力从哪里来][add59]
 - [干就完了][add58]
 <!-- [苏州][add57]-->
