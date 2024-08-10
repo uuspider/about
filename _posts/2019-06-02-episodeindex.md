@@ -6,6 +6,7 @@ title: Keep Calm & Carry On
 ## uuspider's blog
 
 
+- [白色运动衫][add61]
 - [集体智慧][add60]
 - [权力从哪里来][add59]
 - [干就完了][add58]
@@ -127,3 +128,4 @@ title: Keep Calm & Carry On
 [add58]:http://about.uuspider.com/2023/11/26/justdoit.html
 [add59]:http://about.uuspider.com/2024/01/03/power.html
 [add60]:http://about.uuspider.com/2024/02/07/deeplearning.html
+[add61]:http://about.uuspider.com/2024/06/23/LeeKuanYew.html
