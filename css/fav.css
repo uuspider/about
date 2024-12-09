@@ -27,6 +27,13 @@ a:hover, a:focus {
 
 p {
   margin: 0 0 20px;
-  margin-bottom: 2px;
   padding: 0;
+}
+
+li {
+  padding: 3px 16px 3px 16px;
+  margin-bottom: 2px;
+  list-style: none;
+  list-style-type: none;
+  width: auto;
 }
