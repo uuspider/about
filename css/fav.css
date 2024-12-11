@@ -1,63 +1,37 @@
 /* @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700); */
 
 html {
-
 }
 
 body {
-
   font: 14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-
 }
 
 a {
-
   margin-left: 0px;
-
   margin-right: 10px;
-
   margin-bottom: 2px;
-
-  padding: 5px;
-
+  padding: 3px;
   border-radius: 2px;
-
   background-color: #ccc;
-
   color: #000;
-
   text-decoration: none;
-
 }
 
 a:hover, a:focus {
-
   color: #000;
-
   background-color: #eee;
-
   text-decoration: underline;
-
 }
 
 p {
-
   margin: 0 0 20px;
-
   padding: 0;
-
 }
 
 li {
-
-  padding: 3px 16px 3px 16px;
-
   list-style: none;
-
   list-style-type: none;
-
   line-height: 28px;
-
   width: auto;
-
 }
