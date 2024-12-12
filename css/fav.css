@@ -8,14 +8,13 @@ body {
 }
 
 a {
-  margin-left: 0px;
-  margin-right: 10px;
-  margin-bottom: 2px;
-  padding: 3px;
-  border-radius: 2px;
-  
+  #margin-left: 0px;
+  #margin-right: 10px;
+  #margin-bottom: 2px;
+  #padding: 3px;
+  #border-radius: 2px;
   #background-color: #ccc;
-  #color: #000;
+  color: #000;
   #text-decoration: none;
 }
 
