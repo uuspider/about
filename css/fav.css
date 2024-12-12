@@ -13,9 +13,10 @@ a {
   margin-bottom: 2px;
   padding: 3px;
   border-radius: 2px;
-  background-color: #ccc;
-  color: #000;
-  text-decoration: none;
+  
+  #background-color: #ccc;
+  #color: #000;
+  #text-decoration: none;
 }
 
 a:hover, a:focus {
@@ -30,8 +31,8 @@ p {
 }
 
 li {
-  list-style: none;
-  list-style-type: none;
+  #list-style: none;
+  #list-style-type: none;
   line-height: 28px;
   width: auto;
 }
