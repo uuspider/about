@@ -6,6 +6,7 @@ title: Be curious. Read widely. Try new things.
 ## uuspider's blog
 
 
+- [印刷工的一生][add63]
 - [场面][add62]
 - [白色T恤衫][add61]
 - [集体智慧][add60]
@@ -131,3 +132,4 @@ title: Be curious. Read widely. Try new things.
 [add60]:http://about.uuspider.com/2024/02/07/deeplearning.html
 [add61]:http://about.uuspider.com/2024/06/23/LeeKuanYew.html
 [add62]:http://about.uuspider.com/2024/08/11/others.html
+[add63]:http://about.uuspider.com/2025/01/28/Franklin.html
