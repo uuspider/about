@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Keep Calm & Carry On
+title: Be curious. Read widely. Try new things.
 ---
 <link rel="stylesheet" href="/css/episode_index.css" />
 ## uuspider's blog

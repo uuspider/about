@@ -1,22 +1,16 @@
 /* @import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700); */
-html {
 
+html {
 }
 
 body {
-
   font: 14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding-right: 15px;
+  max-width: 750px;
 }
 
 a {
-  margin-left: 0px;
-  margin-right: 10px;
-  margin-bottom: 2px;
-  padding: 5px;
-  border-radius: 2px;
-  background-color: #ccc;
   color: #000;
-  text-decoration: none;
 }
 
 a:hover, a:focus {
@@ -31,9 +25,6 @@ p {
 }
 
 li {
-  padding: 3px 16px 3px 16px;
-  list-style: none;
-  list-style-type: none;
-  line-height: 28px;
+  line-height: 26px;
   width: auto;
 }
