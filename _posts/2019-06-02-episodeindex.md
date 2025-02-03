@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Be curious. Read widely. Try new things.
+title: Keep Writing and Carry on.
 ---
 <link rel="stylesheet" href="/css/episode_index.css" />
 ## uuspider's blog
