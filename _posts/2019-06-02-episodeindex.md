@@ -1,6 +1,10 @@
 ---
 layout: post
+<<<<<<< HEAD
 title: Keep Writing and Carry on.
+=======
+title: Keep writing and carry on.
+>>>>>>> e4b05780faf582610152d52e9353e7bbea878271
 ---
 <link rel="stylesheet" href="/css/episode_index.css" />
 ## uuspider's blog
