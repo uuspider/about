@@ -6,6 +6,7 @@ title: Keep writing and carry on.
 ## uuspider's blog
 
 
+- [毛坯房][add65]
 - [案头工作][add64]
 - [印刷工的一生][add63]
 - [场面][add62]
@@ -135,3 +136,4 @@ title: Keep writing and carry on.
 [add62]:http://about.uuspider.com/2024/08/11/others.html
 [add63]:http://about.uuspider.com/2025/01/28/Franklin.html
 [add64]:http://about.uuspider.com/2025/01/31/howtowork.html
+[add65]:http://about.uuspider.com/2025/03/01/dosth.html
