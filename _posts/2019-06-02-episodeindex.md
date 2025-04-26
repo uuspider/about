@@ -138,4 +138,4 @@ title: Keep writing and carry on.
 [add63]:http://about.uuspider.com/2025/01/28/Franklin.html
 [add64]:http://about.uuspider.com/2025/01/31/howtowork.html
 [add65]:http://about.uuspider.com/2025/03/01/dosth.html
-[add66]:http://about.uuspider.com/2025/04/26/absurdism.html
+[add66]:http://about.uuspider.com/2025/04/25/absurdism.html
