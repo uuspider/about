@@ -140,4 +140,4 @@ title: Keep writing and carry on.
 [add64]:http://about.uuspider.com/2025/01/31/howtowork.html
 [add65]:http://about.uuspider.com/2025/03/01/dosth.html
 [add66]:http://about.uuspider.com/2025/04/25/absurdism.html
-[add67]:http://about.uuspider.com/2025/11/21/GettysburgAddress.html
+[add67]:http://about.uuspider.com/2025/11/21/gettysburg.html
