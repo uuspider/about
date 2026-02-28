@@ -34,7 +34,9 @@
             {{ content }}
           </div>
           <div class="post-footer">
-            <font>Be curious. Read widely. Try new things.</font>
+              {% assign quotes = site.random_quotes %}
+              {% assign random_index = "now" | date: "%N" | modulo: quotes.size %}
+            <font>{{ quotes[random_index] }}</font>
           </div>
           <div></div>
         </article>
