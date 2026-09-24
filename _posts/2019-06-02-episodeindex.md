@@ -6,6 +6,7 @@ title: Keep writing and carry on.
 ## uuspider's blog
 
 
+- [往事亦可追][add68]
 - [葛底斯堡演说][add67]
 - [荒诞的哲学][add66]
 - [毛坯房][add65]
@@ -141,3 +142,4 @@ title: Keep writing and carry on.
 [add65]:http://about.uuspider.com/2025/03/01/dosth.html
 [add66]:http://about.uuspider.com/2025/04/25/absurdism.html
 [add67]:http://about.uuspider.com/2025/11/21/gettysburg.html
+[add68]:http://about.uuspider.com/2026/09/25/continuepresence.html
