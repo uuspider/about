@@ -4,7 +4,25 @@ title: 往事亦可追
 author: uuspider
 ---
 
-豆豆因为皮肤病，去宠物医院，被庸医滥用猛药，导致肝脏受损，并发糖尿病，母亲很自责，想继续花钱维持，我觉得不如静静陪伴。恰在《英语世界》上读到这么一篇吊唁信。
+豆豆因为皮肤病，去宠物医院，被庸医滥用猛药，导致肝脏受损，并发糖尿病，母亲很自责，到处求医问药。
+
+我觉得，不如静静陪伴。
+
+从有记忆开始，几乎总是居无定所，钱不够花，诸事不顺遂，岁月似乎从未静好。直到中年，才猛然醒悟，世事无常，不如意才是常态，那些似水流年、如花岁月、万千浪漫，来自于丰富的阅历、敏感的思绪、细腻的文笔。
+
+课本古诗、散文里描写的那些极致的浪漫其实离我们都不远，不必千里迢迢去身临其境。
+
+飞流直下三千尺，轻舟已过万重山，是极致浪漫，春眠不觉晓，处处闻啼鸟，是极致浪漫，二十年重过南楼，旧江山浑是新愁，也是极致浪漫。
+
+大敌当前，军务之余，江畔谈天、看日落西山是极致浪漫；意大利小城疗伤，每天到茶店喝咖啡、读书是极致浪漫；疫情肆虐，明知会“不断失败”却仍终日出诊、不厌其烦、尽力而为之余，深夜屋顶深聊、海滨游泳，也是极致浪漫。
+
+八角楼深夜理思绪，分析形势，是极致浪漫；三河坝聚集残部，重整军容，是极致浪漫；万里长征，四渡赤水，鼓舞士气，是极致浪漫；土窑洞外，看千里冰封、红妆素裹，是极致浪漫；南国烽烟正十年，此头须向国门悬，也是极致浪漫。
+
+周五下班，驱车800里，午夜陪母亲灯下聊聊日常，是极致浪漫；顶着红色预警，冒着暴雨，和一之到凤凰岭爬天梯，山顶野餐、斗地主，是极致浪漫；写分析报告，凌晨3点看一树海棠花开，也是极致浪漫。
+
+纵使百般不愿，人生的归宿已定，初想，哀莫过于此，但再进一步，这却使仅有一次的人生更值得珍惜和回味。
+
+7月的《英语世界》主题是慰藉，开卷第一篇就值得反复品读。
 
 > Dear Sir,
 >
@@ -20,7 +38,7 @@ author: uuspider
 
 >The business of life summons us away from useless grief, and calls us to the exercise of those virtues of which we are lamenting our deprivation.
 
-生活还要继续，不容我们长久陷于哀思而罔顾现实、止步不前。
+生活还要继续，不容我们长久陷于哀思而止步不前。
 
 >The greatest benefit which one friend can confer upon another, is to guard, and excite, and elevate his virtues.
 
@@ -36,7 +54,7 @@ author: uuspider
 
 >Whether this be more than a pleasing dream, or a just opinion of separate spirits, is, indeed, of no great importance to us, when we consider ourselves as acting under the eye of God: yet, surely, there is something pleasing in the belief that our separation from those whom we love is merely corporeal; and it may be a great incitement to virtuous friendship, if it can be made probable, that that union that has received the divine approbation shall continue to eternity.
 
-事业有生者继续，期望有后来者实践，或者，只言片语的思想被谨记，此生无憾矣。
+事业有生者继续，期望有后来者实践，此生无憾。
 
 >There is one expedient by which you may, in some degree, continue her presence.
 
@@ -44,7 +62,7 @@ author: uuspider
 
 >If you write down minutely what you remember of her from your earliest years, you will read it with great pleasure, and receive from it many hints of soothing recollection, when time shall remove her yet farther from you, and your grief shall be matured to veneration.
 
-趁往事尤可追忆，不妨细细求索，写成文字。
+趁往事尤可追忆，不妨细细求索，捋成文字。
 
 >To this, however painful for the present, I cannot but advise you, as to a source of comfort and satisfaction in the time to come; for all comfort and all satisfaction is sincerely wished you by, dear Sir, your most obliged, most obedient, and most humble servant,
 Sam. Johnson.
