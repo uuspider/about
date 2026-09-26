@@ -62,9 +62,9 @@ author: uuspider
 
 >If you write down minutely what you remember of her from your earliest years, you will read it with great pleasure, and receive from it many hints of soothing recollection, when time shall remove her yet farther from you, and your grief shall be matured to veneration.
 
-趁往事尤可追忆，不妨细细求索，捋成文字。
+趁往事尤可追忆，不妨细细求索，体察逝者心愿。
 
 >To this, however painful for the present, I cannot but advise you, as to a source of comfort and satisfaction in the time to come; for all comfort and all satisfaction is sincerely wished you by, dear Sir, your most obliged, most obedient, and most humble servant,
 Sam. Johnson.
 
-未来不过是这些过往时光的美好延续，生离死别都无法阻止，努力过好每一天，就是对逝者最好的告慰。
+未来是过往时光的延续，只要所做所为能符合前人心愿，便是慰藉，便是激励，也是解脱。
